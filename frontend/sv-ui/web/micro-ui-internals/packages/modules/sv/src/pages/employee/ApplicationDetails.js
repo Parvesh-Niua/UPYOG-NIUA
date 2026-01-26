@@ -1,8 +1,8 @@
-import { Header, MultiLink, SubmitBar } from "@nudmcdgnpm/digit-ui-react-components";
+import { Header, MultiLink, SubmitBar, useParams } from "@upyog/digit-ui-react-components";
 import _ from "lodash";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import ApplicationDetailsTemplate from "../../../../templates/ApplicationDetails";
 import getSVAcknowledgementData from "../../utils/getSVAcknowledgementData";
 /**

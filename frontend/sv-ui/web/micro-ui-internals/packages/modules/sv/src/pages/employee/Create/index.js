@@ -2,7 +2,8 @@
 import React ,{Fragment}from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
-import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
+import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch } from "@upyog/digit-ui-react-components";
 import { Config } from "../../../config/config";
 
 // parent component index page for employee which will set ui forms through config

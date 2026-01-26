@@ -1,7 +1,7 @@
-import { Header, ActionBar, SubmitBar, PDFSvg, Menu, GenericFileIcon, Loader } from '@nudmcdgnpm/digit-ui-react-components';
+import { Header, ActionBar, SubmitBar, PDFSvg, Menu, GenericFileIcon, Loader, useParams, useHistory } from '@upyog/digit-ui-react-components';
 import React, { useState ,useEffect} from 'react'
 import { useTranslation } from 'react-i18next';
-import { useParams, useHistory } from "react-router-dom";
+// import { useParams, useHistory } from "@upyog/digit-ui-react-components";
 import Confirmation from '../Modal/Confirmation';
 import { format } from "date-fns";
 import { openUploadedDocument } from '../../utils';

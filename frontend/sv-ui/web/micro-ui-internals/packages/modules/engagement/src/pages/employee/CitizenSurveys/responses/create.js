@@ -1,8 +1,8 @@
-import { Banner, Card, Loader, CardText, ActionBar, SubmitBar,Menu } from "@nudmcdgnpm/digit-ui-react-components";
+import { Banner, Card, Loader, CardText, ActionBar, SubmitBar,Menu, useHistory } from "@upyog/digit-ui-react-components";
 import { useQueryClient } from "react-query";
 import React, { useEffect,useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 const getMessage = (mutation) => {
   if (mutation.isSuccess) return mutation.data?.ServiceDefinition?.[0]?.id;
   return "";

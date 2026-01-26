@@ -1,7 +1,7 @@
-import { Loader, Modal, FormComposer, CloseSvg } from "@nudmcdgnpm/digit-ui-react-components";
+import { Loader, Modal, FormComposer, CloseSvg } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
 import { configSVApproverApplication } from "../config";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "@upyog/digit-ui-react-components";
 import EXIF from "exif-js";
 import { getOpenStreetMapUrl } from "../../../../libraries/src/services/atoms/urls";
 

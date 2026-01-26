@@ -1,6 +1,6 @@
-import { AppContainer, BackButton, PrivateRoute } from "@nudmcdgnpm/digit-ui-react-components";
+import { AppContainer, BackButton, PrivateRoute, Switch, useRouteMatch } from "@upyog/digit-ui-react-components";
 import React from "react";
-import { Switch, useRouteMatch } from "react-router-dom";
+// import { Switch, useRouteMatch } from "react-router-dom";
 
 /**
  * Citizen side main index page which is handling the Routing of whole citizen side

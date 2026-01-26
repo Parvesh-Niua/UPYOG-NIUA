@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { FormComposer, Header } from "@nudmcdgnpm/digit-ui-react-components";
+import { FormComposer, Header, useHistory } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { documentsFormConfig } from "../../../config/doc-create";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 
 const Documents = () => {
   const { t } = useTranslation();

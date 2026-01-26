@@ -1,6 +1,6 @@
-import { AppContainer, Card, CardCaption, Header, Loader, PrevIcon } from "@nudmcdgnpm/digit-ui-react-components";
+import { AppContainer, Card, CardCaption, Header, Loader, PrevIcon, useHistory } from "@upyog/digit-ui-react-components";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 import Searchbar from "../../../components/Documents/Searchbar";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { renderDocsList } from "./DocumentList";

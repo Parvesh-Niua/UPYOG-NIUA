@@ -1,7 +1,7 @@
-import { CloseSvg, FormComposer, Header, Toast } from "@nudmcdgnpm/digit-ui-react-components";
+import { CloseSvg, FormComposer, Header, Toast, useHistory } from "@upyog/digit-ui-react-components";
 import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 import CreateNewSurvey from "../../../components/Surveys/SurveyForms";
 
 export const answerTypeEnum = {

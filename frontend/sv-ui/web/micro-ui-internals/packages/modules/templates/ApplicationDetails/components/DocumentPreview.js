@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { CardSubHeader, PDFSvg } from "@nudmcdgnpm/digit-ui-react-components";
+import { CardSubHeader, PDFSvg } from "@upyog/digit-ui-react-components";
 
 /**
  * DocumentPreview Component

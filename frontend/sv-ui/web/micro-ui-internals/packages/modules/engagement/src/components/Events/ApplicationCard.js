@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, DetailsCard, Loader, PopUp, SearchAction, FilterAction } from "@nudmcdgnpm/digit-ui-react-components";
+import { Card, DetailsCard, Loader, PopUp, SearchAction, FilterAction, useHistory } from "@upyog/digit-ui-react-components";
 import Filter from "./Filter";
 import Search from "./Search";
 import { areEqual } from "../../utils";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 
 const ApplicationCard = ({
   searchFields,

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
 
-import { Loader } from "@nudmcdgnpm/digit-ui-react-components";
+import { Loader } from "@upyog/digit-ui-react-components";
 
 import ActionModal from "./Modal";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "@upyog/digit-ui-react-components";
 import ApplicationDetailsContent from "./components/ApplicationDetailsContent";
 import ApplicationDetailsToast from "./components/ApplicationDetailsToast";
 import ApplicationDetailsActionBar from "./components/ApplicationDetailsActionBar";

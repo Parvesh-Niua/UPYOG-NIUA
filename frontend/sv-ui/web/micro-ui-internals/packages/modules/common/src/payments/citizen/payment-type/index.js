@@ -13,30 +13,34 @@ import {
   Toast,
   CardText,
   CardSubHeader,
-} from "@nudmcdgnpm/digit-ui-react-components";
+} from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { useForm, Controller } from "react-hook-form";
-import { useParams, useHistory, useLocation, Redirect } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import $ from "jquery";
 import { makePayment } from "./payGov";
 
 
 export const SelectPaymentType = (props) => {
-  const { state = {} } = useLocation();
+  const location = useLocation();
+  const { state = {}, pathname, search } = location;
+
   const userInfo = Digit.UserService.getUser();
   const [showToast, setShowToast] = useState(null);
-  const { tenantId: __tenantId, authorization, workflow: wrkflow , consumerCode : connectionNo } = Digit.Hooks.useQueryParams();
+  // const { tenantId: __tenantId, authorization, workflow: wrkflow , consumerCode : connectionNo } = Digit.Hooks.useQueryParams();
+  const { tenantId: __tenantId, authorization } = Digit.Hooks.useQueryParams();
+
   const paymentAmount = state?.paymentAmount;
   const { t } = useTranslation();
-  const history = useHistory();
-  const { pathname, search } = useLocation();
+  const navigate = useNavigate();
+ 
   // const menu = ["AXIS"];
   let { consumerCode, businessService } = useParams();
   const tenantId = state?.tenantId || __tenantId || Digit.ULBService.getCurrentTenantId();
   const propertyId = state?.propertyId;
   const stateTenant = Digit.ULBService.getStateId();
   const { control, handleSubmit } = useForm();
-  const [Time, setTime ] = useState(0);
+  // const [Time, setTime ] = useState(0);
   const { data: menu, isLoading } = Digit.Hooks.useCommonMDMS(stateTenant, "DIGIT-UI", "PaymentGateway");
   const { data: paymentdetails, isLoading: paymentLoading } = Digit.Hooks.useFetchPayment(
     { tenantId: tenantId, consumerCode: consumerCode, businessService },

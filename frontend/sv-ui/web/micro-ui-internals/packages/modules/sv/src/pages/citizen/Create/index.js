@@ -2,7 +2,8 @@
 import React ,{Children, Fragment}from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
-import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
+import { Redirect, Route, Switch, useHistory, useLocation, useRouteMatch} from "@upyog/digit-ui-react-components";
 import { Config } from "../../../config/config";
 /**
  * Main Parent Component which is handling all the sub / Child components 

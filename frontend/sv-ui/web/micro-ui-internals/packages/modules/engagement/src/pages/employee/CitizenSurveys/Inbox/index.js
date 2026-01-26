@@ -1,11 +1,11 @@
 import React, { Fragment, useCallback, useMemo, useReducer } from "react"
-import { InboxComposer, DocumentIcon } from "@nudmcdgnpm/digit-ui-react-components";
+import { InboxComposer, DocumentIcon } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import FilterFormFieldsComponent from "./FilterFieldsComponent";
 import SearchFormFieldsComponents from "./SearchFieldsComponents";
 import useInboxTableConfig from "./useInboxTableConfig";
 import useInboxMobileCardsData from "./useInboxMobileDataCard";
-// import { useHistory } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 const Inbox = ({ parentRoute }) => {
 
   const { t } = useTranslation()

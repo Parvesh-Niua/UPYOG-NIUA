@@ -3,7 +3,7 @@ import {
   CitizenHomeCard,
   Loader,
   PTIcon,
-} from "@nudmcdgnpm/digit-ui-react-components";
+} from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import EmployeeDashboard from "./EmployeeDashboard";

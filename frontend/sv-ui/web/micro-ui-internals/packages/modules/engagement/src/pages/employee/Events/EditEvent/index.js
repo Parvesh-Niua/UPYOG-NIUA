@@ -1,8 +1,8 @@
-import { FormComposer, Header, Loader } from "@nudmcdgnpm/digit-ui-react-components";
+import { FormComposer, Header, Loader, useHistory, useParams } from "@upyog/digit-ui-react-components";
 import { format } from 'date-fns';
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 import { config } from "../../../../config/NewEventConfig";
 
 const EditEvents = () => {

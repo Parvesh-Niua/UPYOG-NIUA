@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { RadioButtons, FormComposer, Dropdown, CardSectionHeader, Loader, Toast, Card, Header } from "@nudmcdgnpm/digit-ui-react-components";
+import { RadioButtons, FormComposer, Dropdown, CardSectionHeader, Loader, Toast, Card, Header } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import { useCashPaymentDetails } from "./ManualReciept";
 import { useCardPaymentDetails } from "./card";
@@ -11,7 +11,7 @@ import isEqual from "lodash/isEqual";
 export const CollectPayment = (props) => {
   const { IsDisconnectionFlow } = Digit.Hooks.useQueryParams();
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   let { consumerCode, businessService } = useParams();
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -133,7 +133,7 @@ export const CollectPayment = (props) => {
     try {
       const resposne = await Digit.PaymentService.createReciept(tenantId, recieptRequest);
       queryClient.invalidateQueries();
-      history.push(
+      navigate(
         IsDisconnectionFlow ? `${props.basePath}/success/${businessService}/${resposne?.Payments[0]?.paymentDetails[0]?.receiptNumber.replace(/\//g, "%2F")}/${
           resposne?.Payments[0]?.paymentDetails[0]?.bill?.consumerCode
         }?IsDisconnectionFlow=${IsDisconnectionFlow}` : 

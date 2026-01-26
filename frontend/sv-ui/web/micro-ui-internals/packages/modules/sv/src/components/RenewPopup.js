@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
-import { Modal, Card,SubmitBar, CheckBox} from "@nudmcdgnpm/digit-ui-react-components";
-import { useHistory } from "react-router-dom";
+import { Modal, Card,SubmitBar, CheckBox, useHistory} from "@upyog/digit-ui-react-components";
+// import { useHistory } from "@upyog/digit-ui-react-components";
 import { demandPayloadData } from "../utils";
 
 const Close = () => (

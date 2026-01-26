@@ -1,7 +1,7 @@
-import { Card, CardCaption, Header, Loader, OnGroundEventCard } from "@nudmcdgnpm/digit-ui-react-components";
+import { Card, CardCaption, Header, Loader, OnGroundEventCard, Redirect, useHistory, useLocation } from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+// import { Redirect, useHistory } from "@upyog/digit-ui-react-components";
 
 const EventsListOnGround = ({ variant, parentRoute }) => {
   const { t } = useTranslation();

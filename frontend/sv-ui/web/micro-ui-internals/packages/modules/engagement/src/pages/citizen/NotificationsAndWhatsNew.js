@@ -1,7 +1,7 @@
-import { Card, CardCaption, Header, Loader, OnGroundEventCard, WhatsNewCard } from "@nudmcdgnpm/digit-ui-react-components";
+import { Card, CardCaption, Header, Loader, OnGroundEventCard, WhatsNewCard, Redirect, useHistory, useLocation } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+// import { Redirect, useHistory } from "@upyog/digit-ui-react-components";
 import BroadcastWhatsNewCard from "../../components/Messages/BroadcastWhatsNewCard";
 
 const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {

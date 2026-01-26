@@ -20,11 +20,11 @@ import {
   FirenocIcon,
   LoginIcon,
   CHBIcon
-} from "@nudmcdgnpm/digit-ui-react-components";
+} from "@upyog/digit-ui-react-components";
 import { Link, useLocation } from "react-router-dom";
 import SideBarMenu from "../../../config/sidebar-menu";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LogoutDialog from "../../Dialog/LogoutDialog";
 import ChangeCity from "../../ChangeCity";
 
@@ -97,7 +97,7 @@ const IconsObject = {
 };
 const StaticCitizenSideBar = ({ linkData, islinkDataLoading }) => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
   const { data: storeData, isFetched } = Digit.Hooks.useStore.getInitData();
@@ -128,10 +128,10 @@ const StaticCitizenSideBar = ({ linkData, islinkDataLoading }) => {
   const redirectToLoginPage = () => {
     // localStorage.clear();
     // sessionStorage.clear();
-    history.push("/sv-ui/citizen/login");
+    navigate("/sv-ui/citizen/login");
   };
   const showProfilePage = () => {
-    history.push("/sv-ui/citizen/user/profile");
+    navigate("/sv-ui/citizen/user/profile");
   };
   const tenantId = Digit.ULBService.getCitizenCurrentTenant();
   const filteredTenantContact = storeData?.tenants.filter((e) => e.code === tenantId)[0]?.contactNumber || storeData?.tenants[0]?.contactNumber;

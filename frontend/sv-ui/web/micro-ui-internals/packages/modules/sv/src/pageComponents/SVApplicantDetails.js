@@ -1,9 +1,9 @@
-import { CardLabel, FormStep,RadioButtons, TextInput, CheckBox, LinkButton, MobileNumber,Toast ,Dropdown } from "@nudmcdgnpm/digit-ui-react-components";
+import { CardLabel, FormStep,RadioButtons, TextInput, CheckBox, LinkButton, MobileNumber,Toast ,Dropdown, useLocation } from "@upyog/digit-ui-react-components";
 import React, { useState,useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Timeline from "../components/Timeline";
 import { calculateAge } from "../utils";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 /**
  * Component will render Applicant Details both citizen and employee side 

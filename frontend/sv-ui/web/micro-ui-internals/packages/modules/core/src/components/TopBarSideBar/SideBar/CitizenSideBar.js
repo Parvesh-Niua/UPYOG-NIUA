@@ -1,9 +1,9 @@
 import {
   Loader, NavBar
-} from "@nudmcdgnpm/digit-ui-react-components";
+} from "@upyog/digit-ui-react-components";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import SideBarMenu from "../../../config/sidebar-menu";
 import ChangeCity from "../../ChangeCity";
 import StaticCitizenSideBar from "./StaticCitizenSideBar";
@@ -97,7 +97,8 @@ export const CitizenSideBar = ({ isOpen, isMobile = false, toggleSidebar, onLogo
   const [search, setSearch] = useState("");
 
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation(); 
   const closeSidebar = () => {
     Digit.clikOusideFired = true;
     toggleSidebar(false);
@@ -107,13 +108,13 @@ export const CitizenSideBar = ({ isOpen, isMobile = false, toggleSidebar, onLogo
   const tenantId = Digit.ULBService.getCitizenCurrentTenant();
   const showProfilePage = () => {
     const redirectUrl = isEmployee ? "/sv-ui/employee/user/profile" : "/sv-ui/citizen/user/profile";
-    history.push(redirectUrl);
+    navigate(redirectUrl);
     closeSidebar();
   };
   const redirectToLoginPage = () => {
     // localStorage.clear();
     // sessionStorage.clear();
-    history.push("/sv-ui/citizen/login");
+    navigate("/sv-ui/citizen/login");
     closeSidebar();
   };
   if (islinkDataLoading || isLoading || !isFetched) {
@@ -218,7 +219,7 @@ export const CitizenSideBar = ({ isOpen, isMobile = false, toggleSidebar, onLogo
           icon: configEmployeeSideBar[keys[i]][0]?.leftIcon?.split?.(":")[1],
           populators: {
             onClick: () => {
-              history.push(configEmployeeSideBar[keys[i]][0]?.navigationURL);
+              navigate(configEmployeeSideBar[keys[i]][0]?.navigationURL);
               closeSidebar();
             },
           },
@@ -246,7 +247,7 @@ export const CitizenSideBar = ({ isOpen, isMobile = false, toggleSidebar, onLogo
   }
 
   /*  URL with openlink wont have sidebar and actions    */
-  if (history.location.pathname.includes("/openlink")) {
+  if (location.pathname.includes("/openlink")) {
     profileItem = <span></span>;
     menuItems = menuItems.filter((ele) => ele.element === "LANGUAGE");
   }

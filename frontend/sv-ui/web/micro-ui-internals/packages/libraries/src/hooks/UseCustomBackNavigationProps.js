@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+import { useHistory } from "@upyog/digit-ui-react-components";
 
 /**
  * Custom hook to handle back button navigation

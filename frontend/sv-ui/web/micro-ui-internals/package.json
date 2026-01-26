@@ -5,6 +5,7 @@
   "workspaces": [
     "packages/libraries",
     "example",
+    "packages/react-components",
     "packages/modules/core",
     "packages/modules/common",
     "packages/modules/engagement",
@@ -21,6 +22,7 @@
     "start:dev": "NODE_OPTIONS=--openssl-legacy-provider run-p dev:**",
     "start:script": "NODE_OPTIONS=--openssl-legacy-provider ./scripts/create.sh",
     "dev:libraries": "cd packages/libraries && NODE_OPTIONS=--openssl-legacy-provider yarn start",
+    "dev:components": "cd packages/react-components && yarn start",
     "dev:common": "cd packages/modules/common && NODE_OPTIONS=--openssl-legacy-provider yarn start",
     "dev:core": "cd packages/modules/core && NODE_OPTIONS=--openssl-legacy-provider yarn start",
     "dev:engagement": "cd packages/modules/engagement && NODE_OPTIONS=--openssl-legacy-provider yarn start",
@@ -28,6 +30,7 @@
     "dev:example": "cd example && NODE_OPTIONS=--openssl-legacy-provider yarn start",
     "build": "run-p build:**",
     "build:libraries": "cd packages/libraries && yarn build",
+    "build:components": "cd packages/react-components && yarn build",
     "build:common": "cd packages/modules/common && yarn build",
     "build:core": "cd packages/modules/core && yarn build",
     "build:engagement": "cd packages/modules/engagement && yarn build",

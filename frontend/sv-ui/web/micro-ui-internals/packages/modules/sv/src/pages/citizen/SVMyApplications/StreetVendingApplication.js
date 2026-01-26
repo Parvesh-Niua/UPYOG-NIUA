@@ -1,7 +1,7 @@
-import { Toast, Card, KeyNote, SubmitBar } from "@nudmcdgnpm/digit-ui-react-components";
+import { Toast, Card, KeyNote, SubmitBar, useHistory } from "@upyog/digit-ui-react-components";
 import React,{ useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import RenewPopup from "../../../components/RenewPopup";
 import { RENEWAL_CONSTANTS } from "../../../utils";
 

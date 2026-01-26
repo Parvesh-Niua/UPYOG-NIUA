@@ -1,7 +1,7 @@
-import { CitizenHomeCard, PTIcon } from "@nudmcdgnpm/digit-ui-react-components";
+import { CitizenHomeCard, PTIcon, useRouteMatch } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouteMatch } from "react-router-dom";
+// import { useRouteMatch } from "react-router-dom";
 import SVCreate from "./pages/citizen/Create";
 import CitizenApp from "./pages/citizen"
 import SVApplicantDetails from "./pageComponents/SVApplicantDetails";

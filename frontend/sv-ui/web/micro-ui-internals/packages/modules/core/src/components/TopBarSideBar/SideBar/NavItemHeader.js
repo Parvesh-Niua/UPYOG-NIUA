@@ -16,7 +16,7 @@ import {
   CollectionsBookmarIcons,
   FinanceChartIcon,
   CollectionIcon,
-} from "@nudmcdgnpm/digit-ui-react-components";
+} from "@upyog/digit-ui-react-components";
 import ReactTooltip from "react-tooltip";
 import { useTranslation } from 'react-i18next';
 
@@ -50,7 +50,7 @@ const NavItemHeader = props => {
   const leftIcon = IconsObject[leftIconArray] || IconsObject.collections;
   const iconArr=item?.icon?.leftIcon?.split?.(":")|| item?.leftIcon?.split?.(":");
   if(iconArr?.[0]=='dynamic'){
-    var IconComp = require("@nudmcdgnpm/digit-ui-react-components")?.[iconArr?.[1]];
+    var IconComp = require("@upyog/digit-ui-react-components")?.[iconArr?.[1]];
     leftIcon=IconComp?<IconComp/>:leftIcon;
   }
   const getModuleName = label?.replace(/[ -]/g, "_").toUpperCase();
@@ -113,8 +113,7 @@ const NavItemHeader = props => {
               <NavLink
                 key={key}
                 to={item?.to?.includes("sv-ui") ? item?.to : "/employee/" + item?.to}
-                className="custom-link"
-                activeClassName="actions"
+                className={({ isActive }) => isActive ? "custom-link actions" : "custom-link"}
                 style={{marginLeft:"40px", marginTop:"10px"}}
               >
                 <div data-tip="React-tooltip" data-for={`jk-side-${getModuleName}`}>
