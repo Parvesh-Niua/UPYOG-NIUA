@@ -1,7 +1,7 @@
-import { CitizenHomeCard, PTIcon, useRouteMatch } from "@upyog/digit-ui-react-components";
+import { CitizenHomeCard, PTIcon } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-// import { useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SVCreate from "./pages/citizen/Create";
 import CitizenApp from "./pages/citizen"
 import SVApplicantDetails from "./pageComponents/SVApplicantDetails";
@@ -58,24 +58,25 @@ const componentsToRegister = {
 
   // Parent component of module
   export const SVModule = ({ stateCode, userType, tenants }) => {
-    const { path, url } = useRouteMatch();
+    const location = useLocation();
+    const path = location.pathname;
+    const url = location.pathname;
+
+
     const moduleCode = "SV";
     const language = Digit.StoreData.getCurrentLanguage();
     const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
     addComponentsToRegistry();
     Digit.SessionStorage.set("SV_TENANTS", tenants);
     useEffect(() => {
-      async function loadLocale() {
-        if (userType === "employee") {
-          await Digit.LocalizationService.getLocale({
-            modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-            locale: Digit.StoreData.getCurrentLanguage(),
-            tenantId: Digit.ULBService.getCurrentTenantId(),
-          });
-          }
-        }
-      loadLocale();
-      }, []);
+      if (userType === "employee") {
+        Digit.LocalizationService.getLocale({
+          modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+          locale: Digit.StoreData.getCurrentLanguage(),
+          tenantId: Digit.ULBService.getCurrentTenantId(),
+        });
+      }
+    }, [userType]);
 
   
     if (userType === "employee") {

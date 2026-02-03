@@ -1,12 +1,12 @@
-import { FormComposer, Header, useHistory } from "@upyog/digit-ui-react-components";
+import { FormComposer, Header } from "@upyog/digit-ui-react-components";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-// import { useHistory } from "@upyog/digit-ui-react-components";
+import { useNavigate } from "react-router-dom";
 import { config } from "../../../../config/NewEventConfig";
 
 const NewEvents = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const { fromDate, toDate, fromTime, toTime, address, organizer, fees, geoLocation = {} } = data;
@@ -32,7 +32,7 @@ const NewEvents = () => {
         }
       ]
     }
-    history.push("/sv-ui/employee/engagement/event/response", details)
+    navigate("/sv-ui/employee/engagement/event/response", details)
   }
 
   const [mutationHappened, setMutationHappened, clear] = Digit.Hooks.useSessionStorage("EMPLOYEE_EVENT_MUTATION_HAPPENED", false);

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { FormComposer, Header, useHistory } from "@upyog/digit-ui-react-components";
+import { FormComposer, Header } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { documentsFormConfig } from "../../../config/doc-create";
-// import { useHistory } from "@upyog/digit-ui-react-components";
+import { useNavigate } from "react-router-dom";
 
 const Documents = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [canSubmit, setSubmitValve] = useState(false);
 
   const onFormValueChange = (setValue, formData, formState) => {
@@ -34,7 +34,7 @@ const Documents = () => {
       tenantIds: data.ULB.map((e) => e.code),
     };
 
-    history.push("/sv-ui/employee/engagement/documents/response", { DocumentEntity });
+    navigate("/sv-ui/employee/engagement/documents/response", { DocumentEntity });
   };
 
   return (

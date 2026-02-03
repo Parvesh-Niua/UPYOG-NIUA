@@ -189,7 +189,7 @@ const Home = ({
           />
 
           <Route 
-            path="login" 
+            path="login/*" 
             element={<Login stateCode={stateCode} />} 
           />
 

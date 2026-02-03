@@ -798,7 +798,7 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
               ValidationRequired={false}
               {...(validation = {
                 isRequired: true,
-                pattern: "^[a-zA-Z0-9\\-.,\\/ ]+$",
+                pattern: "^[a-zA-Z-/ ]*$",
                 type: "text",
                 title: t("SV_INPUT_DID_NOT_MATCH"),
               })}
@@ -836,7 +836,7 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
               ValidationRequired={false}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z0-9\\-.,\\/ ]+$",
+                pattern: "^[a-zA-Z0-9-/ ]+$",
                 type: "text",
                 title: t("PT_NAME_ERROR_MESSAGE"),
               })}

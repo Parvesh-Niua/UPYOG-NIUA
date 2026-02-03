@@ -280,7 +280,7 @@ export const CollectPayment = (props) => {
         onSubmit={onSubmit}
         formState={formState}
         defaultValues={getDefaultValues()}
-        isDisabled={( !bill.totalAmount > 0 )}
+        isDisabled={(!bill || !bill.totalAmount || bill.totalAmount <= 0)}
         onFormValueChange={(setValue, formValue) => {
           if (!isEqual(formValue.paymentMode, selectedPaymentMode)) {
             setFormState(formValue);

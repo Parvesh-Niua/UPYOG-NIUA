@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, DetailsCard, Loader, PopUp, SearchAction, FilterAction , useHistory} from "@upyog/digit-ui-react-components";
+import { Card, DetailsCard, Loader, PopUp, SearchAction, FilterAction } from "@upyog/digit-ui-react-components";
 import Filter from "./Filter";
 import Search from "./Search";
 import { areEqual } from "../../utils";
-// import { useHistory } from "@upyog/digit-ui-react-components";
+import { navigate } from "react-router-dom";
 
 
 const ApplicationCard = ({
@@ -19,7 +19,7 @@ const ApplicationCard = ({
   const [popup, setPopup] = useState(false);
   const [params, setParams] = useState(searchParams);
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const history = useHistory()
+  const navigate = useNavigate();
   useEffect(() => {
     if (type) setPopup(true);
   }, [type]);
@@ -37,7 +37,7 @@ const ApplicationCard = ({
 
     const details = responseData?.find((item) => (areEqual(item?.user?.name, data["Posted By"]) && areEqual(item.name, data["Title"])));
     if (details) {
-      history.push(`/sv-ui/employee/engagement/messages/inbox/details/${details?.id  }`,)}
+      navigate(`/sv-ui/employee/engagement/messages/inbox/details/${details?.id  }`,)}
   }
 
   let result;

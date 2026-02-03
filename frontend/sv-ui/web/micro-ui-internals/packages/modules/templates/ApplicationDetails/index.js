@@ -6,7 +6,7 @@ import { Loader } from "@upyog/digit-ui-react-components";
 
 import ActionModal from "./Modal";
 
-import { useHistory } from "@upyog/digit-ui-react-components";
+import { useNavigate, useParams } from "react-router-dom";
 import ApplicationDetailsContent from "./components/ApplicationDetailsContent";
 import ApplicationDetailsToast from "./components/ApplicationDetailsToast";
 import ApplicationDetailsActionBar from "./components/ApplicationDetailsActionBar";
@@ -15,10 +15,10 @@ import ApplicationDetailsActionBar from "./components/ApplicationDetailsActionBa
 
 
 const ApplicationDetails = (props) => {
-    const tenantId = Digit.ULBService.getCurrentTenantId();
+  const tenantId = Digit.ULBService.getCurrentTenantId();
   const state = Digit.ULBService.getStateId();
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   let { id: applicationNumber } = useParams();
   const [displayMenu, setDisplayMenu] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
@@ -72,10 +72,10 @@ const ApplicationDetails = (props) => {
         if (action?.redirectionUrll?.action === "ACTIVATE_CONNECTION") {
           // window.location.assign(`${window.location.origin}sv-ui/employee/ws/${action?.redirectionUrll?.pathname}`, { data: action?.redirectionUrll?.state });
 
-          history.push(`${action?.redirectionUrll?.pathname}`, JSON.stringify({ data: action?.redirectionUrll?.state, url: `${location?.pathname}${location.search}` }));
+          navigate(`${action?.redirectionUrll?.pathname}`, JSON.stringify({ data: action?.redirectionUrll?.state, url: `${location?.pathname}${location.search}` }));
         }
         else if (action?.redirectionUrll?.action === "RE-SUBMIT-APPLICATION"){
-          history.push(`${action?.redirectionUrll?.pathname}`, { data: action?.redirectionUrll?.state });
+          navigate(`${action?.redirectionUrll?.pathname}`, { data: action?.redirectionUrll?.state });
         }
         else {
           window.location.assign(`${window.location.origin}/sv-ui/employee/payment/collect/${action?.redirectionUrll?.pathname}`);
@@ -83,7 +83,7 @@ const ApplicationDetails = (props) => {
       } else if (!action?.redirectionUrl) {
         setShowModal(true);
       } else {
-        history.push({
+        navigate({
           pathname: action.redirectionUrl?.pathname,
           state: { ...action.redirectionUrl?.state },
         });

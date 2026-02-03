@@ -1,13 +1,13 @@
-import { Card, CardCaption, Header, Loader, OnGroundEventCard, WhatsNewCard, Redirect, useHistory, useLocation } from "@upyog/digit-ui-react-components";
+import { Card, CardCaption, Header, Loader, OnGroundEventCard, WhatsNewCard } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-// import { Redirect, useHistory } from "@upyog/digit-ui-react-components";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import BroadcastWhatsNewCard from "../../components/Messages/BroadcastWhatsNewCard";
 
 const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
   const { t } = useTranslation();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const tenantId = Digit.ULBService.getCitizenCurrentTenant();
   const {
@@ -23,9 +23,12 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
 
   const { mutate, isSuccess } = Digit.Hooks.useClearNotifications();
 
-  useEffect(() => {
-    isSuccess ? refetch() : false;
-  }, [isSuccess]);
+  // CORRECT Way to refetch on isSuccess change
+    useEffect(() => {
+      if (isSuccess) {
+        refetch();
+      }
+    }, [isSuccess]);
 
   useEffect(() => (preVisitUnseenNotificationCount && tenantId ? mutate({ tenantId }) : null), [tenantId, preVisitUnseenNotificationCount]);
 
@@ -55,12 +58,14 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
         return <Header>{t("CS_HEADER_WHATSNEW")}</Header>;
 
       default:
-        return <Redirect to={{ pathname: `/sv-ui/citizen`, state: { from: location.pathname + location.search } }} />;
+     //old:   return <Redirect to={{ pathname: `/sv-ui/citizen`, state: { from: location.pathname + location.search } }} />;
+     return <Navigate to="/sv-ui/citizen" state={{ from: location.pathname + location.search }} replace />;
+
     }
   };
 
   function onEventCardClick(id) {
-    history.push(parentRoute + "/events/details/" + id);
+    navigate(parentRoute + "/events/details/" + id);
   }
 
   return (

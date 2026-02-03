@@ -1,7 +1,7 @@
-import { Card, CardSubHeader, Header, LinkButton, Loader, Row, StatusTable, MultiLink, PopUp, Toast, SubmitBar, useParams } from "@upyog/digit-ui-react-components";
+import { Card, CardSubHeader, Header, LinkButton, Loader, Row, StatusTable, MultiLink, PopUp, Toast, SubmitBar } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useMemo, useState, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ViewTimeline from "../../components/ViewTimeline";
 import get from "lodash/get";
 import getSVAcknowledgementData from "../../utils/getSVAcknowledgementData";
@@ -28,7 +28,6 @@ const SvApplicationDetails = () => {
   const SVDetail = get(data, "SVDetail", []);
   let streetVendingDetails = (SVDetail && SVDetail.length > 0 && SVDetail[0]) || {};
   const application = streetVendingDetails;
-  console.log("applicationapplication",application);
   sessionStorage.setItem("streetvending", JSON.stringify(application));
   const [loading, setLoading] = useState(false);
 

@@ -25,8 +25,6 @@ export const SuccessfulPayment = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   receiptNumber = receiptNumber.replace(/%2F/g, "/");
   
- 
-
   useEffect(() => {
     return () => {
       const fetchData = async () => {

@@ -230,7 +230,7 @@ import CitizenConsentForm from "./atoms/CitizenConsentForm";
 import AddressDetails from "./molecules/AddressDetails";
 import ApplicantDetails from "./molecules/ApplicantDetails";
 import Timeline from "./molecules/Timeline";
-import { Route, Switch, useHistory, useRouteMatch, useLocation, Redirect, withRouter, Prompt, useQueryParams, useParams } from "./atoms/RouterCompat";
+// import { Route, Switch, useHistory, useRouteMatch, useLocation, Redirect, withRouter, Prompt, useQueryParams, useParams } from "./atoms/RouterCompat";
 
 export {
   Phone,
@@ -471,16 +471,17 @@ export {
   AddressDetails,
   ApplicantDetails,
   Timeline,
-  // Router Compatibility
-  Route,
-  Switch,
-  useHistory,
-  useRouteMatch,
-  useLocation,
-  Redirect,
-  withRouter,
-  Prompt,
-  useQueryParams,
-  useParams
+  /*Router Compatibility
+  // Route,
+  // Switch,
+  // useHistory,
+  // useRouteMatch,
+  // useLocation,
+  // Redirect,
+  // withRouter,
+  // Prompt,
+  // useQueryParams,
+  // useParams 
+  // End of Compatibility */ 
   
 };

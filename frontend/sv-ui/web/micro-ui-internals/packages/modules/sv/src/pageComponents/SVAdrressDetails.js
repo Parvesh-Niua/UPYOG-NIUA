@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FormStep, TextInput, CardLabel, CardHeader, Dropdown, TextArea, CheckBox, useLocation } from "@upyog/digit-ui-react-components";
+import { FormStep, TextInput, CardLabel, CardHeader, Dropdown, TextArea, CheckBox } from "@upyog/digit-ui-react-components";
 import { useForm, Controller } from "react-hook-form";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Timeline from "../components/Timeline";
 
 /**
@@ -400,7 +400,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
 
   useEffect(() => {
     if (userType === "citizen") {
-        goNext();
+      goNext();
     }
   }, [pincode, city, locality, houseNo, landmark, addressline1, addressline2, ccity, chouseNo, clocality, caddressline1, caddressline2]);
 
@@ -434,7 +434,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: true,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-z0-9- ]*$",
                 type: "text",
                 title: t("SV_HOUSE_NO_ERROR_MESSAGE"),
               })}
@@ -454,7 +454,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-Z,-/ ]*$",
                 type: "textarea",
                 title: t("SV_LANDMARK_ERROR_MESSAGE"),
               })}
@@ -475,7 +475,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-Z,-/ ]*$",
                 type: "textarea",
                 title: t("SV_LANDMARK_ERROR_MESSAGE"),
               })}
@@ -494,7 +494,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-Z,- ]*$",
                 type: "text",
                 title: t("SV_LANDMARK_ERROR_MESSAGE"),
               })}
@@ -594,7 +594,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={false}
               {...(validation = {
                 isRequired: true,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-z0-9- ]*$",
                 type: "text",
                 title: t("SV_HOUSE_NO_ERROR_MESSAGE"),
               })}
@@ -614,7 +614,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-Z,-/ ]*$",
                 type: "textarea",
                 title: t("SV_LANDMARK_ERROR_MESSAGE"),
               })}
@@ -635,7 +635,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-Z,-/ ]*$",
                 type: "textarea",
                 title: t("SV_LANDMARK_ERROR_MESSAGE"),
               })}
@@ -654,7 +654,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               ValidationRequired={true}
               {...(validation = {
                 isRequired: false,
-                pattern: "^[a-zA-Z\\d\\s\\-]+$",
+                pattern: "^[a-zA-Z,- ]*$",
                 type: "textarea",
                 title: t("SV_LANDMARK_ERROR_MESSAGE"),
               })}

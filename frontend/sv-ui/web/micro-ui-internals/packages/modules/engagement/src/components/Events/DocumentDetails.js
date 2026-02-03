@@ -1,7 +1,7 @@
-import { Header, ActionBar, SubmitBar, PDFSvg, Menu, GenericFileIcon, Loader, useParams, useHistory } from '@upyog/digit-ui-react-components';
+import { Header, ActionBar, SubmitBar, PDFSvg, Menu, GenericFileIcon, Loader } from '@upyog/digit-ui-react-components';
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
-// import { useParams, useHistory } from "@upyog/digit-ui-react-components";
+import { useParams, useNavigate } from "react-router-dom";
 import Confirmation from '../Modal/Confirmation';
 import { format } from "date-fns";
 import { openUploadedDocument } from '../../utils';
@@ -16,7 +16,7 @@ const DocumentDetails = () => {
   let isMobile = window.Digit.Utils.browser.isMobile();
   const { id } = useParams();
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [displayMenu, setDisplayMenu] = useState(false);
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -26,7 +26,7 @@ const DocumentDetails = () => {
   function onActionSelect(action) {
     // setSelectedAction(action);
     if (action === "EDIT") {
-      history.push(`/sv-ui/employee/engagement/event/edit-event/${id}`)
+      navigate(`/sv-ui/employee/engagement/event/edit-event/${id}`)
     }
     if (action === "DELETE") {
       setShowModal(true);
@@ -43,7 +43,7 @@ const DocumentDetails = () => {
           },
         ],
       };
-      history.push("/sv-ui/employee/engagement/event/response?delete=true", details);
+      navigate("/sv-ui/employee/engagement/event/response?delete=true", details);
   };
 
   function onModalCancel() {

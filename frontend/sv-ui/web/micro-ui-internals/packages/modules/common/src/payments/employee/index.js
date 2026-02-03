@@ -26,7 +26,7 @@ const EmployeePayment = ({ stateCode, cityCode, moduleCode }) => {
       <Routes>
         <Route
           path="collect/:businessService/:consumerCode"
-          element={<CollectPayment {...commonProps} basePath="." />}
+          element={<CollectPayment {...commonProps} basePath="/sv-ui/employee/payment" />}
         />
         <Route
           path="success/:businessService/:receiptNumber/:consumerCode"

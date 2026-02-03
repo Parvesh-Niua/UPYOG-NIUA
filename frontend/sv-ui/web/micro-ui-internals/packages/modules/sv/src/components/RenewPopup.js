@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
-import { Modal, Card,SubmitBar, CheckBox, useHistory} from "@upyog/digit-ui-react-components";
-// import { useHistory } from "@upyog/digit-ui-react-components";
+import { Modal, Card,SubmitBar, CheckBox} from "@upyog/digit-ui-react-components";
+import { useNavigate } from "react-router-dom";
 import { demandPayloadData } from "../utils";
 
 const Close = () => (
@@ -31,14 +31,14 @@ const CloseBtn = (props) => {
 
 const RenewPopup = ({ t, closeModal, onSubmit, application }) => {
     const mutation = Digit.Hooks.sv.useCreateDemand();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const Heading = (props) => {
         return <h1 className="heading-m">{props.label}</h1>;
     };
 
     const proceedWithApplication = () => {
-        history.push(`renew-application/info`)
+        navigate(`renew-application/info`)
     }
 
 
@@ -53,7 +53,7 @@ const RenewPopup = ({ t, closeModal, onSubmit, application }) => {
                 name: err.name
             });
         }
-        history.push("renew-application/check/makePayment");
+        navigate("renew-application/check/makePayment");
     }
 
     return (

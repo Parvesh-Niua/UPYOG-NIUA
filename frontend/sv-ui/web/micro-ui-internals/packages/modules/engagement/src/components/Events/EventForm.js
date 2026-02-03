@@ -1,9 +1,9 @@
-import { TextInput, CardLabel, LabelFieldPair, Dropdown, Loader, LocationSearch, CardLabelError, useLocation } from "@upyog/digit-ui-react-components";
+import { TextInput, CardLabel, LabelFieldPair, Dropdown, Loader, LocationSearch, CardLabelError } from "@upyog/digit-ui-react-components";
 import React, { Fragment, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Controller } from "react-hook-form";
 import { alphabeticalSortFunctionForTenantsBasedOnName } from "../../utils";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const EventForm = ({ onSelect, config, formData, register, control, errors }) => {
   const { t } = useTranslation();
