@@ -1,5 +1,5 @@
 import { DigiLockerService } from "../../services/elements/DigiLocker";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 const createTokenAPI = (type) => {
 

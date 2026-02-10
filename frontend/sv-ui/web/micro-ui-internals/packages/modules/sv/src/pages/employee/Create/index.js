@@ -1,7 +1,7 @@
 
 import React ,{Fragment}from "react";
 import { useTranslation } from "react-i18next";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Navigate, Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { Config } from "../../../config/config";
 

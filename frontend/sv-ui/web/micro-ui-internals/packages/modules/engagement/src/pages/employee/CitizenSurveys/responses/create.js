@@ -1,5 +1,5 @@
 import { Banner, Card, Loader, CardText, ActionBar, SubmitBar,Menu } from "@upyog/digit-ui-react-components";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import React, { useEffect,useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";

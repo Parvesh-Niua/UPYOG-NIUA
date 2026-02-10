@@ -185,13 +185,16 @@ const SurveyResultsView = ({surveyInfo,selecedSurveyresults}) => {
     const [data,setData]=useState(null);
     const [userInfo,setUserInfo] = useState({})
     const tenant = Digit.ULBService.getCurrentTenantId();
-    useEffect( async() => {
-        if(selecedSurveyresults?.answers?.length){
-        const dp = bindQuesWithAns(surveyInfo?.questions,selecedSurveyresults.answers)
-        setData(dp)
-        const ue = await getUserData(selecedSurveyresults.answers,tenant.split(".")[0])
-        setUserInfo(ue);
-        }
+    useEffect(() => {
+        const fetchData = async () => {
+            if(selecedSurveyresults?.answers?.length){
+                const dp = bindQuesWithAns(surveyInfo?.questions,selecedSurveyresults.answers)
+                setData(dp)
+                const ue = await getUserData(selecedSurveyresults.answers,tenant.split(".")[0])
+                setUserInfo(ue);
+            }
+        };
+        fetchData();
     },[selecedSurveyresults])
 
     //    const dp = bindQuesWithAns(surveyInfo?.questions,responsesInfoMutation.data.answers);

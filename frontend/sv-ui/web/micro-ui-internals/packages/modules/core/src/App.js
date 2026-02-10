@@ -8,7 +8,7 @@ export const SVApp = ({ stateCode, modules, appTenants, logoUrl, initData }) => 
   const { pathname } = useLocation();
 
   const innerWidth = window.innerWidth;
-  const cityDetails = Digit.ULBService.getCurrentUlb();
+  const cityDetails = Digit.ULBService.getCurrentUlb() || {};
   const userDetails = Digit.UserService.getUser();
   const { data: storeData } = Digit.Hooks.useStore.getInitData();
   const { stateInfo } = storeData || {};

@@ -2,7 +2,7 @@
  * Following hook is used to get data of applications from backend in Street Vending module and returns the data in an object "SVDetail"
  */
 
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const useSvSearchApplication = ({ tenantId, filters, auth,searchedFrom="" }, config = {}) => {
   const client = useQueryClient();
@@ -14,12 +14,14 @@ const useSvSearchApplication = ({ tenantId, filters, auth,searchedFrom="" }, con
     return data;
   };
 
-  const { isLoading, error, data, isSuccess } = useQuery(["streetVendingSearchList", tenantId, filters, auth, config], () => Digit.SVService.search(args), {
+  const { isLoading, error, data, isSuccess } = useQuery({
+    queryKey: ["streetVendingSearchList", tenantId, filters, auth, config],
+    queryFn: () => Digit.SVService.search(args),
     select: defaultSelect,
     ...config,
   });
 
-  return { isLoading, error, data, isSuccess, revalidate: () => client.invalidateQueries(["streetVendingSearchList", tenantId, filters, auth]) };
+  return { isLoading, error, data, isSuccess, revalidate: () => client.invalidateQueries({ queryKey: ["streetVendingSearchList", tenantId, filters, auth] }) };
 };
 
 export default useSvSearchApplication;

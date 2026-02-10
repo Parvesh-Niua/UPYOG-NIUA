@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import BillingService from "../../services/elements/Bill";
 
 const useBillSearch = ({ filters, config = {} }) => {
@@ -12,7 +12,9 @@ const useBillSearch = ({ filters, config = {} }) => {
 
   const args = tenantId ? { tenantId, filters } : { filters };
 
-  const { isLoading, error, data } = useQuery(["BILL_INBOX", tenantId, filters], async () => await BillingService.search_bill(args), {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["BILL_INBOX", tenantId, filters],
+    queryFn: async () => await BillingService.search_bill(args),
     ...config,
     enabled: filters?.businesService ? true : false,
   });

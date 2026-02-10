@@ -104,7 +104,7 @@ const EmployeeDashboard = ({modules}) => {
       }
     };
     fetchDashboardData();
-  }, [t]);
+  }, []);
 
   return (
     <React.Fragment>
