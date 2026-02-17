@@ -3,8 +3,11 @@ import { useMutation } from "@tanstack/react-query";
 
 const createTokenAPI = (type) => {
 
-  return useMutation((data) => {
-    DigiLockerService.token(data)});
+  return useMutation({
+    mutationFn: (data) => {
+      return DigiLockerService.token(data)
+    }
+  });
  }
 
 export default createTokenAPI;

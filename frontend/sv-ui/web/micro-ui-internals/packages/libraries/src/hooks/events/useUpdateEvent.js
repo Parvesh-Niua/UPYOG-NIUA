@@ -1,7 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
 const useUpdateEvent = () => {
-  return useMutation(eventData => Digit.EventsServices.Update(eventData))
+  return useMutation({
+    mutationFn: (eventData) => Digit.EventsServices.Update(eventData)
+  })
 }
 
-export default useUpdateEvent; 
+export default useUpdateEvent;

@@ -9,9 +9,13 @@ import { SVService } from "../../services/elements/SV";
 
 export const useSvCreateApi = (tenantId, type = true) => {
   if (type) {
-    return useMutation((data) => SVService.create(data, tenantId));
+    return useMutation({
+      mutationFn: (data) => SVService.create(data, tenantId)
+    });
   } else {
-    return useMutation((data) => SVService.update(data, tenantId));
+    return useMutation({
+      mutationFn: (data) => SVService.update(data, tenantId)
+    });
   }
 };
 

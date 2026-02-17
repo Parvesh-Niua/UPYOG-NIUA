@@ -172,8 +172,9 @@ const useEvents = ({tenantId, variant, config={}}) => useQuery({
     ...config
 })
 
-const useClearNotifications = () => useMutation(({tenantId}) => Digit.EventsServices.ClearNotification({tenantId}))
-
+const useClearNotifications = () => useMutation({
+    mutationFn: ({tenantId}) => Digit.EventsServices.ClearNotification({tenantId})
+})
 const useNotificationCount = ({tenantId, config={}}) => useQuery({
     queryKey: ["NOTIFICATION_COUNT", tenantId],
     queryFn: () => Digit.EventsServices.NotificationCount({tenantId}),
