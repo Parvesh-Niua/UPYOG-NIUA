@@ -26,14 +26,14 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
     })
 
     useEffect(() => {
-        register("offset", 0)
-        register("limit", 10)
-        register("sortBy", "commencementDate")
-        register("sortOrder", "DESC")
-        register("isDraftApplication", "false")
+        setValue("offset", 0);
+        setValue("limit", 10);
+        setValue("sortBy", "commencementDate");
+        setValue("sortOrder", "DESC");
+        setValue("isDraftApplication", "false");
         setValue("fromDate", today);
         setValue("toDate", today);
-    }, [register, setValue, today])
+    }, [setValue, today])
 
 
     const paymentStatusOptions = [
@@ -155,14 +155,19 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
             <SearchForm onSubmit={onSubmit} handleSubmit={handleSubmit}>
                 <SearchField>
                     <label>{t("SV_APPLICATION_NUMBER")}</label>
-                    <TextInput name="applicationNumber" inputRef={register({})} />
+                    <Controller
+                        control={control}
+                        name="applicationNumber"
+                        render={({ field }) => <TextInput {...field} />}
+                    />
                 </SearchField>
 
                 <SearchField>
                     <label>{t("SV_REGISTERED_MOB_NUMBER")}</label>
-                    <MobileNumber
+                    <Controller
+                        control={control}
                         name="mobileNumber"
-                        inputRef={register({
+                        rules={{
                             minLength: {
                                 value: 10,
                                 message: t("CORE_COMMON_MOBILE_ERROR"),
@@ -173,13 +178,16 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                             },
                             pattern: {
                                 value: /[6789][0-9]{9}/,
-                                //type: "tel",
                                 message: t("CORE_COMMON_MOBILE_ERROR"),
                             },
-                        })}
-                        type="number"
-                        componentInFront={<div className="employee-card-input employee-card-input--front">+91</div>}
-                    //maxlength={10}
+                        }}
+                        render={({ field }) => (
+                            <MobileNumber
+                                {...field}
+                                type="number"
+                                componentInFront={<div className="employee-card-input employee-card-input--front">+91</div>}
+                            />
+                        )}
                     />
                     <CardLabelError>{formState?.errors?.["mobileNumber"]?.message}</CardLabelError>
                 </SearchField>
