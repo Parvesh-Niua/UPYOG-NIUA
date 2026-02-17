@@ -239,7 +239,7 @@ const AddressDetails = ({t, config, onSelect, formData, isEdit}) => {
         name={"city"}
         defaultValue={city}
         rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-        render={(props) => (
+        render={({field}) => (
           <Dropdown
             className="form-field"
             selected={city}
@@ -260,7 +260,7 @@ const AddressDetails = ({t, config, onSelect, formData, isEdit}) => {
         name={"locality"}
         defaultValue={locality}
         rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-        render={(props) => (
+        render={({field}) => (
           <Dropdown
             className="form-field"
             selected={locality}

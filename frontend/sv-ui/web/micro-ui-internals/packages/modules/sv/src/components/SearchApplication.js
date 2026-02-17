@@ -186,7 +186,7 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                 <SearchField>
                     <label>{t("SV_FROM_DATE")}</label>
                     <Controller
-                        render={(props) => <DatePicker date={props.value} disabled={false} onChange={props.onChange} max={today} />}
+                        render={({ field }) => <DatePicker date={field.value} disabled={false} onChange={field.onChange} max={today} />}
                         name="fromDate"
                         control={control}
                     />
@@ -194,7 +194,7 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                 <SearchField>
                     <label>{t("SV_TO_DATE")}</label>
                     <Controller
-                        render={(props) => <DatePicker date={props.value} disabled={false} onChange={props.onChange} max={today} />}
+                        render={({ field }) => <DatePicker date={field.value} disabled={false} onChange={field.onChange} max={today} />}
                         name="toDate"
                         control={control}
                     />
@@ -205,11 +205,11 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                     <Controller
                         control={control}
                         name="vendingType"
-                        render={(props) => (
+                        render={({ field }) => (
                             <Dropdown
-                                selected={props.value}
-                                select={props.onChange}
-                                onBlur={props.onBlur}
+                                selected={field.value}
+                                select={field.onChange}
+                                onBlur={field.onBlur}
                                 option={vendingTypeOptions}
                                 optionKey="i18nKey"
                                 t={t}
@@ -225,10 +225,10 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                         control={control}
                         name="vendingLocality"
                         defaultValue={vendingLocality}
-                        render={(props) => (
+                        render={({ field }) => (
                             <Dropdown
-                                selected={props.value}
-                                select={props.onChange}
+                                selected={field.value}
+                                select={field.onChange}
                                 option={allCities}
                                 optionKey="i18nKey"
                                 t={t}
@@ -243,11 +243,11 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                     <Controller
                         control={control}
                         name="paymentStatus"
-                        render={(props) => (
+                        render={({ field }) => (
                             <Dropdown
-                                selected={props.value}
-                                select={props.onChange}
-                                onBlur={props.onBlur}
+                                selected={field.value}
+                                select={field.onChange}
+                                onBlur={field.onBlur}
                                 option={paymentStatusOptions}
                                 optionKey="i18nKey"
                                 t={t}
@@ -262,11 +262,11 @@ const SVSearchApplication = ({ tenantId, isLoading, t, onSubmit, data, count, se
                     <Controller
                         control={control}
                         name="renewalStatus"
-                        render={(props) => (
+                        render={({ field }) => (
                             <Dropdown
-                                selected={props.value}
-                                select={props.onChange}
-                                onBlur={props.onBlur}
+                                selected={field.value}
+                                select={field.onChange}
+                                onBlur={field.onBlur}
                                 option={renewalStatusOptions}
                                 optionKey="i18nKey"
                                 t={t}

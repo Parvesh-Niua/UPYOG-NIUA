@@ -27,12 +27,12 @@ const Search = ({ onSearch, searchParams, searchFields, type, onClose, isInboxPa
                     <Controller
                     rules={{ required: true }}
                         defaultValue={selectedTenat?.[0]}
-                        render={props => (
+                        render={({field}) => (
                             <Dropdown
                                 option={userUlbs}
                                 optionKey={"i18nKey"}
-                                selected={props.value}
-                                select={props.onChange}
+                                selected={field.value}
+                                select={field.onChange}
                                 t={t}
                             />
                         )}
@@ -44,7 +44,7 @@ const Search = ({ onSearch, searchParams, searchFields, type, onClose, isInboxPa
             default:
                 return (
                     <Controller
-                        render={(props) => <TextInput onChange={props.onChange} value={props.value} />}
+                        render={({field}) => <TextInput onChange={field.onChange} value={field.value} />}
                         name={input.name}
                         control={control}
                         defaultValue={null}

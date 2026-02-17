@@ -626,7 +626,7 @@ const SVApplicantDetails = ({ t, config, onSelect, userType, formData,editdata,p
                   name={`userCategory-${index}`}
                   defaultValue={userCategory}
                   rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-                  render={(props) => (
+                  render={({field}) => (
                     <Dropdown
                       className="form-field"
                       style={{width:"100%"}}

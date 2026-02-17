@@ -26,12 +26,12 @@ const SearchFormFieldsComponents = ({ registerRef, controlSearchForm, searchForm
             <Controller
                 rules={{ required: true }}
                 defaultValue={selectedTenat?.[0]}
-                render={props => (
+                render={({ field }) => (
                     <Dropdown
                         option={userUlbs}
                         optionKey={"i18nKey"}
-                        selected={props.value}
-                        select={(e) => props.onChange(e)}
+                        selected={field.value}
+                        select={(e) => field.onChange(e)}
                         t={t}
                     />
                 )}

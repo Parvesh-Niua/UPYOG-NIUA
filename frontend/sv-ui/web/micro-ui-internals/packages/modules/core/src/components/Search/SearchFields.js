@@ -26,7 +26,7 @@ const isMobile = window.Digit.Utils.browser.isMobile();
             <SearchField className="pt-form-field">
                 <label>{t("AUDIT_FROM_DATE_LABEL")}</label>
                 <Controller
-                    render={(props) => <DatePicker date={props.value} onChange={props.onChange} />}
+                    render={({field}) => <DatePicker date={field.value} onChange={field.onChange} />}
                     name="fromDate"
                     control={control}
                 />
@@ -34,7 +34,7 @@ const isMobile = window.Digit.Utils.browser.isMobile();
             <SearchField className="pt-form-field">
                 <label>{t("AUDIT_TO_DATE_LABEL")}</label>
                 <Controller
-                    render={(props) => <DatePicker date={props.value} onChange={props.onChange} />}
+                    render={({field}) => <DatePicker date={field.value} onChange={field.onChange} />}
                     name="toDate"
                     control={control}
                 />

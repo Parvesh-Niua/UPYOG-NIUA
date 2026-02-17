@@ -98,9 +98,14 @@ const FormComposer = (props) => {
       case "mobileNumber":
         return (
           <Controller
-          render={(props) => (
-            <MobileNumber className={populators?.className || "field"} onChange={props.onChange} value={props.value} disable={disable} />
-          )}
+            render={({ field }) => (
+              <MobileNumber
+                className={populators?.className || "field"}
+                onChange={field.onChange}
+                value={field.value}
+                disable={disable}
+              />
+            )}
             defaultValue={populators.defaultValue}
             name={populators?.name}
             control={control}
@@ -109,7 +114,7 @@ const FormComposer = (props) => {
       case "custom":
         return (
           <Controller
-            render={(props) => populators.component({ ...props, setValue }, populators.customProps)}
+            render={({ field }) => populators.component({ ...field, setValue }, populators.customProps)}
             defaultValue={populators.defaultValue}
             name={populators?.name}
             control={control}
@@ -118,7 +123,7 @@ const FormComposer = (props) => {
       case "component":
         return (
           <Controller
-            render={(props) => (
+            render={({ field }) => (
               <Component
                 userType={"employee"}
                 t={t}
@@ -129,11 +134,11 @@ const FormComposer = (props) => {
                 formData={formData}
                 register={register}
                 errors={errors}
-                props={props}
+                props={field}
                 setError={setError}
                 clearErrors={clearErrors}
                 formState={formState}
-                onBlur={props.onBlur}
+                onBlur={field.onBlur}
               />
             )}
             name={config.key}

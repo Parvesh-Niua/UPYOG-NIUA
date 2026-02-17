@@ -206,7 +206,7 @@ export const SelectPaymentType = (props) => {
               name="paymentType"
               defaultValue={menu[0]}
               control={control}
-              render={(props) => <RadioButtons selectedOption={props.value} options={menu} onSelect={props.onChange} />}
+              render={({field}) => <RadioButtons selectedOption={field.value} options={menu} onSelect={field.onChange} />}
             />
           )}
           {!showToast && <SubmitBar label={t("PAYMENT_CS_BUTTON_LABEL")} submit={true} /*disabled={timerEnabledForBusinessService(businessService)? Time ===0:null}*/ />}       

@@ -58,11 +58,11 @@ const CitizenSurveyQuestion = ({t, question, control, register, values, formStat
               name={question.uuid}
               //defaultValue={surveyFormState?.collectCitizenInfo}
               rules={{ required: question.required }}
-              render={({ onChange, value }) => (
+              render={({ field }) => (
                 <RadioButtons
                   disabled={formDisabled}
-                  onSelect={onChange}
-                  selectedOption={value}
+                  onSelect={field.onChange}
+                  selectedOption={field.value}
                   optionsKey=""
                   options={[...question.options]}
                   //disabled={disableInputs}
@@ -83,7 +83,7 @@ const CitizenSurveyQuestion = ({t, question, control, register, values, formStat
               //defaultValue={surveyFormState?.collectCitizenInfo}
               //rules={{required:true}}
               rules={{ required:question.required }}
-              render={({ onChange, value }) => {
+              render={({ field}) => {
                 return (
                 <div className="align-columns">
                   {question.options.map((option) => {
@@ -93,12 +93,12 @@ const CitizenSurveyQuestion = ({t, question, control, register, values, formStat
                         key={option}
                         onChange={(e) => {
                           if (e.target.checked) {
-                            onChange([option,...value?value:[]]);             
+                            onChange([option,...field.value?field.value:[]]);             
                           } else {
-                            value && onChange(value?.filter((item) => item !== option));
+                            field.value && field.onChange(field.value?.filter((item) => item !== option));
                           }
                         }}
-                        checked={typeof value === "string" ? !!([value]?.find(e => e === option)) : !!value?.find(e => e === option)}
+                        checked={typeof field.value === "string" ? !!([field.value]?.find(e => e === option)) : !!field.value?.find(e => e === option)}
                         label={option}
                         checkboxWidth = {{width:"34px",height:"34px"}}
                         style={{marginTop:"5px", overflowWrap:"break-word"}}

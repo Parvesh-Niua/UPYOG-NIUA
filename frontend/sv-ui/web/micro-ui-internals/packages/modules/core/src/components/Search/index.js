@@ -55,10 +55,12 @@ const SearchApplication = ({showLoader,isLoading, tenantId, t, onSubmit, data, c
   }
   }; 
   useEffect(() => {
-    register("offset", 0);
-    register("limit", 10);
+    register("offset");
+    register("limit");
+    setValue("offset", 0);
+    setValue("limit", 10);
     //register("sortOrder", "DESC");
-}, [register]);
+}, [register,setValue]);
 useEffect(() => {
   if ( data?.length >0){
     settabledata([

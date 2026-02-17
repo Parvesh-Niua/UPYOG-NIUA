@@ -450,7 +450,7 @@ const SVSpecialCategory = ({ t, config, onSelect, userType, formData, editdata, 
                 name={"ownerCategory"}
                 defaultValue={ownerCategory}
                 rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-                render={(props) => (
+                render={({field}) => (
                   <Dropdown
                     className="form-field"
                     selected={ownerCategory}
@@ -530,7 +530,7 @@ const SVSpecialCategory = ({ t, config, onSelect, userType, formData, editdata, 
                     name={`beneficiary-${index}`}
                     // defaultValue={"-"}
                     rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-                    render={(props) => (
+                    render={({field}) => (
                       <Dropdown
                         className="form-field"
                         selected={convertToObject(beneficiaryList[index]?.schemeName)}

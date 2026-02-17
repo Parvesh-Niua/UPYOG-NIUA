@@ -506,7 +506,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               name={"city"}
               defaultValue={city}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={city}
@@ -524,7 +524,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               name={"locality"}
               defaultValue={locality}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={locality}
@@ -666,7 +666,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               name={"ccity"}
               defaultValue={ccity}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={ccity}
@@ -684,7 +684,7 @@ const SVAdrressDetails = ({ t, config, onSelect, userType, formData, editdata, p
               name={"clocality"}
               defaultValue={clocality}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={clocality}
