@@ -1,4 +1,4 @@
-import { Card, CardLabelError, CheckBox, RadioButtons, TextArea, TextInput } from "@upyog/digit-ui-react-components";
+import { Card, CardLabelError, CheckBox, RadioButtons, TextArea, TextInput } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 

@@ -11,7 +11,7 @@ import {
   BackButton,
   Loader,
   DatePicker
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import UploadDrawer from "./ImageUpload/UploadDrawer";

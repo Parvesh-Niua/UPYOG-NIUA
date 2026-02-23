@@ -1,4 +1,4 @@
-import { Card, CustomButton, SubmitBar } from "@upyog/digit-ui-react-components";
+import { Card, CustomButton, SubmitBar } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Background from "../../../components/Background";

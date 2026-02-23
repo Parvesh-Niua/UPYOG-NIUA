@@ -1,4 +1,4 @@
-import { Modal, Text } from "@upyog/digit-ui-react-components";
+import { Modal, Text } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState, useEffect } from "react";
 
 const Heading = ({ t, heading }) => {

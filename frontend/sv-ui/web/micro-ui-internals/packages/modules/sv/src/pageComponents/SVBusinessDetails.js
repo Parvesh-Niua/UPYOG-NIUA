@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FormStep, TextInput, CardLabel, Dropdown, LinkButton, Toast, SubmitBar } from "@upyog/digit-ui-react-components";
+import { FormStep, TextInput, CardLabel, Dropdown, LinkButton, Toast, SubmitBar } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { Controller, useForm } from "react-hook-form";
 import GIS from "./GIS";
 import Timeline from "../components/Timeline";

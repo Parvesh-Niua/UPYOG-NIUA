@@ -1,5 +1,4 @@
-import { DatePicker, Dropdown, CheckBox, TextArea, TextInput, CardLabelError } from "@upyog/digit-ui-react-components";
-import { DustbinIcon } from "@upyog/digit-ui-react-components";
+import { DatePicker, Dropdown, CheckBox, TextArea, TextInput, CardLabelError, DustbinIcon} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import TimePicker from "react-time-picker";

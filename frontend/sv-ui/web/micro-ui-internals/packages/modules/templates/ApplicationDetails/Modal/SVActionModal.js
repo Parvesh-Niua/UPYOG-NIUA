@@ -1,4 +1,4 @@
-import { Loader, Modal, FormComposer, CloseSvg } from "@upyog/digit-ui-react-components";
+import { Loader, Modal, FormComposer, CloseSvg } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState, useEffect } from "react";
 import { configSVApproverApplication } from "../config";
 import EXIF from "exif-js";

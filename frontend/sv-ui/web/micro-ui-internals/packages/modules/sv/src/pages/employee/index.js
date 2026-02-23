@@ -1,4 +1,4 @@
-import { AppContainer, BackButton, PrivateRoute, BreadCrumb } from "@upyog/digit-ui-react-components";
+import { AppContainer, BackButton, PrivateRoute, BreadCrumb } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";

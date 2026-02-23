@@ -1,4 +1,4 @@
-import { Loader } from "@upyog/digit-ui-react-components";
+import { Loader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { useResolvedPath, useLocation } from "react-router-dom";
 import CitizenPayment from "./citizen";

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { AppContainer } from "@upyog/digit-ui-react-components";
+import { AppContainer } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { Route, Routes } from "react-router-dom";
 import { loginConfig } from "./config";
 import LoginComponent from "./login";

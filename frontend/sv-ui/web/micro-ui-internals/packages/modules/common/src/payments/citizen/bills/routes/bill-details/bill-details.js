@@ -1,4 +1,4 @@
-import { Card, Header, KeyNote, Loader, SubmitBar } from "@upyog/digit-ui-react-components";
+import { Card, Header, KeyNote, Loader, SubmitBar } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useParams } from "react-router-dom";

@@ -1,4 +1,4 @@
-import { CardLabel, LabelFieldPair, TextInput, UploadFile, CardLabelError, Loader } from "@upyog/digit-ui-react-components";
+import { CardLabel, LabelFieldPair, TextInput, UploadFile, CardLabelError, Loader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState, useMemo } from "react";
 import { Controller } from "react-hook-form";
 import { useLocation } from "react-router-dom";

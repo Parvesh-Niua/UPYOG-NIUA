@@ -1,6 +1,6 @@
 import {
   BackButton, CardSubHeader, CardText, FormComposer, Toast
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";

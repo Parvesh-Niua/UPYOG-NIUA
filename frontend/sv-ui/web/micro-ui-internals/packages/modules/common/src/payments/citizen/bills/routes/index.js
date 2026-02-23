@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import BillDetails from "./bill-details/bill-details";
-import { BackButton } from "@upyog/digit-ui-react-components";
+import { BackButton } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const BillRoutes = ({ paymentRules, businessService }) => {
 

@@ -1,6 +1,5 @@
-import { Dropdown } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
-import { CustomButton, Menu } from "@upyog/digit-ui-react-components";
+import { CustomButton, Menu, Dropdown } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useLocation } from "react-router-dom";
 
 const stringReplaceAll = (str = "", searcher = "", replaceWith = "") => {

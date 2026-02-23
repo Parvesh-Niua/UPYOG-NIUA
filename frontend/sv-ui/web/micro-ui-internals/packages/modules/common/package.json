@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@nudmcdgnpm/digit-ui-libraries": "1.2.1",
-    "@upyog/digit-ui-react-components": "3.10.0",
+    "@nudmcdgnpm/upyog-ui-react-components-lts": "1.0.0",
     "microbundle-crl": "^0.13.11",
     "react": "19.0.0",
     "react-dom": "19.0.0",
