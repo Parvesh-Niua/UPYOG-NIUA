@@ -1,33 +1,36 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
-const nodeModulesDirs = [
-  path.join(__dirname, "node_modules"),
-  path.join(__dirname, "micro-ui-internals", "node_modules"),
-];
+const baseDir = __dirname;
 
-// 1. Fix broken `module` fields in npm packages pointing to non-existent files
-const brokenNpmPackages = [
-  "@nudmcdgnpm/upyog-ui-react-components-lts",
-  "@upyog/digit-ui-module-bills",
-  "@upyog/digit-ui-react-components",
-  "react-smooth",
-];
-
-brokenNpmPackages.forEach((pkg) => {
-  nodeModulesDirs.forEach((nmDir) => {
-    const pkgJsonPath = path.join(nmDir, pkg, "package.json");
-    if (!fs.existsSync(pkgJsonPath)) return;
-    const json = JSON.parse(fs.readFileSync(pkgJsonPath, "utf-8"));
-    if (json.module && !fs.existsSync(path.join(nmDir, pkg, json.module))) {
-      delete json.module;
-      fs.writeFileSync(pkgJsonPath, JSON.stringify(json, null, 2));
-      console.log(`Fixed broken module field: ${pkg} in ${nmDir}`);
-    }
+// 1. Fix ALL broken `module` fields anywhere in node_modules (any nesting level)
+// A broken module field points to a file that doesn't exist
+try {
+  const result = execSync(
+    `find . -name "package.json" -path "*/node_modules/*" -not -path "*/node_modules/*/node_modules/*/node_modules/*/node_modules/*"`,
+    { cwd: baseDir, encoding: "utf-8" }
+  );
+  result.trim().split("\n").filter(Boolean).forEach((rel) => {
+    const full = path.join(baseDir, rel);
+    const dir = path.dirname(full);
+    try {
+      const json = JSON.parse(fs.readFileSync(full, "utf-8"));
+      if (json.module && !fs.existsSync(path.join(dir, json.module))) {
+        delete json.module;
+        fs.writeFileSync(full, JSON.stringify(json, null, 2));
+        console.log(`Fixed broken module field: ${json.name || rel}`);
+      }
+    } catch {}
   });
-});
+} catch {}
 
 // 2. Shim renamed babel plugins
+const nodeModulesDirs = [
+  path.join(baseDir, "node_modules"),
+  path.join(baseDir, "micro-ui-internals", "node_modules"),
+];
+
 const shims = [
   {
     old: "@babel/plugin-proposal-unicode-property-regex",
