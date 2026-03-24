@@ -6,16 +6,13 @@
   "workspaces": [
     "micro-ui-internals/packages/libraries",
     "micro-ui-internals/packages/react-components",
-    "micro-ui-internals/packages/modules/core",
-    "micro-ui-internals/packages/modules/common",
-    "micro-ui-internals/packages/modules/assetv2",
-    "micro-ui-internals/packages/modules/gis"
+    "micro-ui-internals/packages/modules/core"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "dependencies": {
-    "@nudmcdgnpm/upyog-css": "1.2.8",
+    "@nudmcdgnpm/upyog-css": "2.0.0",
     "@upyog/digit-ui-libraries": "3.10.0",
     "@upyog/digit-ui-module-bills": "3.10.0",
     "@upyog/digit-ui-module-common": "3.10.0",
@@ -65,11 +62,10 @@
     "**/@babel/plugin-transform-modules-commonjs": "7.14.0",
     "**/styled-components": "5.0.0",
     "**/@jridgewell/gen-mapping": "0.3.5",
-    "**/polished":"4.2.2",
-    "**/q": "1.5.1",
-    "**/cssesc": "3.0.0",
     "glob":"7.2.3",
-    "minimatch":"3.1.2"
+    "minimatch":"3.1.2",
+    "react-leaflet":"2.8.0",
+    "react-leaflet-draw":"0.19.0"
   },
   "scripts": {
     "start": "react-scripts start",
