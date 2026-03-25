@@ -743,3 +743,21 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "municipal-services/estate-management/src/main/resources/db"
         image-name: "estate-management-db"
+  
+
+  - name: "builds/upyog/municipal-services/challan-generation"
+    build:
+      - work-dir: "municipal-services/challan-generation"
+        image-name: "challan-generation"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "municipal-services/challan-generation/src/main/resources/db"
+        image-name: "challan-generation-db"
+
+
+  - name: "builds/upyog/municipal-services/challan-generation-calculator"
+    build:
+      - work-dir: "municipal-services/challan-generation-calculator"
+        image-name: "challan-generation-calculator"
+        dockerfile: "build/maven/Dockerfile"
+      - work-dir: "municipal-services/challan-generation-calculator/src/main/resources/db"
+        image-name: "challan-generation-calculator-db"
