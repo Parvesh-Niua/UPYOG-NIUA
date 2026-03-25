@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
  * Boundary
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-06-23T05:54:07.373Z[GMT]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-06-23T05:54:07.373Z[GMT]")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -56,7 +56,7 @@ public class Boundary   {
    * code of the boundary.
    * @return code
   **/
-  @ApiModelProperty(required = true, value = "code of the boundary.")
+  @Schema(required = true, description = "code of the boundary.")
       @NotNull
 
     public String getCode() {
@@ -76,7 +76,7 @@ public class Boundary   {
    * name of the boundary.
    * @return name
   **/
-  @ApiModelProperty(required = true, value = "name of the boundary.")
+  @Schema(required = true, description = "name of the boundary.")
     
 
     public String getName() {
@@ -96,7 +96,7 @@ public class Boundary   {
    * localized label for the boundry.
    * @return label
   **/
-  @ApiModelProperty(value = "localized label for the boundry.")
+  @Schema(description = "localized label for the boundry.")
   
     public String getLabel() {
     return label;
@@ -115,7 +115,7 @@ public class Boundary   {
    * latitude of the boundary.
    * @return latitude
   **/
-  @ApiModelProperty(value = "latitude of the boundary.")
+  @Schema(description = "latitude of the boundary.")
   
     public String getLatitude() {
     return latitude;
@@ -134,7 +134,7 @@ public class Boundary   {
    * longitude of the boundary.
    * @return longitude
   **/
-  @ApiModelProperty(value = "longitude of the boundary.")
+  @Schema(description = "longitude of the boundary.")
   
     public String getLongitude() {
     return longitude;
@@ -161,7 +161,7 @@ public class Boundary   {
    * Get children
    * @return children
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
       @Valid
     public List<Boundary> getChildren() {
     return children;
@@ -180,7 +180,7 @@ public class Boundary   {
    * materialized path of the boundary - this would be of the format tenantid.[code] from parentt till teh current boundary
    * @return materializedPath
   **/
-  @ApiModelProperty(readOnly = true, value = "materialized path of the boundary - this would be of the format tenantid.[code] from parentt till teh current boundary")
+  @Schema(readOnly = true, description = "materialized path of the boundary - this would be of the format tenantid.[code] from parentt till teh current boundary")
   
     public String getMaterializedPath() {
     return materializedPath;

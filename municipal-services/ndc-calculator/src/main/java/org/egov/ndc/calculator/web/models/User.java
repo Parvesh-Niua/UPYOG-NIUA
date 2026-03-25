@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -186,18 +186,18 @@ public class User {
             return Objects.hash(uuid, name, mobileNumber);
     }
     
-    public org.egov.common.contract.request.User toCommonUser(){
-            org.egov.common.contract.request.User commonUser = new org.egov.common.contract.request.User();
-            commonUser.setId(this.getId());
-            commonUser.setUserName(this.getUserName());
-            commonUser.setName(this.getName());
-            commonUser.setType(this.getType());
-            commonUser.setMobileNumber(this.getMobileNumber());
-            commonUser.setEmailId(this.getEmailId());
-            commonUser.setRoles(this.getRoles());
-            commonUser.setTenantId(this.getTenantId());
-            commonUser.setUuid(this.getUuid());
-            return commonUser;
-    }
+//    public org.egov.common.contract.request.User toCommonUser(){
+//            org.egov.common.contract.request.User commonUser = new org.egov.common.contract.request.User();
+//            commonUser.setId(this.getId());
+//            commonUser.setUserName(this.getUserName());
+//            commonUser.setName(this.getName());
+//            commonUser.setType(this.getType());
+//            commonUser.setMobileNumber(this.getMobileNumber());
+//            commonUser.setEmailId(this.getEmailId());
+//            commonUser.setRoles(this.getRoles());
+//            commonUser.setTenantId(this.getTenantId());
+//            commonUser.setUuid(this.getUuid());
+//            return commonUser;
+//    }
 
 }
