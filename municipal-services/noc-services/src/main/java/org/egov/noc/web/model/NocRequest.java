@@ -2,7 +2,7 @@ package org.egov.noc.web.model;
 
 import java.util.Objects;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

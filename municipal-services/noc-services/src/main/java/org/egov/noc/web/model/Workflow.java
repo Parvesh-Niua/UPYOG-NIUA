@@ -11,8 +11,8 @@ import java.util.List;
 import lombok.Builder;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 
 /**
  * BPA application object to capture the details of land, land owners, and address of the land.
