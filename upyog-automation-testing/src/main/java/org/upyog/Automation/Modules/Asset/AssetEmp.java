@@ -473,12 +473,12 @@ Thread.sleep(3000);
         for (WebElement option : options) {
             if (option.getText().trim().equalsIgnoreCase(value)) {
 
-                Thread.sleep(1500);  // 🔹 Pause before selecting option
+                Thread.sleep(1500);  //  Pause before selecting option
 
                 ((JavascriptExecutor) driver)
                         .executeScript("arguments[0].click();", option);
 
-                Thread.sleep(2000);  // 🔹 Pause after selection (before next field)
+                Thread.sleep(2000);  //  Pause after selection (before next field)
 
                 return;
             }
@@ -740,6 +740,4 @@ Thread.sleep(3000);
         System.out.println("Uploaded file at index " + index + ": " + filePath);
         Thread.sleep(500);
     }
-
-
 }
