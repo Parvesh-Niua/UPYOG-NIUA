@@ -190,92 +190,24 @@ const EmployeeApp = ({ path, url, userType, tenants }) => {
     // <div className="ground-container">
     <Fragment>
       <EventsBreadCrumb location={location} />
+       {/* <Route> must be a direct child of <Routes></Routes> Normal components (like <div>, <Layout>) not allowed directly */}
       <Routes>
-       
-        <Route 
-          path="event/inbox">
-          element={
-            <Inbox tenants={tenants} parentRoute={path} />
-          }
-        </Route>
-        <Route 
-          path="event/response">
-          element={
-            <Response />
-          }
-        </Route>
-        <Route 
-          path="event/inbox/new-event">
-          element={
-            <NewEvent />
-          }
-        </Route>
-        <Route 
-          path="event/new-event">
-          element={
-            <NewEvent />
-          }
-        </Route>
-        <Route 
-          path="event/edit-event/:id" 
-          element={<EditEvent />} 
-        />
-        
-        <Route 
-          path="event/inbox/event-details/:id" 
-          element={<EmployeeEventDetails />} 
-        />
-        
-        <Route 
-          path="documents/inbox/update" 
-          element={<DocumentUpdate />} 
-        />
-        
-        <Route 
-          path="documents/inbox/new-doc" 
-          element={<DocumenetCreate />} 
-        />
-        
-        <Route 
-          path="documents/new-doc" 
-          element={<DocumenetCreate />} 
-        />
-        
-        <Route 
-          path="documents/inbox/details/:id" 
-          element={<DocumentDetails />} 
-        />
-        
-        <Route 
-          path="documents/response" 
-          element={<DocumentResponse />} 
-        />
-        
-        <Route 
-          path="documents/update-response" 
-          element={<DocUpdateResponse />} 
-        />
-        
-        <Route 
-          path="documents/delete-response" 
-          element={<DocDeleteResponse />} 
-        />
-        
-        <Route 
-          path="documents/inbox" 
-          element={<DocumentNotification tenants={tenants} />} 
-        />
-        
-        <Route 
-          path="messages/*" 
-          element={<Messages tenants={tenants} parentRoute={path} />} 
-        />
-        
-        <Route 
-          path="surveys/*" 
-          element={<Surveys tenants={tenants} parentRoute={path} />} 
-        />
-        
+        <Route path="event/inbox" element={<Inbox tenants={tenants} parentRoute={path} />} />
+        <Route path="event/response" element={<Response />} />
+        <Route path="event/inbox/new-event" element={<NewEvent />} />
+        <Route path="event/new-event" element={<NewEvent />} />
+        <Route path="event/edit-event/:id" element={<EditEvent />} />
+        <Route path="event/inbox/event-details/:id" element={<EmployeeEventDetails />} />
+        <Route path="documents/inbox/update" element={<DocumentUpdate />} />
+        <Route path="documents/inbox/new-doc" element={<DocumenetCreate />} />
+        <Route path="documents/new-doc" element={<DocumenetCreate />} />
+        <Route path="documents/inbox/details/:id" element={<DocumentDetails />} />
+        <Route path="documents/response" element={<DocumentResponse />} />
+        <Route path="documents/update-response" element={<DocUpdateResponse />} />
+        <Route path="documents/delete-response" element={<DocDeleteResponse />} />
+        <Route path="documents/inbox" element={<DocumentNotification tenants={tenants} />} />
+        <Route path="messages/*" element={<Messages tenants={tenants} parentRoute={path} />} />
+        <Route path="surveys/*" element={<Surveys tenants={tenants} parentRoute={path} />} />
       </Routes>
       </Fragment>
     // </div>
@@ -284,7 +216,9 @@ const EmployeeApp = ({ path, url, userType, tenants }) => {
 
 const EngagementModule = ({ stateCode, userType, tenants }) => {
   const moduleCode = "Engagement";
-  const { path, url } = useRouteMatch();
+ const location = useLocation();
+  const path = location.pathname;
+  const url = location.pathname;
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
 

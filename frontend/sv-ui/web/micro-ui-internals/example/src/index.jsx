@@ -5,10 +5,20 @@ import { initLibraries } from "@nudmcdgnpm/digit-ui-libraries";
 import { PaymentModule } from "@upyog/digit-ui-module-common";
 import { StreetVendingUI } from "@upyog/digit-ui-module-core";
 import "@nudmcdgnpm/cnd-css";
-import { initEngagementComponents } from "@upyog/digit-ui-module-engagement";
 import { SVComponents, SVLinks, SVModule } from "@nudmcdgnpm/upyog-ui-module-sv";
+import { initEngagementComponents } from "@upyog/digit-ui-module-engagement";
 
 import { SVConstants } from "./SVConstants";
+
+/**
+ * This file initializes and renders the Street Vending UI application.
+ * 
+ * - Loads required libraries and components for the application.
+ * - Sets up the `ComponentRegistryService` with modules and components.
+ * - Initializes user tokens and session storage based on the user type (citizen or employee).
+ * - Configures the application with the state code and enabled modules.
+ * - renders the `StreetVendingUI` component into the root DOM element.
+ */
 
 var Digit = window.Digit || {};
 
@@ -55,8 +65,6 @@ const initSVUI = () => {
   });
 
   initEngagementComponents();
-
-
   const moduleReducers = (initData) => ({
     // pgr: PGRReducers(initData),
   });

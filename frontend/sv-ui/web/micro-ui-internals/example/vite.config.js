@@ -1,42 +1,22 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-import fs from "fs";
 import path from "path";
+import getWorkspaceAliases from "../workspace-aliases.js";
 
-const CJS_ONLY_PACKAGES = [
-  "@nudmcdgnpm/upyog-ui-react-components-lts",
-  "@upyog/digit-ui-module-bills",
-];
-
-function smartResolvePlugin() {
-  return {
-    name: "smart-resolve",
-    resolveId(id) {
-      try {
-        const pkgDir = path.join(process.cwd(), "node_modules", id);
-        const pkgPath = path.join(pkgDir, "package.json");
-        if (!fs.existsSync(pkgPath)) return null;
-        const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
-        if (CJS_ONLY_PACKAGES.includes(id)) {
-          return path.join(pkgDir, pkg.main);
-        }
-        if (pkg.module) {
-          const modernFile = path.join(pkgDir, pkg.module);
-          if (fs.existsSync(modernFile)) return modernFile;
-        }
-        if (pkg.main) {
-          return path.join(pkgDir, pkg.main);
-        }
-      } catch {
-        return null;
-      }
-    },
-  };
-}
-
+/**
+ * Vite configuration file for the Street Vending UI application.
+ * 
+ * - Loads environment variables based on the current mode.
+ * - Configures a proxy for API routes to handle backend requests during development.
+ * - Sets up React plugin for JSX/JS support.
+ * - Resolves workspace aliases for local package development.
+ * - Defines server settings, including port and file system access.
+ * - Configures build options, such as output directory and source maps.
+ * - Optimizes dependencies for faster builds and development.
+ */
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const apiTarget = env.VITE_PROXY_API || "https://niuatt.niua.in";
+  const proxyTarget = env.VITE_PROXY_API;
 
   const proxyRoutes = [
     "/access/v1/actions/mdms",
@@ -60,35 +40,45 @@ export default defineConfig(({ mode }) => {
   ];
 
   const proxyConfig = Object.fromEntries(
-    proxyRoutes.map((route) => [
-      route,
-      { target: apiTarget, changeOrigin: true },
-    ])
+    proxyRoutes.map((route) => [route, { target: proxyTarget, changeOrigin: true }])
   );
 
   return {
-    plugins: [react({ include: /\.(jsx|js)$/ }), smartResolvePlugin()],
+    plugins: [react({ include: /\.(jsx|js)$/ })],
+
     base: "/sv-ui/",
+
+    esbuild: {
+      loader: "jsx",
+      include: /.*\.(js|jsx)$/,
+      exclude: [],
+    },
+
+    resolve: {
+      alias: getWorkspaceAliases(path.resolve(__dirname, "..")),
+    },
+
     server: {
       port: 3000,
+      fs: { allow: [".."] },
       proxy: proxyConfig,
-      watch: {
-        ignored: ["!**/packages/**"],
-      },
     },
+
     build: {
       sourcemap: true,
       outDir: "build",
-      commonjsOptions: {
-        transformMixedEsModules: true,
+      commonjsOptions: { transformMixedEsModules: true },
+    },
+
+    envPrefix: "VITE_",
+
+    css: {
+      preprocessorOptions: {
+        scss: { silenceDeprecations: ["import"] },
       },
     },
-    define: {
-      "process.env": {},
-    },
-    envPrefix: "VITE_",
+
     optimizeDeps: {
-      force: true,
       include: [
         "pdfmake",
         "pdfmake/build/pdfmake",
