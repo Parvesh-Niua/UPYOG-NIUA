@@ -26,6 +26,29 @@ const userInfo = Digit.UserService.getUser();
 const { data } = Digit.Hooks.useCommonMDMS(tenantId, "common-masters", ["StateInfo"]);
 ```
 
+## Custom Hooks
+
+### useCustomNavigate
+
+A custom navigation hook that wraps `react-router-dom`'s `useNavigate`.
+Use this everywhere in the project instead of importing `useNavigate` directly from `react-router-dom`.
+This centralizes navigation logic so future upgrades only need a single change.
+
+```jsx
+const navigate = Digit.Hooks.useCustomNavigate();
+
+// Navigate to a path
+navigate("/path");
+
+// Navigate with state
+navigate("/path", { state: { data } });
+
+// Go back
+navigate(-1);
+```
+
+> If navigation fails for any reason, it automatically falls back to `window.location.href` so the user is never stuck.
+
 ## Key Dependencies
 
 | Package | Version | Purpose |
