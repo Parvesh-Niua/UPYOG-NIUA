@@ -190,6 +190,7 @@ const EmployeeApp = ({ path, url, userType, tenants }) => {
     // <div className="ground-container">
     <Fragment>
       <EventsBreadCrumb location={location} />
+       {/* <Route> must be a direct child of <Routes></Routes> Normal components (like <div>, <Layout>) not allowed directly */}
       <Routes>
         <Route path="event/inbox" element={<Inbox tenants={tenants} parentRoute={path} />} />
         <Route path="event/response" element={<Response />} />

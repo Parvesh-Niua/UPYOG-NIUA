@@ -30,6 +30,7 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
       }
     }, [isSuccess]);
 
+// In useEffect, only return a cleanup function or nothing. Returning null or other values will cause errors in React 19.
 useEffect(() => {
   if (preVisitUnseenNotificationCount && tenantId) {
     mutate({ tenantId });
@@ -76,6 +77,7 @@ useEffect(() => {
   return (
     <div className="CitizenEngagementNotificationWrapper">
       <VariantWiseRender />
+      {/* The key prop was missing; it was optional in React 17 (warning only), but is required for proper list rendering in React 19 */}
       {EventsData?.length ? (
         EventsData.map((DataParamsInEvent, index) => {
           const key = DataParamsInEvent.uuid || DataParamsInEvent.id || index;

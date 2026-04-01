@@ -35,6 +35,7 @@ const EventsListOnGround = ({ variant, parentRoute }) => {
   return (
     <div className="CitizenEngagementNotificationWrapper">
       <Header>{`${t("EVENTS_EVENTS_HEADER")}(${EventsData?.length})`}</Header>
+      {/* The key prop was missing; it was optional in React 17 (warning only), but is required for proper list rendering in React 19 */}
       {EventsData.length ? (
         EventsData.map((DataParamsInEvent, index) => (
           <OnGroundEventCard 
