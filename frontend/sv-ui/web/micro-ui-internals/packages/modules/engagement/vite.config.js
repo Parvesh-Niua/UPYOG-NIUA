@@ -12,7 +12,7 @@ import path from "path";
  *             - "duplicate-case" (switch with two identical case values)
  * build.lib → Builds this as a reusable library (not a standalone app).
  *             Entry: src/Module.js | Name: digitUiModule
- *             Outputs: index.modern.js (ES) and index.js (CommonJS).
+ *             Output: index.modern.js (ES module only).
  * external  → These packages are NOT bundled — the host app is expected to have them already.
  *             Includes: react, react-dom, react-router-dom, react-redux, redux, react-i18next, i18next, @tanstack/react-query.
  * globals   → Maps package names to browser global variable names.
@@ -35,8 +35,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/Module.js"),
       name: "digitUiModule",
-      formats: ["es", "cjs"],
-      fileName: (format) => format === "es" ? "index.modern.js" : "index.js",
+      formats: ["es"],
+      fileName: () => "index.modern.js",
     },
     rollupOptions: {
       external: ["react", "react-dom", "react-router-dom", "react-redux", "redux", "@tanstack/react-query", "react-i18next", "i18next"],

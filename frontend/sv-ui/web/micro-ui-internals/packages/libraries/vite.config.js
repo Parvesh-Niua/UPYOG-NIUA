@@ -11,7 +11,7 @@ import path from "path";
  * esbuild   → Treats .js files as JSX too (not just .jsx), so React code in .js files works fine.
  * build.lib → Builds this as a reusable library (not a standalone app).
  *             Entry: src/index.js | Name: digitUiLibraries
- *             Outputs: index.modern.js (ES) and index.js (CommonJS).
+ *             Output: index.modern.js (ES module only).
  * external  → These packages are NOT bundled — the host app is expected to have them already.
  *             Includes: react, react-dom, react-router-dom, react-redux, redux,
  *             react-i18next, i18next, @tanstack/react-query.
@@ -33,9 +33,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.js"),
       name: "digitUiLibraries",
-      formats: ["es", "cjs"],
-      fileName: (format) =>
-        format === "es" ? "index.modern.js" : "index.js",
+      formats: ["es"],
+      fileName: () => "index.modern.js",
     },
 
     rollupOptions: {

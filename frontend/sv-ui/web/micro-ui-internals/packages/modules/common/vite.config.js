@@ -10,7 +10,7 @@ import path from "path";
  * esbuild       → Treats .js files as JSX too (not just .jsx), so React code in .js files works fine.
  * build.lib     → Builds this as a reusable library (not a standalone app).
  *                 Entry: src/Module.js | Name: digitUiModule
- *                 Outputs: index.modern.js (ES) and index.js (CommonJS).
+ *                 Output: index.modern.js (ES module only).
  * external      → These packages are NOT bundled — the host app is expected to have them already.
  *                 Keeps the bundle small and avoids duplicate React copies.
  * manualChunks  → Disabled, so everything is packed into a single output file.
@@ -33,9 +33,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/Module.js"),
       name: "digitUiModule",
-      formats: ["es", "cjs"],
-      fileName: (format) =>
-        format === "es" ? "index.modern.js" : "index.js",
+      formats: ["es"],
+      fileName: () => "index.modern.js",
     },
 
     rollupOptions: {
