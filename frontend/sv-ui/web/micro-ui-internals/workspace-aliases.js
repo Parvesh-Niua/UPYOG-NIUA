@@ -2,14 +2,18 @@ import fs from "fs";
 import path from "path";
 
 /**
- * Generates alias mappings for local packages.
- * This function scans the `packages/` and `packages/modules/` directories
- * to find packages with a `dev:<name>` script in the root `package.json`.
- * It maps each package name to its source entry point (from `source` or `style` fields),
- * enabling tools like Vite to resolve local packages directly for HMR during development.
+ * This function builds a list of alias mappings for all local packages.
+ * It is used by the Vite dev server so that imports like
+ * "@nudmcdgnpm/digit-ui-libraries" resolve directly to the local source file
+ * instead of the built "dist/" folder — this enables live HMR during development.
  *
- * @param {string} rootDir - The root directory of the monorepo.
- * @returns {Object} aliases - An object containing alias mappings.
+ * How it works:
+ * - Reads the root package.json to find all scripts that start with "dev:" (e.g. dev:libraries, dev:sv).
+ * - Scans the packages/ and packages/modules/ directories for matching folders.
+ * - For each match, maps the package name to its source entry point (the "source" or "style" field in its package.json).
+ *
+ * @param {string} rootDir - The root directory of micro-ui-internals (where package.json lives).
+ * @returns {Object} - An object of alias mappings, e.g. { "@nudmcdgnpm/digit-ui-libraries": "/path/to/src/index.js" }
  */
 
 export default function getWorkspaceAliases(rootDir) {
