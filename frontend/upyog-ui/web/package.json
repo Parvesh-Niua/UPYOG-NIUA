@@ -8,7 +8,9 @@
     "micro-ui-internals/packages/react-components",
     "micro-ui-internals/packages/modules/common",
     "micro-ui-internals/packages/modules/core",
-    "micro-ui-internals/packages/modules/challanGeneration"
+    "micro-ui-internals/packages/modules/challanGeneration",
+    "micro-ui-internals/packages/modules/dss",
+    "micro-ui-internals/packages/modules/engagement"
   ],
   "engines": {
     "node": ">=14"
