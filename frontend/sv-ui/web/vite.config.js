@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => {
     },
 
     build: {
-      sourcemap: true,
+      sourcemap: false,
       outDir: "build",
       commonjsOptions: {
         transformMixedEsModules: true,
