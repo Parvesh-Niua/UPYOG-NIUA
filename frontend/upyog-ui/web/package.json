@@ -1,5 +1,5 @@
 {
-  "name": "micro-ui",
+  "name": "upyog-ui",
   "version": "1.7.2",
   "private": true,
   "homepage": "/upyog-ui",
@@ -33,7 +33,7 @@
     "micro-ui-internals/packages/modules/mcollect"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "@nudmcdgnpm/upyog-css": "2.1.0",
@@ -71,9 +71,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-unicode-property-regex": "^7.18.6",
-    "@vitejs/plugin-react": "^4.3.0",
-    "vite": "^6.3.0",
-    "vite-plugin-commonjs": "^0.10.1"
+    "@vitejs/plugin-react": "^4.4.0",
+    "vite": "^6.4.1",
+    "vite-plugin-commonjs": "^0.10.4"
   },
   "scripts": {
     "start": "vite",
