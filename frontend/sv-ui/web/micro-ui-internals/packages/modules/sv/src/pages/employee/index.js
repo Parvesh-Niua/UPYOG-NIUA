@@ -27,6 +27,7 @@ const EmployeeApp = () => {
 
  
   const SVEmpCreate = Digit?.ComponentRegistryService?.getComponent("SVEmpCreate");
+  const EnhancedReport = Digit?.ComponentRegistryService?.getComponent("EnhancedReport");
   const SVApplicationDetails = Digit?.ComponentRegistryService?.getComponent("SVApplicationDetails")
   return (
     <span className={"sv-citizen"}style={{width:"100%"}}>

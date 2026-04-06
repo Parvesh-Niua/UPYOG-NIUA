@@ -11,7 +11,7 @@ export const useFetchCitizenBillsForBuissnessService = ({ businessService, ...fi
   /* For these business services, the fetchBill API does not require mobileNumber.
     sriranjan sir has approved these changes
   */
-  const skipBusinessServices = ["adv-services", "chb-services", "pet-services", "sv-services", "request-service.mobile_toilet", "request-service.water_tanker", "request-service.tree_pruning"];
+  const skipBusinessServices = ["adv-services", "chb-services", "pet-services", "sv-services", "request-service.mobile_toilet", "request-service.water_tanker", "request-service.tree_pruning","est-services"];
   // Early return if businessService is in the skip list
   if (skipBusinessServices.includes(businessService)) {
     return {
@@ -105,7 +105,19 @@ export const useFetchPayment = ({ tenantId, consumerCode, businessService }, con
     else return failureCount < 3;
   };
 
-  const queryData = useQuery(["paymentFetchDetails", tenantId, consumerCode, businessService], () => fetchBill(), { retry, ...config });
+  const queryData = useQuery(
+    ["paymentFetchDetails", tenantId, consumerCode, businessService],
+    fetchBill,
+    {
+      ...config,
+      retry,
+      staleTime: 0,
+      cacheTime: 0,
+      refetchOnMount: "always",
+      refetchOnWindowFocus: false,
+    }
+  );
+  
 
   return {
     ...queryData,
