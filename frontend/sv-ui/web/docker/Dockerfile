@@ -1,5 +1,17 @@
-# Build Stage: Install dependencies, set environment, and build the React app
-# Production Stage: Copy built files to Nginx and serve the app
+# =============================================================
+# This is a multi-stage Dockerfile for the Street Vending UI app.
+#
+# Build Stage:
+#   - Uses Node.js 22 Alpine as the build environment.
+#   - Accepts WORK_DIR as a build argument to copy the source code.
+#   - Increases Node.js heap memory to avoid out-of-memory errors.
+#   - Runs install-deps.sh, yarn install, and yarn build to produce
+#     the production build output.
+#
+# Production Stage:
+#   - Copies the build output and custom nginx.conf from the build stage.
+#   - Custom nginx.conf handles routing and serving of the React app.
+# =============================================================
 
 FROM node:22.0.0-alpine AS build
 RUN apk update && apk upgrade

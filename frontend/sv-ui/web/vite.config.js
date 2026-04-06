@@ -1,6 +1,16 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 
+/**
+ * Vite configuration for the Street Vending UI app (production build).
+ *
+ * - Loads environment variables based on the current mode (development/production).
+ * - Configures a proxy for all backend API routes to avoid CORS issues during development.
+ * - Sets base URL to "/sv-ui/" so the app is served under that path.
+ * - Treats .js files as JSX so React code in .js files works fine.
+ * - Builds output into the "build" folder with source maps enabled.
+ * - Pre-bundles heavy dependencies like pdfmake and jspdf for faster dev startup.
+ */
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const proxyTarget = env.VITE_PROXY_API;
