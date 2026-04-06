@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { TextInput, SubmitBar, ActionBar, DatePicker, SearchForm, Dropdown, SearchField, Table, Card, Loader, Header,Toast } from "@upyog/digit-ui-react-components";
 import { useRouteMatch, Link, useHistory } from "react-router-dom";
 import jsPDF from 'jspdf';
-import QRCode from 'qrcode';
+import QRCode from 'qrcode/lib/browser';
 import * as XLSX from 'xlsx';
 
 
