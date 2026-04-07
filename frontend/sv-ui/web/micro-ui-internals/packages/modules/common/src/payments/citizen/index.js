@@ -14,7 +14,7 @@ const CitizenPayment = ({ stateCode, cityCode, moduleCode }) => {
       <div className="bills-citizen-wrapper">
         <Routes>
           <Route
-          path="my-bills/:businessService"
+          path="my-bills/:businessService/*"
           element={<MyBills stateCode={stateCode} />}
         />
 
