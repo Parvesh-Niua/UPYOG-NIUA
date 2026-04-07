@@ -73,6 +73,12 @@ const componentsToRegister = {
     const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
     addComponentsToRegistry();
     Digit.SessionStorage.set("SV_TENANTS", tenants);
+    // Fixed: React 19 requires useEffect to return either a cleanup function or nothing (undefined).
+    // Old code used arrow function shorthand which returned the result of the && expression.
+    // When userType !== "employee", the && expression returned false — an invalid return value in React 19.
+    // When userType === "employee", it returned a Promise from getLocale() — also invalid in React 19.
+    // Fixed: Replaced with block body using if statement — returns undefined implicitly, which is valid.
+    // Fixed: Added  userType to dependency array — best practice to include all values used inside useEffect.
     useEffect(() => {
       if (userType === "employee") {
         Digit.LocalizationService.getLocale({
