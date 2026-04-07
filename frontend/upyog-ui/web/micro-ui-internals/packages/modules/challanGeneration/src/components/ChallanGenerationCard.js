@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
  */
 
 const ChallanGenerationCard = () => {
-  if (!Digit.Utils.mCollectAccess()) {
+  if (!Digit.Utils.challanAccess()) {
     return null;
   }
   const { t } = useTranslation();

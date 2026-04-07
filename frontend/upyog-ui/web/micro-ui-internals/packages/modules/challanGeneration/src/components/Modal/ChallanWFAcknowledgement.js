@@ -12,7 +12,7 @@ import * as func from "./Utils/getQueryParams";
  * - Provides navigation to home and payment action
  */
 
-const MCollectWFAcknowledgement = () => {
+const ChallanWFAcknowledgement = () => {
   const location = useLocation();
   const [params, setParams] = useState({});
   useEffect(() => {
@@ -41,4 +41,4 @@ const MCollectWFAcknowledgement = () => {
     </Card>
   );
 };
-export default MCollectWFAcknowledgement;
+export default ChallanWFAcknowledgement;

@@ -6,7 +6,7 @@ import React from "react";
  * - Provides form structure for rejection comment
  */
 
-export const configMCollectRejectApplication = ({ t, action }) => {
+export const configChallanRejectApplication = ({ t, action }) => {
   return {
     label: {
       heading: `CANCEL_CHALLAN_HEADER`,
