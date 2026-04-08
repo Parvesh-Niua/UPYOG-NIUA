@@ -17,7 +17,9 @@ import { useTranslation } from "react-i18next";
 import NDCDocument from "../components/NDCDocument";
 import Timeline from "../components/NDCTimeline";
 
-// This component is the summary page for the NDC application. It displays all the details entered by the user in the previous steps and allows them to review before submission. It also provides an option to go back and edit the details if needed. The user can also take actions based on the workflow state of the application.
+// This component is the summary page for the NDC application. 
+// It displays all the details entered by the user in the previous steps and allows them to review before submission.
+//  It also provides an option to go back and edit the details if needed. The user can also take actions based on the workflow state of the application.
 const NDCSummary = ({ formData, goNext, onGoBack }) => {
   const { pathname: url } = useLocation();
   const { t } = useTranslation();

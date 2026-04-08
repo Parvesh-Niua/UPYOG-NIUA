@@ -22,13 +22,7 @@ function NDCDocument({ value = {} }) {
   );
   let documents = [];
   if (value?.workflowDocs) documents = value?.workflowDocs;
-  //   if(value?.owners?.documents["ProofOfIdentity"]) documents.push(value.owners.documents["ProofOfIdentity"]);
-  //   if(value?.owners?.documents["ProofOfOwnership"]) documents.push(value.owners.documents["ProofOfOwnership"]);
-  //   if(value?.owners?.documents["OwnerPhotoProof"]) documents.push(value.owners.documents["OwnerPhotoProof"]);
-
-  //   if (isLoading) {
-  //     return <Loader />;
-  //   }
+ 
 
   return (
     <div className="document-container">

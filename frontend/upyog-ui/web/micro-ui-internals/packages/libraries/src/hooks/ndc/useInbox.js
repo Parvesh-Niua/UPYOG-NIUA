@@ -1,5 +1,7 @@
 import useInbox from "../useInbox";
 
+// useNDCInbox is a custom hook that fetches the inbox data for the NDC module.
+//  It takes in tenantId, filters, and config as parameters and returns the inbox data based on the provided filters and configuration.
 const useNDCInbox = ({ tenantId, filters, config = {} }) => {
   const { filterForm, searchForm, tableForm, getFilter } = filters;
   let { assignee } = filterForm;
@@ -39,37 +41,12 @@ const useNDCInbox = ({ tenantId, filters, config = {} }) => {
     offset,
   };
 
-  // return useInbox({
-  //   tenantId,
-  //   filters: _filters,
-  //   config: {
-  //     select: (data) => ({
-  //       statuses: data.statusMap,
-  //       table: data?.items.map((application) => ({
-  //         applicationId: application.businessObject.applicationNo,
-  //         date: parseInt(application.businessObject?.auditDetails?.createdTime),
-  //         businessService: application?.ProcessInstance?.businessService,
-  //         locality: `${application.businessObject?.tenantId?.toUpperCase()?.split(".")?.join("_")}`,
-  //         status: `WF_${application.businessObject.additionalDetails.workflowCode}_${application.businessObject.applicationStatus}`, //application.businessObject.applicationStatus,
-  //         owner: application?.ProcessInstance?.assignes?.[0]?.name || "-",
-  //         source: application.businessObject.source,
-  //         sla: application?.businessObject?.applicationStatus.match(/^(APPROVED)$/)
-  //           ? "CS_NA"
-  //           : Math.round(application.ProcessInstance?.businesssServiceSla / (24 * 60 * 60 * 1000)),
-  //       })),
-  //       totalCount: data.totalCount,
-  //       nearingSlaCount: data.nearingSlaCount,
-  //     }),
-  //     ...config,
-  //   },
-  // });
   return useInbox({
     tenantId,
     filters: _filters,
     config: {
       select: (data) => {
         const tableData = data?.items?.map((application) => {
-          console.log("application", application);
           return {
             applicationId: application.businessObject?.applicationNo,
             date: parseInt(application.businessObject?.auditDetails?.createdTime),

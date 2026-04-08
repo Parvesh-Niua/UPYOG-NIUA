@@ -1,5 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 
+//useNDCSearch is a custom hook that fetches NDC applications based on the provided parameters, tenant ID, and configuration. 
+// It uses the Digit.NDCService.NDCsearch method to perform the search and returns the data in a structured format for use in the application.
 const useNDCSearch = (params, tenantId, config) => {
   return async () => {
     const data = await Digit.NDCService.NDCsearch({ filters: params, tenantId, config });

@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { stringReplaceAll } from "../../utils";
 
+//NDCResponseCitizen is a component that displays the response after a citizen submits an NDC application.
+//  It shows a banner with the application status and provides options to go back to the home page, go to the NDC home page, or make a payment if the application is approved.
+//  The content of the banner and the available actions are based on the application status.
 const NDCResponseCitizen = (props) => {
   const { state } = props.location;
   const { t } = useTranslation();

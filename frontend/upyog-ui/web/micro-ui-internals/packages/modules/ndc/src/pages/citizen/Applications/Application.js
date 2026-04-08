@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-// This component is responsible for displaying the list of applications submitted by the user in the Citizen portal. It fetches the applications using a custom hook and displays them in a paginated format. Each application card shows key details and provides links to view more details or make payments if applicable.
+// This component is responsible for displaying the list of applications submitted by the user in the Citizen portal. 
+// It fetches the applications using a custom hook and displays them in a paginated format. 
+// Each application card shows key details and provides links to view more details or make payments if applicable.
 const MyApplications = ({ view }) => {
   const { t } = useTranslation();
   const userInfo = Digit.UserService.getUser()?.info || {};

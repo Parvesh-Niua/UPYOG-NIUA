@@ -1,6 +1,9 @@
 import { Dropdown, UploadFile } from "@upyog/digit-ui-react-components";
 import React from "react";
 
+// modal config for employee workflow actions in inbox and application overview pages. 
+// This config is used to render the modal for workflow actions like approve, reject, send back etc.
+//  It takes the action as a prop and renders the appropriate fields based on the action. It also handles the file upload functionality for the workflow actions.
 export const ModalConfig = ({
   t,
   action,

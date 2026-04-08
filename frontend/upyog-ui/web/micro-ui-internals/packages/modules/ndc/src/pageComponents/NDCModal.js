@@ -22,7 +22,9 @@ const CloseBtn = (props) => {
     </div>
   );
 };
-
+// Modal component for workflow actions in NDC application. 
+// It renders a form based on the action and allows the user to submit comments, select approver and upload documents.
+//  It also handles the submission of the workflow action and displays appropriate toasts based on the success or failure of the action.
 const NDCModal = ({
   t,
   action,

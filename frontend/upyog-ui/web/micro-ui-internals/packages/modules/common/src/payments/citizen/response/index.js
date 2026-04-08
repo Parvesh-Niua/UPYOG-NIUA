@@ -45,7 +45,7 @@ export const convertEpochToDate = (dateEpoch) => {
   });
   console.log("datatatataty",data)
 
-  const { label } = Digit.Hooks.useApplicationsForBusinessServiceSearch({ businessService: business_service }, { enabled: false }) || {};
+  const { label } = Digit.Hooks.useApplicationsForBusinessServiceSearch({ businessService: business_service }, { enabled: false });
 
   // const { data: demand } = Digit.Hooks.useDemandSearch(
   //   { consumerCode, businessService: business_service },
@@ -375,7 +375,6 @@ export const convertEpochToDate = (dateEpoch) => {
     } else return "N/A";
   };
   
-
   let bannerText;
   if (workflw) {
     bannerText = `CITIZEN_SUCCESS_UC_PAYMENT_MESSAGE`;
@@ -441,6 +440,10 @@ export const convertEpochToDate = (dateEpoch) => {
     const fileStore = await Digit.PaymentService.printReciept(tenantId, { fileStoreIds: fileStoreId });
     window.open(fileStore[fileStoreId], "_blank");
   };
+
+  // This function is used to print NDC receipt. It first checks if the receipt is already generated and stored in filestore. 
+  // If yes, it fetches the receipt from filestore and opens it in a new tab. 
+  // If not, it generates the receipt using the payment details and application details, stores it in filestore and then opens it in a new tab.
   const printNDCReceipt = async () => {
     if (printing) return;
     setPrinting(true);

@@ -490,6 +490,7 @@ export const SuccessfulPayment = (props) => {
   };
   if (businessService?.includes("BPA") && isBpaSearchLoading) return <Loader />;
 
+  // Functions for printing NDC receipt.
   const printNDCReceipt = async () => {
     if (printing) return;
     setPrinting(true);

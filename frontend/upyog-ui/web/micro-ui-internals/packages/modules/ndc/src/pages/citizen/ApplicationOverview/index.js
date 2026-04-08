@@ -24,7 +24,6 @@ import { useParams, useHistory } from "react-router-dom";
 import { businessServiceList, convertEpochToDate, stringReplaceAll } from "../../../utils";
 import { format } from "date-fns";
 import NDCDocument from "../../../pageComponents/NDCDocument";
-import NDCModal from "../../../pageComponents/NDCModal";
 import { set } from "lodash";
 import getAcknowledgementData from "../../../getAcknowlegment";
 import NewApplicationTimeline from "../../../../../templates/ApplicationDetails/components/NewApplicationTimeline";

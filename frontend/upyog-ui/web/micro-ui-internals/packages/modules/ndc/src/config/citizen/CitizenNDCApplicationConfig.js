@@ -1,3 +1,4 @@
+//config for citizen NDC application form 
 export const config = [
   {
     head: "",
@@ -49,19 +50,5 @@ export const config = [
         withoutLabel: true,
       },
     ],
-  },
-  // {
-  //     head: "TL_NEW_APPLICATION_PROPERTY",
-  //     stepNumber: 1,
-  //     body: [
-  //       {
-  //
-  //         name: "",
-  //         type: "component",
-  //         component: "SelectNDCDocuments",
-  //         key: "cpt",
-  //         withoutLabel: true,
-  //       },
-  //     ],
-  //   },
+  }
 ];
