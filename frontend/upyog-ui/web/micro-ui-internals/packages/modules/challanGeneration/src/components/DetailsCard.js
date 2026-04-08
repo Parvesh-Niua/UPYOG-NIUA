@@ -63,9 +63,6 @@ const DetailsCard = ({
       <div>
         {data?.map((object, itemIndex) => {
 
-          // Debug log (can be removed in production)
-          console.log("object==", object);
-
           return (
             <Link
               key={itemIndex}

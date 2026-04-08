@@ -39,28 +39,6 @@ export const ChallanGenerationModule = ({ stateCode, userType, tenants }) => {
   } else return <CitizenApp />;
 };
 
-export const ChallanGenerationLinks = ({ matchPath, userType }) => {
-  const { t } = useTranslation();
-  const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("PT_CREATE_PROPERTY112", {});
-
-  useEffect(() => {
-    clearParams();
-  }, []);
-
-  const links = [
-    {
-      link: `${matchPath}/search`,
-      i18nKey: t("UC_SEARCH_AND_PAY"),
-    },
-    {
-      link: `${matchPath}/My-Challans`,
-      i18nKey: t("UC_MY_CHALLANS"),
-    },
-  ];
-
-  return <CitizenHomeCard header={t("ACTION_TEST_MCOLLECT")} links={links} Icon={() => <PTIcon className="fill-path-primary-main" />} />;
-};
-
 export const ChallanReducers = getRootReducer;
 
 const componentsToRegister = {
@@ -68,7 +46,6 @@ const componentsToRegister = {
   ServiceDetails,
   ChallanGenerationCard,
   ChallanGenerationModule,
-  ChallanGenerationLinks,
   MCollectEmployeeChallan: EmployeeChallan,
   SearchReceipt,
   SearchChallan,

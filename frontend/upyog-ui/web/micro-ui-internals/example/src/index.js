@@ -35,7 +35,6 @@ import { ASSETComponents, ASSETLinks, ASSETModule } from "@upyog/upyog-ui-module
 import { ASSETV2Components, ASSETV2Links, ASSETV2Module } from "@nudmcdgnpm/upyog-ui-module-asset-v2";
 import {
   ChallanGenerationModule,
-  ChallanGenerationLinks,
   initChallanGenerationComponents,
   ChallanReducers,
 } from "@upyog/digit-ui-module-challangeneration";
@@ -142,7 +141,6 @@ const initDigitUI = () => {
     MCollectLinks,
     MCollectModule,
     ChallanGenerationModule,
-    ChallanGenerationLinks,
     HRMSModule,
     ReceiptsModule,
     BillsModule,

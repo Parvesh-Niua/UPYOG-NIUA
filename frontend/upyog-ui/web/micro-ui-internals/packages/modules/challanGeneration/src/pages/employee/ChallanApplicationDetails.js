@@ -112,7 +112,6 @@ const ChallanApplicationDetails = () => {
       setChallanData(responseData?.challans?.[0]);
       setLoader(false);
     } catch (error) {
-      console.log("error", error);
       setLoader(false);
     }
   };
@@ -173,7 +172,6 @@ const ChallanApplicationDetails = () => {
         applicationDetails?.challans?.[0]?.additionalDetail?.latitude,
         applicationDetails?.challans?.[0]?.additionalDetail?.longitude
       );
-      console.log("location", location);
       const challan = {
         ...applicationDetails,
         ...challanEmpData,
@@ -232,7 +230,6 @@ const ChallanApplicationDetails = () => {
     const payload = {
       Licenses: [action],
     };
-    console.log("action", action);
     if (action.action == "PAY") {
       const code = getChallanData?.challanNo;
       history.push(`/upyog-ui/employee/payment/collect/Challan_Generation/${code}/${tenantId}?tenantId=${tenantId}`);
@@ -246,7 +243,6 @@ const ChallanApplicationDetails = () => {
 
   const payLater = async () => {
     setLoader(true);
-    console.log("pay later", getChallanData);
 
     const payload = {
       Challan: {
@@ -277,7 +273,6 @@ const ChallanApplicationDetails = () => {
   };
 
   const submitAction = async (modalData) => {
-    console.log("modalData", modalData);
     if (!modalData?.amount) {
       setErrorOne(`Please Enter Amount`);
       setShowErrorToastt(true);
@@ -288,7 +283,6 @@ const ChallanApplicationDetails = () => {
         setShowErrorToastt(true);
         setError(`Amount must be less than or equal to ${finalAmount}`);
       } else {
-        console.log("nothing");
 
         setLoader(true);
 
@@ -302,8 +296,7 @@ const ChallanApplicationDetails = () => {
             feeWaiver: modalData?.amount,
           },
         };
-
-        console.log("payload", payload);
+        
         try {
           const response = await Digit.ChallanGenerationService.update(payload);
           setLoader(false);

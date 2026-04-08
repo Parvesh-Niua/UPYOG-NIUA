@@ -32,18 +32,15 @@ const ChallanResponseCitizen = (props) => {
   const pathname = history?.location?.pathname || "";
   const ndcCode = pathname.split("/").pop(); // ✅ Extracts the last segment
 
-  console.log("ndcCode", ndcCode);
   let challanEmpData = ChallanData(tenantId, ndcCode);
 
   const fetchChallans = async (filters) => {
     setLoader(true);
     try {
       const responseData = await Digit.ChallanGenerationService.search({ tenantId, filters });
-      console.log("search ", responseData);
       setChallanData(responseData?.challans?.[0]);
       setLoader(false);
     } catch (error) {
-      console.log("error", error);
       setLoader(false);
     }
   };
@@ -67,7 +64,6 @@ const ChallanResponseCitizen = (props) => {
 
   const payLater = async () => {
     setLoader(true);
-    console.log("pay later", getChallanData);
 
     const payload = {
       Challan: {
@@ -104,12 +100,10 @@ const ChallanResponseCitizen = (props) => {
     try {
       const applicationDetails = await Digit.ChallanGenerationService.search({ tenantId, filters: { challanNo: ndcCode } });
       const location = await getLocationName(applicationDetails?.challans?.[0]?.additionalDetail?.latitude,applicationDetails?.challans?.[0]?.additionalDetail?.longitude)
-      console.log('location', location)
       const challan = {
         ...applicationDetails,
         ...challanEmpData,
       };
-      console.log("applicationDetails", applicationDetails);
       let application = challan;
       let fileStoreId = applicationDetails?.Applications?.[0]?.paymentReceiptFilestoreId;
       if (!fileStoreId) {

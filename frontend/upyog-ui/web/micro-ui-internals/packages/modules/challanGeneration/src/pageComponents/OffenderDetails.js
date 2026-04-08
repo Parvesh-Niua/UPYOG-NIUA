@@ -34,7 +34,6 @@ const OffenderDetails = ({ t, goNext, currentStepData, onGoBack }) => {
   };
 
   useEffect(() => {
-    console.log("currentStepData", currentStepData);
   }, [currentStepData, setValue]);
 
   return (

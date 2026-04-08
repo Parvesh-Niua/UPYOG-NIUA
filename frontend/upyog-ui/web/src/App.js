@@ -30,7 +30,6 @@ import {
 } from "@upyog/digit-ui-module-tl";
 import {
   ChallanGenerationModule,
-  ChallanGenerationLinks,
   initChallanGenerationComponents,
   ChallanReducers,
 } from "@upyog/digit-ui-module-challangeneration";
@@ -119,7 +118,6 @@ window.Digit.ComponentRegistryService.setupRegistry({
   MCollectLinks,
   MCollectModule,
   ChallanGenerationModule,
-  ChallanGenerationLinks,
   HRMSModule,
   TLModule,
   TLLinks,

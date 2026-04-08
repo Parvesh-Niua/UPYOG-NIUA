@@ -112,7 +112,6 @@ const SearchReceipt = () => {
 
     } catch (error) {
       setIsLoading(false);
-      console.log("error", error);
     }
   };
 
@@ -145,7 +144,6 @@ const SearchReceipt = () => {
 
     } catch (error) {
       setIsLoading(false);
-      console.log("error", error);
     }
   };
 
@@ -176,7 +174,6 @@ const SearchReceipt = () => {
 
     } catch (error) {
       setIsLoading(false);
-      console.log("error", error);
     }
   };
 

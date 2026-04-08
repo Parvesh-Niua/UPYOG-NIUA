@@ -32,8 +32,6 @@ const ServiceCategory = ({
   );
   const { data: OffenceTypeData, isLoading: OffenceTypeLoading } = Digit.Hooks.useCustomMDMS(tenantId, "Challan", [{ name: "OffenceType" }]);
 
-  console.log("OffenceTypeData===", OffenceTypeData);
-  console.log("Menu====", Menu);
 
   let newMenu = [];
   const stringReplaceAll = (str = "", searcher = "", replaceWith = "") => {
@@ -50,14 +48,9 @@ const ServiceCategory = ({
     });
 
   const onRemove = (category) => {
-    console.log("category", category);
-    console.log("searchParams", searchParams);
-    console.log("selectedCategory", selectedCategory);
     const newBusinessService = searchParams?.businessService?.filter((code) => code !== category.i18nKey);
     const newCategories = selectedCategory?.filter((item) => item.i18nKey !== category.i18nKey);
 
-    console.log("newBusinessService", newBusinessService);
-    console.log("newCategories", newCategories);
     setSearchParams({ ...searchParams, businessService: newBusinessService });
     setselectedCategories(newCategories);
   };
@@ -82,7 +75,6 @@ const ServiceCategory = ({
         options={newMenu}
         onSelect={(selectedItems) => {
           const filterParam = selectedItems?.map((item) => item?.[1]?.i18nKey);
-          console.log("selectedItems", selectedItems);
 
           const selectedCategory = selectedItems?.map((item) => ({
             code: item?.[1]?.id,

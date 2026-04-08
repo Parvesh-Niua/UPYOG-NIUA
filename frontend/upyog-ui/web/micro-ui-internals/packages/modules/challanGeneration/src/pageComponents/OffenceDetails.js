@@ -19,8 +19,6 @@ const OffenceDetails = ({ onGoBack, goNext, currentStepData, t }) => {
   const { data: subCategoryData, isLoading: subCategoryLoading } = Digit.Hooks.useCustomMDMS(tenantId, "Challan", [{ name: "SubCategory" }]);
   const { data: OffenceTypeData, isLoading: OffenceTypeLoading } = Digit.Hooks.useCustomMDMS(tenantId, "Challan", [{ name: "OffenceType" }]);
 
-  console.log("categoryData====", categoryData, subCategoryData, OffenceTypeData);
-
   const {
     control,
     handleSubmit,

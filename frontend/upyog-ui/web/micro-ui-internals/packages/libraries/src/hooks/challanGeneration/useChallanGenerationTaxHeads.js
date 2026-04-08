@@ -5,4 +5,16 @@ const useChallanGenerationTaxHeads = (selectedCategoryType,categoriesandTypes) =
    return TaxHeadMasterFields;
 };
     
+/**
+ * Filters and returns tax heads based on selected category type.
+ *
+ * - Extracts TaxHeadMaster data from MDMS response.
+ * - Filters tax heads where service matches selectedCategoryType.code.
+ *
+ * @param {Object} selectedCategoryType - Selected category type
+ * @param {Object} categoriesandTypes - MDMS response data
+ *
+ * @returns {Array} TaxHeadMasterFields - Filtered tax heads
+ */
+
 export default useChallanGenerationTaxHeads;

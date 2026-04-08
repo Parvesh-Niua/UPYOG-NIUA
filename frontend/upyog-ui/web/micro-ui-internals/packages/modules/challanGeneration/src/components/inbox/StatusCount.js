@@ -11,8 +11,6 @@ import { CheckBox } from "@upyog/digit-ui-react-components";
 const StatusCount = ({ status, searchParams, onAssignmentChange, businessServices, clearCheck, setclearCheck, setSearchParams, _searchParams }) => {
   const { t } = useTranslation();
 
-  console.log("_searchParams", _searchParams);
-  console.log("status", status);
 
   return (
     <CheckBox
