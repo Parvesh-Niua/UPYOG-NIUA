@@ -4,7 +4,6 @@ import Inbox from "./Inbox";
 import { Switch, useLocation, Link } from "react-router-dom";
 import { PrivateRoute } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import ChallanApplicationDetails from "./ChallanApplicationDetails";
 
 /**
  * EmployeeApp component:
@@ -47,11 +46,12 @@ const EmployeeApp = ({ path, url, userType }) => {
   const searchMW = [{ combineTaxDueInSearchData }];
 
   const EmployeeChallan = Digit?.ComponentRegistryService?.getComponent("MCollectEmployeeChallan");
-  const MCollectAcknowledgement = Digit?.ComponentRegistryService?.getComponent("MCollectAcknowledgement");
+  const ChallanAcknowledgement = Digit?.ComponentRegistryService?.getComponent("ChallanAcknowledgement");
   const SearchReceiptPage = Digit?.ComponentRegistryService?.getComponent("SearchReceipt");
   const SearchChallanPage = Digit?.ComponentRegistryService?.getComponent("SearchChallan");
   const ChallanSearch = Digit?.ComponentRegistryService?.getComponent("ChallanStepperForm");
   const ChallanResponseCitizen = Digit?.ComponentRegistryService?.getComponent("ChallanResponseCitizen");
+  const ChallanApplicationDetails = Digit?.ComponentRegistryService?.getComponent("ChallanApplicationDetails");
 
   return (
     <Switch>
@@ -82,7 +82,7 @@ const EmployeeApp = ({ path, url, userType }) => {
               <Inbox parentRoute={path} businessService="PT" middlewareSearch={searchMW} initialStates={inboxInitialState} isInbox={false} />
             )}
           />
-          <PrivateRoute path={`${path}/acknowledgement`} component={() => <MCollectAcknowledgement />} />
+          <PrivateRoute path={`${path}/acknowledgement`} component={() => <ChallanAcknowledgement />} />
           <PrivateRoute path={`${path}/challansearch/:challanno`} component={() => <EmployeeChallan />} />
           <PrivateRoute path={`${path}/search-receipt`} component={() => <SearchReceiptPage />} />{" "}
           <PrivateRoute path={`${path}/search-challan`} component={() => <SearchChallanPage parentRoute={path} />} />{" "}

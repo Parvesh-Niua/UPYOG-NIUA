@@ -11,12 +11,11 @@ import EmployeeApp from "./pages/employee";
 import SearchReceipt from "./pages/employee/SearchReceipt";
 import SearchChallan from "./pages/employee/SearchChallan";
 import ChallanStepperForm from "./pageComponents/ChallanStepper/ChallanStepperForm";
-import OffenderDetails from "./pageComponents/OffenderDetails";
 import OffenceDetails from "./pageComponents/OffenceDetails";
 import ChallanDocuments from "./pageComponents/ChallanDocuments";
 import getRootReducer from "../redux/reducer";
 import ChallanResponseCitizen from "./components/ChallanResponseCitizen";
-import DetailsCard from "./components/DetailsCard";   
+import ChallanApplicationDetails from "./pages/employee/ChallanApplicationDetails";
 
 /**
  * ChallanGenerationModule:
@@ -51,7 +50,7 @@ const componentsToRegister = {
   SearchChallan,
   MCOLLECT_INBOX_FILTER: (props) => <InboxFilter {...props} />,
   ChallanStepperForm,
-  OffenderDetails,
+  ChallanApplicationDetails,
   OffenceDetails,
   ChallanDocuments,
   ChallanResponseCitizen

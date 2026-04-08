@@ -1,7 +1,6 @@
 import { Loader, Modal, FormComposer } from "@upyog/digit-ui-react-components";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import { configChallanRejectApplication } from "./ChallanRejectApplication";
 
 /**
  * ActionModal component:
