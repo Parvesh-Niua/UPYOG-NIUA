@@ -1,5 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { initLibraries } from "@upyog/digit-ui-libraries";
 import { PGRReducers } from "@upyog/digit-ui-module-pgr";
@@ -54,6 +55,9 @@ import { PGRAIComponents, PGRAILinks, PGRAIModule } from "@upyog/upyog-ui-module
 import { pgrCustomizations, pgrComponents } from "./pgr";
 
 var Digit = window.Digit || {};
+
+const container = document.getElementById("root");
+  const root = createRoot(container);
 
 const enabledModules = [
   "Tqm",
@@ -206,7 +210,15 @@ const initDigitUI = () => {
   initTokens(stateCode);
 
   const registry = window?.Digit.ComponentRegistryService.getRegistry();
-  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
+
+  root.render(
+    <DigitUI
+      stateCode={stateCode}
+      enabledModules={enabledModules}
+      moduleReducers={moduleReducers}
+    />
+  );
+  // ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules} moduleReducers={moduleReducers} />, document.getElementById("root"));
 };
 
 initLibraries().then(() => {
