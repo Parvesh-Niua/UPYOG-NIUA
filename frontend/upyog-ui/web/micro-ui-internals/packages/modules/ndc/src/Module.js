@@ -8,10 +8,6 @@ import CitizenApplicationOverview from "./pages/citizen/ApplicationOverview";
 import NOCCard from "./pages/employee/EmployeeCard";
 import Inbox from "./pages/employee/Inbox";
 import NOCSearchApplication from "./pages/employee/SearchApplication/Search";
-import PropertyDetailsForm from "./pages/employee/createNDCApplication/propertyDetailsForm";
-import PropertyDetailsStep1 from "./pages/employee/createNDCApplication/propertyDetailsStep1";
-import PropertyDetailsStep2 from "./pages/employee/createNDCApplication/propertyDetailsStep2";
-import PropertyDetailsFormUser from "./pages/employee/createNDCApplication/propertyDetailsFormUser";
 import { NewNDCStepForm as NewNDCStepFormCitizen } from "./pages/citizen/createNCDApplication/NewNDCStepForm";
 import { NewNDCStepFormOne as NewNDCStepFormOneCitizen } from "./pages/citizen/createNCDApplication/NewNDCStepFormOne";
 import SelectNDCReason from "./pageComponents/SelectNDCReason";
@@ -59,10 +55,6 @@ const componentsToRegister = {
   NDCApplicationOverview: ApplicationOverview,
   NDCInbox: Inbox,
   NOCSearchApplication,
-  PropertyDetailsForm,
-  PropertyDetailsStep1,
-  PropertyDetailsStep2,
-  PropertyDetailsFormUser,
   NewNDCStepFormCitizen,
   SelectNDCReason,
   NewNDCStepFormOneCitizen,

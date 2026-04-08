@@ -12,16 +12,13 @@ const NDCNewFormSummaryStepThreeCitizen = ({ config, onGoNext, onBackClick, t })
   // const tenantId = Digit.ULBService.getCurrentTenantId();
   const tenantId = Digit.ULBService.getCitizenCurrentTenant(true) || Digit.ULBService.getCurrentTenantId();
   const user = Digit.UserService.getUser();
-  console.log("tenantId", tenantId);
 
   const formData = useSelector((state) => state.ndc.NDCForm.formData || {});
   // Function to handle the "Next" button click
 
-  console.log("formData 4th step", formData);
 
   const goNext = async (action) => {
     const actionStatus = action?.action;
-    console.log("actionStatus", actionStatus);
     try {
       const res = await onSubmit(formData, actionStatus); // wait for the API response
       // Check if the API call was successful
@@ -37,7 +34,6 @@ const NDCNewFormSummaryStepThreeCitizen = ({ config, onGoNext, onBackClick, t })
 
   function mapToNDCPayload(inputData, actionStatus) {
     const applicant = Digit.UserService.getUser()?.info || {};
-    console.log("inputData", inputData);
 
     const owners = (inputData?.apiData?.Applications?.[0]?.owners || [])?.map((item) => {
       const obj = JSON.parse(JSON.stringify(item));
@@ -90,7 +86,6 @@ const NDCNewFormSummaryStepThreeCitizen = ({ config, onGoNext, onBackClick, t })
 
   const onSubmit = async (data, actionStatus) => {
     const finalPayload = mapToNDCPayload(data, actionStatus);
-    console.log("finalPayload", finalPayload);
     // return;
     const response = await Digit.NDCService.NDCUpdate({ tenantId, details: finalPayload });
     dispatch(resetNDCForm());

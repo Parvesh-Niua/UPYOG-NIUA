@@ -72,6 +72,11 @@ const NOCEmployeeHomeCard = () => {
           label: t("ES_COMMON_INBOX"),
           link: `/upyog-ui/employee/ndc/inbox`,
         },
+        {
+          count: totalCount,
+          label: t("Create Application"),
+          link: `/upyog-ui/employee/ndc/create`,
+        }
         // {
         //   label: t("ES_COMMON_APPLICATION_SEARCH"),
         //   link: `/upyog-ui/employee/noc/search`,

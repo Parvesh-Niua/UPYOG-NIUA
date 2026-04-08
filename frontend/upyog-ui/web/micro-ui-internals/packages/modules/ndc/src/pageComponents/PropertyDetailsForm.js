@@ -37,9 +37,6 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
   const [propertyDetails, setPropertyDetails] = useState(formData?.PropertyDetails || {});
   const [selectedRow, setSelectedRow] = useState(null);
 
-  console.log("apiDataCheck", apiDataCheck);
-  console.log("formData==?/||", formData);
-  console.log("checkApiDataCheck====", checkApiDataCheck?.Applications?.[0]);
 
   const { isLoading: waterConnectionLoading, data: waterConnectionData, error: waterConnectionError } = Digit.Hooks.ws.useSearchWS({
     tenantId,
@@ -86,7 +83,6 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
             name="applicationFee"
             checked={selectedRow?.uuid === row?.original?.uuid}
             onChange={() => {
-              console.log("row?.original", row?.original);
               setSelectedRow(row?.original);
             }}
           />
@@ -107,14 +103,7 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
 
     const emailApi = apiDataCheck?.[0]?.owners?.[0]?.emailId;
     const firstName = ownerObj?.name;
-    // let lastName;
-    // if (fullName?.length > 1) {
-    //   lastName = fullName?.[fullName.length - 1];
-
-    console.log("ownerObj?.emailId", ownerObj?.emailId);
-    console.log("formData?.PropertyDetails?.email", formData?.PropertyDetails?.email);
-    console.log("emailApi", emailApi);
-    // }
+   
     const email = ownerObj?.emailId || emailApi || "";
     const mobileNumber = ownerObj?.mobileNumber;
     const address = ownerObj?.permanentAddress;
@@ -351,54 +340,6 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
     // setError("");
   };
 
-  function redirectToPayBill(billData, index, isEdit) {
-    const userType = window.location.href.includes("employee") ? "employee" : "citizen";
-
-    let service;
-    if (billData?.businessService === "WS") {
-      service = "WATER";
-    } else if (billData?.businessService === "SW") {
-      service = "SEWERAGE";
-    } else if (billData?.businessService === "PT") {
-      service = "PT";
-    }
-    let payUrl;
-    if (billData?.businessService === "PT") {
-      payUrl =
-        "https://sdc-uat.lgpunjab.gov.in" +
-        `/${userType}/egov-common/pay?consumerCode=${billData?.consumerCode}&tenantId=${billData?.tenantId}&businessService=${service}`;
-    } else {
-      payUrl =
-        "https://sdc-uat.lgpunjab.gov.in" +
-        `/${userType}/wns/viewBill?connectionNumber=${billData?.consumerCode}&tenantId=${billData?.tenantId}&service=${service}`;
-      // const payUrl =`/${userType}/egov-common/pay?consumerCode=${billData?.consumerCode}&tenantId=${billData?.tenantId}&businessService=${billData?.businessService}`
-    }
-    window.open(payUrl, "_blank");
-
-    if (billData?.businessService === "WS") {
-      const updated = [...propertyDetails.waterConnection];
-      updated[index] = { connectionNo: billData?.consumerCode, isEdit: isEdit, billData: {}, isLoading: false };
-      setPropertyDetails((prev) => ({
-        ...prev,
-        waterConnection: updated,
-      }));
-    } else if (billData?.businessService === "SW") {
-      const updated = [...propertyDetails.sewerageConnection];
-      updated[index] = { connectionNo: billData?.consumerCode, isEdit: isEdit, billData: {}, isLoading: false };
-      setPropertyDetails((prev) => ({
-        ...prev,
-        sewerageConnection: updated,
-      }));
-    } else if (billData?.businessService === "PT") {
-      let updated = { ...propertyDetails.propertyBillData };
-      updated = { connectionNo: billData?.consumerCode, billData: {}, isLoading: false };
-      setPropertyDetails((prev) => ({
-        ...prev,
-        propertyBillData: updated,
-      }));
-    }
-  }
-
   const PayWSBillModal = Digit?.ComponentRegistryService?.getComponent("PayWSBillModal");
 
   useEffect(() => {
@@ -417,8 +358,6 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
     if (checkApiDataCheck?.Applications?.[0] || apiDataCheck?.[0]) {
       const checkOwners = checkApiDataCheck?.Applications?.[0]?.owners || apiDataCheck?.[0]?.owners;
       const filterRow = checkOwners?.find((owner) => owner?.isPrimaryOwner);
-      // const primaryOwner = ndcObject?.owners?.find((owner) => owner?.isPrimaryOwner) || ndcObject?.owners?.[0]; // fallback if none marked
-      console.log("filterRow===", filterRow);
       setSelectedRow(filterRow);
     }
   }, [checkApiDataCheck, apiDataCheck]);
@@ -489,7 +428,6 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
                             type="button"
                             style={{ color: "white" }}
                             onClick={() => {
-                              redirectToPayBill(item?.billData, index, item.isEdit);
                             }}
                           >
                             {`${t("PAY_DUES")}`}
@@ -603,7 +541,6 @@ export const PropertyDetailsForm = ({ config, onSelect, userType, formData, form
                             onClick={() => {
                               // setSelectedBillData(item?.billData);
                               // setShowPayModal(true);
-                              redirectToPayBill(item?.billData, index);
                             }}
                           >
                             {`${t("PAY_DUES")}`}

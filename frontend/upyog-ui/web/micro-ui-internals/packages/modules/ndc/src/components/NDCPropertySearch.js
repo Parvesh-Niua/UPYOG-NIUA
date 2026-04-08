@@ -224,17 +224,6 @@ export const PropertySearchNSummary = ({ config, onSelect, formData }) => {
     }
   }
 
-  function redirectToPayBill(billData, index, isEdit) {
-    const userType = window.location.href.includes("employee") ? "employee" : "citizen";
-
-    const payUrl =
-      "https://sdc-uat.lgpunjab.gov.in" +
-      `/${userType}/egov-common/pay?consumerCode=${formData?.cpt?.id}&tenantId=${formData?.cpt?.details?.tenantId}&businessService=PT`;
-
-    window.open(payUrl, "_blank");
-    setPropertyDues({});
-  }
-
   useEffect(() => {
     if (showToast) {
       const timer = setTimeout(() => {
@@ -288,7 +277,6 @@ export const PropertySearchNSummary = ({ config, onSelect, formData }) => {
                 className="submit-bar"
                 type="button"
                 onClick={() => {
-                  redirectToPayBill(formData?.cpt?.dues?.totalAmount);
                   setPayDuesButton(false);
                 }}
               >

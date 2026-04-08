@@ -77,7 +77,6 @@ const getAcknowledgementData = async (application, formattedAddress, tenantInfo,
   // const propertyId = ndc?.consumerCode || "NA";
   const ptObj = appData?.NdcDetails?.find(item => item.businessService === 'PT');
   const propertyId = ptObj?.consumerCode;
-  console.log('ptObj', ptObj)
 
   const propertyType = add?.propertyType ? t(add.propertyType) : "NA";
   const applicantName = owner?.name || "NA";
@@ -90,10 +89,8 @@ const getAcknowledgementData = async (application, formattedAddress, tenantInfo,
   const dateOfApplication = add?.dateOfApplication || "NA";
   const dateOfApproval = add?.dateOfApproval || "NA";
   const ownerNames = (application?.propertyOwnerNames || []).join(", ") || "NA";
-  console.log(appData, "APPDATA");
 
   const readableCity = getReadableCity(appData?.tenantId);
-  console.log(tenantInfo, "TENANT INFO IN ACKNOWLEDGEMENT");
 
   // Build single certificate body by concatenating translated fragments and dynamic values
   const certificateBody = [

@@ -37,7 +37,6 @@ const NDCSummary = ({ formData, goNext, onGoBack }) => {
 
   const filterType = propertyDet?.filter((item) => item?.businessService == "PT");
 
-  console.log("filterType", filterType);
 
   const tenantId = Digit.ULBService.getCitizenCurrentTenant(true) || Digit.ULBService.getCurrentTenantId();
 

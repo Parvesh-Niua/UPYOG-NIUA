@@ -12,12 +12,8 @@ const NDCNewFormSummaryStepThreeEmployee = ({ config, onGoNext, onBackClick, t }
   const checkFormData = useSelector((state) => state.ndc.NDCForm.formData || {});
 
   const formData = useSelector((state) => state.ndc.NDCForm.formData || {});
-  // console.log("state.pt.PTNewApplicationForm Form data in Summary Step: ", useSelector((state) => state.pt.PTNewApplicationForm.formData));
   // Function to handle the "Next" button click
-  console.log("formData", formData);
   const goNext = async (action) => {
-    console.log("yeah", action);
-    console.log("formData", formData);
     const actionStatus = action?.action;
     try {
       const res = await onSubmit(formData, actionStatus); // wait for the API response
@@ -35,7 +31,6 @@ const NDCNewFormSummaryStepThreeEmployee = ({ config, onGoNext, onBackClick, t }
 
   function mapToNDCPayload(inputData, actionStatus) {
     const applicant = Digit.UserService.getUser()?.info || {};
-    console.log("checkFormData", formData);
 
     const owners = (inputData?.apiData?.Applications?.[0]?.owners || [])?.map((item) => {
       const obj = JSON.parse(JSON.stringify(item));
@@ -84,7 +79,6 @@ const NDCNewFormSummaryStepThreeEmployee = ({ config, onGoNext, onBackClick, t }
   }
 
   const onSubmit = async (data, actionStatus) => {
-    console.log("coming here btw");
     const finalPayload = mapToNDCPayload(data, actionStatus);
 
     const response = await Digit.NDCService.NDCUpdate({ tenantId, details: finalPayload });

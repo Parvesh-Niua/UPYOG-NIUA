@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import SearchApplication from "./SearchApplication";
 import { Switch, useLocation, Route } from "react-router-dom";
-import CreateNDCApplicationStep from "./createNDCApplication";
 import Response from "./Response";
 
 // NDCBreadCrumbs is a component that renders the breadcrumb navigation for the NDC module. It takes the current location as a prop and determines which breadcrumbs to show based on the pathname. The breadcrumbs are defined in an array, where each breadcrumb has a path, content, and a show property that determines whether it should be displayed or not. The BreadCrumb component from "@upyog/digit-ui-react-components" is used to render the breadcrumbs on the UI.
@@ -45,7 +44,6 @@ const NDCBreadCrumbs = ({ location }) => {
 };
 
 const EmployeeApp = ({ path }) => {
-  console.log("path in employee app", path);
   const location = useLocation();
   const { t } = useTranslation();
   const ApplicationOverview = Digit?.ComponentRegistryService?.getComponent("NDCApplicationOverview");
@@ -64,7 +62,7 @@ const EmployeeApp = ({ path }) => {
           {/* <PrivateRoute path={`${path}/search/application-overview/:id`} component={ApplicationOverview} /> */}
           <Route path={`${path}/inbox`} component={(props) => <Inbox {...props} parentRoute={path} />} />
           <PrivateRoute path={`${path}/create`} component={(props) => <NewNDCStepForm {...props} parentRoute={path} />} />
-          {/* <PrivateRoute path={`${path}/response/:id`} component={Response} /> */}
+          <PrivateRoute path={`${path}/response/:id`} component={Response} />
         </Switch>
       </div>
     </Fragment>

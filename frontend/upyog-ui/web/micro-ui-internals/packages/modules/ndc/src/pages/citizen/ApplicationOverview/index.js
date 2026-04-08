@@ -157,7 +157,6 @@ const CitizenApplicationOverview = () => {
 
   useEffect(() => {
     const ndcObject = applicationDetails?.Applications?.[0];
-    console.log("ndcObject", ndcObject);
     if (ndcObject) {
       const primaryOwner = ndcObject?.owners?.find((owner) => owner?.isPrimaryOwner) || ndcObject?.owners?.[0]; // fallback if none marked
 
@@ -207,16 +206,13 @@ const CitizenApplicationOverview = () => {
 
       Property.propertyOwnerNames = propertyOwnerNames;
 
-      console.log("propertyOwnerNames", propertyOwnerNames);
       const tenantInfo = tenants?.find((tenant) => tenant?.code === Property?.Applications?.[0]?.tenantId);
-      console.log("tenantInfo", tenantInfo);
       const ulbType = tenantInfo?.city?.ulbType;
       let acknowledgementData;
 
       if (empData) {
         acknowledgementData = await getAcknowledgementData(Property, formattedAddress, tenantInfo, t, approver, ulbType, empData, approverStatement);
       }
-      console.log("acknowledgementData", acknowledgementData);
       setTimeout(() => {
         Digit.Utils.pdf.generateNDC(acknowledgementData);
       }, 0);
@@ -231,9 +227,7 @@ const CitizenApplicationOverview = () => {
 
   useEffect(() => {
     if (displayData) {
-      console.log("here");
       const checkProperty = displayData?.NdcDetails?.filter((item) => item?.businessService == "NDC_PROPERTY_TAX");
-      console.log("checkProperty", checkProperty);
       setPropertyId(checkProperty?.[0]?.consumerCode);
     }
   }, [displayData]);
@@ -266,17 +260,11 @@ const CitizenApplicationOverview = () => {
     return <Loader />;
   }
 
-  console.log("propertyDetailsFetch", propertyDetailsFetch);
-
-  console.log("displayData?.applicantData", displayData);
-
   const ownerForName = propertyDetailsFetch?.Properties?.[0]?.owners || [];
   const ownerNames = ownerForName
     ?.map((owner) => owner?.name)
     ?.filter(Boolean)
     ?.join(", ");
-
-  console.log("applicationDetails?.[0]", applicationDetails?.Applications?.[0]);
 
   return (
     <div className={"employee-main-application-details"}>
@@ -337,7 +325,6 @@ const CitizenApplicationOverview = () => {
       <Card className="ndc_card_main">
         <CardSubHeader className="ndc_label">{t("NDC_APPLICATION_NDC_DETAILS_OVERVIEW")}</CardSubHeader>
         {displayData?.NdcDetails?.map((detail, index) => {
-          console.log("detail", detail);
           const isRed = detail.dueAmount > 0;
           return (
             <div className="ndc-application-overview-table" key={index}>

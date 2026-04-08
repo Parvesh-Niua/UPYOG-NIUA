@@ -61,7 +61,6 @@ function SelectNDCReason({ config, onSelect, userType, formData, setError, formS
 
   useEffect(() => {
     if (apiDataCheck && ndcReasonOptions?.length > 0) {
-      console.log("check apiDataCheck", apiDataCheck);
       // find the matching option from MDMS
       const matchedOption = ndcReasonOptions.find((opt) => opt?.code === apiDataCheck?.[0]?.reason);
       if (matchedOption) {
@@ -115,10 +114,6 @@ function SelectNDCReason({ config, onSelect, userType, formData, setError, formS
                 <TextInput
                   value={props.value}
                   onChange={(e) => {
-                    console.log("config.key", config.key);
-                    console.log("formData", formData);
-                    // onSelect("NDCValue", { checkReason: "tese" });
-
                     onSelect("NDCReason", { ...formData?.NDCReason, reason: e.target.value }, config);
 
                     // onSelect("reason", e.target.value, config);

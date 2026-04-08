@@ -6,7 +6,6 @@ import FilterFormFieldsComponent from "./FilterFormFieldsComponent";
 import useInboxTableConfig from "./useInboxTableConfig";
 import useInboxMobileCardsData from "./useInboxMobileCardsData";
 import { businessServiceList } from "../../../utils";
-import CreateNDCApplicationStep from "../createNDCApplication";
 
 // This component renders the main inbox page for NDC (Non-Domestic Connection) applications. It manages forms for searching, filtering, and sorting, and displays the inbox data in both desktop and mobile views.
 const Inbox = ({ parentRoute }) => {
@@ -29,7 +28,6 @@ const Inbox = ({ parentRoute }) => {
     assignee: "ASSIGNED_TO_ALL",
     businessServiceArray: businessServiceList(true) || [],
   };
-  console.log("filterFormDefaultValues", filterFormDefaultValues);
 
   const tableOrderFormDefaultValues = {
     sortBy: "",
@@ -224,7 +222,6 @@ const Inbox = ({ parentRoute }) => {
         {totalCount ? <p className="inbox-count">{totalCount}</p> : null}
       </Header>
       {/* <section>
-        <CreateNDCApplicationStep />
       </section> */}
       <div className="NDCSection">
         <InboxComposer
