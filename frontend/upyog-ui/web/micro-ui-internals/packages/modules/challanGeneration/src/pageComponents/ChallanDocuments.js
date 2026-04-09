@@ -9,6 +9,8 @@ import EXIF from "exif-js";
  * - Supports validation, file upload, and EXIF extraction
  */
 
+
+
 const ChallanDocuments = ({
   t,
   config,
@@ -36,7 +38,7 @@ const ChallanDocuments = ({
   };
 
   const onSkip = () => onSelect();
-  function onAdd() {}
+  function onAdd() { }
 
   useEffect(() => {
     let count = 0;
@@ -289,10 +291,13 @@ function PTRSelectDocument({ t, document: doc, setDocuments, setError, documents
             buttonType="button"
             error={!uploadedFile}
           />
-          {doc?.code == "CHALLAN.EVIDENCE_IMAGE" && (
-            <span className="challan-note-green" >
-              <span className="challan-note-red" >Note:</span>
-              Please upload a picture **clicked with location enabled**.
+          {doc?.code === "CHALLAN.EVIDENCE_IMAGE" && (
+            <span className="challan-note-green">
+              <span className="challan-note-red">
+                {t("CHALLAN_NOTE_LABEL")}
+              </span>
+              {" "}
+              {t("CHALLAN_UPLOAD_LOCATION_IMAGE")}
             </span>
           )}
           {doc?.code == "CHALLAN.EVIDENCE_IMAGE" &&
