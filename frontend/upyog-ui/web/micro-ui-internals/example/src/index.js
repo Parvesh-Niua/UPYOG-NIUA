@@ -33,6 +33,11 @@ import "@upyog-niua/upyog-css";
 import { PTRModule, PTRLinks, PTRComponents } from "@upyog/upyog-ui-module-ptr";
 import { ASSETComponents, ASSETLinks, ASSETModule } from "@upyog/upyog-ui-module-asset";
 import { ASSETV2Components, ASSETV2Links, ASSETV2Module } from "@nudmcdgnpm/upyog-ui-module-asset-v2";
+import {
+  ChallanGenerationModule,
+  initChallanGenerationComponents,
+  ChallanReducers,
+} from "@upyog/digit-ui-module-challangeneration";
 
 import { 
   EWModule, 
@@ -95,7 +100,8 @@ const enabledModules = [
   "EST",
   "ASSETV2",
   "GIS",
-  "NDC"
+  "NDC",
+  "ChallanGeneration",
 ];
 
 const initTokens = (stateCode) => {
@@ -136,6 +142,7 @@ const initDigitUI = () => {
     ...PTComponents,
     MCollectLinks,
     MCollectModule,
+    ChallanGenerationModule,
     HRMSModule,
     ReceiptsModule,
     BillsModule,
@@ -183,6 +190,7 @@ const initDigitUI = () => {
   initPGRComponents();
   initDSSComponents();
   initMCollectComponents();
+  initChallanGenerationComponents();
   initHRMSComponents();
   initTLComponents();
   initReceiptsComponents();
@@ -200,6 +208,7 @@ const initDigitUI = () => {
   const moduleReducers = (initData) => ({
     pgr: PGRReducers(initData),
     ndc: NDCReducers(initData),
+    challan: ChallanReducers(initData),
   });
 
   window.Digit.Customizations = {
