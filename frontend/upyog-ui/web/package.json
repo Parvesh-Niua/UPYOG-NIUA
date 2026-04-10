@@ -64,8 +64,8 @@
     "@upyog/upyog-ui-module-vendor": "3.10.0",
     "@upyog/upyog-ui-module-wt": "3.10.0",
     "qrcode": "^1.5.4",
-    "react": "18",
-    "react-dom": "18",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "react-router-dom": "5.3.0",
     "web-vitals": "^3.5.0"
   },
