@@ -54,7 +54,7 @@ export default defineConfig(({ mode }) => {
     // No mainFields override — use Node standard resolution
     // dist/ exists because yarn build ran before this
     resolve: {
-      mainFields: ["module", "main"],
+      mainFields: ["main", "module"],
       dedupe: ["react", "react-dom"],
       preserveSymlinks: true
 
