@@ -28,23 +28,30 @@
 	</scm>
 
 	<distributionManagement>
+		
 		<repository>
 			<id>repo.egovernments.org</id>
 			<name>eGov ERP Releases Repository</name>
-			<url>https://nexus-repo.digit.org/nexus/content/repositories/releases/</url>
+			<url>https://upyog-nexus.niua.org/nexus/content/repositories/releases/</url>
 		</repository>
+		
 		<snapshotRepository>
 			<id>repo.egovernments.org</id>
 			<name>eGov ERP Snapshots Repository</name>
-			<url>https://nexus-repo.digit.org/nexus/content/repositories/snapshots/</url>
+			<url>https://upyog-nexus.niua.org/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
 	<repositories>
+
+ <repository>
+        <id>jasperreports</id>
+        <url>https://jasperreports.sourceforge.net/maven2</url>
+    </repository>
 		<repository>
 			<id>repo.egovernments.org</id>
 			<name>eGov Public Repository Group</name>
-			<url>https://nexus-repo.digit.org/nexus/content/groups/public/</url>
+			<url>https://upyog-nexus.niua.org/nexus/content/groups/public/</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
@@ -55,21 +62,21 @@
 		</repository>
 		<repository>
 			<id>JBoss Repository</id>
-			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<url>https://upyog-nexus.niua.org/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>AsposeJavaAPI</id>
+			<name>Aspose Java API</name>
+			<url>https://repository.aspose.com/repo/</url>
 		</repository>
 		<!--<repository>
 			<id>AsposeJavaAPI</id>
 			<name>Aspose Java API</name>
-			<url>https://repository.aspose.com/repo/</url>
-		</repository>-->
-		<repository>
-			<id>AsposeJavaAPI</id>
-			<name>Aspose Java API</name>
-			<url>http://releases.aspose.com/repo/</url>
-		</repository> 
+			<url>https://upyog-nexus.niua.org/repo/</url>
+		</repository> -->
 		<repository>
 			<id>javaxt.com</id>
-			<url>https://www.javaxt.com/maven</url>
+			<url>https://upyog-nexus.niua.org/maven</url>
 		</repository>
 	</repositories>
 
@@ -77,7 +84,7 @@
 		<pluginRepository>
 			<id>repo.egovernments.org</id>
 			<name>eGov Public Repository Group</name>
-			<url>https://nexus-repo.digit.org/nexus/content/groups/public/</url>
+			<url>https://upyog-nexus.niua.org/nexus/content/groups/public/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -109,10 +116,10 @@
 
 
 		<!-- Application server provided dependency versions -->
-		<hibernate-version>5.1.10.Final</hibernate-version>
+		<hibernate-version>5.6.15.Final</hibernate-version>
 		<hibernate-search-version>5.5.8.Final</hibernate-search-version>
-		<hibernate-validator-version>5.3.5.Final</hibernate-validator-version>
-		<javax-validation-version>1.1.0.Final</javax-validation-version>
+		<hibernate-validator-version>5.4.3.Final</hibernate-validator-version>
+		<javax-validation-version>2.0.1.Final</javax-validation-version>
 		<javax-servlet-api-version>1.0.0.Final</javax-servlet-api-version>
 		<javax-servlet-jstl-version>1.2.6-RC1</javax-servlet-jstl-version>
 		<javax-servlet-jsp-version>1.0.1.Final</javax-servlet-jsp-version>
@@ -120,26 +127,26 @@
 		<javax-mail-version>1.5.6</javax-mail-version>
 		<javax-el-version>3.0.1-b08</javax-el-version>
 		<xerces-version>2.11.0.SP5</xerces-version>
-		<postgres-version>42.7.1</postgres-version>
+		<postgres-version>42.7.10</postgres-version>
 
 		<!-- Other application dependency versions -->
-		<struts2-version>2.5.14.1</struts2-version>
+		<!--<struts2-version>2.5.14.1</struts2-version>
 		<struts2-jquery-version>4.0.2</struts2-jquery-version>
-		<xstream-version>1.4.10</xstream-version>
-		<spring-version>4.3.11.RELEASE</spring-version>
-		<spring-session-version>1.3.2.RELEASE</spring-session-version>
-		<spring-data-jpa-version>1.10.6.RELEASE</spring-data-jpa-version>
-		<spring-data-jpa-envers-version>1.0.6.RELEASE</spring-data-jpa-envers-version>
-		<spring-security-version>4.2.3.RELEASE</spring-security-version>
-		<spring-security-oauth2-version>2.2.0.RELEASE</spring-security-oauth2-version>
+		<xstream-version>1.4.10</xstream-version>-->
+		<spring-version>5.3.31</spring-version>
+		<spring-session-version>2.7.4</spring-session-version>
+        <spring-data-jpa-version>2.7.18</spring-data-jpa-version>
+		<spring-data-jpa-envers-version>2.7.18</spring-data-jpa-envers-version>
+		<spring-security-version>5.7.11</spring-security-version>
+		<spring-security-oauth2-version>2.5.2.RELEASE</spring-security-oauth2-version>
 		<spring-data-elasticsearch>2.0.6.RELEASE</spring-data-elasticsearch>
 		<elastic-search-version>2.4.6</elastic-search-version>
 		<apache-tiles-version>3.0.7</apache-tiles-version>
 		<embedded-redis-version>0.6</embedded-redis-version>
 		<quartz-version>2.3.0</quartz-version>
-		<jasper-report-version>6.1.0</jasper-report-version>
+		<jasper-report-version>6.20.0</jasper-report-version>
 		<json-simple-version>1.1.1</json-simple-version>
-		<jackson-version>2.9.2</jackson-version>
+		<jackson-version>2.13.5</jackson-version>
 		<orika-core.version>1.5.2</orika-core.version>
 		<gson-version>2.8.2</gson-version>
 		<antisamy-version>1.5.6</antisamy-version>
@@ -163,14 +170,14 @@
 		<commons-io-version>2.6</commons-io-version>
 		<commons-fileupload-version>1.3.3</commons-fileupload-version>
 		<commons.compress.version>1.16.1</commons.compress.version>
-		<httpclient-version>4.5.3</httpclient-version>
+		<httpclient-version>4.5.14</httpclient-version>
 		<sitemesh-version>2.4.2</sitemesh-version>
 		<ehcache-web-version>2.0.4</ehcache-web-version>
 		<joda-time-version>2.9.9</joda-time-version>
 		<joda-time-jsptag-version>1.1.1</joda-time-jsptag-version>
 		<jsoup-version>1.10.3</jsoup-version>
 		<jython-version>2.7.1b3</jython-version>
-		<flyway-core-version>7.11.1</flyway-core-version>
+		<flyway-core-version>9.22.3</flyway-core-version>
 		<junit-version>4.12</junit-version>
 		<mockito-all-version>1.10.19</mockito-all-version>
 		<springockito-version>1.0.9</springockito-version>
@@ -183,7 +190,7 @@
 		<saaj-impl-version>1.3.16</saaj-impl-version>
 		<ap-fonts-version>1.0.1</ap-fonts-version>
 		<wsdl4j-version>1.6.3</wsdl4j-version>
-		<google-guava-version>23.2-jre</google-guava-version>
+		<google-guava-version>33.4.4-jre</google-guava-version>
 		<google.zxing.version>3.3.0</google.zxing.version>
 		<javaxt.core.version>1.7.8</javaxt.core.version>
 		<recaptcha.version>0.0.8</recaptcha.version>
@@ -196,14 +203,14 @@
 		<mvn.ear.plugin.version>2.10.1</mvn.ear.plugin.version>
 		<mvn.war.plugin.version>3.2.0</mvn.war.plugin.version>
 		<mvn.jar.plugin.version>3.0.2</mvn.jar.plugin.version>
-		<mvn.compiler.plugin.version>3.7.0</mvn.compiler.plugin.version>
+		<mvn.compiler.plugin.version>3.11.0</mvn.compiler.plugin.version>
 		<mvn.dependency.plugin.version>3.0.2</mvn.dependency.plugin.version>
 		<mvn.resource.plugin.version>3.0.1</mvn.resource.plugin.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
+			<!--<dependency>
 				<groupId>org.elasticsearch</groupId>
 				<artifactId>elasticsearch</artifactId>
 				<version>${elastic-search-version}</version>
@@ -212,8 +219,12 @@
 						<artifactId>snakeyaml</artifactId>
 						<groupId>org.yaml</groupId>
 					</exclusion>
+					<exclusion>
+    <groupId>tomcat</groupId>
+    <artifactId>jasper-compiler-jdt</artifactId>
+</exclusion>
 				</exclusions>
-			</dependency>
+			</dependency> -->
 
 			<dependency>
 				<groupId>org.egov.edcr</groupId>
@@ -231,6 +242,7 @@
 				<artifactId>egov-config</artifactId>
 				<version>2.1.1-SNAPSHOT</version>
 			</dependency>
+		
 			<dependency>
 				<groupId>org.egov.edcr</groupId>
 				<artifactId>egov-commons</artifactId>
@@ -245,6 +257,11 @@
 				<version>2.1.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+    <groupId>org.javassist</groupId>
+    <artifactId>javassist</artifactId>
+    <version>3.29.2-GA</version>
+</dependency>
+			<dependency>
 				<groupId>org.egov.edcr</groupId>
 				<artifactId>egov-edcr</artifactId>
 				<version>2.1.1-SNAPSHOT</version>
@@ -254,37 +271,40 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
 				<version>${hibernate-version}</version>
-				<scope>provided</scope>
+				 
+				
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate-version}</version>
-				<scope>provided</scope>
+				
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-envers</artifactId>
 				<version>${hibernate-version}</version>
-				<scope>provided</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-infinispan</artifactId>
-				<version>${hibernate-version}</version>
-				<scope>provided</scope>
-			</dependency>
+			
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-infinispan</artifactId>
+    <version>${hibernate-version}</version>
+</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
 				<version>${hibernate-validator-version}</version>
-				<scope>provided</scope>
+				
+				
 			</dependency>
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>${javax-validation-version}</version>
-				<scope>provided</scope>
+			
+				
+				
 			</dependency>
 			<!-- <dependency> <groupId>org.jadira.usertype</groupId> <artifactId>usertype.core</artifactId> 
 				<version>4.0.0.GA</version> </dependency> <dependency> <groupId>org.jadira.usertype</groupId> 
@@ -318,6 +338,18 @@
 			</dependency>
 			
 			<dependency>
+    <groupId>org.objenesis</groupId>
+    <artifactId>objenesis</artifactId>
+    <version>3.3</version>
+</dependency>
+
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+    <version>3.3.0</version>
+</dependency>
+			
+			<dependency>
 				<groupId>org.jboss.spec.javax.servlet.jsp</groupId>
 				<artifactId>jboss-jsp-api_2.3_spec</artifactId>
 				<version>${javax-servlet-jsp-version}</version>
@@ -344,15 +376,12 @@
 			<!-- SERVLET SPEC JBOSS DEPENDENCIES END -->
 
 			<!-- STRUTS2 DEPENDENCIES START -->
-			<dependency>
+				<!--<dependency>
 				<groupId>org.apache.struts</groupId>
 				<artifactId>struts2-core</artifactId>
 				<version>${struts2-version}</version>
 				<exclusions>
-					<exclusion>
-						<groupId>org.javassist</groupId>
-						<artifactId>javassist</artifactId>
-					</exclusion>
+				
 					<exclusion>
 						<groupId>org.apache.logging.log4j</groupId>
 						<artifactId>log4j-api</artifactId>
@@ -385,7 +414,7 @@
 				<groupId>com.thoughtworks.xstream</groupId>
 				<artifactId>xstream</artifactId>
 				<version>${xstream-version}</version>
-			</dependency>
+			</dependency>-->
 			<!-- STRUTS2 DEPENDENCIES END -->
 
 			<!-- JSON START -->
@@ -456,55 +485,36 @@
 				<groupId>ma.glasnost.orika</groupId>
 				<artifactId>orika-core</artifactId>
 				<version>${orika-core.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.javassist</groupId>
-						<artifactId>javassist</artifactId>
-					</exclusion>
-				</exclusions>
+				
 			</dependency>
 			<!-- End Orika -->
 
 			<!-- SPRING START -->
 			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<version>${spring-version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-framework-bom</artifactId>
+    <version>5.3.31</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>	
 
-			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-jpa</artifactId>
-				<version>${spring-data-jpa-version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework.data</groupId>
-						<artifactId>spring-data-commons</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-bom</artifactId>
+    <version>2021.2.18</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework.session</groupId>
+    <artifactId>spring-session-bom</artifactId>
+    <version>2021.2.3</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
 
-			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-envers</artifactId>
-				<version>${spring-data-jpa-envers-version}</version>
-			</dependency>
 
-			<dependency>
-				<groupId>org.springframework.session</groupId>
-				<artifactId>spring-session-data-redis</artifactId>
-				<version>${spring-session-version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>commons-logging</artifactId>
-						<groupId>commons-logging</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
+			<!--<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-elasticsearch</artifactId>
 				<version>${spring-data-elasticsearch}</version>
@@ -514,7 +524,7 @@
 						<artifactId>spring-data-commons</artifactId>
 					</exclusion>
 				</exclusions>
-			</dependency>
+			</dependency> -->
 			<!-- SPRING END -->
 
 			<!-- SECURITY START -->
@@ -575,6 +585,12 @@
 				<artifactId>embedded-redis</artifactId>
 				<version>${embedded-redis-version}</version>
 			</dependency>
+			<dependency>
+    <groupId>javax.persistence</groupId>
+    <artifactId>javax.persistence-api</artifactId>
+    <version>2.2</version>
+   
+</dependency>
 			<!-- EMBEDDED REDIS ENDS -->
 
 			<!-- QUARTZ START -->
@@ -648,15 +664,11 @@
 				<artifactId>jasperreports-functions</artifactId>
 				<version>${jasper-report-version}</version>
 			</dependency>
-			<dependency>
-				<groupId>net.sf.jasperreports</groupId>
-				<artifactId>jasperreports-javaflow</artifactId>
-				<version>${jasper-report-version}</version>
-			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
-				<version>3.10.1</version>
+				<version>5.2.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jfree</groupId>
@@ -673,11 +685,7 @@
 				<artifactId>itext</artifactId>
 				<version>${itext-version}</version>
 			</dependency>
-			<dependency>
-				<groupId>commons-javaflow</groupId>
-				<artifactId>commons-javaflow</artifactId>
-				<version>${commons-javaflow-version}</version>
-			</dependency>
+			
 			<dependency>
 				<groupId>net.sourceforge.jexcelapi</groupId>
 				<artifactId>jxl</artifactId>
@@ -707,6 +715,11 @@
 				<version>${commons-lang3-version}</version>
 			</dependency>
 			<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+    <version>${jackson-version}</version>
+</dependency>
+			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-email</artifactId>
 				<version>${commons-email-version}</version>
@@ -718,6 +731,12 @@
 				</exclusions>
 			</dependency>
 			<dependency>
+    <groupId>com.fasterxml.woodstox</groupId>
+    <artifactId>woodstox-core</artifactId>
+    <version>6.5.1</version>
+</dependency>
+			<dependency>
+				
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>${commons-collections-version}</version>
@@ -1083,6 +1102,40 @@
 				<artifactId>wsdl4j</artifactId>
 				<version>${wsdl4j-version}</version>
 			</dependency>
+			<!-- Add these explicitly in dependencyManagement -->
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-commons</artifactId>
+    <version>2.7.18</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-jpa</artifactId>
+    <version>2.7.18</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.session</groupId>
+    <artifactId>spring-session-data-redis</artifactId>
+  
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.session</groupId>
+    <artifactId>spring-session-core</artifactId>
+   
+</dependency>
+	<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.3.31</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.31</version>
+        </dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -1211,18 +1264,26 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-data-redis</artifactId>
+			 <version>${spring-session-version}</version> 
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-elasticsearch</artifactId>
-		</dependency>
+	<!-- Comment out for now in both dependencyManagement AND dependencies -->
+<!-- <dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-elasticsearch</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.elasticsearch</groupId>
+    <artifactId>elasticsearch</artifactId>
+</dependency> -->
 		<!-- SPRING DEPENDENCIES END -->
 
 		<!-- EMBEDDED REDIS SERVER START -->
+		<!-- ADD this to dependencyManagement imports -->
 		<dependency>
 			<groupId>com.orange.redis-embedded</groupId>
 			<artifactId>embedded-redis</artifactId>
@@ -1230,10 +1291,7 @@
 		<!-- EMBEDDED REDIS SERVER END -->
 
 		<!-- ELASTICSEARCH DEPENDANCY STARTS -->
-		<dependency>
-			<groupId>org.elasticsearch</groupId>
-			<artifactId>elasticsearch</artifactId>
-		</dependency>
+	
 		<!-- ELASTICSEARCH DEPENDANCY ENDS -->
 
 		<!-- MISC STARTS -->
@@ -1421,6 +1479,7 @@
 					<artifactId>log4j</artifactId>
 				</exclusion>
 			</exclusions>
+			
 		</dependency>
 	</dependencies>
 
@@ -1436,8 +1495,14 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${mvn.compiler.plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>17</source>
+					<target>17</target>
+					<excludes>
+            <exclude>**/elasticsearch/**</exclude>
+            <exclude>**/repository/es/**</exclude>
+            <exclude>**/entity/es/**</exclude>
+            <exclude>**/config/elasticsearch/**</exclude>
+        </excludes>
 				</configuration>
 			</plugin>
 			<plugin>

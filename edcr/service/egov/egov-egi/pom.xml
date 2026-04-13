@@ -58,10 +58,15 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
-
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>3.9.0</version>
+</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-envers</artifactId>
+			 <version>${spring-data-jpa-envers-version}</version>
 		</dependency>
 
 		<dependency>
@@ -95,7 +100,7 @@
 		</dependency>
 
 		<!-- STRUTS2 DEPENDENCIES START -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
 		</dependency>
@@ -118,7 +123,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- STRUTS2 DEPENDENCIES END -->
 
 		<!-- JSON START -->
@@ -130,6 +135,7 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate5</artifactId>
 		</dependency>
+		
 		<!-- JSON END -->
 
 		<!-- SECURITY START -->
@@ -190,39 +196,24 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-functions</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports-javaflow</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-javaflow</groupId>
-			<artifactId>commons-javaflow</artifactId>
+			
+        
+    
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
 			<artifactId>jfreechart</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>ar.com.fdvs</groupId>
-			<artifactId>DynamicJasper</artifactId>
-			<version>5.0.2</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>jasperreports</artifactId>
-					<groupId>net.sf.jasperreports</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>tomcat</groupId>
 			<artifactId>jasper-compiler-jdt</artifactId>
-			<version>5.5.23</version>
-		</dependency>
+			<version>5.5.23</version> 
+		</dependency> -->
 		<!-- REPORTS END -->
 
 		<!-- COMMONS START -->
@@ -283,9 +274,11 @@
 			<artifactId>gt-shapefile</artifactId>
 		</dependency>
 		<dependency>
+			
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-shapefile-renderer</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.media</groupId>
 			<artifactId>jai_core</artifactId>
