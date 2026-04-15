@@ -1,10 +1,10 @@
 /* Custom Component to to show all the form details filled by user. All the details are coming through the value, 
 In Parent Component,  we are passing the data as a props coming through params (data in params comes through session storage) into the value.
 */
-import { Card, CardHeader, CardSubHeader, CheckBox, LinkButton, Row, StatusTable, SubmitBar, EditIcon } from "@nudmcdgnpm/digit-ui-react-components";
+import { Card, CardHeader, CardSubHeader, CheckBox, LinkButton, Row, StatusTable, SubmitBar, EditIcon } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState, useMemo, Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { checkForNA, getOrderDocuments } from "../../../utils";
 import ApplicationTable from "../../../components/inbox/ApplicationTable";
 import { SVDocumnetPreview } from "../../../utils";
@@ -17,9 +17,9 @@ import _ from "lodash";
 //function for edit button with edit icon and functioanality of redirecting to differnt URL's
 const ActionButton = ({ jumpTo }) => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = Digit.Hooks.useCustomNavigate();
   function routeTo() {
-    history.push(jumpTo);
+    navigate(jumpTo);
   }
   return <LinkButton
     label={<EditIcon style={{ marginTop: "-30px", float: "right", position: "relative", bottom: "32px" }} />}
@@ -343,8 +343,8 @@ const SVCheckPage = ({ onSubmit, editdata, value = {}, renewalData }) => {
             />
             {/* Handles rendering of beneficiaryList based on renew data or the data from normal flow of code */}
             {specialCategoryData?.beneficiaryList[0]?.schemeName ?
-              specialCategoryData?.beneficiaryList.map((item) => (
-                <>
+              specialCategoryData?.beneficiaryList.map((item, i) => (
+                <Fragment key={i}>
                   <Row
                     label={t("SV_BENEFICIARY_SCHEMES")}
                     text={`${t(checkForNA(item?.schemeName))}`}
@@ -354,10 +354,10 @@ const SVCheckPage = ({ onSubmit, editdata, value = {}, renewalData }) => {
                     label={t("SV_ENROLLMENT_APPLICATION_NUMBER")}
                     text={`${t(checkForNA(item?.enrollmentId))}`}
                   />
-                </>
+                </Fragment>
               ))
-              : renewalData?.benificiaryOfSocialSchemes?.map((item) => (
-                <>
+              : renewalData?.benificiaryOfSocialSchemes?.map((item, index) => (
+                <Fragment key={index}>
                   <Row
                     label={t("SV_BENEFICIARY_SCHEMES")}
                     text={`${t(checkForNA(item?.schemeName))}`}
@@ -367,7 +367,7 @@ const SVCheckPage = ({ onSubmit, editdata, value = {}, renewalData }) => {
                     label={t("SV_ENROLLMENT_APPLICATION_NUMBER")}
                     text={`${t(checkForNA(item?.enrollmentId))}`}
                   />
-                </>
+                </Fragment>
               )
               )
             }

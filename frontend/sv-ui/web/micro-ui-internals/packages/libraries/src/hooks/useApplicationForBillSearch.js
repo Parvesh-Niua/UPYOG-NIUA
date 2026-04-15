@@ -4,7 +4,7 @@
  * The returned object includes the fetched applications and metadata like `key` and `label` for bill generation reference.
  * 
 */
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { SVService } from "../services/elements/SV";
 
 const svApplications = async (tenantId, filters) => {
@@ -32,7 +32,9 @@ export const useApplicationsForBusinessServiceSearch = ({ tenantId, businessServ
   
   /* key from application ie being used as consumer code in bill */
   const { searchFn, key, label } = referenceObject(tenantId, filters)[_key];
-  const applications = useQuery(["applicationsForBillDetails", { tenantId, businessService, filters, searchFn }], searchFn, {
+  const applications = useQuery({
+    queryKey: ["applicationsForBillDetails", { tenantId, businessService, filters, searchFn }],
+    queryFn: searchFn,
     ...config,
   });
 

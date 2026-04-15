@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FormStep, TextInput, CardLabel, Dropdown, LinkButton, Toast, SubmitBar } from "@nudmcdgnpm/digit-ui-react-components";
+import { FormStep, TextInput, CardLabel, Dropdown, LinkButton, Toast, SubmitBar } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { Controller, useForm } from "react-hook-form";
 import GIS from "./GIS";
 import Timeline from "../components/Timeline";
@@ -552,8 +552,6 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
         comments: "",
         businessService: "street-vending",
         moduleName: "sv-services",
-        businessService: "street-vending",
-        moduleName: "sv-services",
         varificationDocuments: [
           {
             additionalDetails: {},
@@ -651,7 +649,7 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
               name={"vendingType"}
               defaultValue={vendingType}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={vendingType}
@@ -669,7 +667,7 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
               name={"locality"}
               defaultValue={vendorLocality}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={vendorLocality}
@@ -688,7 +686,7 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
               name={"vendingZones"}
               defaultValue={vendingZones}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={vendingZones}
@@ -810,7 +808,7 @@ const SVBusinessDetails = ({ t, config, onSelect, userType, formData, editdata, 
               name={"vendingPayment"}
               defaultValue={vendingPayment}
               rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-              render={(props) => (
+              render={({field}) => (
                 <Dropdown
                   className="form-field"
                   selected={vendingPayment}

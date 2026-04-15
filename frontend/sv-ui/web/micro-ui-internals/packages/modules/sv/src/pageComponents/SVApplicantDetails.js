@@ -1,4 +1,4 @@
-import { CardLabel, FormStep,RadioButtons, TextInput, CheckBox, LinkButton, MobileNumber,Toast ,Dropdown } from "@nudmcdgnpm/digit-ui-react-components";
+import { CardLabel, FormStep,RadioButtons, TextInput, CheckBox, LinkButton, MobileNumber,Toast ,Dropdown } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState,useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Timeline from "../components/Timeline";
@@ -492,8 +492,6 @@ const SVApplicantDetails = ({ t, config, onSelect, userType, formData,editdata,p
         comments: "",
         businessService: "street-vending",
         moduleName: "sv-services",
-        businessService: "street-vending",
-        moduleName: "sv-services",
         varificationDocuments: [
           {
             additionalDetails: {},
@@ -626,7 +624,7 @@ const SVApplicantDetails = ({ t, config, onSelect, userType, formData,editdata,p
                   name={`userCategory-${index}`}
                   defaultValue={userCategory}
                   rules={{ required: t("CORE_COMMON_REQUIRED_ERRMSG") }}
-                  render={(props) => (
+                  render={({field}) => (
                     <Dropdown
                       className="form-field"
                       style={{width:"100%"}}

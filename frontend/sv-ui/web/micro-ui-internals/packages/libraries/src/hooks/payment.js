@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PaymentService } from "../services/elements/Payment";
 
 export const useFetchCitizenBillsForBuissnessService = ({ businessService, ...filters }, config = {}) => {
@@ -9,22 +9,21 @@ export const useFetchCitizenBillsForBuissnessService = ({ businessService, ...fi
   if (!params["mobileNumber"]) delete params["mobileNumber"];
 
 
-  const { isLoading, error, isError, data, status } = useQuery(
-    ["citizenBillsForBuisnessService", businessService, { ...params }],
-    () => Digit.PaymentService.fetchBill(tenantId, { ...params }),
-    {
-      refetchOnMount: true,
-      retry: false,
-      ...config,
-    }
-  );
+  const { isLoading, error, isError, data, status } = useQuery({
+    queryKey: ["citizenBillsForBuisnessService", businessService, { ...params }],
+    queryFn: () => Digit.PaymentService.fetchBill(tenant, { ...params }),
+    refetchOnMount: true,
+    retry: false,
+    ...config,
+  });
+
   return {
     isLoading,
     error,
     isError,
     data,
     status,
-    revalidate: () => queryClient.invalidateQueries(["citizenBillsForBuisnessService", businessService]),
+    revalidate: () => queryClient.invalidateQueries({ queryKey: ["citizenBillsForBuisnessService", businessService] }),
   };
 };
 
@@ -33,23 +32,21 @@ export const useFetchBillsForBuissnessService = ({ tenantId, businessService, ..
   // let isPTAccessDone = sessionStorage.getItem("IsPTAccessDone");
   const params = { businessService, ...filters };
   const _tenantId = tenantId || Digit.UserService.getUser()?.info?.tenantId;
-  const { isLoading, error, isError, data, status } = useQuery(
-    ["billsForBuisnessService", businessService, { ...filters }, config, /*isPTAccessDone*/ false],
-    () => Digit.PaymentService.fetchBill(_tenantId, params),
-    {
-      retry: (count, err) => {
-        return false;
-      },
-      ...config,
-    }
-  );
+  const { isLoading, error, isError, data, status } = useQuery({
+    queryKey: ["billsForBuisnessService", businessService, { ...filters }, config, /*isPTAccessDone*/ false],
+    queryFn: () => Digit.PaymentService.fetchBill(_tenantId, params),
+    retry: (count, err) => {
+      return false;
+    },
+    ...config,
+  });
   return {
     isLoading,
     error,
     isError,
     data,
     status,
-    revalidate: () => queryClient.invalidateQueries(["billsForBuisnessService", businessService]),
+    revalidate: () => queryClient.invalidateQueries({ queryKey: ["billsForBuisnessService", businessService] }),
   };
 };
 
@@ -67,11 +64,16 @@ export const useFetchPayment = ({ tenantId, consumerCode, businessService }, con
     else return failureCount < 3;
   };
 
-  const queryData = useQuery(["paymentFetchDetails", tenantId, consumerCode, businessService], () => fetchBill(), { retry, ...config });
+  const queryData = useQuery({
+    queryKey: ["paymentFetchDetails", tenantId, consumerCode, businessService],
+    queryFn: () => fetchBill(),
+    retry,
+    ...config
+  });
 
   return {
     ...queryData,
-    revalidate: () => queryClient.invalidateQueries(["paymentFetchDetails", tenantId, consumerCode, businessService]),
+    revalidate: () => queryClient.invalidateQueries({ queryKey: ["paymentFetchDetails", tenantId, consumerCode, businessService] }),
   };
 };
 
@@ -84,22 +86,31 @@ export const usePaymentUpdate = ({ egId }, businessService, config) => {
     return { payments, applicationNo: transaction.Transaction[0].consumerCode, txnStatus: transaction.Transaction[0].txnStatus };
   };
 
-  return useQuery(["paymentUpdate", egId], () => getPaymentData(egId), config);
+  return useQuery({
+    queryKey: ["paymentUpdate", egId],
+    queryFn: () => getPaymentData(egId),
+    ...config
+  });
 };
 
 
 export const useDemandSearch = ({ consumerCode, businessService, tenantId }, config = {}) => {
   if (!tenantId) tenantId = Digit.ULBService.getCurrentTenantId();
   const queryFn = () => Digit.PaymentService.demandSearch(tenantId, consumerCode, businessService);
-  const queryData = useQuery(["demand_search", { consumerCode, businessService, tenantId }], queryFn, { refetchOnMount: "always", ...config });
+  const queryData = useQuery({
+    queryKey: ["demand_search", { consumerCode, businessService, tenantId }],
+    queryFn,
+    refetchOnMount: "always",
+    ...config
+  });
   return queryData;
 };
 
 export const useAssetQrCode = ({ tenantId, ...params }, config = {}) => {     
   return useQuery(
-    ["assets_Reciept_Search", { tenantId, params },config],
-    () => Digit.PaymentService.useAssetQrCodeService(tenantId, params),
     {
+      queryKey: ["assets_Reciept_Search", { tenantId, params },config],
+      queryFn: () => Digit.PaymentService.useAssetQrCodeService(tenantId, params),
       refetchOnMount: false,
       ...config,
     }
@@ -108,9 +119,9 @@ export const useAssetQrCode = ({ tenantId, ...params }, config = {}) => {
 
 export const useRecieptSearch = ({ tenantId, businessService, ...params }, config = {}) => {
   return useQuery(
-    ["reciept_search", { tenantId, businessService, params },config],
-    () => Digit.PaymentService.recieptSearch(tenantId, businessService, params),
     {
+      queryKey: ["reciept_search", { tenantId, businessService, params },config],
+      queryFn: () => Digit.PaymentService.recieptSearch(tenantId, businessService, params),
       refetchOnMount: false,
       ...config,
     }
@@ -118,9 +129,9 @@ export const useRecieptSearch = ({ tenantId, businessService, ...params }, confi
 };
 export const useRecieptSearchNew = ({ tenantId, ...params }, config = {}) => {
   return useQuery(
-    ["obps_Reciept_Search", { tenantId, params },config],
-    () => Digit.PaymentService.recieptSearchNew(tenantId, params),
     {
+      queryKey: ["obps_Reciept_Search", { tenantId, params },config],
+      queryFn: () => Digit.PaymentService.recieptSearchNew(tenantId, params),
       refetchOnMount: false,
       ...config,
     }
@@ -128,5 +139,8 @@ export const useRecieptSearchNew = ({ tenantId, ...params }, config = {}) => {
 };
 
 export const useBulkPdfDetails = ({ filters }) => {
-  return useQuery(["BULK_PDF_DETAILS", filters], async () => await PaymentService.getBulkPdfRecordsDetails(filters));
+  return useQuery({
+    queryKey: ["BULK_PDF_DETAILS", filters],
+    queryFn: async () => await PaymentService.getBulkPdfRecordsDetails(filters)
+  });
 };

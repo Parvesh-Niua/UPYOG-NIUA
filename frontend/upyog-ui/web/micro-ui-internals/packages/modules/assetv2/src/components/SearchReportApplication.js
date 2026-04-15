@@ -10,7 +10,7 @@ import {SubmitBar, DatePicker, SearchForm, SearchField, Dropdown, Table, Card, L
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import QRCode from 'qrcode';
+import QRCode from 'qrcode/lib/browser';
 
 
 const ASSETReportApplication = ({tenantId, isLoading, userType, t, onSubmit, data, count, setShowToast }) => {

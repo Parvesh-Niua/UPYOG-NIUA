@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Banner, Card, CardText, SubmitBar, ActionBar } from "@nudmcdgnpm/digit-ui-react-components";
+import { Banner, Card, CardText, SubmitBar, ActionBar } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const convertEpochToDate = (dateEpoch) => {
   // Returning NA in else case because new Date(null) returns Current date from calender
@@ -25,8 +25,6 @@ export const SuccessfulPayment = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   receiptNumber = receiptNumber.replace(/%2F/g, "/");
   
- 
-
   useEffect(() => {
     return () => {
       const fetchData = async () => {

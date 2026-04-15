@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { SVService } from "../../services/elements/SV";
 
 /**
@@ -18,7 +18,9 @@ import { SVService } from "../../services/elements/SV";
  */
 
 export const useCreateDemand = () => {
-    return useMutation((data) => SVService.update(data));
+    return useMutation({
+        mutationFn: (data) => SVService.update(data)
+    });
 };
 
 export default useCreateDemand;

@@ -1,11 +1,11 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { format } from "date-fns";
 
 const useEventDetails = (tenantId, filters, config = {}) => {
   return useQuery(
-    ['EVENT_DETAILS', tenantId, filters],
-    () => Digit.EventsServices.EventDetails(tenantId, filters),
     {
+      queryKey: ['EVENT_DETAILS', tenantId, filters],
+      queryFn: () => Digit.EventsServices.EventDetails(tenantId, filters),
       select: (data) => {
         const details = [{
           title:" ",
