@@ -27,7 +27,7 @@
  */
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { TelePhone, DisplayPhotos } from "@upyog/digit-ui-react-components";
+import { TelePhone, DisplayPhotos } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 
 const PTRWFCaption = ({ data,OpenImage }) => {

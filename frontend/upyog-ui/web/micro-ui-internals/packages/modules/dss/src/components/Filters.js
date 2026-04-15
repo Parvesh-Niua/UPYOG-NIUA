@@ -1,4 +1,4 @@
-import { CloseSvg, FilterIcon, MultiSelectDropdown, RefreshIcon, Dropdown } from "@upyog/digit-ui-react-components";
+import { CloseSvg, FilterIcon, MultiSelectDropdown, RefreshIcon, Dropdown } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import DateRange from "./DateRange";
 import FilterContext from "./FilterContext";

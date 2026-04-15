@@ -13,7 +13,7 @@ import {
   ComplaintIcon,
   BPAHomeIcon,
   WSICon
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

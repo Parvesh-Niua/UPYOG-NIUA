@@ -11,7 +11,7 @@ import {
   SearchForm,
   SearchField,
   Dropdown,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useForm, Controller } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";

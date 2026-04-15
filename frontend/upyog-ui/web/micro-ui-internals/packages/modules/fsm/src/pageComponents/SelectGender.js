@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, FormStep, Loader, RadioOrSelect } from "@upyog/digit-ui-react-components";
+import { Dropdown, FormStep, Loader, RadioOrSelect } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import Timeline from "../components/TLTimelineInFSM";
 
 const SelectGender = ({ config, onSelect, t, userType, formData }) => {

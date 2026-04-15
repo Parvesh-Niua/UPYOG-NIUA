@@ -8,7 +8,7 @@ import {
   SearchIconSvg,
   TextInput,
   WhatsappIcon,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useRef, Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 

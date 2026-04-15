@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { EmployeeModuleCard, PropertyHouse } from "@upyog/digit-ui-react-components";
+import { EmployeeModuleCard, PropertyHouse } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const PTCard = () => {
   const { t } = useTranslation();

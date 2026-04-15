@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { LabelFieldPair, CardLabel, TextInput, CardLabelError, Dropdown } from "@upyog/digit-ui-react-components";
+import { LabelFieldPair, CardLabel, TextInput, CardLabelError, Dropdown } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useLocation } from "react-router-dom";
-import { RadioButtons } from "@upyog/digit-ui-react-components";
+import { RadioButtons } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const SelectPaymentType = ({ t, config, onSelect, formData = {}, userType, register, errors }) => {
   const stateId = Digit.ULBService.getStateId();

@@ -18,7 +18,7 @@ import {
   CardText,
   Dropdown,
   AddIcon,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 import { useQueryClient } from "react-query";
 

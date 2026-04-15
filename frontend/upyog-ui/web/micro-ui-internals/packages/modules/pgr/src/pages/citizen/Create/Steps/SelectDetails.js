@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormStep } from "@upyog/digit-ui-react-components";
+import { FormStep } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const SelectDetails = ({ t, config, onSelect, value }) => {
   const pttype=sessionStorage.getItem("type")

@@ -1,4 +1,4 @@
-import { Loader, Modal, FormComposer, Toast } from "@upyog/digit-ui-react-components";
+import { Loader, Modal, FormComposer, Toast } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState, useEffect } from "react";
 import { useQueryClient } from "react-query";
 

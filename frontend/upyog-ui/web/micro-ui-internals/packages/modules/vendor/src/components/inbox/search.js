@@ -10,7 +10,7 @@ import {
   DatePicker,
   CardLabelError,
   Header,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import DropdownStatus from "./DropdownStatus";
 import { useTranslation } from "react-i18next";
 

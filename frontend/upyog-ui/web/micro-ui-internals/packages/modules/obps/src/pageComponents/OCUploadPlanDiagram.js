@@ -4,7 +4,7 @@ import {
     Toast,
     Loader,
     CardText
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 

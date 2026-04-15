@@ -1,4 +1,4 @@
-import { Dropdown, FilterFormField, Loader, RadioButtons } from "@upyog/digit-ui-react-components";
+import { Dropdown, FilterFormField, Loader, RadioButtons } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { Fragment } from "react";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";

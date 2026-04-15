@@ -21,7 +21,7 @@ import {
   Header,
   ImageViewer,
   MultiLink,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 import ActionModal from "./Modal";
 import TLCaption from "../../../components/TLCaption";

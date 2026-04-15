@@ -1,4 +1,4 @@
-import { StatusTable, Row, CardSubHeader } from "@upyog/digit-ui-react-components";
+import { StatusTable, Row, CardSubHeader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { getQueryStringParams } from "../../../ws/src/utils";

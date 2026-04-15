@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { EmployeeModuleCard, PropertyHouse } from "@upyog/digit-ui-react-components";
+import { EmployeeModuleCard, PropertyHouse } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 /**
  * Renders the E-Waste module card for employee dashboard.

@@ -1,4 +1,4 @@
-import {UploadFile,Dropdown } from "@upyog/digit-ui-react-components";
+import {UploadFile,Dropdown } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 
 /*

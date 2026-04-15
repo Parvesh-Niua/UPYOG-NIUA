@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormStep, ImageUploadHandler, Loader } from "@upyog/digit-ui-react-components";
+import { FormStep, ImageUploadHandler, Loader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const SelectImages = ({ t, config, onSelect, onSkip, value }) => {
   // const __initImages = Digit.SessionStorage.get("PGR_CREATE_IMAGES");

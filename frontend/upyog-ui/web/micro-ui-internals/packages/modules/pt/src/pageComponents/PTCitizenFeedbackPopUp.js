@@ -1,4 +1,4 @@
-import { PopUp } from "@upyog/digit-ui-react-components";
+import { PopUp } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 
 const PTCitizenFeedbackPopUp = ({ setpopup, setShowToast, data }) => {

@@ -1,4 +1,4 @@
-import { Card, PropertyHouse } from "@upyog/digit-ui-react-components";
+import { Card, PropertyHouse } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

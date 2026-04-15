@@ -1,4 +1,4 @@
-import { ModuleCardFullWidth } from "@upyog/digit-ui-react-components";
+import { ModuleCardFullWidth } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

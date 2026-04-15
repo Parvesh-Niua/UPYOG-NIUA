@@ -5,7 +5,7 @@ import {
     CardLabel,
     TextInput,
     MobileNumber,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import Timeline from "../components/Timeline";
 
 const WSPlumberPreference = ({ t, config, onSelect, userType, formData }) => {

@@ -11,7 +11,7 @@ import {
     CheckBox,
     UploadFile,
     InfoBannerIcon
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
