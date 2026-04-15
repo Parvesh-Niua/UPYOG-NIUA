@@ -2,6 +2,8 @@ package org.upyog.Automation.Common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.upyog.Automation.Modules.Adv.AdvBookingCreate;
 import org.upyog.Automation.Modules.CHB.chbCreate;
 import org.upyog.Automation.Modules.CnD.CnDRequest;
@@ -23,9 +25,47 @@ import org.upyog.Automation.Modules.WaterAndSewerage.WAndSCreate;
  * Common entry point for all citizen module tests
  * Routes to appropriate module based on moduleName
  */
+
+@Component
 public class CommonCitizenTest {
 
     private static final Logger logger = LoggerFactory.getLogger(CommonCitizenTest.class);
+
+    @Autowired
+    private CreateApplication createApplication;
+    
+    @Autowired
+    private TradeLicenseCreate tradeLicenseCreate;
+    
+    @Autowired
+    private PetCreateApplication petCreateApplication;
+    
+    @Autowired
+    private AdvBookingCreate advBookingCreate;
+    
+    @Autowired
+    private TreePruningCitizen treePruningCitizen;
+    
+    @Autowired
+    private WaterTankerCitizen waterTankerCitizen;
+    
+    @Autowired
+    private MobileToiletCitizen mobileToiletCitizen;
+    
+    @Autowired
+    private PropertyTaxCreate propertyTaxCreate;
+    
+    @Autowired
+    private PgrCreate pgrCreate;
+    
+    @Autowired
+    private OBPASCreate obpasCreate;
+    
+    @Autowired
+    private EWasteCreate eWasteCreate;
+    
+    @Autowired
+    private chbCreate chbCreate;
 
     public void runCitizenTest(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName) {
         logger.info("Starting {} citizen test", moduleName);

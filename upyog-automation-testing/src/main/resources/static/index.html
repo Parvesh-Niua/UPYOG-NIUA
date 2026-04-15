@@ -148,6 +148,8 @@
             resultDiv.textContent = 'Running test...';
 
             try {
+                window.open('http://13.201.2.162:8000', '_blank');
+                
                 const response = await fetch('/api/test/citizen', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -173,6 +175,8 @@
             resultDiv.textContent = 'Running test...';
 
             try {
+                window.open('http://13.201.2.162:8000', '_blank');
+                
                 const response = await fetch('/api/test/employee', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },

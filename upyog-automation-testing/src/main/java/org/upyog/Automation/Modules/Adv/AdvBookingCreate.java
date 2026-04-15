@@ -10,8 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
-import org.upyog.Automation.Utils.DriverFactory;
+import org.upyog.Automation.config.WebDriverFactory;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
@@ -29,8 +31,11 @@ import java.util.Set;
  *  - Upload documents (3 document rows on one page)
  *  - Submit application
  */
-//@Component
+@Component
 public class AdvBookingCreate {
+
+    @Autowired
+    private WebDriverFactory webDriverFactory;
 
     /**
      * Main test method for Advertisement booking workflow.
@@ -48,8 +53,8 @@ public class AdvBookingCreate {
     public void AdvBookingReg(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName) {
         System.out.println("Advertisement Booking by Citizen");
 
-        WebDriver driver = DriverFactory.createChromeDriver();
-        WebDriverWait wait = DriverFactory.createWebDriverWait(driver);
+        WebDriver driver = webDriverFactory.createDriver();
+        WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
 
@@ -188,7 +193,7 @@ public class AdvBookingCreate {
             // Get current date and add days for future dates
             LocalDate today = LocalDate.now();
             LocalDate futureFromDate = today.plusDays(5);   // 5 days from today
-            LocalDate futureToDate = today.plusDays(30);    // 30 days from today
+            LocalDate futureToDate = today.plusDays(55);    // 30 days from today
 
             // Format dates as dd-MM-yyyy for Advertisement
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
