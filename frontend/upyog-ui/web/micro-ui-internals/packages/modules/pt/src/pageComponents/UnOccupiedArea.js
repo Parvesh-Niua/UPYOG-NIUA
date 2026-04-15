@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FormStep, CardLabel, TextInput } from "@upyog/digit-ui-react-components";
+import { FormStep, CardLabel, TextInput } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const UnOccupiedArea = ({ t, config, onSelect, value, userType, formData }) => {
   //let index = window.location.href.charAt(window.location.href.length - 1);

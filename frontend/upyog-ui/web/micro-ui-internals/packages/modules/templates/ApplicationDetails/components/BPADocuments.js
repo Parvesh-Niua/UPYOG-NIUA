@@ -5,7 +5,7 @@ import {
     LabelFieldPair,
     MultiUploadWrapper,
     CardSubHeader
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import DocumentsPreview from "./DocumentsPreview";
 
 const BPADocuments = ({ t, formData, applicationData, docs, bpaActionsDetails }) => {

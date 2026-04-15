@@ -1,7 +1,7 @@
 import {
   ActionBar, Card, DatePicker, Dropdown, FormComposer, Header, Loader, Modal, Row, StatusTable, SubmitBar,
   Toast
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import * as func from "../../../utils";

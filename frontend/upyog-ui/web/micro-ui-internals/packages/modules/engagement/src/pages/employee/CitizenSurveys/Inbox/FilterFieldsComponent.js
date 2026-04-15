@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo } from "react"
-import { FilterFormField, Loader, Dropdown} from "@upyog/digit-ui-react-components";
+import { FilterFormField, Loader, Dropdown} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 

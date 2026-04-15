@@ -1,4 +1,4 @@
-import { CardLabel, Dropdown, LabelFieldPair, Loader, TextInput, CardLabelError, CheckBox, StatusTable, Row, CardSubHeader } from "@upyog/digit-ui-react-components";
+import { CardLabel, Dropdown, LabelFieldPair, Loader, TextInput, CardLabelError, CheckBox, StatusTable, Row, CardSubHeader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState } from "react";
 import { getPattern } from "../utils";
 import { useForm, Controller } from "react-hook-form";

@@ -1,4 +1,4 @@
-import { CardLabel, CitizenInfoLabel, FormStep, TextInput } from "@upyog/digit-ui-react-components";
+import { CardLabel, CitizenInfoLabel, FormStep, TextInput } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState } from "react";
 import Timeline from "../components/TLTimeline";
 

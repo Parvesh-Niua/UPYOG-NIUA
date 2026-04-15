@@ -9,7 +9,7 @@ import {
   TextInput,
   CardLabelError,
   KeyNote,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import Timeline from "../components/TLTimelineInFSM";
 
 const SelectPaymentPreference = ({ config, formData, t, onSelect, userType }) => {

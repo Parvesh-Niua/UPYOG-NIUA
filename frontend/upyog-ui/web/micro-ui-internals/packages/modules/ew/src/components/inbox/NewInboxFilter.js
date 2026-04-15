@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RemoveableTag, CloseSvg, CheckBox, Localities, SubmitBar } from "@upyog/digit-ui-react-components";
+import { RemoveableTag, CloseSvg, CheckBox, Localities, SubmitBar } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useQueryClient } from "react-query";
 import { useTranslation } from "react-i18next";
 import Status from "./Status";

@@ -1,6 +1,6 @@
 import {
   CardLabel, CardLabelError, CitizenInfoLabel, Dropdown, FormStep, LabelFieldPair, RadioButtons
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 

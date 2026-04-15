@@ -1,4 +1,4 @@
-import { Dropdown, UploadFile } from "@upyog/digit-ui-react-components";
+import { Dropdown, UploadFile } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 
 export const configPTApproverApplication = ({

@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown } from "@upyog/digit-ui-react-components";
+import { Dropdown } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 export const configAcceptDso = ({ t, dsoData, dso, selectVehicleNo, vehicleNoList, vehicleNo, vehicle, action }) => {
   return {

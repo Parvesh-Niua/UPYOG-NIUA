@@ -10,7 +10,7 @@ import {
   LinkButton,
   CardHeader,
   Loader,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 import Timeline from "../components/TLTimeline";
 

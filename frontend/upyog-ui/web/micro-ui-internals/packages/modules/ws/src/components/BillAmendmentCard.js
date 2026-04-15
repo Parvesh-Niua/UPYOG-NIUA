@@ -1,4 +1,4 @@
-import { EmployeeModuleCard, WSICon } from "@upyog/digit-ui-react-components";
+import { EmployeeModuleCard, WSICon } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 

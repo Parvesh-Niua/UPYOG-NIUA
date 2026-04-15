@@ -1,4 +1,4 @@
-import { CardSectionHeader, CardSubHeader, CheckPoint, ConnectingCheckPoints, Loader } from "@upyog/digit-ui-react-components";
+import { CardSectionHeader, CardSubHeader, CheckPoint, ConnectingCheckPoints, Loader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React, { Fragment } from "react";
 import WFCaption from "./WFCaption";
 import { useTranslation } from "react-i18next";

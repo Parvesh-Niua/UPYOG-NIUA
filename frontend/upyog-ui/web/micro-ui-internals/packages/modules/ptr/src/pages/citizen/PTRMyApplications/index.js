@@ -17,7 +17,7 @@
  */
 
 
-import { Header, Loader } from "@upyog/digit-ui-react-components";
+import { Header, Loader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";

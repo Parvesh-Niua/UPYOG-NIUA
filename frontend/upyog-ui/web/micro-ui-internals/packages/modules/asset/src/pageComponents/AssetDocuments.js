@@ -6,7 +6,7 @@ import {
   UploadFile,
   Toast,
   Loader,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useParams } from "react-router-dom";
 
 

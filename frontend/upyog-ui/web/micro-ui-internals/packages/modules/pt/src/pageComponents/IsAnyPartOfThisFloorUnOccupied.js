@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormStep, RadioOrSelect, RadioButtons } from "@upyog/digit-ui-react-components";
+import { FormStep, RadioOrSelect, RadioButtons } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 
 const IsAnyPartOfThisFloorUnOccupied = ({ t, config, onSelect, userType, formData }) => {
   let index = window.location.href.split("/").pop();

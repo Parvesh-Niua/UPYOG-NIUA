@@ -1,4 +1,4 @@
-import { Header, MultiLink } from "@upyog/digit-ui-react-components";
+import { Header, MultiLink } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

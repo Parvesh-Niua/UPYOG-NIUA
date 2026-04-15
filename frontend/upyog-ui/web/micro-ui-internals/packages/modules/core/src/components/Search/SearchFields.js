@@ -17,7 +17,7 @@ import {
     Loader,
     CardText,
     Header,
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 const SearchFields = ({ register, control, reset, tenantId, t, previousPage, formState, isLoading }) => {
 const isMobile = window.Digit.Utils.browser.isMobile();
 

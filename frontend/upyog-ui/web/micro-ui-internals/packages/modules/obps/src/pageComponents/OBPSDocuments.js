@@ -1,4 +1,4 @@
-import { CardText, Loader, PDFSvg } from "@upyog/digit-ui-react-components";
+import { CardText, Loader, PDFSvg } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { pdfDocumentName, pdfDownloadLink, getDocumentsName,stringReplaceAll } from "../utils";

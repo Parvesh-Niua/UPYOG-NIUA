@@ -5,7 +5,7 @@ import {
   StatusTable,
   Row,
   LabelFieldPair
-} from "@upyog/digit-ui-react-components";
+} from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import DocumentsPreview from "./DocumentsPreview";
 
 function SelectDocument({

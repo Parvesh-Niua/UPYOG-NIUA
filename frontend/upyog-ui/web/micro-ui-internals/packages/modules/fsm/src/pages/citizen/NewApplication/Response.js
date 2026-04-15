@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Card, Banner, CardText, SubmitBar, LinkButton } from "@upyog/digit-ui-react-components";
+import { Card, Banner, CardText, SubmitBar, LinkButton } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Loader } from "@upyog/digit-ui-react-components";
+import { Loader } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import getPDFData from "../../../getPDFData";
 
 const GetActionMessage = () => {

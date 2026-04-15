@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Loader, Card, KeyNote } from "@upyog/digit-ui-react-components";
+import { Loader, Card, KeyNote } from "@nudmcdgnpm/upyog-ui-react-components-lts";
 import { useTranslation } from "react-i18next";
 
 /**
