@@ -14,7 +14,7 @@ export const TimerValues = ({timerValues, SlotSearchData,draftId=""}) => {
    
    // Prepare form data for Advertisement Service
    const formdata = {
-    advertisementSlotSearchCriteria: SlotSearchData.map((item) => ({
+    advertisementSlotSearchCriteria: SlotSearchData?.map((item) => ({
       bookingId: "",
       addType: item?.addTypeCode,
       bookingStartDate: item?.bookingDate,

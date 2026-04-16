@@ -5,7 +5,16 @@
   "main": "dist/index.modern.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
+  "exports": {
+    ".": {
+      "development": "./src/index.js",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "engines": {
+    "node": ">=22"
     "node": ">=22"
   },
   "scripts": {

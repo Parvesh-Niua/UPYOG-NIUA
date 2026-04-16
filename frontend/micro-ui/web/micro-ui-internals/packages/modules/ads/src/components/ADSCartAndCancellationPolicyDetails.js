@@ -81,7 +81,7 @@ const ADSCartAndCancellationPolicyDetails = () => {
     },
     // { Header: t("TOTAL_PRICE"), accessor: "price" },
   ];
-  let cartDetails = params?.adslist?.cartDetails.map((details) => {
+  let cartDetails = params?.adslist?.cartDetails?.map((details) => {
     return { 
       addType:details.addTypeCode,
       faceArea:details.faceAreaCode,
@@ -100,10 +100,12 @@ const ADSCartAndCancellationPolicyDetails = () => {
   };
   let mutation = Digit.Hooks.ads.useADSDemandEstimation();
 
-  if (showdemandEstimation === false) {
-    mutation.mutate(formdata);
-    setShowDemandEstimation(true);
-  }
+  React.useEffect(() => {
+    if (showdemandEstimation === false && cartDetails?.length > 0) {
+      mutation.mutate(formdata);
+      setShowDemandEstimation(true);
+    }
+  }, [showdemandEstimation]);
 
   const handleCartClick = () => {
     setShowViewCart((prev) => !prev);
@@ -172,7 +174,7 @@ const ADSCartAndCancellationPolicyDetails = () => {
                   height:"30px",
                   textAlign:"center"
               }}>
-              <div> {params?.adslist?.cartDetails.length}</div>
+              <div> {params?.adslist?.cartDetails?.length}</div>
 
               </div>
             </div>
@@ -260,7 +262,7 @@ const ADSCartAndCancellationPolicyDetails = () => {
               },
             })}
             isPaginationRequired={false}
-            totalRecords={params?.adslist?.cartDetails.length}
+            totalRecords={params?.adslist?.cartDetails?.length || 0}
           />
         </Modal>
       )}

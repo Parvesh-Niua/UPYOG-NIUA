@@ -142,7 +142,7 @@ const ADSSearchApplication = ({tenantId, isLoading, t, onSubmit, data, count, se
               };
                 const slotSearchData = Digit.Hooks.ads.useADSSlotSearch();
                 let formdata = {
-                  advertisementSlotSearchCriteria:application?.cartDetails.map((item) => ({
+                  advertisementSlotSearchCriteria:application?.cartDetails?.map((item) => ({
                     bookingId: application?.bookingId,
                     addType: item?.addType,
                     bookingStartDate: item?.bookingDate,
