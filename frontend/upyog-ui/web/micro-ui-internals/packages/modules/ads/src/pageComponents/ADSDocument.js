@@ -38,7 +38,7 @@ function ADSDocument({ value = {}, Code, index,showFileName= false }) {
     <div>
       <React.Fragment>
         <div >
-          {documents.map((document, index) => {
+          {documents?.map((document, index) => {
             let documentLink = pdfDownloadLink(data.pdfFiles, document.fileStoreId);
             return (
               <a target="_" href={documentLink} style={{ minWidth: "160px", display: "flex", alignItems: "center" }} key={index}>

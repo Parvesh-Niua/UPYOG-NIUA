@@ -50,7 +50,7 @@ const ADSAcknowledgement = ({ data, onSuccess }) => {
   const [showToast, setShowToast] = useState(null);
   const slotSearchData = Digit.Hooks.ads.useADSSlotSearch();
   let formdata = {
-    advertisementSlotSearchCriteria: mutation.data?.bookingApplication[0]?.cartDetails.map((item) => ({
+    advertisementSlotSearchCriteria: mutation.data?.bookingApplication[0]?.cartDetails?.map((item) => ({
       bookingId: mutation.data?.bookingApplication[0].bookingId,
       addType: item?.addType,
       bookingStartDate: item?.bookingDate,

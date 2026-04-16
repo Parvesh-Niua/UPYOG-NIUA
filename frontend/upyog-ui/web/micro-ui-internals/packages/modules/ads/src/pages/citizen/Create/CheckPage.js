@@ -90,14 +90,12 @@ import {
       // Update the state with the modified params
       setParams(updatedParams);
     };
-    const adslistRows =  params?.adslist?.cartDetails.map((slot) => (
-      {
-        addType: slot.addType,
-        faceArea:slot.faceArea,
-        nightLight:slot.nightLight,
-        bookingDate:slot.bookingDate,
-      }
-    )) || [];
+    const adslistRows = params?.adslist?.cartDetails?.map((slot) => ({
+      addType: slot.addType,
+      faceArea: slot.faceArea,
+      nightLight: slot.nightLight,
+      bookingDate: slot.bookingDate,
+    })) || [];
     const [agree, setAgree] = useState(false);
     const setdeclarationhandler = () => {
       setAgree(!agree);
@@ -216,12 +214,12 @@ import {
                   },
                 })}
                 isPaginationRequired={false}
-                totalRecords={ params?.adslist?.cartDetails.length}
+                totalRecords={params?.adslist?.cartDetails?.length || 0}
               />
           <CardSubHeader style={{ fontSize: "24px" }}>{t("ADS_DOCUMENTS_DETAILS")}</CardSubHeader>
           <StatusTable>
           <Card>
-            {documents && documents?.documents.map((doc, index) => (
+            {documents?.documents?.map((doc, index) => (
                   <ADSDocument value={value} Code={doc?.documentType} index={index} />
             ))}
           </Card>

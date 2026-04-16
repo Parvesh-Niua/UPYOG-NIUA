@@ -77,7 +77,7 @@ const ADSAddress = ({ t, config, onSelect, userType, formData, value=formData.ad
   }
   
   const goNext = () => {
-    let cartDetails = value?.cartDetails.map((slot) => {
+    let cartDetails = value?.cartDetails?.map((slot) => {
       return { 
         addType:slot.addTypeCode,
         faceArea:slot.faceAreaCode,

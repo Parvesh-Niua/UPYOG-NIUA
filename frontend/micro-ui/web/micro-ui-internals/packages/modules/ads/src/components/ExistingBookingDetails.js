@@ -22,7 +22,7 @@ export const ExistingBookingDetails = ({ onSubmit,setExistingDataSet,Searchdata 
   
   // Prepare form data for Advertisement Service
   const formdata = {
-    advertisementSlotSearchCriteria: Searchdata.map((item) => ({
+    advertisementSlotSearchCriteria: Searchdata?.map((item) => ({
       bookingId: "",
       addType: item?.addTypeCode,
       bookingStartDate: item?.bookingDate,

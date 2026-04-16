@@ -53,7 +53,7 @@ const ADSCitizenDetails = ({ t, config, onSelect, userType, formData,value=formD
   const goNext = () => {
     let applicantData = formData.applicant && formData.applicant[index];
     // Create the formdata object
-    let cartDetails = value?.cartDetails.map((slot) => {
+    let cartDetails = value?.cartDetails?.map((slot) => {
       return { 
         addType:slot.addTypeCode,
         faceArea:slot.faceAreaCode,
