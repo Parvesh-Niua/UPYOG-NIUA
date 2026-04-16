@@ -1,5 +1,5 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { queryTemplate } from "../../common/queryTemplate";
+import { useQueryClient } from "../common/queryClientTemplate";
+import { queryTemplate } from "../common/queryTemplate";
 import { PaymentService } from "../services/elements/Payment";
 
 export const useFetchCitizenBillsForBuissnessService = ({ businessService, ...filters }, config = {}) => {
