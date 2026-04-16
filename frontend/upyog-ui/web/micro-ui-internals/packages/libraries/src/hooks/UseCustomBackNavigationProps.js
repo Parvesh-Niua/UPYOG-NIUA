@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 /**
  * Custom hook to handle back button navigation
@@ -16,7 +16,7 @@ export const useCustomBackNavigation = ({
   enableConfirmation = false,
   confirmationMessage = "Are you sure you want to leave this page?",
 }) => {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   useEffect(() => {
     // Push dummy state to block browser back
@@ -29,12 +29,12 @@ export const useCustomBackNavigation = ({
         const shouldRedirect = window.confirm(confirmationMessage);
 
         if (shouldRedirect) {
-          navigate(redirectPath);
+          history.push(redirectPath);
         } else {
           window.history.pushState(null, "", window.location.pathname);
         }
       } else {
-        navigate(redirectPath);
+        history.push(redirectPath);
       }
     };
 
@@ -43,5 +43,5 @@ export const useCustomBackNavigation = ({
     return () => {
       window.removeEventListener("popstate", handleBackButton);
     };
-  }, [navigate, redirectPath, enableConfirmation, confirmationMessage]);
+  }, [history, redirectPath, enableConfirmation, confirmationMessage]);
 };
