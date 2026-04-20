@@ -11,7 +11,7 @@ import {
   CardHeader,
   SubmitBar
 } from "@upyog/digit-ui-react-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 
 function WSDisconnectionDocumentsForm({ t, config, onSelect, userType, formData  }) { 
   const tenantId = Digit.ULBService.getStateId();
@@ -20,7 +20,7 @@ function WSDisconnectionDocumentsForm({ t, config, onSelect, userType, formData 
   const [documents, setDocuments] = useState(storedData.WSDisconnectionForm.documents ?  storedData.WSDisconnectionForm.documents : []);
   const [error, setError] = useState(null);
   const [checkRequiredFields, setCheckRequiredFields] = useState(false);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { pathname } = useLocation();
 
   const handleSubmit = () => {

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useEffect, useState, useRef } from "react"
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, SubmitBar, ActionBar, DatePicker, SearchForm, Dropdown, SearchField, Table, Card, Loader, Header,Toast } from "@upyog/digit-ui-react-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import jsPDF from 'jspdf';
 import QRCode from 'qrcode';
 import * as XLSX from 'xlsx';
@@ -11,7 +11,7 @@ const ASSETSearchApplication = ({ isLoading, t, onSubmit, data, count, setShowTo
   const isMobile = window.Digit.Utils.browser.isMobile();
   const todaydate = new Date();
   const today = todaydate.toISOString().split("T")[0];
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   // Calculate the date 7 days ago
   const fromDate = new Date(todaydate);
   fromDate.setDate(todaydate.getDate() - 7);  // Subtract 7 days from today

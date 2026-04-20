@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Banner, CardText, SubmitBar, Loader, LinkButton, Toast, ActionBar, Menu } from "@upyog/digit-ui-react-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 import getPDFData from "../getPDFData";
@@ -46,7 +46,7 @@ const BannerPicker = (props) => {
 };
 
 const Response = (props) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [showToast, setShowToast] = useState(null);
   const { t } = useTranslation();
   const queryClient = useQueryClient();

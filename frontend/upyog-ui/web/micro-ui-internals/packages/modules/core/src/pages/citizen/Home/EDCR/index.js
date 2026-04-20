@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Route, Routes, useLocation, useNavigate, Navigate } from "react-router-dom";
+import { Route, Routes, useLocation,  Navigate } from "react-router-dom";
 import { newConfig as newConfigEDCR} from "../../../../config/edcrConfig";
 // import { uuidv4 } from "../../../utils";
 import EDCRAcknowledgement from "./EDCRAcknowledgement";
@@ -16,7 +16,7 @@ const CreateAnonymousEDCR = ({ parentRoute }) => {
   const match = Digit.Hooks.useModuleBasePath();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let config = [];
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("EDCR_CREATE", {});
   const [isShowToast, setIsShowToast] = useState(null);

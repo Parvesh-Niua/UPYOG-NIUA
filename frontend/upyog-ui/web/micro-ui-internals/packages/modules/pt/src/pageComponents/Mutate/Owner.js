@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Route, useLocation, useNavigate, Routes, Navigate } from "react-router-dom";
+import { Route, useLocation,  Routes, Navigate } from "react-router-dom";
 
 const createOwnerDetails = () => ({
   name: "",
@@ -132,7 +132,7 @@ const OwnerCitizen = (props) => {
   const { path, url } = Digit.Hooks.useModuleBasePath();
 
   const allowMultipleOwners = formData?.ownershipCategory?.code === "INDIVIDUAL.MULTIPLEOWNERS";
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   useEffect(() => {
     if (!owners.length) setOwners([createOwnerDetails()]);
@@ -209,7 +209,7 @@ const OwnerSteps = ({ owner, addNewOwner, removeOwner, setOwners, owners, ownerI
 
   const { path } = Digit.Hooks.useModuleBasePath();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const addOwner = (data) => {
     // handle submission of prev on click of add Owner

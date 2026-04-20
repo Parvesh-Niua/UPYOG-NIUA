@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, useLocation, useNavigate, Routes, Navigate } from "react-router-dom";
+import { Route, useLocation,  Routes, Navigate } from "react-router-dom";
 import { newConfigMutate } from "../../../config/Mutate/config";
 
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ const MutationCitizen = (props) => {
   const match = Digit.Hooks.useModuleBasePath();
   const { pathname } = useLocation();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("PT_MUTATE_PROPERTY", {});
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [submit, setSubmit] = useState(false);
   const [formData, setFormData] = useState(null);
 

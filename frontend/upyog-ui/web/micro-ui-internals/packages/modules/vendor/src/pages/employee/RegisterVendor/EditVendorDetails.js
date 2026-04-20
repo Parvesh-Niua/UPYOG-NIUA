@@ -21,7 +21,7 @@ import {
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import ConfirmationBox from "../../../components/Confirmation";
 
 const Heading = (props) => {
@@ -46,7 +46,7 @@ const EditVendorDetails = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const state = Digit.ULBService.getStateId();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const queryClient = useQueryClient();
   let { id: dsoId } = useParams();
   const [displayMenu, setDisplayMenu] = useState(false);

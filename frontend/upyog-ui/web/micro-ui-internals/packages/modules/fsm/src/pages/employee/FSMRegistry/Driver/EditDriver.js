@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Loader, Toast, Header } from "@upyog/digit-ui-react-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import DriverConfig from "../../configs/DriverConfig";
 
@@ -53,7 +53,7 @@ const EditDriver = ({ parentUrl, heading }) => {
   }, [driverData]);
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const Config = DriverConfig(t, true);
 

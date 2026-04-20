@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CardLabelError, Loader, RatingCard } from "@upyog/digit-ui-react-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const SelectRating = ({ parentRoute }) => {
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let { id: applicationNos } = useParams();
   const { isError, error, data: application } = Digit.Hooks.fsm.useSearch(tenantId, { applicationNos });
   const { isLoading, data: checklistData } = Digit.Hooks.fsm.useMDMS(tenantId, "FSM", "Checklist");

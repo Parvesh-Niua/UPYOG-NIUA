@@ -1,6 +1,6 @@
 import { CardLabel, Dropdown, FormStep, Loader, TextInput, Toast, UploadFile } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState, useTransition } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import { stringReplaceAll, sortDropdownNames } from "../../../../../obps/src/utils";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ const EDCRScrutiny = ({ config, onSelect, userType, formData, ownerIndex = 0, ad
         const [error, setError] = useState(null);
         const [uploadMessage, setUploadMessage] = useState("");
         const [showToast, setShowToast] = useState(null);
-        const navigate = useNavigate();
+        const navigate = Digit.Hooks.useCustomNavigate();
         const { t } = useTranslation();
 
         let validation = {};

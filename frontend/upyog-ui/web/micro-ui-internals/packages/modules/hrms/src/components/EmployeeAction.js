@@ -1,12 +1,12 @@
 import { FormComposer, Loader, Modal } from "@upyog/digit-ui-react-components";
 import set from "lodash/set";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { configEmployeeActiveApplication } from "./Modal/EmployeeActivation";
 import { configEmployeeApplication } from "./Modal/EmployeeAppliaction";
 
 const EmployeeAction = ({ t, action, tenantId, closeModal, submitAction, applicationData, billData }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [config, setConfig] = useState({});
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);

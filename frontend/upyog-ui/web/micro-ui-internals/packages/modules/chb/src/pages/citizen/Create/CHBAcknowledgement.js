@@ -1,7 +1,7 @@
 import { Banner, Card, CardText, LinkButton, LinkLabel, Loader, Row, StatusTable, SubmitBar,Toast } from "@upyog/digit-ui-react-components";
 import React, {useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { CHBDataConvert } from "../../../utils";
 
 
@@ -69,7 +69,7 @@ const BannerPicker = (props) => {
 
 const CHBAcknowledgement = ({ data, onSuccess }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.ULBService.getCitizenCurrentTenant(true) || Digit.ULBService.getCurrentTenantId();
   const mutation = Digit.Hooks.chb.useChbCreateAPI(tenantId);
   const { data: storeData } = Digit.Hooks.useStore.getInitData();

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { useParams, useLocation, Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { useParams, useLocation, Route, Routes, Navigate,  } from "react-router-dom";
 import { newConfig as newConfigBPA } from "../../../config/buildingPermitConfig";
 import {newConfig1} from "./NewConfig"
 // import CheckPage from "./CheckPage";
@@ -20,7 +20,7 @@ const NewBuildingPermit = () => {
   const { t } = useTranslation();
   const routeParams = useParams();
   const { pathname, state } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { path: modulePath } = Digit.Hooks.useModuleBasePath();
   const basePath = useMemo(
     () => getPath(`${modulePath}/bpa/:applicationType/:serviceType`, routeParams),

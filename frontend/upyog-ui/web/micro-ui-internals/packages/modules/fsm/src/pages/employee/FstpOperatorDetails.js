@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation,  } from "react-router-dom";
 import TimePicker from "react-time-picker";
 import { Dropdown, Header, MultiUploadWrapper, RadioButtons, TextArea } from "@upyog/digit-ui-react-components";
 import {
@@ -38,7 +38,7 @@ const FstpOperatorDetails = () => {
   const stateId = Digit.ULBService.getStateId();
   let isMobile = window.Digit.Utils.browser.isMobile();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const location = useLocation();
   const queryClient = useQueryClient();
   const tenantId = Digit.ULBService.getCurrentTenantId();

@@ -1,7 +1,7 @@
 import { FormComposer, Loader } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { useParams } from "react-router-dom";
 
 import { editConfig } from "../../../config/Create/editConfig";
@@ -12,7 +12,7 @@ const EditAsset = () => {
   const [canSubmit, setSubmitValve] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { id: applicationNo } = useParams();
   const { data: applicationDetails } = Digit.Hooks.asset.useAssetApplicationDetail(t, tenantId, applicationNo);
    const [_formData, setFormData,_clear] = Digit.Hooks.useSessionStorage("store-data",null);

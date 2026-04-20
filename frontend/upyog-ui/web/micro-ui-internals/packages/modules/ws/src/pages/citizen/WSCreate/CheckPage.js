@@ -4,13 +4,13 @@ import {
   } from "@upyog/digit-ui-react-components";
   import React from "react";
   import { useTranslation } from "react-i18next";
-  import { Link, useNavigate } from "react-router-dom";
+  import { Link,  } from "react-router-dom";
   import Timeline from "../../../components/Timeline";
   import WSDocument from "../../../pageComponents/WSDocument";
   
   const CheckPage = ({ onSubmit, value }) => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
     const match = Digit.Hooks.useModuleBasePath();
     let isMobile = window.Digit.Utils.browser.isMobile();
     const { ConnectionHolderDetails, plumberPreference, serviceName, waterConectionDetails, sewerageConnectionDetails, documents, cpt } = value;

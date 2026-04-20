@@ -25,7 +25,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import {
   checkForNA 
 } from "../../../utils";
@@ -33,7 +33,7 @@ import Timeline from "../../../components/PTRTimeline";
 
 const ActionButton = ({ jumpTo }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   function routeTo() {
     navigate(jumpTo);
   }

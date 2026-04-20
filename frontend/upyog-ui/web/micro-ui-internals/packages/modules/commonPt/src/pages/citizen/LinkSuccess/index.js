@@ -7,12 +7,12 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 
 const PropertyLinkSuccess = ({ onSelect }) => {
   const { t } = useTranslation();
   const { propertyIds } = useParams();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const onSubmit = () => {
     if(onSelect) {

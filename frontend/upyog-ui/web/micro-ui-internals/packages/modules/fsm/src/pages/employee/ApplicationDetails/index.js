@@ -28,7 +28,7 @@ import TLCaption from "../../../components/TLCaption";
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams,  } from "react-router-dom";
 import { ViewImages } from "../../../components/ViewImages";
 import getPDFData from "../../../getPDFData";
 
@@ -36,7 +36,7 @@ const ApplicationDetails = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const state = Digit.ULBService.getStateId();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const queryClient = useQueryClient();
   let { id: applicationNumber } = useParams();
   const [displayMenu, setDisplayMenu] = useState(false);

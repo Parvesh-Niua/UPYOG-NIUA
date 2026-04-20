@@ -3,7 +3,7 @@ import { FormComposer, CardLabelDesc, Loader, Menu } from "@upyog/digit-ui-react
 import { FormStep, CardLabel, RadioButtons, RadioOrSelect } from "@upyog/digit-ui-react-components";
 import { TextInput, LabelFieldPair, Dropdown } from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+
 import { useTranslation } from "react-i18next";
 import useMCollectMDMS from "../../../../../../libraries/src/hooks/mcollect/useMCollectMDMS";
 import ServiceCategory from "../../../components/inbox/ServiceCategory";
@@ -11,7 +11,7 @@ import ServiceCategory from "../../../components/inbox/ServiceCategory";
 const SearchChallan = ({ config: propsConfig, formData }) => {
   const { t } = useTranslation();
   let validation = {};
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.ULBService.getCurrentTenantId();
 
   const [mobileNumber, setMobileNumber] = useState(formData?.mobileNumber || "");

@@ -1,14 +1,14 @@
 import { ActionBar, Card, CardHeader, CardLabel, CardLabelDesc, CardText, DownloadIcon, Header, Loader, MultiLink, ShareIcon, SubmitBar } from "@upyog/digit-ui-react-components"
 import React, {Fragment, useRef} from "react"
 import { useTranslation } from "react-i18next"
-import { useLocation, useParams, useNavigate } from "react-router-dom"
+import { useLocation, useParams,  } from "react-router-dom"
 
 const RequiredDocuments = ({path}) => {
 	//connectionNumber=WS/107/2021-22/227166&tenantId=pb.amritsar&service=WATER&connectionType=Metered
 	const {search} = useLocation()
 	let { state } = useLocation();
   	state = state  ? (typeof(state) === "string" ? JSON.parse(state) : state) : {};
-	const navigate = useNavigate()
+	const navigate = Digit.Hooks.useCustomNavigate();
 	const { t } = useTranslation()
 	const stateId = Digit.ULBService.getStateId();
 	const fullPageRef = useRef()

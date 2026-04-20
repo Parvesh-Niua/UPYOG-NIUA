@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Header, ResponseComposer, Loader } from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
 import Axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const MyChallanResult = ({ template, header, actionButtonLabel }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const filters = {};
   const userInfo = Digit.UserService.getUser();
   const tenantId = userInfo?.info?.tenantId;

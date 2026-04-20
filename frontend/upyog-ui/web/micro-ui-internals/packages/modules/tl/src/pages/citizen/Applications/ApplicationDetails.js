@@ -14,7 +14,7 @@ import {
 } from  "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams,  } from "react-router-dom";
 import getPDFData from "../../../utils/getTLAcknowledgementData";
 import TLWFApplicationTimeline from "../../../pageComponents/TLWFApplicationTimeline";
 import TLDocument from "../../../pageComponents/TLDocumets";
@@ -29,7 +29,7 @@ const TLApplicationDetails = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const { tenantId } = useParams();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [bill, setBill] = useState(null);
   const { data: storeData } = Digit.Hooks.useStore.getInitData();
   const [mutationHappened, setMutationHappened, clear] = Digit.Hooks.useSessionStorage("CITIZEN_TL_MUTATION_HAPPENED", false);

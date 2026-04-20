@@ -1,6 +1,6 @@
 import { CardLabel, Dropdown, FormStep, Loader, TextInput, Toast, UploadFile } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import { getPattern, stringReplaceAll, sortDropdownNames  } from "../utils";
 
 const EDCRForm = ({ t, config, onSelect, userType, formData, ownerIndex = 0, addNewOwner, isShowToast, isSubmitBtnDisable, setIsShowToast }) => {
@@ -15,7 +15,7 @@ const EDCRForm = ({ t, config, onSelect, userType, formData, ownerIndex = 0, add
     const [error, setError] = useState(null);
     const [uploadMessage, setUploadMessage] = useState("");
     const [showToast, setShowToast] = useState(null);
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
 
 
     let validation = { };

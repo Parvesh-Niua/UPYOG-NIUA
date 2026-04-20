@@ -1,6 +1,6 @@
 import { Header, ActionBar, SubmitBar, ExternalLinkIcon, Menu, GenericFileIcon, LinkButton } from "@upyog/digit-ui-react-components";
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+
 import { useTranslation } from 'react-i18next';
 import { openDocumentLink, openUploadedDocument } from '../../utils';
 import Confirmation from '../Modal/Confirmation';
@@ -13,7 +13,7 @@ const getUlbName = (tenantId) => {
     return ulbName;
 }
 const DocumentDetails = ({ location, match, history, }) => {
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
     let isMobile = window.Digit.Utils.browser.isMobile();
     const { t } = useTranslation();
     const { details } = location?.state;

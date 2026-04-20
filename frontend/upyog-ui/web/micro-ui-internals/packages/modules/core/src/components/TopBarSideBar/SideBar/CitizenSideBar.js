@@ -3,7 +3,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import SideBarMenu from "../../../config/sidebar-menu";
 import ChangeCity from "../../ChangeCity";
 import StaticCitizenSideBar from "./StaticCitizenSideBar";
@@ -90,7 +90,7 @@ export const CitizenSideBar = ({ isOpen, isMobile = false, toggleSidebar, onLogo
   const [search, setSearch] = useState("");
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const closeSidebar = () => {
     Digit.clikOusideFired = true;
     toggleSidebar(false);

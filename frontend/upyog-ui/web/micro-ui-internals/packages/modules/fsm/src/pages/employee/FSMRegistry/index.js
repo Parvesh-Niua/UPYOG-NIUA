@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Header, InfoIcon } from "@upyog/digit-ui-react-components";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation,  } from "react-router-dom";
 
 import RegisryInbox from "../../../components/RegistryInbox";
 
@@ -32,7 +32,7 @@ const FSMRegistry = () => {
   const [vehicleIds, setVehicleIds] = useState("");
   const [driverIds, setDriverIds] = useState("");
   const [tableData, setTableData] = useState([]);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const selectedTabs = queryParams.get("selectedTabs");

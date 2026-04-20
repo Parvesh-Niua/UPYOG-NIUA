@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Toast, Header, Loader } from "@upyog/digit-ui-react-components";
 import { newConfig as newConfigMcollect } from "../../../config/config";
-import { useNavigate } from "react-router-dom";
+
 import { stringReplaceAll } from "../../../utils";
 //import { convertDateToEpoch } from "../../../utils";
 
@@ -55,7 +55,7 @@ const NewChallan = ({ChallanData}) => {
   }
   const [canSubmit, setSubmitValve] = useState(false);
   const defaultValues = {};
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   // delete
   const [_formData, setFormData, _clear] = Digit.Hooks.useSessionStorage("store-data", null);
   const [mutationHappened, setMutationHappened, clear] = Digit.Hooks.useSessionStorage("EMPLOYEE_MUTATION_HAPPENED", false);

@@ -2,7 +2,7 @@
 import React ,{Children, Fragment}from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Route, useLocation, useNavigate, Routes, Navigate } from "react-router-dom";
+import { Route, useLocation,  Routes, Navigate } from "react-router-dom";
 import { Config } from "../../../config/config";
 
 const SVCreate = ({ parentRoute }) => {
@@ -11,7 +11,7 @@ const SVCreate = ({ parentRoute }) => {
   const match = Digit.Hooks.useModuleBasePath();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const stateId = Digit.ULBService.getStateId();
   let config = [];
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("SV_CREATES", {});

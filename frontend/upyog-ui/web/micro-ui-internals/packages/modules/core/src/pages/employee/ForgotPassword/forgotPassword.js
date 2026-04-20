@@ -1,14 +1,14 @@
 import { BackButton, Dropdown, FormComposer, Loader, Toast } from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Background from "../../../components/Background";
 import Header from "../../../components/Header";
 
 const ForgotPassword = ({ config: propsConfig, t }) => {
   const { data: cities, isLoading } = Digit.Hooks.useTenants();
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [showToast, setShowToast] = useState(null);
   const getUserType = () => Digit.UserService.getType();
   let sourceUrl = "https://s3.ap-south-1.amazonaws.com/egov-qa-assets";

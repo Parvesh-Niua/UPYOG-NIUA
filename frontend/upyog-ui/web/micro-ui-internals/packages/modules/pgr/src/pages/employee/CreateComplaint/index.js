@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Dropdown, Loader } from "@upyog/digit-ui-react-components";
-import { useNavigate } from "react-router-dom";
+
 import { useQueryClient } from "@tanstack/react-query";
 
 import { FormComposer } from "../../../components/FormComposer";
@@ -64,7 +64,7 @@ const [description, setDescription] = useState("")
   ]
   const dispatch = useDispatch();
   const match = Digit.Hooks.useModuleBasePath();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const serviceDefinitions = Digit.GetServiceDefinitions;
   const client = useQueryClient();
   useEffect(() => {

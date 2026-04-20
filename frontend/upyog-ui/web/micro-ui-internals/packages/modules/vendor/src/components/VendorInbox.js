@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { Card, Dropdown, Loader, Menu, SubmitBar, Toast } from "@upyog/digit-ui-react-components";
 //import FSMLink from "./inbox/FSMLink";
 import VENDORLink from "./inbox/VENDORLink";
@@ -15,7 +15,7 @@ import { add } from "lodash";
 const VendorInbox = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const DSO = Digit.UserService.hasAccess(["FSM_DSO"]) || false;
   const GetCell = (value) => <span className="cell-text">{value}</span>;
   const FSTP = Digit.UserService.hasAccess("FSM_EMP_FSTPO") || false;

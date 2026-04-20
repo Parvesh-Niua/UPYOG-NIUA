@@ -2,14 +2,14 @@ import React from "react";
 import { Header, ResponseComposer, Loader } from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
 import Axios from "axios";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation,  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {stringReplaceAll} from "../../../utils/index";
 import WSInfoLabel from "../../../pageComponents/WSInfoLabel";
 
 const WNSMyBills = ({ template, header, actionButtonLabel }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const location = useLocation();
   const { tenantId: _tenantId } = Digit.Hooks.useQueryParams();
   let { tenantId } = Digit.UserService.getUser()?.info || location?.state || { tenantId: _tenantId } || {};

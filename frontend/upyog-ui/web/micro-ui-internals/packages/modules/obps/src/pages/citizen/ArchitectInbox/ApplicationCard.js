@@ -1,6 +1,6 @@
 import { Card, DetailsCard, FilterAction, Loader, PopUp, SearchAction } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Filter from "./Filter";
 import Search from "./Search";
 import SortBy from "./SortBy";
@@ -19,7 +19,7 @@ const ApplicationCard = ({
   isLoading
 }) => {
   const [type, setType] = useState("");
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [popup, setPopup] = useState(false);
   const [params, setParams] = useState(searchParams);
   const tenantId = Digit.ULBService.getCurrentTenantId();

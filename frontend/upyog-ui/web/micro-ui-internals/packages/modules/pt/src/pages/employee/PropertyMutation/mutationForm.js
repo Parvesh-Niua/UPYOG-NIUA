@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Toast } from "@upyog/digit-ui-react-components";
 import { newConfigMutate } from "../../../config/Mutate/config";
-import { useNavigate } from "react-router-dom";
+
 
 const MutationForm = ({ applicationData, tenantId }) => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const MutationForm = ({ applicationData, tenantId }) => {
     clearSuccessData();
   }, []);
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const onFormValueChange = (setValue, formData, formState) => {
     setSubmitValve(!Object.keys(formState.errors).length);

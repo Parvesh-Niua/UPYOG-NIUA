@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Loader, Toast, Header, InfoIcon } from "@upyog/digit-ui-react-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import VehicleConfig from "../../configs/VehicleConfig";
 
@@ -70,7 +70,7 @@ const EditVehicle = ({ parentUrl, heading }) => {
   }, [vehicleData]);
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const Config = VehicleConfig(t, true);
 

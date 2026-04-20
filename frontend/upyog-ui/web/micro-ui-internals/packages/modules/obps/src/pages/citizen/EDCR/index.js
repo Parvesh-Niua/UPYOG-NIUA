@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes,  } from "react-router-dom";
 import { newConfig as newConfigEDCR } from "../../../config/edcrConfig";
 import { uuidv4 } from "../../../utils";
 // import EDCRAcknowledgement from "./EDCRAcknowledgement";
@@ -9,7 +9,7 @@ import { uuidv4 } from "../../../utils";
 const CreateEDCR = ({ parentRoute }) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("EDCR_CREATE", {});
   const [isShowToast, setIsShowToast] = useState(null);
   const [isSubmitBtnDisable, setIsSubmitBtnDisable] = useState(false);

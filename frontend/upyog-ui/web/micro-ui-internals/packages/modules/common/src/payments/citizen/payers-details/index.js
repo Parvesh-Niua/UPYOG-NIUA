@@ -13,7 +13,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation,  } from "react-router-dom";
 import { stringReplaceAll } from "../bills/routes/bill-details/utils";
 
 const SelectPaymentType = (props) => {
@@ -34,7 +34,7 @@ const SelectPaymentType = (props) => {
   const payersActiveMobileNumber = userInfo?.mobileNumber;
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { state, ...location } = useLocation();
   const { consumerCode, businessService, paymentAmt } = useParams();
   const { workflow: wrkflow, tenantId: _tenantId, ConsumerName } = Digit.Hooks.useQueryParams();

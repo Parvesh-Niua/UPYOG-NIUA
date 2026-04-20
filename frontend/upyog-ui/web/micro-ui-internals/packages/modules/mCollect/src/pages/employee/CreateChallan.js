@@ -5,12 +5,12 @@ import * as func from "./Utils/Category";
 import { FormComposer } from "../../components/FormComposer";
 import { sortDropdownNames } from "./Utils/Sortbyname";
 import { stringReplaceAll } from "../../utils/index";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 const CreateChallen = ({ ChallanData }) => {
   const childRef = useRef();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { url } = Digit.Hooks.useModuleBasePath();
   let defaultval;
   let isEdit = false;

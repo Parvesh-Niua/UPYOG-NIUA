@@ -1,6 +1,6 @@
 import { CardHeader, Header, Toast, Card, StatusTable, Row, Loader, Menu, PDFSvg, SubmitBar, LinkButton, ActionBar, CheckBox, MultiLink, CardText, CardSubHeader } from "@upyog/digit-ui-react-components";
 import React, { Fragment, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import BPAApplicationTimeline from "./BPAApplicationTimeline";
@@ -36,7 +36,7 @@ const BpaApplicationDetail = () => {
   sessionStorage.setItem("isEDCRDisable", JSON.stringify(true));
   sessionStorage.setItem("BPA_IS_ALREADY_WENT_OFF_DETAILS", JSON.stringify(false));
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   sessionStorage.setItem("bpaApplicationDetails", false);
   let isFromSendBack = false;
   const { data: stakeHolderDetails, isLoading: stakeHolderDetailsLoading } = Digit.Hooks.obps.useMDMS(stateCode, "StakeholderRegistraition", "TradeTypetoRoleMapping");

@@ -2,11 +2,11 @@ import { FormComposer,Dropdown } from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
 import React, { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 
 const SearchTrade = ({ config: propsConfig, onSelect }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [canSubmit, setCanSubmit] = useState(false);
   const userInfo =  Digit.UserService.getUser(); 
   let user = userInfo?.info;

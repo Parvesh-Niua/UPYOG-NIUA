@@ -2,7 +2,7 @@ import React from "react";
 import { Loader } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Route, useLocation, useNavigate, Routes } from "react-router-dom";
+import { Route, useLocation,  Routes } from "react-router-dom";
 
 import CreatePropertyForm from '../../pageComponents/createForm';
 import PTAcknowledgement from '../../pageComponents/PTAcknowledgement';
@@ -14,7 +14,7 @@ const NewApplication = ({ path }) => {
   const queryClient = useQueryClient();
   const match = Digit.Hooks.useModuleBasePath();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const stateId = Digit.ULBService.getStateId();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("PT_CREATE_PROPERTY", {});

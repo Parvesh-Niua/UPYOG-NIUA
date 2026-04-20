@@ -1,12 +1,12 @@
 import { DetailsCard, Loader, Table } from "@upyog/digit-ui-react-components";
 import React, { memo, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 
 const GetCell = (value) => <span className="cell-text">{value}</span>;
 
 const SearchPTID = ({ tenantId, t, payload, showToast, setShowToast, ptSearchConfig, redirectToUrl }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { state } = useLocation();
   const search = useLocation().search;
   const urlPropertyId = new URLSearchParams(search).get("propertyId");

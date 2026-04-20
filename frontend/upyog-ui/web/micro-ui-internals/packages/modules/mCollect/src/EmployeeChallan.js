@@ -1,7 +1,7 @@
 import { Card, CardSubHeader, Header, Row, StatusTable, SubmitBar, ActionBar, Menu, Toast,MultiLink,DownloadBtnCommon} from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { stringReplaceAll, convertEpochToDate } from "./utils";
 import ActionModal from "./components/Modal";
 import { downloadAndPrintChallan, downloadAndPrintReciept } from "./utils";
@@ -16,7 +16,7 @@ const EmployeeChallan = (props) => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { url } = Digit.Hooks.useModuleBasePath();
   const [isDisplayDownloadMenu, setIsDisplayDownloadMenu] = useState(false);
   const [showToast, setShowToast] = useState(null);

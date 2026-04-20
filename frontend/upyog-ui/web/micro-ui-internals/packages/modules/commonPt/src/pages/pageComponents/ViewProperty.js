@@ -1,7 +1,7 @@
 import { Header, ActionBar, SubmitBar } from "@upyog/digit-ui-react-components";
 import React, {useEffect} from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { useLocation, Link } from "react-router-dom";
 import ApplicationDetails from "../../../../templates/ApplicationDetails";
 
@@ -25,7 +25,7 @@ const ViewProperty = () => {
   const { propertyId, tenantId, redirectToUrl } = Digit.Hooks.useQueryParams();
   const { isLoading, data: applicationDetails } = Digit.Hooks.pt.useGenericViewProperty(t, tenantId, propertyId, {});
   const { state } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let workflowDetails = {};
 
   const onSubmit = () => {

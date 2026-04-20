@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { Card, CardHeader, SubmitBar, CitizenInfoLabel, CardText, Loader, CardSubHeader, BackButton, BreadCrumb, Header, CardLabel, CardSectionHeader, CardCaption, ActionBar } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 
 const WSDisconnectionDocsRequired = ({ userType }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { pathname } = useLocation();
   const tenantId = Digit.ULBService.getStateId();
   const goNext = () => {

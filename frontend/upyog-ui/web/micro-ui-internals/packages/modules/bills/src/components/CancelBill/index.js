@@ -5,12 +5,12 @@ import SearchFields from "./SearchFields";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CancelBillModal from "./CancelBillModal";
-import { useNavigate } from "react-router-dom";
+
 import { join } from "lodash";
 import MobileCancelBill from "./MobileCancelBill";
 
 const CancelBills = ({ tenantId, onSubmit, data, count,isLoading,resultOk }) => {
-    const navigate = useNavigate()
+    const navigate = Digit.Hooks.useCustomNavigate();
     const convertEpochToDate = (dateEpoch) => {
         if (dateEpoch == null || dateEpoch == undefined || dateEpoch == "") {
             return "NA";

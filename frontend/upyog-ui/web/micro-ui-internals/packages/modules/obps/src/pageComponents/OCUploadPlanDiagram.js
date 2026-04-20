@@ -6,7 +6,7 @@ import {
     CardText
 } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 
 const OCUploadPlanDiagram = ({ t, config, onSelect, userType, formData, ownerIndex = 0, addNewOwner, isShowToast, isSubmitBtnDisable, setIsShowToast }) => {
     const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -14,7 +14,7 @@ const OCUploadPlanDiagram = ({ t, config, onSelect, userType, formData, ownerInd
     const [uploadedFile, setUploadedFile] = useState(() => formData?.uploadData?.file || null);
     const [file, setFile] = useState(formData?.uploadData?.file);
     const [uploadMessage, setUploadMessage] = useState("");
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
 
     function selectfile(e) {
         setUploadedFile(e.target.files[0]);

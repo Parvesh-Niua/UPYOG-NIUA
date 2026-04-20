@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Toast, Header } from "@upyog/digit-ui-react-components";
 //import { FormComposerV2 } from "../../../../../../../react-components/src";
-import { useNavigate } from "react-router-dom";
+
 import WorkerConfig from "../../configs/WorkerConfig";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -10,7 +10,7 @@ const AddWorker = ({ parentUrl, heading }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const stateId = Digit.ULBService.getStateId();
   const [showToast, setShowToast] = useState(null);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const [canSubmit, setSubmitValve] = useState(false);

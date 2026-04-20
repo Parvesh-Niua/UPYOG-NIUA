@@ -2,7 +2,7 @@
 import React ,{Fragment}from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Route, useLocation, useNavigate, Routes, Navigate } from "react-router-dom";
+import { Route, useLocation,  Routes, Navigate } from "react-router-dom";
 import { Config } from "../../../config/config";
 
 // parent component index page for employee which will set ui forms through config
@@ -12,7 +12,7 @@ const SVEmpCreate = ({ parentRoute }) => {
   const match = Digit.Hooks.useModuleBasePath();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const stateId = Digit.ULBService.getStateId();
   let config = [];
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("SV_EMP_CREATES", {});

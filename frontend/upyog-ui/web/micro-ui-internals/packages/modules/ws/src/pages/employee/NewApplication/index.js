@@ -2,7 +2,7 @@ import { FormComposer, Header, Loader, Toast } from "@upyog/digit-ui-react-compo
 import cloneDeep from "lodash/cloneDeep";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import * as func from "../../../utils";
 import _ from "lodash";
 import { newConfig as newConfigLocal } from "../../../config/wsCreateConfig";
@@ -14,7 +14,7 @@ import {
 const NewApplication = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let filters = func.getQueryStringParams(location.search);
   const [canSubmit, setSubmitValve] = useState(false);
   const [isEnableLoader, setIsEnableLoader] = useState(false);

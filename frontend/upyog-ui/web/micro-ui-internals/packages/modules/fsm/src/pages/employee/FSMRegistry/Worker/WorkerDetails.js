@@ -23,7 +23,7 @@ import {
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import ConfirmationBox from "../../../../components/Confirmation";
 import { ViewImages } from "../../../../components/ViewImages";
 
@@ -49,7 +49,7 @@ const WorkerDetails = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const state = Digit.ULBService.getStateId();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const queryClient = useQueryClient();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");

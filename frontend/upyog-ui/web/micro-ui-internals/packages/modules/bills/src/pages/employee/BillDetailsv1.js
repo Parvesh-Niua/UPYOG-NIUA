@@ -4,10 +4,10 @@ import { Link, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next";
 import { BillDetailsConfig } from './BillDetailsConfig';
 import CancelBillModal from '../../components/CancelBill/CancelBillModal';
-import { useNavigate } from "react-router-dom";
+
 
 const BillDetailsv1 = (props) => {
-    const navigate = useNavigate()
+    const navigate = Digit.Hooks.useCustomNavigate();
     //serviceTYpe -> WS,SW
     const { connectionNumber,service:serviceType,tenantId} = Digit.Hooks.useQueryParams();
     

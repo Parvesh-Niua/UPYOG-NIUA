@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { FormComposer, Header, Loader } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 
@@ -8,7 +8,7 @@ const isConventionalSpecticTank = (tankDimension) => tankDimension === "lbd";
 const EditForm = ({ tenantId, applicationData, channelMenu, vehicleMenu, sanitationMenu }) => {
   console.log("applndata",applicationData)
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [canSubmit, setSubmitValve] = useState(false);
   const stateId = Digit.ULBService.getStateId();
   const { data: commonFields, isLoading } = Digit.Hooks.fsm.useMDMS(stateId, "FSM", "CommonFieldsConfig");

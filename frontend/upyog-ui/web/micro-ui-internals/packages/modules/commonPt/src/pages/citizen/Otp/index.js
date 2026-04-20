@@ -1,6 +1,6 @@
 import React, { useMemo,useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Route, useLocation, useNavigate, Routes } from "react-router-dom";
+import { Route, useLocation,  Routes } from "react-router-dom";
 import SelectOtp from "./SelectOtp";
 import { loginSteps } from "./config";
 
@@ -8,7 +8,7 @@ const CitizenOtp = (props) => {
   const { t } = useTranslation();
   const { path } = Digit.Hooks.useModuleBasePath();
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const [params1, setParmas1] = useState({mobileNumber: location.state.mobileNumber, otp: ''});
   const [isOtpValid, setIsOtpValid] = useState(true);

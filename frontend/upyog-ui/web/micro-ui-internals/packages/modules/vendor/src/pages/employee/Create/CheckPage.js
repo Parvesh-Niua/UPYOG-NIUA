@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardSubHeader, CardText, CheckBox, LinkButton, Row, StatusTable, SubmitBar } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 //import { VendorData } from "../../../utils"
 
 import { checkForNA } from "../../../utils";
@@ -9,7 +9,7 @@ import Timeline from "../../../components/VENDORTimeline";
 
 const ActionButton = ({ jumpTo }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   function routeTo() {
     navigate(jumpTo);
   }
@@ -19,7 +19,7 @@ const ActionButton = ({ jumpTo }) => {
 
 const CheckPage = ({ onSubmit, value = {} }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [categoriesWiseData, setCategoriesWiseData] = useState();
 
   //  * get @param city & state id

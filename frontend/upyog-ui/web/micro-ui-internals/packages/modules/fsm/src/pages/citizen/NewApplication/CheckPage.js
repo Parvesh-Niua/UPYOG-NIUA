@@ -13,13 +13,13 @@ import {
   CardText,
   CitizenInfoLabel,
 } from "@upyog/digit-ui-react-components";
-import { useNavigate } from "react-router-dom";
+
 import { useTranslation } from "react-i18next";
 import Timeline from "../../../components/TLTimelineInFSM";
 
 const ActionButton = ({ jumpTo }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   function routeTo() {
     navigate(jumpTo);
@@ -30,7 +30,7 @@ const ActionButton = ({ jumpTo }) => {
 
 const CheckPage = ({ onSubmit, value }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const { address, propertyID,  propertyType, subtype, pitType, pitDetail, selectGender, selectPaymentPreference, selectTripNo, roadWidth, distancefromroad } = value;
 

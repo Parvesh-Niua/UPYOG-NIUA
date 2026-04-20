@@ -22,7 +22,7 @@ import {
   InfoIcon
 } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 import DisconnectTimeline from "../components/DisconnectTimeline";
 import { stringReplaceAll, createPayloadOfWSDisconnection, updatePayloadOfWSDisconnection, convertDateToEpoch } from "../utils";
 import { addDays, format } from "date-fns";
@@ -34,7 +34,7 @@ const WSDisconnectionForm = ({ t, config, onSelect, userType }) => {
 
   const isMobile = window.Digit.Utils.browser.isMobile();
   const applicationData = Digit.SessionStorage.get("WS_DISCONNECTION");
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { pathname } = useLocation();
   
   const [disconnectionData, setDisconnectionData] = useState({

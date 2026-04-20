@@ -1,7 +1,7 @@
 import { Card, CardSubHeader, Header, LinkButton, Loader, Row, StatusTable, MultiLink } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import getPTAcknowledgementData from "../../getPTAcknowledgementData";
 import PropertyDocument from "../../pageComponents/PropertyDocument";
 import PTWFApplicationTimeline from "../../pageComponents/PTWFApplicationTimeline";
@@ -24,7 +24,7 @@ const MutationApplicationDetails = ({ propertyId, acknowledgementIds, workflowDe
   const { data: storeData } = Digit.Hooks.useStore.getInitData();
   const { tenants } = storeData || {};
   const [businessService, setBusinessService] = useState("PT.MUTATION");
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [isEnableLoader, setIsEnableLoader] = useState(false);
   const { isLoading, isError, error, data } = Digit.Hooks.pt.usePropertySearch(
     { filters: { acknowledgementIds },tenantId },

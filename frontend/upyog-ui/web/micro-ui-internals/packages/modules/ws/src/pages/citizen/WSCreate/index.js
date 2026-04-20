@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation,  } from "react-router-dom";
 import { newConfig as newConfigWS } from "../../../config/wsCreateConfig";
 
 const getPath = (path, params) => {
@@ -18,7 +18,7 @@ const WSCreate = () => {
   const { path: modulePath } = Digit.Hooks.useModuleBasePath();
   const basePath = useMemo(() => `${modulePath}/create-application`, [modulePath]);
   const { pathname, state } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage(

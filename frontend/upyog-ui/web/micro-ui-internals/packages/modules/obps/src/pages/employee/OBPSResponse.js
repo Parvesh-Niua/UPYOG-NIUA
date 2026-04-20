@@ -2,7 +2,7 @@ import { Banner, Card, CardText, ActionBar, SubmitBar, Loader, LinkButton } from
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { stringReplaceAll, getBusinessServices } from "../../utils";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 
 
 const OBPSResponse = (props) => {
@@ -19,7 +19,7 @@ const OBPSResponse = (props) => {
   }
   const [applicationData, setApplicationData] = useState({});
   const [isLoader, setIsLoader] = useState(true);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [isSanctionFee, setSanctionFee] = useState("");
   const [billData, setBillData] = useState(null);
 

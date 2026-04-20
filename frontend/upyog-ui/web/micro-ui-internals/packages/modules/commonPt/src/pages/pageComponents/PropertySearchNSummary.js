@@ -16,7 +16,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import _ from "lodash";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, Link,  } from "react-router-dom";
 const getAddress = (address, t) => {
   return `${address?.doorNo ? `${address?.doorNo}, ` : ""} ${address?.street ? `${address?.street}, ` : ""}${
     address?.landmark ? `${address?.landmark}, ` : ""
@@ -27,7 +27,7 @@ const getAddress = (address, t) => {
 
 const PropertySearchNSummary = ({ config, onSelect, userType, formData, setError, formState, clearErrors }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let { pathname, state } = useLocation();
   state = state && (typeof state === "string" || state instanceof String) ? JSON.parse(state) : state;
   const isEditScreen = pathname.includes("/modify-application/");

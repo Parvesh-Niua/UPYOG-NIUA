@@ -2,7 +2,7 @@ import React, { useEffect, useState,useRef } from "react";
 import { useTranslation } from "react-i18next";
 import ApplicationDetailsTemplate from "../../../../templates/ApplicationDetails";
 
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation,  } from "react-router-dom";
 import { ActionBar, Header, Loader, SubmitBar,Card,CardSubHeader,CardSectionHeader,LinkLabel, CardLabel, CardHeader, CardText} from "@upyog/digit-ui-react-components";
 import { useQueryClient } from "@tanstack/react-query";
 import _, { first, update } from "lodash";
@@ -21,7 +21,7 @@ const AssessmentDetails = () => {
   const AssessmentData = location?.state?.Assessment;
   const [showToast, setShowToast] = useState(null);
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [appDetailsToShow, setAppDetailsToShow] = useState({});
   const isMobile = window.Digit.Utils.browser.isMobile();
   

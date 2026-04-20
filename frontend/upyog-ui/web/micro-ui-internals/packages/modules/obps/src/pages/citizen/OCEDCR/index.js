@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation,  } from "react-router-dom";
 import { newConfig as newConfigOCEDCR } from "../../../config/ocEdcrConfig";
 import { uuidv4, convertDateToEpoch } from "../../../utils";
 // import EDCRAcknowledgement from "./EDCRAcknowledgement";
@@ -10,7 +10,7 @@ const CreateOCEDCR = ({ parentRoute }) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("OC_EDCR_CREATE", {});
   const [isShowToast, setIsShowToast] = useState(null);
   const [isSubmitBtnDisable, setIsSubmitBtnDisable] = useState(false);

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CardHeader, Header, Loader } from "@upyog/digit-ui-react-components";
 import DesktopInbox from "../../components/DesktopInbox";
 import MobileInbox from "../../components/MobileInbox";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation,  } from "react-router-dom";
 
 const config = {
   select: (response) => {
@@ -20,7 +20,7 @@ const config = {
 };
 
 const FstpServiceRequest = () => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { t } = useTranslation();
   const location = useLocation();
   const vehicleNumber = location.pathname.split("/").at(-1);

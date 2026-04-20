@@ -7,7 +7,7 @@ import { PGR_CITIZEN_COMPLAINT_CONFIG, PGR_CITIZEN_CREATE_COMPLAINT } from "../.
 import Response from "./Response";
 
 import { config as defaultConfig } from "./defaultConfig";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation,  } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const CreateComplaint = () => {
@@ -16,7 +16,7 @@ export const CreateComplaint = () => {
   const { pathname } = useLocation();
   const config = useMemo(() => defaultConfig);
   const match = Digit.Hooks.useWizardPath(config);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const registry = useContext(ComponentProvider);
   const dispatch = useDispatch();
   const { data: storeData, isLoading } = Digit.Hooks.useStore.getInitData();

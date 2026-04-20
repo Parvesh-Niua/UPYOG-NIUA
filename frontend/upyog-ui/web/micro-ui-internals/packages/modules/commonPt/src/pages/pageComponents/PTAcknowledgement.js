@@ -1,7 +1,7 @@
 import { Banner, Card, CardText, LinkButton, Loader, Row, StatusTable, SubmitBar } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation,  } from "react-router-dom";
 // import getPTAcknowledgementData from "../../../getPTAcknowledgementData";
 import { convertToPropertyLightWeight, convertToUpdatePropertyLightWeight } from "../utils";
 
@@ -37,7 +37,7 @@ const PTAcknowledgement = ({ onSuccess, onSelect, formData, redirectUrl, userTyp
   const location = useLocation();
   const stateId = Digit.ULBService.getStateId();
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   let data = location?.state?.data;
   if (onSelect) {

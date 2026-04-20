@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Header } from "@upyog/digit-ui-react-components";
 //import RegisryInbox from "../../../components/RegistryInbox";
 import VendorInbox from "../../../components/VendorInbox";
-import { useNavigate } from "react-router-dom";
+
 
 const SearchVendor = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [searchParams, setSearchParams] = useState({});
   const [sortParams, setSortParams] = useState([{ id: "createdTime", desc: true }]);

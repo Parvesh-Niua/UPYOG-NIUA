@@ -1,7 +1,7 @@
 import { FormComposer, Loader, Toast } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { useParams } from "react-router-dom";
 import { maintenanceConfig } from "../../../config/Create/maintenanceConfig";
 import { convertDateToEpoch } from "../../../utils";
@@ -11,7 +11,7 @@ const MaintenanceAssetApplication = () => {
   const { t } = useTranslation();
   const [canSubmit, setCanSubmit] = useState(false);
   const defaultValues = {};
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { id: applicationNo } = useParams();
   const { data: applicationDetails } = Digit.Hooks.asset.useAssetApplicationDetail(t, tenantId, applicationNo);
 

@@ -1,7 +1,7 @@
 import { BackButton, WhatsappIcon, Card, CitizenHomeCard, CitizenInfoLabel, PrivateRoute, AdvertisementModuleCard } from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useNavigate, Link } from "react-router-dom";
+import { Route, Routes,  Link } from "react-router-dom";
 import ErrorBoundary from "../../components/ErrorBoundaries";
 import { AppHome, processLinkData } from "../../components/Home";
 import TopBarSideBar from "../../components/TopBarSideBar";
@@ -88,7 +88,7 @@ const Home = (props) => {
   // 🔁 replacing useRouteMatch
   const path = "/upyog-ui/citizen";
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const handleClickOnWhatsApp = (obj) => {
     window.open(obj);

@@ -2,7 +2,7 @@ import { Loader } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useParams, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useParams,  } from "react-router-dom";
 import { newConfig as newConfigOCBPA } from "../../../config/ocbuildingPermitConfig";
 
 const getPath = (path, params) => {
@@ -100,7 +100,7 @@ const OCSendToArchitect = ({ parentRoute }) => {
   const { path: modulePath } = Digit.Hooks.useModuleBasePath();
   const basePath = useMemo(() => getPath(`${modulePath}/editApplication/ocbpa/:tenantId/:applicationNo`, routeParams), [modulePath, routeParams]);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let config = [];
   let application = {};
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("OC_BUILDING_PERMIT_EDITFLOW", {});

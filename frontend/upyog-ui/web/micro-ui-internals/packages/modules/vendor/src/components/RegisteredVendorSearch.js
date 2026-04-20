@@ -14,14 +14,14 @@ import {
 } from "@upyog/digit-ui-react-components";
 import DropdownStatus from "./inbox/DropdownStatus";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 
 const SearchApplication = ({ onSearch, type, onClose, onTabChange, isFstpOperator, searchFields, searchParams, isInboxPage, selectedTab }) => {
   const storedSearchParams = isInboxPage ? Digit.SessionStorage.get("vendor/inbox/searchParams") : Digit.SessionStorage.get("vendor/search/searchParams");
 
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { register, handleSubmit, reset, watch, control } = useForm({
     defaultValues: storedSearchParams || searchParams,
   });

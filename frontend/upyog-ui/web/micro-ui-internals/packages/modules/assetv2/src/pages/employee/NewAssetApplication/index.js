@@ -1,7 +1,7 @@
 import { FormComposer, Loader } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { useParams } from "react-router-dom";
 import { assignConfig } from "../../../config/Create/assignConfig";
 
@@ -10,7 +10,7 @@ const NewAssetApplication = () => {
   const { t } = useTranslation();
   const [canSubmit, setSubmitValve] = useState(false);
   const defaultValues = {};
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { id: applicationNo } = useParams();
   const { data: applicationDetails } = Digit.Hooks.asset.useAssetApplicationDetail(t, tenantId, applicationNo);
   

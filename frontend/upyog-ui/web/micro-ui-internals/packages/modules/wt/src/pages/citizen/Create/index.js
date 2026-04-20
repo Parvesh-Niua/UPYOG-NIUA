@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation,  } from "react-router-dom";
 import { commonConfig } from "../../../config/config";
 import { Timeline } from "@upyog/digit-ui-react-components";
 
@@ -9,7 +9,7 @@ const WTCreate = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("WT_Create", {});
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { useLocation, Route, useNavigate, Routes, Navigate } from "react-router-dom";
+import { useLocation, Route,  Routes, Navigate } from "react-router-dom";
 import { newConfig as newConfigBPAREG } from "../../../config/stakeholderConfig";
 // import CheckPage from "./CheckPage";
 // import StakeholderAcknowledgement from "./StakeholderAcknowledgement";
@@ -12,7 +12,7 @@ const StakeholderRegistration = () => {
   const { t } = useTranslation();
   const { path, url } = Digit.Hooks.useModuleBasePath();
   const { pathname, state } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("BUILDING_PERMIT", state?.edcrNumber ? { data: { scrutinyNumber: { edcrNumber: state?.edcrNumber }}} : {});

@@ -1,7 +1,7 @@
 import { FormComposer, Toast ,Loader, Header} from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { newConfig } from "../components/config/config";
 
 const CreateEmployee = () => {
@@ -12,7 +12,7 @@ const CreateEmployee = () => {
   const [phonecheck, setPhonecheck] = useState(false);
   const [checkfield, setcheck] = useState(false)
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const isMobile = window.Digit.Utils.browser.isMobile();
 
  const { data: mdmsData,isLoading } = Digit.Hooks.useCommonMDMS(Digit.ULBService.getStateId(), "egov-hrms", ["CommonFieldsConfig"], {

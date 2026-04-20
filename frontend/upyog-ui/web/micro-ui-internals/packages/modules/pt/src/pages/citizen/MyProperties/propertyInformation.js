@@ -13,7 +13,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams,  } from "react-router-dom";
 import PropertyDocument from "../../../pageComponents/PropertyDocument";
 import { getCityLocale, getPropertyTypeLocale, stringReplaceAll } from "../../../utils";
 import ActionModal from "../../../../../templates/ApplicationDetails/Modal/index"
@@ -47,13 +47,13 @@ const [showModal,setshowModal] = useState(false)
   var isMobile = window.Digit.Utils.browser.isMobile();
   const [enableAudit, setEnableAudit] = useState(false);
 const moduleCode="PT"
-const navigate = useNavigate();
+const navigate = Digit.Hooks.useCustomNavigate();
 const selectedAction =    {
   action: "ASSESS_PROPERTY",
   forcedName: "PT_ASSESS",
   showFinancialYearsModal: true,
   customFunctionToExecute: (data) => {
-    //const navigate = useNavigate();
+    //const navigate = Digit.Hooks.useCustomNavigate();
     delete data.customFunctionToExecute;
     navigate(`/upyog-ui/citizen/pt/assessment-details/${property.propertyId}`, { replace: true, state: { ...data } });
   },
@@ -171,7 +171,7 @@ const handleClick=()=>{
   flrno = units && units[0]?.floorNo;
   const ActionButton = ({ jumpTo, style }) => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
     function routeTo() {
       navigate(jumpTo);
     }

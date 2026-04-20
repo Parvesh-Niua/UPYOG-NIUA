@@ -4,14 +4,14 @@ import { useForm, Controller } from "react-hook-form";
 import SearchFields from "./SearchFields";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 import { join } from "lodash";
 //import MobileCancelBill from "../CancelBill/MobileCancelBill";
 import MobileGroupBill from "../GroupBill/MobileGroupBill";
 import { getBillNumber } from "../../utils";
 const GroupBills = ({ tenantId, onSubmit, data, count, isLoading, resultOk,serviceType,locality }) => {
     
-    const navigate = useNavigate()
+    const navigate = Digit.Hooks.useCustomNavigate();
     const convertEpochToDate = (dateEpoch) => {
         if (dateEpoch == null || dateEpoch == undefined || dateEpoch == "") {
             return "NA";

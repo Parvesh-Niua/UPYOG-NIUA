@@ -2,7 +2,7 @@ import { Card, KeyNote, SubmitBar, Toast,CardSubHeader } from "@upyog/digit-ui-r
 import React, { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 
 /*
  * AdsApplication component displays the details of a specific advertisement application.
@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const AdsApplication = ({ application, tenantId, buttonLabel }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [showToast, setShowToast] = useState(null);
 
   /*

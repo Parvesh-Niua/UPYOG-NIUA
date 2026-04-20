@@ -2,7 +2,7 @@ import { FormComposer, Header, Toast } from "@upyog/digit-ui-react-components";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import { newConfig as newConfigTL } from "../../../config/config";
 import { convertDateToEpoch } from "../../../utils";
 
@@ -11,7 +11,7 @@ const NewApplication = () => {
   const tenants = Digit.Hooks.tl.useTenants();
   const { t } = useTranslation();
   const [canSubmit, setSubmitValve] = useState(false);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   // delete
   const [propertyId, setPropertyId] = useState(new URLSearchParams(useLocation().search).get("propertyId"));
   const isEmpNewApplication = window.location.href.includes("/employee/tl/new-application");

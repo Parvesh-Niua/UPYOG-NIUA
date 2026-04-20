@@ -1,10 +1,10 @@
 import { FormComposer, Loader, Modal } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { configCancelConfig } from "./Modal/CancelConfig";
 
 const BillCancelModal = ({ t, action, tenantId, closeModal, submitAction, applicationData, billData }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [config, setConfig] = useState({});
   const [Reasons, setReasons] = useState([]);
   const [selectedReason, selecteReason] = useState("");

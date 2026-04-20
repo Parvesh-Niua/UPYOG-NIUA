@@ -2,7 +2,7 @@ import { FormComposer, Header, Toast, Loader } from "@upyog/digit-ui-react-compo
 import cloneDeep from "lodash/cloneDeep";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import { convertDateToEpoch, convertEpochToDate, stringReplaceAll } from "../../../utils";
 import { newConfig as newConfigTL } from "../../../config/config";
 
@@ -25,7 +25,7 @@ const ReNewApplication = (props) => {
     propertyDetails= propertydetails;   
 }
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   // delete
   const [_formData, setFormData, _clear] = Digit.Hooks.useSessionStorage("store-data", null);
   const [mutationHappened, setMutationHappened, clear] = Digit.Hooks.useSessionStorage("EMPLOYEE_MUTATION_HAPPENED", false);

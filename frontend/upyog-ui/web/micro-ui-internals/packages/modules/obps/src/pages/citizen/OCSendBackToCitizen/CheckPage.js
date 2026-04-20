@@ -16,7 +16,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import Timeline from "../../../components/Timeline";
 import ActionModal from "../BpaApplicationDetail/Modal";
 import { convertToBPAObject, stringReplaceAll, convertEpochToDateDMY, getOrderDocuments } from "../../../utils";
@@ -27,7 +27,7 @@ import usePreApprovedSearch from "../../../../../../libraries/src/hooks/obps/use
 
 const CheckPage = ({ onSubmit, value }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const match = Digit.Hooks.useModuleBasePath();
   let user = Digit.UserService.getUser(), BusinessService;
   const tenantId = user?.info?.permanentCity;

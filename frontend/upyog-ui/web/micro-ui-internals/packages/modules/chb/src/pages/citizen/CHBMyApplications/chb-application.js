@@ -2,7 +2,7 @@ import { Card, KeyNote, SubmitBar,Toast,CardSubHeader } from "@upyog/digit-ui-re
 import React, { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 
 
 /**
@@ -40,7 +40,7 @@ import { Link, useNavigate } from "react-router-dom";
  */
 const ChbApplication = ({ application, tenantId, buttonLabel }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [showToast, setShowToast] = useState(null);
 
   const { data: slotSearchData, refetch } = Digit.Hooks.chb.useChbSlotSearch({

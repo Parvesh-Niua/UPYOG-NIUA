@@ -2,7 +2,7 @@ import { Loader,Modal ,Card , CardHeader, StatusTable,Row} from "@upyog/digit-ui
 import React ,{Fragment,useState,useEffect}from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Route, useLocation, useNavigate, Routes, Navigate } from "react-router-dom";
+import { Route, useLocation,  Routes, Navigate } from "react-router-dom";
 import { newConfig } from "../../../config/Create/config";
 
 const CreateProperty = ({ parentRoute }) => {
@@ -11,7 +11,7 @@ const CreateProperty = ({ parentRoute }) => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const [showToast, setShowToast] = useState(null);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const stateId = Digit.ULBService.getStateId();
   let config = [];
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("PT_CREATE_PROPERTY", {});

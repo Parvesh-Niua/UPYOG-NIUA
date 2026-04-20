@@ -14,7 +14,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import { Link,  useParams, useLocation } from "react-router-dom";
 import TLDocument from "../../../pageComponents/TLDocumets";
 import Timeline from "../../../components/TLTimeline";
 const getPath = (path, params) => {
@@ -36,7 +36,7 @@ const CheckPage = (props) => {
 const WrapCheckPage = ({ onSubmit, value }) => {
   let isEdit = window.location.href.includes("renew-trade");
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const routeParams = useParams();
   const { pathname } = useLocation();
   const { path: modulePath } = Digit.Hooks.useModuleBasePath();

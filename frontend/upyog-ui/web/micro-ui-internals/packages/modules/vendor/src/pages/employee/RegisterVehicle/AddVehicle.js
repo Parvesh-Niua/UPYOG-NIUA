@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Toast, Header, InfoIcon } from "@upyog/digit-ui-react-components";
-import { useNavigate } from "react-router-dom";
+
 //import VehicleConfig from "../../../configs/VehicleConfig";
 import { useQueryClient } from "@tanstack/react-query";
 import VehicleConfig from "../../../config/VehicleConfig";
@@ -10,7 +10,7 @@ const AddVehicle = ({ parentUrl, heading }) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const stateId = Digit.ULBService.getStateId();
   const [showToast, setShowToast] = useState(null);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const queryClient = useQueryClient();
 
   const [mutationHappened, setMutationHappened, clear] = Digit.Hooks.useSessionStorage("FSM_MUTATION_HAPPENED", false);

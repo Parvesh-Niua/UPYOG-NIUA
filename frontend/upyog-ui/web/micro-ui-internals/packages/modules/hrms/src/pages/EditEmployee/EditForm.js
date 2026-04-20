@@ -1,13 +1,13 @@
 import { FormComposer, Toast,Loader } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { newConfig } from "../../components/config/config";
 import { convertEpochToDate } from "../../components/Utils";
 
 const EditForm = ({ tenantId, data }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [canSubmit, setSubmitValve] = useState(false);
   const [showToast, setShowToast] = useState(null);
   const [mobileNumber, setMobileNumber] = useState(null);

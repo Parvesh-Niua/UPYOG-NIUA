@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormComposer, Loader, Toast, Header } from "@upyog/digit-ui-react-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import VendorConfig from "../../configs/VendorConfig";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -71,7 +71,7 @@ const EditVendor = ({ parentUrl, heading }) => {
   }, [dsoData]);
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const Config = VendorConfig(t, true);
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation,  } from "react-router-dom";
 import { newConfig as newConfigTL } from "../../../config/config";
 // import CheckPage from "./CheckPage";
 // import TLAcknowledgement from "./TLAcknowledgement";
@@ -10,7 +10,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("TL_CREATE_TRADE", {});
   let isReneworEditTrade = window.location.href.includes("/renew-trade/") || window.location.href.includes("/edit-application/");
 

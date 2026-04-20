@@ -1,7 +1,7 @@
 import { FormComposer, Loader,Toast } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import { disposeConfig } from "../../../config/Create/disposeConfig";
 import {convertStringToFloat} from "../../../utils/index"
 
@@ -11,7 +11,7 @@ const DisposeAssetApplication = () => {
   const { t } = useTranslation();
   const [canSubmit, setSubmitValve] = useState(false);
   const defaultValues = {};
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const { id: applicationNo } = useParams();
 

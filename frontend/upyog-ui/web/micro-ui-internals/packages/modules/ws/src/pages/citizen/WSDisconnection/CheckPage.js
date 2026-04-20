@@ -4,14 +4,14 @@ import {
   } from "@upyog/digit-ui-react-components";
   import React, { useState } from "react";
   import { useTranslation } from "react-i18next";
-  import { Link, useNavigate } from "react-router-dom";
+  import { Link,  } from "react-router-dom";
   import DisconnectTimeline from "../../../components/DisconnectTimeline";
   import WSDocument from "../../../pageComponents/WSDocument";
 import { convertDateToEpoch, convertEpochToDate, createPayloadOfWSDisconnection, updatePayloadOfWSDisconnection } from "../../../utils";
   
   const CheckPage = () => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
     const match = Digit.Hooks.useModuleBasePath();
     const value = Digit.SessionStorage.get("WS_DISCONNECTION");
     const [documents, setDocuments] = useState( value.WSDisconnectionForm.documents || []);

@@ -1,6 +1,6 @@
 import { Loader, Modal, FormComposer } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 import { configWTApproverApplication } from "../config/WTApproverApplication";
 /*
@@ -104,7 +104,7 @@ const ActionModal = ({ t, action, tenantId, state, id, closeModal, submitAction,
   const [selectedVendor, setSelectedVendor] = useState(null);
   const [selectVehicle, setSelectVehicle] = useState(null);
   const [comment, setComment] = useState("");
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
 
   useEffect(() => {

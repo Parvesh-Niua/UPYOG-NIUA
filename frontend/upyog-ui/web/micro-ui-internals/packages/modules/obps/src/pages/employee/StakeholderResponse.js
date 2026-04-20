@@ -1,13 +1,13 @@
 import { Banner, Card, CardText, ActionBar, SubmitBar } from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 
 
 const StakeholderResponse = (props) => {
   const { state } = props.location;
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const bparegData = state?.data?.Licenses?.[0];
   const typeofStakeholder = bparegData?.tradeLicenseDetail?.tradeUnits?.[0]?.tradeType?.split('.')[0]
 

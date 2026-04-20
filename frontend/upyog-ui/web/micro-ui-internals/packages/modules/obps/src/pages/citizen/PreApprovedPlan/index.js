@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Routes, Route, Navigate, useLocation, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, Link,  } from "react-router-dom";
 import { SubmitBar } from "@upyog/digit-ui-react-components";
 
 import { newConfig as newPreApprovedConfig } from "../../../config/PreApprovedPlanConfig"
@@ -14,7 +14,7 @@ const PreApprovedPlan=()=>{
   console.log("pathhh", path)
   const { pathname, state } = useLocation();
   console.log("pathnamee",pathname)
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [params, setParams, clearParams] = Digit.Hooks.useSessionStorage("BPA_PRE_APPROVED_CREATE", {});
   const [isShowToast, setIsShowToast] = useState(null);
   const [isSubmitBtnDisable, setIsSubmitBtnDisable] = useState(false);

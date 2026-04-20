@@ -1,6 +1,6 @@
 import { Loader, Modal, FormComposer, Toast } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { useQueryClient } from "@tanstack/react-query";
 import { UploadPitPhoto } from "@upyog/digit-ui-react-components";
 
@@ -41,7 +41,7 @@ const popupActionBarStyles = {
 }
 
 const ActionModal = ({ t, action, tenantId, state, id, closeModal, submitAction, actionData, module, applicationDetails }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const mobileView = Digit.Utils.browser.isMobile() ? true : false;
   const { data: dsoData, isLoading: isDsoLoading, isSuccess: isDsoSuccess, error: dsoError } = Digit.Hooks.fsm.useDsoSearch(tenantId, { limit: '-1', status: 'ACTIVE' });
   const { isLoading, isSuccess, isError, data: applicationData, error } = Digit.Hooks.fsm.useSearch(

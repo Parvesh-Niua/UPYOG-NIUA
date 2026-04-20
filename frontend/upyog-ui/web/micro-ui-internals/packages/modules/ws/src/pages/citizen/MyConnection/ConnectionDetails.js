@@ -16,7 +16,7 @@ import {
   Modal,
   Toast,
 } from "@upyog/digit-ui-react-components";
-import { useNavigate } from "react-router-dom";
+
 import _ from "lodash";
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ const ConnectionDetails = () => {
   const { t } = useTranslation();
   const menuRef = useRef();
   const user = Digit.UserService.getUser();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.SessionStorage.get("CITIZEN.COMMON.HOME.CITY")?.code || user?.info?.permanentCity || Digit.ULBService.getCurrentTenantId();
   const [showOptions, setShowOptions] = useState(false);
   const applicationNobyData = window.location.href.includes("SW_") ? window.location.href.substring(window.location.href.indexOf("SW_")) : window.location.href.substring(window.location.href.indexOf("WS_"));

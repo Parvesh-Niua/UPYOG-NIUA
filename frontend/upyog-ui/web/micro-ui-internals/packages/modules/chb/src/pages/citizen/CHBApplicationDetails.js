@@ -17,7 +17,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
 
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link,  } from "react-router-dom";
 import getChbAcknowledgementData from "../../getChbAcknowledgementData";
 import CHBWFApplicationTimeline from "../../pageComponents/CHBWFApplicationTimeline";
 import CHBDocument from "../../pageComponents/CHBDocument";
@@ -57,7 +57,7 @@ import { size } from "lodash";
  */
 const CHBApplicationDetails = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { acknowledgementIds, tenantId } = useParams();
   const [acknowldgementData, setAcknowldgementData] = useState([]);
   const [showOptions, setShowOptions] = useState(false);

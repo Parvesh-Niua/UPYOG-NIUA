@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { useParams,  Navigate } from "react-router-dom";
 
 import { BackButton, Card, CardHeader, CardText, TextArea, SubmitBar,Toast } from "@upyog/digit-ui-react-components";
 
@@ -10,7 +10,7 @@ import { LOCALIZATION_KEY } from "../../../constants/Localization";
 
 const AddtionalDetails = (props) => {
   // const [details, setDetails] = useState(null);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let { id } = useParams();
   const dispatch = useDispatch();
   const appState = useSelector((state) => state)["common"];

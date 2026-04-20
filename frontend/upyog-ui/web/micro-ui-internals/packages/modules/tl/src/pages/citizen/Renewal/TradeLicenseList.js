@@ -1,14 +1,14 @@
 import { Card, KeyNote, SubmitBar, Toast } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { convertEpochToDateCitizen, getvalidfromdate } from "../../../utils/index";
 import {TLSearch} from "../../../../../../libraries/src/services/molecules/TL/Search";
 import cloneDeep from "lodash/cloneDeep";
 
 const TradeLicenseList = ({ application }) => {
   sessionStorage.setItem("isDirectRenewal", true);
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const owners = application?.tradeLicenseDetail?.owners;
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();

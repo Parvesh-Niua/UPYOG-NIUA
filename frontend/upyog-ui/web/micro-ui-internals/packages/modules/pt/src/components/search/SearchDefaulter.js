@@ -1,12 +1,12 @@
 import { DetailsCard, Loader, Table, Modal,SearchField,SubmitBar,SearchForm } from "@upyog/digit-ui-react-components";
 import React, { memo, useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import PropertyInvalidMobileNumber from "../../pages/citizen/MyProperties/PropertyInvalidMobileNumber";
 import { useQuery } from "@tanstack/react-query";
 const GetCell = (value) => <span className="cell-text">{value}</span>;
 
 const SearchPTID = ({ tenantId, t, payload, showToast, setShowToast,ptSearchConfig }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   
   const [searchQuery, setSearchQuery] = useState({
     /* ...defaultValues,   to enable pagination */

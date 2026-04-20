@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import getPDFData from "../../utils/getWSAcknowledgementData";
 import getModifyPDFData from "../../utils/getWsAckDataForModifyPdfs"
-import { useNavigate } from "react-router-dom";
+
 import * as func from "../../utils";
 
 
 const WSResponse = (props) => {
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let filters = func.getQueryStringParams(location.search);
   const [waterApplicationData, setWaterApplicationData] = useState({});
   const [sewerageApplicationData, setSewerageApplicationData] = useState({});

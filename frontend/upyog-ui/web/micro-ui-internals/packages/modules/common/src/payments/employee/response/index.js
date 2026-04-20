@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Banner, Card, CardText, SubmitBar, ActionBar, DownloadPrefixIcon, Loader, Menu, LinkLabel } from "@upyog/digit-ui-react-components";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link,  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -19,7 +19,7 @@ export const convertEpochToDate = (dateEpoch) => {
   }
 };
 export const SuccessfulPayment = (props) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { addParams, clearParams } = props;
   const { t } = useTranslation();
   const queryClient = useQueryClient();

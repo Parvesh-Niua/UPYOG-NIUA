@@ -2,7 +2,7 @@ import { EditIcon, Header, LinkLabel, Loader, Modal } from "@upyog/digit-ui-reac
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams,  } from "react-router-dom";
 import ApplicationDetailsTemplate from "../../../../templates/ApplicationDetails";
 import OwnerHistory from "./PropertyMutation/ownerHistory";
 import usePropertyAPI from "../../../../../libraries/src/hooks/pt/usePropertyAPI"
@@ -33,7 +33,7 @@ const PropertyDetails = () => {
   const [showUpdateNo, setShowUpdateNo] = useState(false);
   const PT_CEMP = Digit.UserService.hasAccess(["PT_CEMP"]) || false;
   const [businessService, setBusinessService] = useState("PT.CREATE");
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   sessionStorage.setItem("propertyIdinPropertyDetail", applicationNumber);
   // const isMobile = window.Digit.Utils.browser.isMobile();
   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 780);

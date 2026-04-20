@@ -1,7 +1,7 @@
 import { Loader, Modal, FormComposer } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
+
 import { configASSETApproverApplication } from "../config";
 
 
@@ -36,7 +36,7 @@ const ActionModal = ({ t, action, tenantId, state, id, closeModal, submitAction,
     { enabled: !action?.isTerminateState }
   );
 
-  const navigate = useNavigate(); // Initialize useHistory
+  const navigate = Digit.Hooks.useCustomNavigate(); // Initialize useHistory
 
 
 

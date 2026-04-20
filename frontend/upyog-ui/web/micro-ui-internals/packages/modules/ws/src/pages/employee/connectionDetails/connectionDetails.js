@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import ApplicationDetailsTemplate from "../../../../../templates/ApplicationDetails";
-import { useNavigate } from "react-router-dom";
+
 import { Header, ActionBar, MultiLink, SubmitBar, Menu, Modal, ButtonSelector, Toast } from "@upyog/digit-ui-react-components";
 import * as func from "../../../utils";
 import { ifUserRoleExists, downloadPdf, downloadAndOpenPdf } from "../../../utils";
@@ -11,7 +11,7 @@ import getConnectionDetailsPDF from "../../../utils/getConnectionDetails";
 const GetConnectionDetails = () => {
   const { t } = useTranslation();
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [displayMenu, setDisplayMenu] = useState(false);
   const [showToast, setShowToast] = useState(null);
   let filters = func.getQueryStringParams(location.search);

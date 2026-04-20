@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { CardLabel,SubmitBar, Dropdown } from '@upyog/digit-ui-react-components';
 
 
@@ -10,7 +10,7 @@ const CHBMapView = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [inputValue, setInputValue] = useState('');
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const geoJsonData = {
     "type": "FeatureCollection",

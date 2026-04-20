@@ -3,13 +3,13 @@ import { FormComposer, CardLabelDesc, Loader, Menu, CardText } from "@upyog/digi
 import { FormStep, CardLabel, RadioButtons, RadioOrSelect, Localities, InfoBannerIcon } from "@upyog/digit-ui-react-components";
 import { TextInput, LabelFieldPair, Dropdown, Toast } from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+
 import { useTranslation } from "react-i18next";
 
 const SearchConnection = ({ config: propsConfig, formData }) => {
   const { t } = useTranslation();
   let validation = {};
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const logginedUser = Digit.UserService.getUser();
   const [mobileNumber, setMobileNumber] = useState(formData?.mobileNumber || "");

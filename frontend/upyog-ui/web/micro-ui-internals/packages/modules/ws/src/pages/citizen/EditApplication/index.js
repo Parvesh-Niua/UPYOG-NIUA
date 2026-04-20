@@ -2,7 +2,7 @@ import { Loader } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useParams, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useParams,  } from "react-router-dom";
 import { newConfig as newConfigWS } from "../../../config/wsCreateConfig";
 import { stringReplaceAll } from "../../../utils/index";
 
@@ -109,7 +109,7 @@ const EditApplication = ({ parentRoute }) => {
   const routeParams = useParams();
   let { tenantId } = routeParams;
   const { pathname, state } = useLocation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { path: modulePath } = Digit.Hooks.useModuleBasePath();
   const basePath = useMemo(() => {
     const pattern = pathname.includes("/modify-connection/")

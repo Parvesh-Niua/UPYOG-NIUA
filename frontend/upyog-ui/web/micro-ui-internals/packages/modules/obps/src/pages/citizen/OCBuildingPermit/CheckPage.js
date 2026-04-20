@@ -15,14 +15,14 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import Timeline from "../../../components/Timeline";
 import { convertEpochToDateDMY, stringReplaceAll, getOrderDocuments } from "../../../utils";
 import DocumentsPreview from "../../../../../templates/ApplicationDetails/components/DocumentsPreview";
 
 const CheckPage = ({ onSubmit, value }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const match = Digit.Hooks.useModuleBasePath();
   let user = Digit.UserService.getUser();
   let BusinessService;

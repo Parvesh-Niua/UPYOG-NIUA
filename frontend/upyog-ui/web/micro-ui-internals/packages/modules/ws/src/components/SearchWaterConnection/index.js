@@ -5,9 +5,9 @@ import SearchFields from "./SearchFields";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import MobileSearchWater from "./MobileSearchWater";
-import { useNavigate } from "react-router-dom";
+
 const SearchWaterConnection = ({ tenantId, onSubmit, data, count, resultOk, businessService, isLoading }) => {
-  const navigate = useNavigate()
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [result,setResult]=  useState([])
   const [showToast, setShowToast] = useState(null);
   const replaceUnderscore = (str) => {

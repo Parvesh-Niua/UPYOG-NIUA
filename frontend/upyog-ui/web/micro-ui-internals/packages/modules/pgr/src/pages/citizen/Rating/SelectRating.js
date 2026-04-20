@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RatingCard, CardLabelError } from "@upyog/digit-ui-react-components";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { useParams,  Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { updateComplaints } from "../../../redux/actions/index";
 
@@ -9,7 +9,7 @@ const SelectRating = ({ parentRoute }) => {
   const { t } = useTranslation();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   let tenantId = Digit.SessionStorage.get("CITIZEN.COMMON.HOME.CITY")?.code || Digit.ULBService.getCurrentTenantId();
   const complaintDetails = Digit.Hooks.pgr.useComplaintDetails({ tenantId: tenantId, id: id }).complaintDetails;

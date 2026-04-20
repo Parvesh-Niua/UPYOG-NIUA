@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Header, ResponseComposer, Loader, Modal, Card, KeyNote, SubmitBar, CitizenInfoLabel} from "@upyog/digit-ui-react-components";
 import PropTypes from "prop-types";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation,  } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 
@@ -72,7 +72,7 @@ const PropertySearchResults = ({ template, header, actionButtonLabel, isMutation
     }
   );
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const proceedToPay = (data) => {
     navigate(`/upyog-ui/citizen/payment/my-bills/PT/${data.property_id}`, { tenantId });

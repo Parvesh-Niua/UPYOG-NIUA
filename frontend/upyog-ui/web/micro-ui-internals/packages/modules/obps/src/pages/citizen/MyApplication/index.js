@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, KeyNote, Loader, SubmitBar, Header } from "@upyog/digit-ui-react-components";
 import { Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { getBPAFormData } from "../../../utils/index";
 
 const getServiceType = () => {
@@ -11,7 +11,7 @@ const getServiceType = () => {
 
 const MyApplication = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [finalData, setFinalData] = useState([]);
   const [labelMessage, setLableMessage] = useState(false);
   const tenantId = Digit.ULBService.getCitizenCurrentTenant();

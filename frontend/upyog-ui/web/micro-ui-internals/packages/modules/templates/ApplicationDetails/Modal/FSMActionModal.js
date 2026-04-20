@@ -1,6 +1,6 @@
 import { Loader, Modal, FormComposer, Toast } from "@upyog/digit-ui-react-components";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { useQueryClient } from "@tanstack/react-query";
 
 import { configAssignDso, configCompleteApplication, configReassignDSO, configAcceptDso, configRejectApplication } from "../config";
@@ -25,7 +25,7 @@ const CloseBtn = (props) => {
 };
 
 const ActionModal = ({ t, action, tenantId, state, id, closeModal, submitAction, actionData }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { data: dsoData, isLoading: isDsoLoading, isSuccess: isDsoSuccess, error: dsoError } = Digit.Hooks.fsm.useDsoSearch(tenantId);
   const { isLoading, isSuccess, isError, data: applicationData, error } = Digit.Hooks.fsm.useSearch(
     tenantId,
