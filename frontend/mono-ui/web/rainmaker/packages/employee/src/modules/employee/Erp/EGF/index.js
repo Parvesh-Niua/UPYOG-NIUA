@@ -31,7 +31,7 @@ class EGFFinance extends Component {
     //subdomainurl = !!(finEnv) ? "-" + finEnv + "." + domainurl : "." + domainurl;
     //erp_url = loc.protocol + "//" + getTenantId().split(".")[1] + subdomainurl + menuUrl;
     subdomainurl = !!(finEnv) ? finEnv + "." + domainurl : domainurl; 
-    erp_url = loc.protocol + "//" + subdomainurl + menuUrl;  // this will form url like - erp_url = "http://niuatt.niua.in/services/EGF/expensebill/newform"
+    erp_url = loc.protocol + "//" + subdomainurl + menuUrl;  // this will form url like - erp_url = "https://niuatt.niua.in/services/EGF/expensebill/newform"
 
 
     return (
