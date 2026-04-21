@@ -30,7 +30,10 @@
     "packages/modules/dss",
     "packages/modules/noc",
     "packages/modules/mcollect",
-    "packages/modules/reports"
+    "packages/modules/reports",
+    "packages/modules/chb",
+    "packages/modules/assetv2",
+    "packages/modules/gis"
   ],
   "license": "MIT",
   "private": true,

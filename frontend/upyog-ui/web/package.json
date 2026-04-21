@@ -30,7 +30,10 @@
     "micro-ui-internals/packages/modules/dss",
     "micro-ui-internals/packages/modules/reports",
     "micro-ui-internals/packages/modules/noc",
-    "micro-ui-internals/packages/modules/mcollect"
+    "micro-ui-internals/packages/modules/mcollect",
+    "micro-ui-internals/packages/modules/chb",
+    "micro-ui-internals/packages/modules/assetv2",
+    "micro-ui-internals/packages/modules/gis"
   ],
   "engines": {
     "node": ">=22"
