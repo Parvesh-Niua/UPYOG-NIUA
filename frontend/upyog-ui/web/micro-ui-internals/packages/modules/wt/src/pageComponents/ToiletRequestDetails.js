@@ -151,7 +151,6 @@ const ToiletRequestDetails = ({ t, config, onSelect, userType, formData }) => {
             placeholder="Special Request"
             value={specialRequest}
             onChange={SetSpecialRequest}
-            style={{ width: user.type === "EMPLOYEE" ? "51.6%" : null }}
           />
 
         </div>
