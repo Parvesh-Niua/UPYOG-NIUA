@@ -80,19 +80,19 @@ const CreateTradeLicence = ({ parentRoute }) => {
       nextStep = key;
     }
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/check`);
+      return redirectWithHistory(`check`);
     }
     if(isPTCreateSkip && nextStep === "acknowledge-create-property")
     {
       nextStep = "map";
     }
-    nextPage = `${match.path}/${nextStep}`;
+    nextPage = `${nextStep}`;
     redirectWithHistory(nextPage);
   };
 
   const createProperty = async () => {
     sessionStorage.setItem("isCreateEnabled", "true");
-    navigate(`${match.path}/acknowledgement`);
+    navigate(`acknowledgement`);
   };
 
   function handleSelect(key, data, skipStep, index, isAddMultiple = false) {
@@ -142,7 +142,7 @@ const CreateTradeLicence = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component
@@ -158,9 +158,9 @@ const CreateTradeLicence = ({ parentRoute }) => {
           />
         );
       })}
-      <Route path={`${match.path}/check`} element={<CheckPage onSubmit={createProperty} value={params} />} />
-      <Route path={`${match.path}/acknowledgement`} element={<TLAcknowledgement data={params} onSuccess={onSuccess} onUpdateSuccess={onUpdateSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} />} />
+      <Route path={`check`} element={<CheckPage onSubmit={createProperty} value={params} />} />
+      <Route path={`acknowledgement`} element={<TLAcknowledgement data={params} onSuccess={onSuccess} onUpdateSuccess={onUpdateSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} />} />
     </Routes>
   );
 };

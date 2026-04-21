@@ -100,7 +100,7 @@ const CreateEDCR = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component
@@ -118,8 +118,8 @@ const CreateEDCR = ({ parentRoute }) => {
           />
         );
       })}
-      <Route path={`${match.path}/acknowledgement`} element={<EDCRAcknowledgement data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} />} />
+      <Route path={`acknowledgement`} element={<EDCRAcknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} />} />
     </Routes>
   );
 };

@@ -55,7 +55,7 @@ const CreatePropertyForm = ({ config, onSelect,value, userType, redirectUrl }) =
       onSelect('cptNewProperty', { property: formValue });
     } else {
       if(userType === 'employee') {
-        navigate(`${match.path}/save-property?redirectToUrl=${redirectUrl}`, {
+        navigate(`save-property?redirectToUrl=${redirectUrl}`, {
           data: formValue,
           prevState:{...location?.state}
         });

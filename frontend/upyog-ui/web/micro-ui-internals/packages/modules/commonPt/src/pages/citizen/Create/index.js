@@ -22,7 +22,7 @@ const CreateProperty = ({ parentRoute, onSelect }) => {
   const redirectUrl = new URLSearchParams(search).get('redirectUrl');
 
   const createProperty = async () => {
-    navigate(`${match.path}/acknowledgement`);
+    navigate(`acknowledgement`);
   };
 
   const onSuccess = () => {
@@ -37,7 +37,7 @@ const CreateProperty = ({ parentRoute, onSelect }) => {
   return (
     <Routes>
       <Route path={`${match.path}`} element={<CreatePropertyForm onSubmit={createProperty} value={params} userType={"citizen"} />} />
-      <Route path={`${match.path}/save-property`} element={<PTAcknowledgement data={params} onSuccess={onSuccess} redirectUrl={redirectUrl} userType={"citizen"} />} />
+      <Route path={`save-property`} element={<PTAcknowledgement data={params} onSuccess={onSuccess} redirectUrl={redirectUrl} userType={"citizen"} />} />
     </Routes>
   );
 };

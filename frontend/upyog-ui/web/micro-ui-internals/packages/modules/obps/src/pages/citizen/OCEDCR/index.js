@@ -88,9 +88,9 @@ const CreateOCEDCR = ({ parentRoute }) => {
     const currentPath = pathname.split("/").pop();
     const { nextStep } = config.find((routeObj) => routeObj.route === currentPath);
     if (nextStep === null) {
-      return navigate(`${match.path}/check`);
+      return navigate(`check`);
     }
-    navigate(`${match.path}/${nextStep}`);
+    navigate(`${nextStep}`);
   };
 
   const handleSelect = (key, data, skipStep, isFromCreateApi) => {
@@ -121,7 +121,7 @@ const CreateOCEDCR = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component
@@ -139,8 +139,8 @@ const CreateOCEDCR = ({ parentRoute }) => {
           />
         );
       })}
-      <Route path={`${match.path}/acknowledgement`} element={<EDCRAcknowledgement data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} />} />
+      <Route path={`acknowledgement`} element={<EDCRAcknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} />} />
     </Routes>
   );
 };

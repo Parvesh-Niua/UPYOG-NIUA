@@ -42,7 +42,7 @@ const FileComplaint = ({ parentRoute }) => {
     if (nextStep === null) {
       return redirectWithHistory(`${parentRoute}/new-application/check`);
     }
-    redirectWithHistory(`${match.path}/${nextStep}`);
+    redirectWithHistory(`${nextStep}`);
   };
 
   const submitComplaint = async () => {
@@ -80,15 +80,15 @@ const FileComplaint = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={<Component config={{ texts, inputs, key }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} />}
           />
         );
       })}
-      <Route path={`${match.path}/check`} element={<CheckPage onSubmit={submitComplaint} value={params} />} />
-      <Route path={`${match.path}/response`} element={<Response data={params} onSuccess={handleSUccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${configs.indexRoute}`} />} />
+      <Route path={`check`} element={<CheckPage onSubmit={submitComplaint} value={params} />} />
+      <Route path={`response`} element={<Response data={params} onSuccess={handleSUccess} />} />
+      <Route path="*" element={<Navigate to={`${configs.indexRoute}`} />} />
     </Routes>
   );
 };

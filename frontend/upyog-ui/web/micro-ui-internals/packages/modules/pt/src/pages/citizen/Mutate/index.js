@@ -161,11 +161,11 @@ const MutationCitizen = (props) => {
   };
 
   useEffect(() => {
-    if (formData) navigate(`${match.path}/check`);
+    if (formData) navigate(`check`);
   }, [formData]);
 
   const mutateProperty = () => {
-    navigate(`${match.path}/acknowledgement`);
+    navigate(`acknowledgement`);
   };
 
   const handleSkip = () => {};
@@ -179,7 +179,7 @@ const MutationCitizen = (props) => {
           const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
           return (
             <Route
-              path={`${match.path}/${routeObj.route}`}
+              path={`${routeObj.route}`}
               key={index}
               element={
                 Component ? (
@@ -191,9 +191,9 @@ const MutationCitizen = (props) => {
             />
           );
         })}
-        <Route path={`${match.path}/check`} element={<CheckPage onSubmit={mutateProperty} value={params} />} />
+        <Route path={`check`} element={<CheckPage onSubmit={mutateProperty} value={params} />} />
         <Route
-          path={`${match.path}/acknowledgement`}
+          path={`acknowledgement`}
           element={
             <PTAcknowledgement
               data={formData}
@@ -204,7 +204,7 @@ const MutationCitizen = (props) => {
             />
           }
         />
-        <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} replace />} />
+        <Route path="*" element={<Navigate to={`${config.indexRoute}`} replace />} />
       </Routes>
     </React.Fragment>
   );

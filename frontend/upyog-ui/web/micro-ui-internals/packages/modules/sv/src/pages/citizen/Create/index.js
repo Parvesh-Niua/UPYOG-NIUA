@@ -67,13 +67,13 @@ const SVCreate = ({ parentRoute }) => {
       nextStep = key;
     }
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/check`);
+      return redirectWithHistory(`check`);
     }
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.path}/${nextStep}`;
+      nextPage = `${nextStep}`;
     }
      else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.path}/${nextStep}/${index}` : `${match.path}/${nextStep}`;
+      nextPage = isMultiple && nextStep !== "map" ? `${nextStep}/${index}` : `${nextStep}`;
     }
 
     redirectWithHistory(nextPage);
@@ -87,7 +87,7 @@ const SVCreate = ({ parentRoute }) => {
     }
 
   const svcreate = async () => {
-    navigate(`${match.path}/acknowledgement`, { replace: true });
+    navigate(`acknowledgement`, { replace: true });
   };
 
   function handleSelect(key, data, skipStep, index, isAddMultiple = false) {
@@ -151,7 +151,7 @@ const SVCreate = ({ parentRoute }) => {
         const user = Digit.UserService.getUser().info.type;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component config={{ texts, inputs, key }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} userType={user} editdata={pathname.includes("apply") ? {} : vendingData} previousData={vending_draft_data} />
@@ -160,9 +160,9 @@ const SVCreate = ({ parentRoute }) => {
         );
       })}
 
-      <Route path={`${match.path}/check`} element={<SVCheckPage onSubmit={svcreate} value={params} editdata={pathname.includes("apply") ? {} : vendingData} />} />
-      <Route path={`${match.path}/acknowledgement`} element={<SVAcknowledgement data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} replace />} />
+      <Route path={`check`} element={<SVCheckPage onSubmit={svcreate} value={params} editdata={pathname.includes("apply") ? {} : vendingData} />} />
+      <Route path={`acknowledgement`} element={<SVAcknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} replace />} />
     </Routes>
   );
 };

@@ -62,16 +62,15 @@ export const PTRModule = ({ stateCode, userType, tenants }) => {
   Digit.SessionStorage.set("PTR_TENANTS", tenants);  // setting a value in a session storage object
 
   // loads localization settings for an employee based on the current tenant and language when the component mounts
-  useEffect(
-    () =>
-      userType === "employee" &&
+  useEffect(() => {
+    if (userType === "employee") {
       Digit.LocalizationService.getLocale({
         modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
         locale: Digit.StoreData.getCurrentLanguage(),
         tenantId: Digit.ULBService.getCurrentTenantId(),
-      }),
-    []
-  );
+      });
+    }
+  }, []);
 
     // Displaying employee module if userType is 'employee', otherwise displaying citizen module
   if (userType === "employee") {

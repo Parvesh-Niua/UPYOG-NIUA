@@ -91,13 +91,13 @@ const WTCreate = () => {
         }
     } 
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/check`);
+      return redirectWithHistory(`$check`);
     }
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.path}/${nextStep}`;
+      nextPage = `${nextStep}`;
     }
     else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.path}/${nextStep}/${index}` : `${match.path}/${nextStep}`;
+      nextPage = isMultiple && nextStep !== "map" ? `${nextStep}/${index}` : `${nextStep}`;
     }
 
     redirectWithHistory(nextPage);
@@ -112,13 +112,13 @@ const WTCreate = () => {
 
   const wt_create = async () => {
     if (params?.serviceType?.serviceType?.code === "WT") {
-      navigate(`${match.path}/wt-acknowledgement`);
+      navigate(`wt-acknowledgement`);
     }
     if (params?.serviceType?.serviceType?.code === "MobileToilet") {
-      navigate(`${match.path}/mt-acknowledgement`);
+      navigate(`mt-acknowledgement`);
     }
     if (params?.serviceType?.serviceType?.code === "TREE_PRUNING") {
-      navigate(`${match.path}/tp-acknowledgement`);
+      navigate(`tp-acknowledgement`);
     }
   };
 
@@ -166,17 +166,17 @@ const WTCreate = () => {
           const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
           return (
             <Route
-              path={`${match.path}/${routeObj.route}`}
+              path={`${routeObj.route}`}
               key={index}
               element={<Component config={{ texts, inputs, key, additionaFields }} onSelect={handleSelect} t={t} formData={params} />}
             />
           );
         })}
-        <Route path={`${match.path}/check`} element={<CheckPage onSubmit={wt_create} value={params} />} />
-        <Route path={`${match.path}/wt-acknowledgement`} element={<WTAcknowledgement data={params} onSuccess={onSuccess} />} />
-        <Route path={`${match.path}/mt-acknowledgement`} element={<MTAcknowledgement data={params} onSuccess={onSuccess} />} />
-        <Route path={`${match.path}/tp-acknowledgement`} element={<TPAcknowledgement data={params} onSuccess={onSuccess} />} />
-        <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} />} />
+        <Route path={`check`} element={<CheckPage onSubmit={wt_create} value={params} />} />
+        <Route path={`wt-acknowledgement`} element={<WTAcknowledgement data={params} onSuccess={onSuccess} />} />
+        <Route path={`mt-acknowledgement`} element={<MTAcknowledgement data={params} onSuccess={onSuccess} />} />
+        <Route path={`tp-acknowledgement`} element={<TPAcknowledgement data={params} onSuccess={onSuccess} />} />
+        <Route path="*" element={<Navigate to={`${config.indexRoute}`} />} />
       </Routes>
     </React.Fragment>
   );

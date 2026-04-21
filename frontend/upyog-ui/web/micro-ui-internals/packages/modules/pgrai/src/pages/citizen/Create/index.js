@@ -59,12 +59,12 @@ const PGRAICreate = ({ parentRoute }) => {
       nextStep = key;
     }
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/acknowledgement`);
+      return redirectWithHistory(`acknowledgement`);
     }
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.path}/${nextStep}`;
+      nextPage = `${nextStep}`;
     } else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.path}/${nextStep}/${index}` : `${match.path}/${nextStep}`;
+      nextPage = isMultiple && nextStep !== "map" ? `${nextStep}/${index}` : `${nextStep}`;
     }
     redirectWithHistory(nextPage);
   };
@@ -110,7 +110,7 @@ const PGRAICreate = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component config={{ texts, inputs, key}} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} />
@@ -119,9 +119,9 @@ const PGRAICreate = ({ parentRoute }) => {
         );
       })}
 
-      {/* <Route path={`${match.path}/check`} element={<CheckPage onSubmit={chbcreate} value={params} />} /> */}
-      <Route path={`${match.path}/acknowledgement`} element={<Acknowledgement data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} replace />} />
+      {/* <Route path={`check`} element={<CheckPage onSubmit={chbcreate} value={params} />} /> */}
+      <Route path={`acknowledgement`} element={<Acknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} replace />} />
     </Routes>
   );
 };

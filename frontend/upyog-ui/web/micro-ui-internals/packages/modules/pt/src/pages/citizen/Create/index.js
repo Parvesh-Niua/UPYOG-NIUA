@@ -101,12 +101,12 @@ const CreateProperty = ({ parentRoute }) => {
       nextStep = key;
     }
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/check`);
+      return redirectWithHistory(`check`);
     }
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.path}/${nextStep}`;
+      nextPage = `${nextStep}`;
     } else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.path}/${nextStep}/${index}` : `${match.path}/${nextStep}`;
+      nextPage = isMultiple && nextStep !== "map" ? `${nextStep}/${index}` : `${nextStep}`;
     }
 
     redirectWithHistory(nextPage);
@@ -127,7 +127,7 @@ const CreateProperty = ({ parentRoute }) => {
       "isRequestForDuplicatePropertyValidation":true
     }
     setSearchData({ city: params.address.city.code, filters: tempObject });    
-    //navigate(`${match.path}/acknowledgement`);
+    //navigate(`acknowledgement`);
   };
   useEffect(() => {  
     if(propertyDataLoading && propertyData?.Properties.length >0)  
@@ -138,7 +138,7 @@ const CreateProperty = ({ parentRoute }) => {
     else if(propertyDataLoading && propertyData?.Properties.length === 0) {  
       setShowToast(false)  
       console.log("propertyDatapropertyData",propertyData)
-      navigate(`${match.path}/acknowledgement`);  
+      navigate(`acknowledgement`);  
     }  
     }, [propertyData]);
 
@@ -203,7 +203,7 @@ let propertyStructureDetails ={"propertyStructureDetails":propertyStructureDetai
   }
   const setModal=()=>{
     setShowToast(false)   
-    navigate(`${match.path}/acknowledgement`) 
+    navigate(`acknowledgement`) 
   }
   // commonFields=newConfig;
   /* use newConfig instead of commonFields for local development in case needed */
@@ -827,7 +827,7 @@ config.indexRoute = "info";
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component config={{ texts, inputs, key, isMandatory }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} />
@@ -835,9 +835,9 @@ config.indexRoute = "info";
           />
         );
       })}
-      <Route path={`${match.path}/check`} element={<CheckPage onSubmit={createProperty} value={params} />} />
-      <Route path={`${match.path}/acknowledgement`} element={<PTAcknowledgement data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} replace />} />
+      <Route path={`check`} element={<CheckPage onSubmit={createProperty} value={params} />} />
+      <Route path={`acknowledgement`} element={<PTAcknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} replace />} />
     </Routes>
     </div>
     <div>

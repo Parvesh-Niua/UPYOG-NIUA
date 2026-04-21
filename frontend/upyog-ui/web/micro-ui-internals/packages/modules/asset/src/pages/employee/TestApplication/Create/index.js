@@ -49,13 +49,13 @@ const ASSETCreate = ({ parentRoute }) => {
       nextStep = key;
     }
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/check`);
+      return redirectWithHistory(`check`);
     }
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.path}/${nextStep}`;
+      nextPage = `${nextStep}`;
     }
      else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.path}/${nextStep}/${index}` : `${match.path}/${nextStep}`;
+      nextPage = isMultiple && nextStep !== "map" ? `${nextStep}/${index}` : `${nextStep}`;
     }
 
     redirectWithHistory(nextPage);
@@ -69,7 +69,7 @@ const ASSETCreate = ({ parentRoute }) => {
     }
 
   const astcreate = async () => {
-    navigate(`${match.path}/acknowledgement`);
+    navigate(`acknowledgement`);
   };
 
   function handleSelect(key, data, skipStep, index, isAddMultiple = false) {
@@ -124,7 +124,7 @@ const ASSETCreate = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${routeObj.route}`}
+            path={`${routeObj.route}`}
             key={index}
             element={
               <Component config={{ texts, inputs, key }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} />
@@ -133,9 +133,9 @@ const ASSETCreate = ({ parentRoute }) => {
         );
       })}
 
-      <Route path={`${match.path}/check`} element={<CheckPage onSubmit={astcreate} value={params} />} />
-      <Route path={`${match.path}/acknowledgement`} element={<NewResponse data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} replace />} />
+      <Route path={`check`} element={<CheckPage onSubmit={astcreate} value={params} />} />
+      <Route path={`acknowledgement`} element={<NewResponse data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} replace />} />
     </Routes>
   );
 };

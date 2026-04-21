@@ -38,7 +38,7 @@ export const CreateComplaint = () => {
     if (nextStep === null) {
       wrapperSubmit();
     } else {
-      navigate(`${match.path}/${nextStep}`);
+      navigate(`${nextStep}`);
     }
   }, [params, nextStep]);
 
@@ -97,7 +97,7 @@ export const CreateComplaint = () => {
 
       await dispatch(createComplaint(data));
       await client.refetchQueries(["complaintsList"]);
-      navigate(`${match.path}/response`);
+      navigate(`response`);
     }
   };
 
@@ -130,14 +130,14 @@ export const CreateComplaint = () => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
           <Route
-            path={`${match.path}/${route}`}
+            path={`${route}`}
             key={index}
             element={<Component config={{ texts, inputs }} onSelect={handleSelect} onSkip={handleSkip} value={params} t={t} />}
           />
         );
       })}
-      <Route path={`${match.path}/response`} element={<Response match={match} />} />
-      <Route path="*" element={<Navigate to={`${match.path}/${config.indexRoute}`} />} />
+      <Route path={`response`} element={<Response match={match} />} />
+      <Route path="*" element={<Navigate to={`${config.indexRoute}`} />} />
     </Routes>
   );
 };
