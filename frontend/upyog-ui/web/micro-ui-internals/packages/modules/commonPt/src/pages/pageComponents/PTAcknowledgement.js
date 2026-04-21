@@ -80,7 +80,7 @@ const PTAcknowledgement = ({ onSuccess, onSelect, formData, redirectUrl, userTyp
       });
 
       if (!createNUpdate) {
-        if (!(mutation.isLoading && mutation.isIdle)) {
+        if (!(mutation.isPending && mutation.isIdle)) {
           if (mutation.isSuccess) {
             setTimeout(() => {
               if (redirectUrl) {
@@ -155,7 +155,7 @@ const PTAcknowledgement = ({ onSuccess, onSelect, formData, redirectUrl, userTyp
     }
   };
 
-  return mutation.isLoading || mutation.isIdle ? (
+  return mutation.isPending || mutation.isIdle ? (
     <Loader />
   ) : (
     <Card>

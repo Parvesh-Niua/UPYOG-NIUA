@@ -40,7 +40,7 @@ const Acknowledgement = (props) => {
     };
   }, []);
 
-  if (mutation.isLoading && !mutation.isIdle) {
+  if (mutation.isPending && !mutation.isIdle) {
     return <Loader />;
   }
 

@@ -130,7 +130,7 @@ const TLAcknowledgement = ({ data, onSuccess, onUpdateSuccess }) => {
     data.then((ress) => Digit.Utils.pdf.generate(ress));
   };
 
-  let enableLoader = !resubmit ? (!isEdit ? mutation.isIdle || mutation.isLoading : isDirectRenewal ? false : mutation1.isIdle || mutation1.isLoading):false;
+  let enableLoader = !resubmit ? (!isEdit ? mutation.isIdle || mutation.isPending : isDirectRenewal ? false : mutation1.isIdle || mutation1.isLoading):false;
   if(enableLoader)
   {return (<Loader />)}
   else if( ((mutation?.isSuccess == false && mutation?.isIdle == false) || (mutation1?.isSuccess == false && mutation1?.isIdle == false )) && !isDirectRenewal && !resubmit)

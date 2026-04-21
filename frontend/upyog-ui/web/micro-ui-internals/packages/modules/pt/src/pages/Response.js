@@ -111,7 +111,7 @@ const Response = (props) => {
     Digit.Utils.pdf.generate(data);
   };
 
-  if (mutation.isLoading || (mutation.isIdle && !mutationHappened)) {
+  if (mutation.isPending || (mutation.isIdle && !mutationHappened)) {
     return <Loader />;
   }
 

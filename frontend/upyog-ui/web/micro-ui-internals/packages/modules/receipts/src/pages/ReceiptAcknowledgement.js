@@ -77,7 +77,7 @@ const ReceiptAcknowledgement = (props) => {
     }
   };
 
-  if (mutation.isLoading || (mutation.isIdle && !mutationHappened)) {
+  if (mutation.isPending || (mutation.isIdle && !mutationHappened)) {
     return <Loader />;
   }
   const Payment = mutation?.data?.Payments[0] || successData?.Payments?.[0];

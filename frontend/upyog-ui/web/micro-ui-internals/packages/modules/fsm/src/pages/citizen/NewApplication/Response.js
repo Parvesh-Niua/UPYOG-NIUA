@@ -165,7 +165,7 @@ const Response = ({ data, onSuccess }) => {
   };
   const isSuccess = !successData ? mutation?.isSuccess : true;
 
-  return mutation.isLoading || (mutation.isIdle && !mutationHappened) ? (
+  return mutation.isPending || (mutation.isIdle && !mutationHappened) ? (
     <Loader />
   ) : (
     <Card>

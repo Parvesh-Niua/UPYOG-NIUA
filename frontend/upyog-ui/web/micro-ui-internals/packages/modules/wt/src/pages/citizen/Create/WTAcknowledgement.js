@@ -96,7 +96,7 @@ const WTAcknowledgement = ({ data, onSuccess }) => {
     Digit.Utils.pdf.generate(data);
   };
 
-  return mutation.isLoading || mutation.isIdle ? (
+  return mutation.isPending || mutation.isIdle ? (
     <Loader />
   ) : (
     <Card>

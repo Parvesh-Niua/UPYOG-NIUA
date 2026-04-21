@@ -111,7 +111,7 @@ useEffect(() => {
       return () => clearTimeout(timer); // Clear timer on cleanup
     }
   }, [showToast]);
-  return mutation.isLoading || mutation.isIdle ? (
+  return mutation.isPending || mutation.isIdle ? (
     <Loader />
   ) : (
     <Card>
