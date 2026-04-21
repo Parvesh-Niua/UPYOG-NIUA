@@ -41,7 +41,7 @@ import {
   EWComponents }
   from "@upyog/upyog-ui-module-ew";
 
-import { SVComponents, SVLinks, SVModule } from "@upyog/upyog-ui-module-sv";
+
 import {CHBModule,CHBLinks,CHBComponents} from "@upyog/upyog-ui-module-chb";
 import {ADSModule,ADSLinks,ADSComponents} from "@upyog/upyog-ui-module-ads";
 import { WTModule, WTLinks, WTComponents } from "@upyog/upyog-ui-module-wt";
@@ -150,9 +150,6 @@ const initDigitUI = () => {
     ADSLinks,
   ADSModule,
   ...ADSComponents,
-  SVModule,
-  SVLinks,
-  ...SVComponents,
   EWModule,
   EWLinks,
   ...EWComponents,

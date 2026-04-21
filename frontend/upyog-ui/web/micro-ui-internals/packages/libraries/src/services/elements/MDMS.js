@@ -2067,8 +2067,6 @@ const transformResponse = (type, MdmsRes, moduleCode, moduleName, tenantId, mast
     
     case "Asset_Classification":
       return Asset_Classification(MdmsRes);
-    case "Asset_Classification":
-        return Asset_Classification(MdmsRes);
     case "assetParentCategory":
           return getAssetParent(MdmsRes);
     
