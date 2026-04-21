@@ -99,12 +99,13 @@ export const ASSETModule = ({ stateCode, userType, tenants }) => {
 
   useEffect(
     () =>
-      userType === "employee" &&
-      Digit.LocalizationService.getLocale({
-        modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-        locale: Digit.StoreData.getCurrentLanguage(),
-        tenantId: Digit.ULBService.getCurrentTenantId(),
-      }),
+      userType === "employee"
+        ? Digit.LocalizationService.getLocale({
+            modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+            locale: Digit.StoreData.getCurrentLanguage(),
+            tenantId: Digit.ULBService.getCurrentTenantId(),
+          })
+        : undefined,
     []
   );
 

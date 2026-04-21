@@ -77,16 +77,16 @@ const EmployeeApp = ({ path, url, userType }) => {
           <VendorBreadCrumb location={location} />
         </div>
         <Routes>
-          <Route path={`${path}/registry/new-vendor`} element={<PrivateRoute><AddVendor parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/search-vendor`} element={<PrivateRoute><SearchVendor parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/registry/new-driver`} element={<PrivateRoute><AddDriver parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/registry/vendor-details/:id`} element={<PrivateRoute><EditVendorDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/registry/vehicle-details/:id`} element={<PrivateRoute><VehicleDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/registry/new-vehicle`} element={<PrivateRoute><AddVehicle parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/registry/additionaldetails`} element={<PrivateRoute><VendorCreate parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/registry/driver-details`} element={<PrivateRoute><DriverDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/common-search/:id`} element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/new-application`} element={<PrivateRoute><Create parentRoute={path} /></PrivateRoute>} />
+          <Route path="registry/new-vendor" element={<PrivateRoute><AddVendor/></PrivateRoute>} />
+          <Route path="search-vendor" element={<PrivateRoute><SearchVendor/></PrivateRoute>} />
+          <Route path="registry/new-driver" element={<PrivateRoute><AddDriver/></PrivateRoute>} />
+          <Route path="registry/vendor-details/:id" element={<PrivateRoute><EditVendorDetails/></PrivateRoute>} />
+          <Route path="registry/vehicle-details/:id" element={<PrivateRoute><VehicleDetails/></PrivateRoute>} />
+          <Route path="registry/new-vehicle" element={<PrivateRoute><AddVehicle/></PrivateRoute>} />
+          <Route path="registry/additionaldetails" element={<PrivateRoute><VendorCreate/></PrivateRoute>} />
+          <Route path="registry/driver-details" element={<PrivateRoute><DriverDetails/></PrivateRoute>} />
+          <Route path="common-search/:id" element={<PrivateRoute><SearchApp/></PrivateRoute>} />
+          <Route path="new-application" element={<PrivateRoute><Create/></PrivateRoute>} />
         </Routes>
       </div>
     </AppContainer>

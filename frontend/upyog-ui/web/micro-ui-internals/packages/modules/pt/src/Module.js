@@ -197,16 +197,15 @@ export const PTModule = ({ stateCode, userType, tenants }) => {
   addComponentsToRegistry();
 
   Digit.SessionStorage.set("PT_TENANTS", tenants);
-  useEffect(
-    () =>
-      userType === "employee" &&
+  useEffect(() => {
+    if (userType === "employee") {
       Digit.LocalizationService.getLocale({
         modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
         locale: Digit.StoreData.getCurrentLanguage(),
         tenantId: Digit.ULBService.getCurrentTenantId(),
-      }),
-    []
-  );
+      });
+    }
+  }, []);
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;
