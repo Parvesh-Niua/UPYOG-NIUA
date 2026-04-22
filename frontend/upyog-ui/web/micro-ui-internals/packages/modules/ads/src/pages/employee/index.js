@@ -42,9 +42,15 @@ const EmployeeApp = ({ path, url, userType }) => {
             </div>
           ) : null}
           <Routes>
-            <Route path={`${path}/bookad`} element={<PrivateRoute><ADSCreate /></PrivateRoute>} />
+            {/* <Route path={`${path}/bookad`} element={<PrivateRoute><ADSCreate /></PrivateRoute>} />
             <Route path={`${path}/my-applications`} element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
-            <Route path={`${path}/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+            <Route path={`${path}/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} /> */}
+
+            <Route path="bookad/*" element={<PrivateRoute><ADSCreate /></PrivateRoute>} />
+            <Route path="my-applications" element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
+            <Route path="applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+
+
           </Routes>
         </div>
       </React.Fragment>

@@ -26,42 +26,75 @@ export const AppModules = ({ stateCode, userType, modules, appTenants }) => {
     );
   }
 
-  const appRoutes = modules.map(({ code, tenants }, index) => {
-    const Module = Digit.ComponentRegistryService.getComponent(`${code}Module`);
-    return Module ? (
-      <Route
-        key={index}
-        path={`${path}/${code.toLowerCase()}/*`}
-        element={<Module stateCode={stateCode} moduleCode={code} userType={userType} tenants={getTenants(tenants, appTenants)} />}
-      />
-    ) : (
-      <Route
-        key={index}
-        path={`${path}/${code.toLowerCase()}`}
-        element={
-          <Navigate
-            to="/upyog-ui/employee/user/error?type=notfound"
-            state={{ from: location.pathname + location.search }}
-            replace
-          />
-        }
-      />
-    );
-  });
+  // const appRoutes = modules.map(({ code, tenants }, index) => {
+  //   const Module = Digit.ComponentRegistryService.getComponent(`${code}Module`);
+  //   return Module ? (
+  //     <Route
+  //       key={index}
+  //       path={`${path}/${code.toLowerCase()}/*`}
+  //       element={<Module stateCode={stateCode} moduleCode={code} userType={userType} tenants={getTenants(tenants, appTenants)} />}
+  //     />
+  //   ) : (
+  //     <Route
+  //       key={index}
+  //       path={`${path}/${code.toLowerCase()}`}
+  //       element={
+  //         <Navigate
+  //           to="/upyog-ui/employee/user/error?type=notfound"
+  //           state={{ from: location.pathname + location.search }}
+  //           replace
+  //         />
+  //       }
+  //     />
+  //   );
+  // });
 
-  return (
-    <div className="ground-container">
-      <Routes>
-        {appRoutes}
-        <Route
-          path={`${path}/login`}
-          element={<Navigate to="/upyog-ui/employee/user/login" state={{ from: location.pathname + location.search }} replace />}
-        />
-        <Route path={`${path}/forgot-password`} element={<ForgotPassword />} />
-        <Route path={`${path}/change-password`} element={<ChangePassword />} />
-        <Route path="*" element={<AppHome userType={userType} modules={modules} />} />
-        {/* <Route path={`${path}/user-profile`}> <UserProfile /></Route> */}
-      </Routes>
-    </div>
+  // return (
+  //   <div className="ground-container">
+  //     <Routes>
+  //       {appRoutes}
+  //       <Route
+  //         path={`${path}/login`}
+  //         element={<Navigate to="/upyog-ui/employee/user/login" state={{ from: location.pathname + location.search }} replace />}
+  //       />
+  //       <Route path={`${path}/forgot-password`} element={<ForgotPassword />} />
+  //       <Route path={`${path}/change-password`} element={<ChangePassword />} />
+  //       <Route path="*" element={<AppHome userType={userType} modules={modules} />} />
+  //       {/* <Route path={`${path}/user-profile`}> <UserProfile /></Route> */}
+  //     </Routes>
+  //   </div>
+  // );
+
+
+
+
+  const appRoutes = modules.map(({ code, tenants }, index) => {
+  const Module = Digit.ComponentRegistryService.getComponent(`${code}Module`);
+  return Module ? (
+    <Route
+      key={index}
+      path={`${code.toLowerCase()}/*`}
+      element={<Module stateCode={stateCode} moduleCode={code} userType={userType} tenants={getTenants(tenants, appTenants)} />}
+    />
+  ) : (
+    <Route
+      key={index}
+      path={`${code.toLowerCase()}`}
+      element={<Navigate to="/upyog-ui/employee/user/error?type=notfound" state={{ from: location.pathname + location.search }} replace />}
+    />
   );
+});
+
+return (
+  <div className="ground-container">
+    <Routes>
+      {appRoutes}
+      <Route path="login" element={<Navigate to="/upyog-ui/employee/user/login" state={{ from: location.pathname + location.search }} replace />} />
+      <Route path="forgot-password" element={<ForgotPassword />} />
+      <Route path="change-password" element={<ChangePassword />} />
+      <Route path="*" element={<AppHome userType={userType} modules={modules} />} />
+    </Routes>
+  </div>
+);
+
 };
