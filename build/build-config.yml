@@ -676,15 +676,6 @@ config:
         dockerfile: 'build/maven/Dockerfile'
       - work-dir: 'municipal-services/pqm-anomaly-finder/src/main/resources/db'
         image-name: 'pqm-anomaly-finder-db'
-        
-  - name: 'builds/upyog/municipal-services/cnd-calculator'
-    build:
-      - work-dir: 'municipal-services/cnd-calculator'
-        image-name: 'cnd-calculator'
-        dockerfile: 'build/maven/Dockerfile'
-    #  - work-dir: 'municipal-services/cnd-calculator/src/main/resources/db'
-    #    image-name: 'cnd-calculator-db'
- # Utilities
  
   - name: "builds/upyog/utilities/egov-weekly-impact-notifier"
     build:
@@ -961,6 +952,14 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "municipal-services/cnd-service/src/main/resources/db"
         image-name: "cnd-service-db"
+
+  - name: 'builds/upyog/municipal-services/cnd-calculator'
+      build:
+        - work-dir: 'municipal-services/cnd-calculator'
+          image-name: 'cnd-calculator'
+          dockerfile: 'build/maven/Dockerfile'
+        - work-dir: "municipal-services/cnd-calculator/src/main/resources/db"
+          image-name: "cnd-calculate-db"
         
   - name: 'builds/upyog/municipal-services/pgr-ai-services'
     build:
@@ -977,8 +976,6 @@ config:
         dockerfile: "build/maven/Dockerfile"
       - work-dir: "municipal-services/tp-services/src/main/resources/db"
         image-name: "tp-services-db"
-
- 
 
   - name: "builds/upyog/municipal-services/request-service"
     build:
@@ -995,33 +992,6 @@ config:
         dockerfile: "build/maven/Dockerfile"  
       - work-dir: "municipal-services/vendor-management/src/main/resources/db"
         image-name: "vendor-management-db" 
-
- 
-        
-  - name: 'builds/upyog/municipal-services/cnd-calculator'
-    build:
-      - work-dir: 'municipal-services/cnd-calculator'
-        image-name: 'cnd-calculator'
-        dockerfile: 'build/maven/Dockerfile'
-      - work-dir: "municipal-services/cnd-calculator/src/main/resources/db"
-        image-name: "cnd-calculate-db"
-
-  - name: 'builds/upyog/municipal-services/pgr-ai-services'
-    build:
-      - work-dir: 'municipal-services/pgr-ai-services'
-        image-name: 'pgr-ai-services'
-        dockerfile: 'build/maven/Dockerfile'
-      - work-dir: "municipal-services/pgr-ai-services/src/main/resources/db"
-        image-name: "pgr-ai-services-db"
-
-  - name: "builds/upyog/municipal-services/tp-services"
-    build:
-      - work-dir: "municipal-services/tp-services"
-        image-name: "tp-services"
-        dockerfile: "build/maven/Dockerfile"
-      - work-dir: "municipal-services/tp-services/src/main/resources/db"
-        image-name: "tp-services-db"
-
 
   - name: "builds/upyog/municipal-services/estate-management"
     build:
