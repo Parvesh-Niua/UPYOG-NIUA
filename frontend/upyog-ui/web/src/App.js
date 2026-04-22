@@ -10,7 +10,7 @@ import {
   PTLinks,
   PTComponents,
 } from "@upyog/digit-ui-module-pt";
-import { MCollectModule, MCollectLinks, initMCollectComponents } from "@upyog/digit-ui-module-mcollect";
+// import { MCollectModule, MCollectLinks, initMCollectComponents } from "@upyog/digit-ui-module-mcollect";
 import { initDSSComponents } from "@upyog/digit-ui-module-dss";
 import {
   PaymentModule,
@@ -71,7 +71,7 @@ const enabledModules = [
   "QuickPayLinks",
   "DSS",
   "NDSS",
-  "MCollect",
+  // "MCollect",
   "HRMS",
   "TL",
   "Receipts",
@@ -107,8 +107,8 @@ window.Digit.ComponentRegistryService.setupRegistry({
   PaymentModule,
   PaymentLinks,
   ...PTComponents,
-  MCollectLinks,
-  MCollectModule,
+  // MCollectLinks,
+  // MCollectModule,
   HRMSModule,
   TLModule,
   TLLinks,
@@ -148,7 +148,7 @@ window.Digit.ComponentRegistryService.setupRegistry({
 initPGRComponents();
 initFSMComponents();
 initDSSComponents();
-initMCollectComponents();
+// initMCollectComponents();
 initHRMSComponents();
 initTLComponents();
 initReceiptsComponents();
