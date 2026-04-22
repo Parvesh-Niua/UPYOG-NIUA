@@ -75,14 +75,13 @@ const EmployeeApp = ({ path, url, userType }) => {
             </div>
           ) : null}
           <Routes>
-            <Route path={`${path}/`} element={<PrivateRoute><ASSETLinks matchPath={path} userType={userType} /></PrivateRoute>} />
+            <Route path="/*" element={<PrivateRoute><ASSETLinks userType={userType} /></PrivateRoute>} />
             <Route
-              path={`${path}/assetservice/inbox`}
+              path= "assetservice/inbox/*"
               element={
                 <PrivateRoute>
                   <Inbox
                     useNewInboxAPI={true}
-                    parentRoute={path}
                     businessService="asset-create"
                     filterComponent="AST_INBOX_FILTER"
                     initialStates={inboxInitialState}
@@ -91,25 +90,25 @@ const EmployeeApp = ({ path, url, userType }) => {
                 </PrivateRoute>
               }
             />
-            <Route path={`${path}/assetservice/assign-assets/:id`} element={<PrivateRoute><NewAssetAssignApplication parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/maintenance-assets/:id`} element={<PrivateRoute><MaintenanceApplication parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/dispose-assets/:id`} element={<PrivateRoute><DisposeApplication parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/return-assets/:id`} element={<PrivateRoute><NewAssetReturnApplication parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/edit/:id`} element={<PrivateRoute><EditAsset parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/new-assets`} element={<PrivateRoute><ASSETCreate parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/assign-response`} element={<PrivateRoute><Response  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/maintenance`} element={<PrivateRoute><Maintenance  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/edit-maintenance`} element={<PrivateRoute><EditMaintenance  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/maintenance-edit/:id`} element={<PrivateRoute><EditAssetMaintenance parentUrl={url} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/asset-dispose-response`} element={<PrivateRoute><DisposeResponse  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/asset-process-depreciation-response`} element={<PrivateRoute><ProcessDepreciationResponse  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/return-response`} element={<PrivateRoute><ReturnResponse  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/search`} element={<PrivateRoute><Search  t={t} parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/my-asset`} element={<PrivateRoute><SearchApp  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/assetservice/report`} element={<PrivateRoute><SearchReport  parentRoute={path} /></PrivateRoute>} />
-            <Route path={`${path}/assetservice/edit-response`} element={<PrivateRoute><EditResponse parentRoute={path} /></PrivateRoute>} />
+            <Route path= "assetservice/assign-assets/:id" element={<PrivateRoute><NewAssetAssignApplication /></PrivateRoute>} />
+            <Route path= "assetservice/maintenance-assets/:id" element={<PrivateRoute><MaintenanceApplication /></PrivateRoute>} />
+            <Route path= "assetservice/dispose-assets/:id" element={<PrivateRoute><DisposeApplication /></PrivateRoute>} />
+            <Route path= "assetservice/return-assets/:id" element={<PrivateRoute><NewAssetReturnApplication  /></PrivateRoute>} />
+            <Route path= "assetservice/edit/:id" element={<PrivateRoute><EditAsset /></PrivateRoute>} />
+            <Route path= "assetservice/new-assets/*" element={<PrivateRoute><ASSETCreate /></PrivateRoute>} />
+            <Route path= "assetservice/application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
+            <Route path= "assetservice/applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
+            <Route path= "assetservice/assign-response/*" element={<PrivateRoute><Response  /></PrivateRoute>} />
+            <Route path= "assetservice/maintenance/*" element={<PrivateRoute><Maintenance  /></PrivateRoute>} />
+            <Route path= "assetservice/edit-maintenance/*" element={<PrivateRoute><EditMaintenance  /></PrivateRoute>} />
+            <Route path= "assetservice/maintenance-edit/:id" element={<PrivateRoute><EditAssetMaintenance /></PrivateRoute>} />
+            <Route path= "assetservice/asset-dispose-response/*" element={<PrivateRoute><DisposeResponse  /></PrivateRoute>} />
+            <Route path= "assetservice/asset-process-depreciation-response/*" element={<PrivateRoute><ProcessDepreciationResponse  /></PrivateRoute>} />
+            <Route path= "assetservice/return-response/*" element={<PrivateRoute><ReturnResponse  /></PrivateRoute>} />
+            {/* <Route path= "assetservice/search/*" element={<PrivateRoute><Search /></PrivateRoute>} /> */}
+            <Route path= "assetservice/my-asset/*" element={<PrivateRoute><SearchApp  /></PrivateRoute>} />
+            <Route path= "assetservice/report/*" element={<PrivateRoute><SearchReport  /></PrivateRoute>} />
+            <Route path= "assetservice/edit-response/*" element={<PrivateRoute><EditResponse /></PrivateRoute>} />
           </Routes>
         </div>
       </React.Fragment>

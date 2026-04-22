@@ -87,14 +87,13 @@ const EmployeeApp = ({ path, url, userType }) => {
           </div>
         ) : null}
         <Routes>
-          <Route path={`${path}/`} element={<PrivateRoute><PTRLinks matchPath={path} userType={userType} /></PrivateRoute>} />
+          <Route path={`/*`} element={<PrivateRoute><PTRLinks userType={userType} /></PrivateRoute>} />
           <Route
-            path={`${path}/petservice/inbox`}
+            path= "petservice/inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
                   useNewInboxAPI={true}
-                  parentRoute={path}
                   businessService="ptr"
                   filterComponent="PTR_INBOX_FILTER"
                   initialStates={inboxInitialState}
@@ -103,17 +102,16 @@ const EmployeeApp = ({ path, url, userType }) => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/petservice/new-application`} element={<PrivateRoute><NewApplication /></PrivateRoute>} />
-          <Route path={`${path}/petservice/revised-application`} element={<PrivateRoute><NewApplication /></PrivateRoute>} />
-          <Route path={`${path}/petservice/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/petservice/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/petservice/search`} element={<PrivateRoute><SearchApp path={`${path}/petservice/search`} /></PrivateRoute>} />
+          <Route path= "petservice/new-application/*" element={<PrivateRoute><NewApplication /></PrivateRoute>} />
+          <Route path= "petservice/revised-application/*" element={<PrivateRoute><NewApplication /></PrivateRoute>} />
+          <Route path= "petservice/application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
+          <Route path= "petservice/applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
+          <Route path= "petservice/search/*" element={<PrivateRoute><SearchApp /></PrivateRoute>} />
           <Route
-            path={`${path}/searchold`}
+            path= "searchold/*"
             element={
               <PrivateRoute>
                 <Inbox
-                  parentRoute={path}
                   businessService="ptr"
                   middlewareSearch={searchMW}
                   initialStates={inboxInitialState}
@@ -123,7 +121,7 @@ const EmployeeApp = ({ path, url, userType }) => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/petservice/my-applications`} element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
+          <Route path= "petservice/my-applications/*" element={<PrivateRoute><SearchApp /></PrivateRoute>} />
         </Routes>
       </div>
     </React.Fragment>

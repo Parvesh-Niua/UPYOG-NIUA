@@ -78,17 +78,19 @@ export const VENDORModule = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("VENDOR_TENANTS", tenants);
 
-  useEffect(
-    () =>
-      userType === "employee"
-        ? Digit.LocalizationService.getLocale({
-            modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-            locale: Digit.StoreData.getCurrentLanguage(),
-            tenantId: Digit.ULBService.getCurrentTenantId(),
-          })
-        : undefined,
-    []
-  );
+  useEffect(() => {
+    if (userType === "employee") {
+      const loadLocale = async () => {
+        await Digit.LocalizationService.getLocale({
+          modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+          locale: Digit.StoreData.getCurrentLanguage(),
+          tenantId: Digit.ULBService.getCurrentTenantId(),
+        });
+      };
+  
+      loadLocale();
+    }
+  }, []);
 
   return <EmployeeApp path={path} url={url} userType={userType} />;
 };

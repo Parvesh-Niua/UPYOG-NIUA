@@ -48,14 +48,13 @@ const EmployeeApp = ({ path, url, userType }) => {
             </div>
           ) : null}
           <Routes>
-            <Route path={`${path}/`} element={<PrivateRoute><CHBLinks matchPath={path} userType={userType} /></PrivateRoute>} />
+            <Route path={`/*`} element={<PrivateRoute><CHBLinks userType={userType} /></PrivateRoute>} />
             <Route
-              path={`${path}/inbox`}
+              path= "inbox/*"
               element={
                 <PrivateRoute>
                   <Inbox
                     useNewInboxAPI={true}
-                    parentRoute={path}
                     businessService="booking-refund"
                     filterComponent="CHB_INBOX_FILTER"
                     initialStates={inboxInitialState}
@@ -64,10 +63,10 @@ const EmployeeApp = ({ path, url, userType }) => {
                 </PrivateRoute>
               }
             />
-            <Route path={`${path}/bookHall`} element={<PrivateRoute><CHBCreate /></PrivateRoute>} />
-            <Route path={`${path}/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-            <Route path={`${path}/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-            <Route path={`${path}/my-applications`} element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
+            <Route path= "bookHall/*" element={<PrivateRoute><CHBCreate /></PrivateRoute>} />
+            <Route path= "application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
+            <Route path= "applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
+            <Route path= "my-applications/*" element={<PrivateRoute><SearchApp /></PrivateRoute>} />
           </Routes>
         </div>
       </React.Fragment>
