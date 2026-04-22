@@ -45,7 +45,6 @@ const WSActivationPlumberDetails = ({ config, onSelect, userType, formData, setE
         setError,
         clearErrors,
         config,
-        setPlumberDetails,
         setIsErrors,
         isErrors,
         plumberDetails,

@@ -350,7 +350,7 @@ function ApplicationDetailsContent({
 
             {detail?.isTable && (
               <table
-                style={{ tableLayout: "fixed", width: "100%", borderCollapse: "collapse", borderCollapse: "collapse", border: "1px solid black" }}
+                style={{ tableLayout: "fixed", width: "100%", borderCollapse: "collapse", border: "1px solid black" }}
               >
                 <tr style={{ textAlign: "left" }}>
                   {detail?.headers.map((header) => (

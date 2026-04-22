@@ -187,7 +187,6 @@ export const newConfig =[
                     "route": "electricity-number",
                     "component": "Electricity",
                     "key": "electricity",
-                    "withoutLabel": true,
                     "texts": {
                         "headerCaption": "",
                         "header": "PT_ASSESMENT1_ELECTRICITY_NUMBER",

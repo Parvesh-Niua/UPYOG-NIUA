@@ -71,7 +71,6 @@ const WSConnectionDetails = ({ config, onSelect, userType, formData, setError, f
     focusIndex,
     connectionDetails,
     setFocusIndex,
-    formData,
     formState,
     t,
     setError,

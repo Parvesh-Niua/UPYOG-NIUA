@@ -150,7 +150,6 @@ const WSConnectionHolderDetails = ({ config, onSelect, userType, formData, setEr
 
   const commonProps = {
     focusIndex,
-    connectionHolderDetails,
     setFocusIndex,
     formData,
     formState,

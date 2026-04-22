@@ -38,13 +38,13 @@ const ActionModal = ({ t, closeModal, submitAction, actionData, action, applicat
     switch (action) {
       case "APPROVE": {
         setConfig(
-          configAcceptApplication({ t, action, selectFile, uploadedFile, error, isCommentRequired: false, setUploadedFile,file, error })
+          configAcceptApplication({ t, action, selectFile, uploadedFile, isCommentRequired: false, setUploadedFile,file, error })
         )
         break;
       }
       case "SEND_TO_ARCHITECT":
         setConfig(
-          configAcceptApplication({ t, action, selectFile, uploadedFile, error, setUploadedFile,file, error })
+          configAcceptApplication({ t, action, selectFile, uploadedFile, setUploadedFile,file, error })
         );
         break;
       case "TERMS_AND_CONDITIONS":
@@ -53,7 +53,7 @@ const ActionModal = ({ t, closeModal, submitAction, actionData, action, applicat
         break;  
       default:
         setConfig(
-          configAcceptApplication({ t, action, selectFile, uploadedFile, error, isCommentRequired: false , setUploadedFile,file, error})
+          configAcceptApplication({ t, action, selectFile, uploadedFile, isCommentRequired: false , setUploadedFile,file, error})
         )
     }
   }, [action, uploadedFile, error]);

@@ -228,7 +228,7 @@ export default defineConfig(({ mode }) => {
     // Optimization configuration for pre-bundling dependencies
     optimizeDeps: {
       // Pre-bundle these packages for faster initial load
-      include: ["react", "react-dom", "react-router-dom"],
+      include: ["react", "react-dom", "react-router-dom", "leaflet-draw"],
       // Exclude workspace packages from pre-bundling (they come from dist/ after yarn build)
       // This prevents Vite from unnecessarily processing our own packages
       exclude: Object.keys(moduleAliases), // 👈 IMPORTANT: prevents double-bundling

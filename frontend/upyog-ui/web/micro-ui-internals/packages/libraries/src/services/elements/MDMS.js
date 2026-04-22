@@ -2044,8 +2044,8 @@ const transformResponse = (type, MdmsRes, moduleCode, moduleName, tenantId, mast
       return GetReceivedPaymentType(MdmsRes);
     case "UrcConfig":
       return getUrcConfig(MdmsRes);
-    case "Documents":
-      return getPetDocumentsRequiredScreen(MdmsRes);
+    // case "Documents":
+    //   return getPetDocumentsRequiredScreen(MdmsRes);
     case "PetType":
       return getPetType(MdmsRes); 
     case "BreedType":
@@ -2079,8 +2079,8 @@ const transformResponse = (type, MdmsRes, moduleCode, moduleName, tenantId, mast
     case "AssetTypeParent":
           return AssetTypeParent(MdmsRes);
     
-    case "Documents":
-          return getAssetDocuments(MdmsRes);
+    // case "Documents":
+    //       return getAssetDocuments(MdmsRes);
     case "AssetSubTypeParent":
             return AssetSubTypeParent(MdmsRes);
       
@@ -2088,10 +2088,10 @@ const transformResponse = (type, MdmsRes, moduleCode, moduleName, tenantId, mast
             return Assetcommondetail(MdmsRes);
     case "AST_PARENT":
               return AST_PARENT(MdmsRes);
-    case "Documents":
-      return getSVDocuments(MdmsRes);
-    case "Documents":
-      return getADSDocuments(MdmsRes);
+    // case "Documents":
+    //   return getSVDocuments(MdmsRes);
+    // case "Documents":
+    //   return getADSDocuments(MdmsRes);
     case "ProductName":
       return getProductPrice(MdmsRes);
     case "VendorName":
@@ -2111,8 +2111,8 @@ const transformResponse = (type, MdmsRes, moduleCode, moduleName, tenantId, mast
     case "ChbCommunityHalls":
       return getChbCommunityHalls(MdmsRes);
     
-    case "Documents":
-      return getChbDocuments(MdmsRes);
+    // case "Documents":
+    //   return getChbDocuments(MdmsRes);
 
     case "i18nKey":
       return getDataWithi18nkey(MdmsRes, moduleName, masterName, i18nKeyString);

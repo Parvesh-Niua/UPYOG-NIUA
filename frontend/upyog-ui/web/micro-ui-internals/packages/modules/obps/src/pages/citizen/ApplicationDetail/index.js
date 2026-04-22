@@ -162,7 +162,7 @@ const ApplicationDetails = () => {
                     <a target="_blank" href={documents[document.fileStoreId]?.split(",")[0]}>
                       <PDFSvg />
                     </a>
-                    <p style={{ marginTop: "8px", fontWeight: "bold", fontSize: "16px", lineHeight: "19px", color: "#505A5F", fontWeight: "400" }}>
+                    <p style={{ marginTop: "8px", fontSize: "16px", lineHeight: "19px", color: "#505A5F", fontWeight: "400" }}>
                       {t(`BPAREG_HEADER_${stringReplaceAll(document?.documentType?.toUpperCase(), ".", "_")}`)}
                     </p>
                     {/* <p style={{ marginTop: "8px", fontWeight: "bold", fontSize: "16px", lineHeight: "19px", color: "#505A5F", fontWeight: "400" }}>{decodeURIComponent( documents[document.fileStoreId]?.split(",")[0]?.split("?")[0]?.split("/")?.pop()?.slice(13))}</p> */}
