@@ -77,7 +77,7 @@ const StakeholderAcknowledgement = ({ data, onSuccess }) => {
     
   };
 
-  return mutation.isLoading || mutation.isIdle ? (
+  return mutation.isPending || mutation.isIdle ? (
     <Loader />
   ) : (
     <div>

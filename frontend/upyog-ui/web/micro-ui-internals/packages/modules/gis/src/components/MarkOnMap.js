@@ -1,6 +1,6 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Modal, Toast } from "@upyog/digit-ui-react-components";
-import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
+import { MapContainer, TileLayer, FeatureGroup, useMap } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import * as turf from "@turf/turf";
 import L from "leaflet";
@@ -26,47 +26,48 @@ const Close = () => (
     </svg>
 );
 
-const CloseBtn = (props) => {
-    return (
-        <div className="icon-bg-secondary" onClick={props.onClick}>
-            <Close />
-        </div>
-    );
+const CloseBtn = (props) => (
+  <div className="icon-bg-secondary" onClick={props.onClick}>
+    <Close />
+  </div>
+);
+
+// react-leaflet v4 replacement for whenCreated prop
+const MapController = ({ setMap }) => {
+  const map = useMap();
+  useEffect(() => {
+    setMap(map);
+  }, [map]);
+  return null;
 };
 
-
-
-const MarkOnMap = ({closeModal,location,onGeometrySave,onAreaSave,savedGeometry, savedArea}) => {
+const MarkOnMap = ({ closeModal, location, onGeometrySave, onAreaSave, savedGeometry, savedArea }) => {
   const [geometry, setGeometry] = useState(savedGeometry || null);
   const [area, setArea] = useState(savedArea || null);
   const [showToast, setShowToast] = useState(null);
   const [map, setMap] = useState(null);
   const featureGroupRef = useRef(null);
-  const center = location 
-    ? [location.lat, location.lng]
-    : [20.5937, 78.9629]; // default India center
+  const center = location ? [location.lat, location.lng] : [20.5937, 78.9629];
 
-
-
-    // Load saved geometry AFTER both map + featureGroup are ready
+  // Load saved geometry AFTER both map + featureGroup are ready
   useEffect(() => {
-        if (!map || !featureGroupRef.current || !savedGeometry) return;
+    if (!map || !featureGroupRef.current || !savedGeometry) return;
 
-        featureGroupRef.current.clearLayers();
-        try {
-        const geoJsonLayer = L.geoJSON(savedGeometry);
-        geoJsonLayer.eachLayer((layer) => {
-            featureGroupRef.current.addLayer(layer);
-            map.fitBounds(layer.getBounds());
-        });
+    featureGroupRef.current.clearLayers();
+    try {
+      const geoJsonLayer = L.geoJSON(savedGeometry);
+      geoJsonLayer.eachLayer((layer) => {
+        featureGroupRef.current.addLayer(layer);
+        map.fitBounds(layer.getBounds());
+      });
 
-        if (savedGeometry.geometry?.type === "Polygon") {
-            const polygon = turf.polygon(savedGeometry.geometry.coordinates);
-            setArea(turf.area(polygon));
-        }
-        } catch (err) {
-        console.error("Error restoring geometry:", err);
-        }
+      if (savedGeometry.geometry?.type === "Polygon") {
+        const polygon = turf.polygon(savedGeometry.geometry.coordinates);
+        setArea(turf.area(polygon));
+      }
+    } catch (err) {
+      console.error("Error restoring geometry:", err);
+    }
   }, [map, savedGeometry]);
 
   const _onCreated = (e) => {
@@ -74,42 +75,33 @@ const MarkOnMap = ({closeModal,location,onGeometrySave,onAreaSave,savedGeometry,
     const geoJson = layer.toGeoJSON();
     setGeometry(geoJson);
 
-     // Pass to parent if needed
-    if (onGeometrySave) {
-      onGeometrySave(geoJson);
-    }
+    if (onGeometrySave) onGeometrySave(geoJson);
 
-    // ✅ If polygon, calculate area
     if (geoJson.geometry.type === "Polygon") {
       const polygon = turf.polygon(geoJson.geometry.coordinates);
-      const polygonArea = turf.area(polygon); // returns area in square meters
+      const polygonArea = turf.area(polygon);
       setArea(polygonArea);
-      onAreaSave ? onAreaSave(polygonArea):null
-      
+      if (onAreaSave) onAreaSave(polygonArea);
     }
   };
 
   const _onEdited = (e) => {
-    const layers = e.layers;
-    layers.eachLayer((layer) => {
+    e.layers.eachLayer((layer) => {
       const geoJson = layer.toGeoJSON();
       setGeometry(geoJson);
-      
-      if (onGeometrySave) {
-        onGeometrySave(geoJson);
-      }
 
-      // Recalculate area after editing
+      if (onGeometrySave) onGeometrySave(geoJson);
+
       if (geoJson.geometry.type === "Polygon") {
         const polygon = turf.polygon(geoJson.geometry.coordinates);
         const polygonArea = turf.area(polygon);
         setArea(polygonArea);
-        onAreaSave ? onAreaSave(polygonArea) : null;
+        if (onAreaSave) onAreaSave(polygonArea);
       }
     });
   };
 
-  const _onDeleted = (e) => {
+  const _onDeleted = () => {
     setGeometry(null);
     setArea(null);
     if (onGeometrySave) {
@@ -123,7 +115,7 @@ const MarkOnMap = ({closeModal,location,onGeometrySave,onAreaSave,savedGeometry,
 
   useEffect(() => {
         if (geometry && area) {
-          setShowToast({ error: false, label: ("Marking Successfully Captured") });
+          setShowToast({ error: false, label: "Marking Successfully Captured" });
         }
       }, [geometry, area]);
 
@@ -146,8 +138,10 @@ const MarkOnMap = ({closeModal,location,onGeometrySave,onAreaSave,savedGeometry,
             center={center}
             zoom={20}
             style={{ height: "100%", width: "100%" }}
-            whenCreated={setMap}
           >
+          {/* v4 replacement for whenCreated */}
+          <MapController setMap={setMap} />
+
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; OpenStreetMap contributors"

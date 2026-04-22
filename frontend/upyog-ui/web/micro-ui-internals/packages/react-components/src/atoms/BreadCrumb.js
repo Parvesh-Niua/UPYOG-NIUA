@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import LinkButton from "../atoms/LinkButton";
+import { Link } from "react-router-dom";
 
 const Breadcrumb = (props) => {
   const navigate = Digit.Hooks.useCustomNavigate();

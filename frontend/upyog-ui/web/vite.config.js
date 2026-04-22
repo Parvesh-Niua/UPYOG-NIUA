@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
     "/egov-document-uploader", "/egov-url-shortening", "/inbox", "/tl-services",
     "/tl-calculator", "/edcr", "/bpa-services", "/noc-services", "/ws-services",
     "/sw-services", "/ws-calculator", "/sw-calculator", "/report",
-    "/service-request", "/pet-services", "/sv-services", "/ewaste-services",
+    "/service-request", "/pet-services", "/ewaste-services",
     "/chb-services", "/adv-services", "/employee-dashboard",
     "/verification-service", "/asset-services", "/vendor-management",
     "/tp-services", "/pgr-ai-services", "/gis-dx-service", "/individual",

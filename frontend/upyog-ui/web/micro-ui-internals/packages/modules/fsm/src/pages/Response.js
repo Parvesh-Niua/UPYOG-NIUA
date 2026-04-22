@@ -188,7 +188,7 @@ const Response = (props) => {
     }
   }, [selectedAction]);
 
-  if (mutation.isLoading || (mutation.isIdle && !mutationHappened)) {
+  if (mutation.isPending || (mutation.isIdle && !mutationHappened)) {
     return <Loader />;
   }
   let ACTIONS = ["GO_TO_HOME"];

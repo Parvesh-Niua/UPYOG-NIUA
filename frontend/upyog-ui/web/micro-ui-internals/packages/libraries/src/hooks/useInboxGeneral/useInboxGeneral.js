@@ -8,7 +8,6 @@ import { filterFunctions } from "./filterFn";
 import { getSearchFields } from "./searchFields";
 import { TLService } from "../../services/elements/TL";
 import { CHBServices } from "../../services/elements/CHB";
-import { SVService } from "../../services/elements/SV";
 import { EwService } from "../../services/elements/EW";
 
 const inboxConfig = (tenantId, filters) => ({
@@ -67,15 +66,7 @@ const inboxConfig = (tenantId, filters) => ({
     businessIdAliasForSearch: "bookingNo",
     fetchFilters: filterFunctions.CHB,
     _searchFn: () => CHBServices.search({ tenantId, filters }),
-  },
-  SV: {
-    services: ["street-vending"],
-    searchResponseKey: "SVDetails",
-    businessIdsParamForSearch: "applicationNo",
-    businessIdAliasForSearch: "applicationNo",
-    fetchFilters: filterFunctions.SV,
-    _searchFn: () => SVService.search({ tenantId, filters }),
-  },
+  }
 });
 
 const defaultCombineResponse = ({ totalCount, ...d }, wf) => {

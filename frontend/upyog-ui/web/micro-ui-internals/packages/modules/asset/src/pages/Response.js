@@ -91,7 +91,7 @@ const Response = (props) => {
   }, []);
 
 
-  if (mutation.isLoading || (mutation.isIdle && !mutationHappened)) {
+  if (mutation.isPending || (mutation.isIdle && !mutationHappened)) {
     return <Loader />;
   }
 

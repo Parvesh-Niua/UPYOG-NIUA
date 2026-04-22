@@ -19,9 +19,9 @@ const App = () => {
       <AppContainer>
         {!shouldHideBackButton(hideBackButtonConfig) ? <BackButton>Back</BackButton> : ""}
         <Routes>
-          <Route path={`${path}/fileGrievance`} element={<PrivateRoute><PGRAICreate /></PrivateRoute>} />
-          <Route path={`${path}/myGrievance`} element={<PrivateRoute><PGRAIApplicationDetails /></PrivateRoute>} />
-          <Route path={`${path}/application/:acknowledgementIds/:tenantId`} element={<PrivateRoute><PGRApplicationDetails /></PrivateRoute>} />
+          <Route path= "fileGrievance/*" element={<PrivateRoute><PGRAICreate /></PrivateRoute>} />
+          <Route path= "myGrievance/*" element={<PrivateRoute><PGRAIApplicationDetails /></PrivateRoute>} />
+          <Route path= "application/:acknowledgementIds/:tenantId" element={<PrivateRoute><PGRApplicationDetails /></PrivateRoute>} />
         </Routes>
       </AppContainer>
     </span>

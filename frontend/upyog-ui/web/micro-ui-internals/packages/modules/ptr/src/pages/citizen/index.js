@@ -43,12 +43,12 @@ const App = () => {
       <AppContainer>
         {!shouldHideBackButton(hideBackButtonConfig) ? <BackButton>Back</BackButton> : ""}
         <Routes>
-          <Route path={`${path}/petservice/new-application`} element={<PrivateRoute><PTRCreate /></PrivateRoute>} />
+          <Route path= "petservice/new-application/*" element={<PrivateRoute><PTRCreate /></PrivateRoute>} />
           {/* path added for renew application */}
-          <Route path={`${path}/petservice/revised-application`} element={<PrivateRoute><PTRCreate /></PrivateRoute>} />
-          <Route path={`${path}/petservice/application/:acknowledgementIds/:tenantId`} element={<PrivateRoute><PTRApplicationDetails /></PrivateRoute>} />
-          <Route path={`${path}/petservice/my-applications`} element={<PrivateRoute><PTRMyApplications /></PrivateRoute>} />
-          <Route path={`${path}/petservice/search`} element={<PrivateRoute><SearchApp path={`${path}/petservice/search`} /></PrivateRoute>} />
+          <Route path= "petservice/revised-application/*" element={<PrivateRoute><PTRCreate /></PrivateRoute>} />
+          <Route path= "petservice/application/:acknowledgementIds/:tenantId" element={<PrivateRoute><PTRApplicationDetails /></PrivateRoute>} />
+          <Route path= "petservice/my-applications/*" element={<PrivateRoute><PTRMyApplications /></PrivateRoute>} />
+          <Route path= "petservice/search/*" element={<PrivateRoute><SearchApp path={`${path}/petservice/search`} /></PrivateRoute>} />
         </Routes>
       </AppContainer>
     </span>

@@ -9,7 +9,7 @@
       "react": ">=19",
       "react-dom": ">=19",
       "@tanstack/react-query": "^5.0.0",
-    "react-router-dom": "^6.23.0"
+      "react-router-dom": "^6.23.0"
     },
     "dependencies": {
       "@upyog/digit-ui-libraries": "3.10.0",
@@ -17,10 +17,10 @@
       "lodash.merge": "^4.6.2",
       "react-hook-form": "6.15.8",
       "react-i18next": "11.16.2",
-     "leaflet": "1.8.0",
-      "leaflet-draw": "^1.0.4",
-      "react-leaflet": "^3.2.5",
-      "react-leaflet-draw": "^0.21.0",
+      "leaflet": "1.9.4",
+      "leaflet-draw": "1.0.4",
+      "react-leaflet": "4.2.1",
+      "react-leaflet-draw": "0.20.4",
       "@turf/turf": "^7.2.0"
     }
   }

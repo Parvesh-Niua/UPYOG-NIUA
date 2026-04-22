@@ -390,7 +390,6 @@ export default {
   downloadReceipt,
   downloadBill,
   downloadPDFFromLink,
-  downloadBill,
   getFileUrl,
   getFileTypeFromFileStoreURL,
   browser: BrowserUtil,

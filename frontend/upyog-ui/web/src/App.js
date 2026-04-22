@@ -49,14 +49,14 @@ import {
   EWComponents }
   from "@upyog/upyog-ui-module-ew";
 
-import { SVComponents, SVLinks, SVModule } from "@upyog/upyog-ui-module-sv";
-// import {CHBModule,CHBLinks,CHBComponents} from "@upyog/upyog-ui-module-chb";
+
+import {CHBModule,CHBLinks,CHBComponents} from "@upyog/upyog-ui-module-chb";
 import {ADSModule,ADSLinks,ADSComponents} from "@upyog/upyog-ui-module-ads";
 import { WTModule, WTLinks, WTComponents } from "@upyog/upyog-ui-module-wt";
 import { VENDORComponents, VENDORLinks, VENDORModule } from "@upyog/upyog-ui-module-vendor";
 import { PGRAIComponents, PGRAILinks, PGRAIModule } from "@upyog/upyog-ui-module-pgrai";
-// import { ASSETV2Components, ASSETV2Links, ASSETV2Module } from "@nudmcdgnpm/upyog-ui-module-asset-v2";
-// import { GISComponents, GISLinks, GISModule } from "@nudmcdgnpm/upyog-ui-module-gis";
+import { ASSETV2Components, ASSETV2Links, ASSETV2Module } from "@nudmcdgnpm/upyog-ui-module-asset-v2";
+import { GISComponents, GISLinks, GISModule } from "@nudmcdgnpm/upyog-ui-module-gis";
 // import "leaflet/dist/leaflet.css";
 // import "leaflet-draw/dist/leaflet.draw.css";
 
@@ -91,14 +91,14 @@ const enabledModules = [
   "ASSET",
   "ADS",
   "EW",
-  // "CHB",
+  "CHB",
   "WT",
   "VENDOR",
   "MT",
   "PGRAI",
   "TP",
-  // "ASSETV2",
-  // "GIS"
+  "ASSETV2",
+  "GIS"
 ];
 window.Digit.ComponentRegistryService.setupRegistry({
   ...paymentConfigs,
@@ -122,15 +122,12 @@ window.Digit.ComponentRegistryService.setupRegistry({
   ADSLinks,
   ADSModule,
   ...ADSComponents,
-  SVModule,
-  SVLinks,
-  ...SVComponents,
   EWModule,
   EWLinks,
   ...EWComponents,
-  // CHBModule,
-  // CHBLinks,
-  // ...CHBComponents,
+  CHBModule,
+  CHBLinks,
+  ...CHBComponents,
   WTModule,
   WTLinks,
   ...WTComponents,
@@ -140,12 +137,12 @@ window.Digit.ComponentRegistryService.setupRegistry({
   PGRAIModule,
   PGRAILinks,
   ...PGRAIComponents,
-  // ...ASSETV2Components, 
-  // ASSETV2Links, 
-  // ASSETV2Module,
-  //  GISLinks,
-  //   GISModule,
-  //   ...GISComponents
+  ...ASSETV2Components, 
+  ASSETV2Links, 
+  ASSETV2Module,
+   GISLinks,
+    GISModule,
+    ...GISComponents
 });
 
 initPGRComponents();

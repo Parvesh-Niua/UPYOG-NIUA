@@ -143,7 +143,7 @@ const CHBAcknowledgement = ({ data, onSuccess }) => {
       }
     }, [showToast]);
 
-  return mutation.isLoading || mutation.isIdle ? (
+  return mutation.isPending || mutation.isIdle ? (
     <Loader />
   ) : (
     <Card>

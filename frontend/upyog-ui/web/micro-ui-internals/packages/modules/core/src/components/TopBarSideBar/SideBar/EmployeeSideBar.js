@@ -10,9 +10,11 @@ const EmployeeSideBar = () => {
   const { isLoading, data } = Digit.Hooks.useAccessControl();
   const [search, setSearch] = useState("");
   const { t } = useTranslation();
+
+  // added  !sidebarRef.current as a safety check ensure sidebarRef.current is not null.  Removed loader as useEffect now either need nothing in return or cleanup function
   useEffect(() => {
-    if (isLoading) {
-      return <Loader />;
+    if (isLoading || !sidebarRef.current) {
+      return;
     }
     sidebarRef.current.style.cursor = "pointer";
     collapseNav();

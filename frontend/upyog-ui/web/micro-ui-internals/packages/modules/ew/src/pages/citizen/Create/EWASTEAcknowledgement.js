@@ -69,7 +69,7 @@ const EWASTEAcknowledgement = ({ data, onSuccess }) => {
     Digit.Utils.pdf.generateTable(data);
   };
 
-  return mutation.isLoading || mutation.isIdle ? (
+  return mutation.isPending || mutation.isIdle ? (
     <Loader />
   ) : 
   (
