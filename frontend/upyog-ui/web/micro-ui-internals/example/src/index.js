@@ -28,10 +28,16 @@ import { initBillsComponents, BillsModule } from "@upyog/digit-ui-module-bills";
 
 // import { PGRModule, PGRLinks } from "@upyog/digit-ui-module-pgr";
 // import { Body, TopBar } from "@upyog/digit-ui-react-components";
-import "@upyog-niua/upyog-css";
+import "@nudmcdgnpm/upyog-css";
 
 import { PTRModule, PTRLinks, PTRComponents } from "@upyog/upyog-ui-module-ptr";
 import { ASSETComponents, ASSETLinks, ASSETModule } from "@upyog/upyog-ui-module-asset";
+import { ASSETV2Components, ASSETV2Links, ASSETV2Module } from "@nudmcdgnpm/upyog-ui-module-asset-v2";
+import {
+  ChallanGenerationModule,
+  initChallanGenerationComponents,
+  ChallanReducers,
+} from "@upyog/digit-ui-module-challangeneration";
 
 import { 
   EWModule, 
@@ -45,6 +51,9 @@ import {ADSModule,ADSLinks,ADSComponents} from "@upyog/upyog-ui-module-ads";
 import { WTModule, WTLinks, WTComponents } from "@upyog/upyog-ui-module-wt";
 import { VENDORComponents, VENDORLinks, VENDORModule } from "@upyog/upyog-ui-module-vendor";
 import { PGRAIComponents, PGRAILinks, PGRAIModule } from "@upyog/upyog-ui-module-pgrai";
+import { GISComponents, GISLinks, GISModule } from "@nudmcdgnpm/upyog-ui-module-gis";
+import { ESTComponents, ESTLinks, ESTModule } from "@nudmcdgnpm/upyog-ui-module-est";
+import { initNDCComponents, NDCReducers } from "@nudmcdgnpm/upyog-ui-module-ndc";
 // import * as comps from "@upyog/digit-ui-react-components";
 
 // import { subFormRegistry } from "@upyog/digit-ui-libraries";
@@ -87,7 +96,12 @@ const enabledModules = [
   "VENDOR",
   "MT",
   "PGRAI",
-  "TP"
+  "TP",
+  "EST",
+  "ASSETV2",
+  "GIS",
+  "NDC",
+  "ChallanGeneration",
 ];
 
 const initTokens = (stateCode) => {
@@ -128,6 +142,7 @@ const initDigitUI = () => {
     ...PTComponents,
     MCollectLinks,
     MCollectModule,
+    ChallanGenerationModule,
     HRMSModule,
     ReceiptsModule,
     BillsModule,
@@ -157,15 +172,25 @@ const initDigitUI = () => {
   VENDORModule,
   VENDORLinks,
   ...VENDORComponents,
+    ESTModule,
+  ESTLinks,
+  ...ESTComponents,
   PGRAIModule,
   PGRAILinks,
-  ...PGRAIComponents
+  ...PGRAIComponents,
+  ...ASSETV2Components, 
+  ASSETV2Links, 
+  ASSETV2Module,
+  GISLinks,
+  GISModule,
+  ...GISComponents
   });
 
   initFSMComponents();
   initPGRComponents();
   initDSSComponents();
   initMCollectComponents();
+  initChallanGenerationComponents();
   initHRMSComponents();
   initTLComponents();
   initReceiptsComponents();
@@ -176,11 +201,14 @@ const initDigitUI = () => {
   initWSComponents();
   initCommonPTComponents();
   initBillsComponents();
+  initNDCComponents();
 
   // initCustomisationComponents();
 
   const moduleReducers = (initData) => ({
     pgr: PGRReducers(initData),
+    ndc: NDCReducers(initData),
+    challan: ChallanReducers(initData),
   });
 
   window.Digit.Customizations = {
@@ -192,7 +220,7 @@ const initDigitUI = () => {
     },
   };
 
-  const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";
+  const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pg";
   initTokens(stateCode);
 
   const registry = window?.Digit.ComponentRegistryService.getRegistry();
