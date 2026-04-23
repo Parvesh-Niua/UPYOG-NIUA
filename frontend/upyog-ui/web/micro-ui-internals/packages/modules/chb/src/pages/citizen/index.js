@@ -62,7 +62,7 @@ const App = () => {
           <Route path= "myBookings/*" element={<PrivateRoute><CHBMyApplications /></PrivateRoute>} />
           <Route path= "application/:acknowledgementIds/:tenantId" element={<PrivateRoute><CHBApplicationDetails /></PrivateRoute>} />
           <Route path= "map/*" element={<PrivateRoute><CHBMapView /></PrivateRoute>} />
-          <Route path= "bookHall/search/*" element={<PrivateRoute><Search t={t} parentRoute={path} /></PrivateRoute>} />
+          {/* <Route path= "bookHall/search/*" element={<PrivateRoute><Search t={t} parentRoute={path} /></PrivateRoute>} /> */}
         </Routes>
       </AppContainer>
     </span>

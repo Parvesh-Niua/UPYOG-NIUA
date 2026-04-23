@@ -89,7 +89,7 @@ const Table = ({
   useEffect(() => setGlobalFilter(onSearch), [onSearch, setGlobalFilter]);
 
   const tref = useRef();
-  
+  // Extract `key` from React Table props and pass it explicitly; don’t spread objects containing `key`.
   return (
     <React.Fragment>
     <div ref={tref} style={tref.current && tref.current.offsetWidth < tref.current.scrollWidth ? {...inboxStyles}: {}}>
@@ -98,42 +98,46 @@ const Table = ({
       <table className={className} {...getTableProps()} style={styles} ref={tableRef}>
          
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-             {showAutoSerialNo&& <th style={{  verticalAlign: "top"}}>
-              {showAutoSerialNo&& typeof showAutoSerialNo =="string"?t(showAutoSerialNo):t("TB_SNO")}
-              </th>}
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{ verticalAlign: "top" }}>
-                  {column.render("Header")}
-                  <span>{column.isSorted ? column.isSortedDesc ? <SortDown /> : <SortUp /> : ""}</span>
-                </th>
-              ))}
-            </tr>
-          ))}
+          {headerGroups.map((headerGroup) => {
+            const headerProps = headerGroup.getHeaderGroupProps();
+            const { key, ...restHeaderProps } = headerProps;
+            return (
+              <tr key={key} {...restHeaderProps}>
+               {showAutoSerialNo&& <th style={{  verticalAlign: "top"}}>
+                {showAutoSerialNo&& typeof showAutoSerialNo =="string"?t(showAutoSerialNo):t("TB_SNO")}
+                </th>}
+                {headerGroup.headers.map((column) => {
+                  const thProps = column.getHeaderProps(column.getSortByToggleProps());
+                  const { key, ...restThProps } = thProps;
+                  return (
+                    <th key={key} {...restThProps} style={{ verticalAlign: "top" }}>
+                      {column.render("Header")}
+                      <span>{column.isSorted ? column.isSortedDesc ? <SortDown /> : <SortUp /> : ""}</span>
+                    </th>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map((row, i) => {
             // rows.slice(0, 10).map((row, i) => {
             prepareRow(row);
+            const rowProps = row.getRowProps();
+            const { key: rowKey, ...restRowProps } = rowProps;
             return (
-              <tr {...row.getRowProps()}>
+              <tr key={rowKey} {...restRowProps}>
               {showAutoSerialNo&&  <td >
               {i+1}
               </td>}
                 {row.cells.map((cell) => {
+                  const cellProps = cell.getCellProps([
+                    getCellProps(cell),
+                  ]);
+                  const { key: cellKey, ...restCellProps } = cellProps;
                   return (
-                    <td
-                      // style={{ padding: "20px 18px", fontSize: "16px", borderTop: "1px solid grey", textAlign: "left", verticalAlign: "middle" }}
-                      {...cell.getCellProps([
-                        // {
-                        //   className: cell.column.className,
-                        //   style: cell.column.style,
-                        // },
-                        // getColumnProps(cell.column),
-                        getCellProps(cell),
-                      ])}
-                    >
+                    <td key={cellKey} {...restCellProps}>
                       {cell.attachment_link ? (
                         <a style={{ color: "#1D70B8" }} href={cell.attachment_link}>
                           {cell.render("Cell")}

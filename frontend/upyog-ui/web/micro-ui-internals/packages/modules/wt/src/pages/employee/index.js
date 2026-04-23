@@ -76,7 +76,7 @@ const EmployeeApp = ({ path,userType }) => {
         </div>
         <Routes>
           <Route
-            path={`${path}/inbox`}
+            path="inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
@@ -92,7 +92,7 @@ const EmployeeApp = ({ path,userType }) => {
             }
           />
           <Route
-            path={`${path}/mt/inbox`}
+            path="mt/inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
@@ -108,7 +108,7 @@ const EmployeeApp = ({ path,userType }) => {
             }
           />
           <Route
-            path={`${path}/tp/inbox`}
+            path="tp/inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
@@ -123,14 +123,14 @@ const EmployeeApp = ({ path,userType }) => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/request-service`} element={<PrivateRoute><WTCreate /></PrivateRoute>} />
-          <Route path={`${path}/mt/request-service`} element={<PrivateRoute><WTCreate /></PrivateRoute>} />
-          <Route path={`${path}/tp/request-service`} element={<PrivateRoute><WTCreate /></PrivateRoute>} />
-          <Route path={`${path}/booking-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/bookingsearch/booking-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/my-bookings`} element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"WT"} /></PrivateRoute>} />
-          <Route path={`${path}/mt/my-bookings`} element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"MT"} /></PrivateRoute>} />
-          <Route path={`${path}/tp/my-bookings`} element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"TP"} /></PrivateRoute>} />
+          <Route path="request-service/*" element={<PrivateRoute><WTCreate /></PrivateRoute>} />
+          <Route path="mt/request-service/*" element={<PrivateRoute><WTCreate /></PrivateRoute>} />
+          <Route path="tp/request-service/*" element={<PrivateRoute><WTCreate /></PrivateRoute>} />
+          <Route path="booking-details/:id/*" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path="bookingsearch/booking-details/:id/*" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path="my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"WT"} /></PrivateRoute>} />
+          <Route path="mt/my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"MT"} /></PrivateRoute>} />
+          <Route path="tp/my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"TP"} /></PrivateRoute>} />
         </Routes>
       </div>
     </AppContainer>

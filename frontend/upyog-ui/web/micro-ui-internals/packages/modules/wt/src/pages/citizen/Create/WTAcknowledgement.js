@@ -65,13 +65,17 @@ const WTAcknowledgement = ({ data, onSuccess }) => {
   const { tenants } = storeData || {};
 
   useEffect(() => {
+    if (!data || mutation.isSuccess || mutation.isPending) {
+      return;
+    }
     try {
       data.tenantId = tenantId;
       let formdata = waterTankerPayload(data);
       mutation.mutate(formdata, {onSuccess});
     } catch (err) {
+      console.error("Error in WTAcknowledgement submission:", err);
     }
-  }, []);
+  }, [data, tenantId]);
 
   /*custom hook to prevent going back in Acknowledgement /success response page
   * if you click Back then it will redirect you to Home page 
@@ -100,7 +104,7 @@ const WTAcknowledgement = ({ data, onSuccess }) => {
     <Loader />
   ) : (
     <Card>
-      <BannerPicker t={t} data={mutation.data} isSuccess={mutation.isSuccess} isLoading={mutation.isIdle || mutation.isLoading} />
+      <BannerPicker t={t} data={mutation.data} isSuccess={mutation.isSuccess} isLoading={mutation.isPending} />
       <StatusTable>
         {mutation.isSuccess && (
           <Row

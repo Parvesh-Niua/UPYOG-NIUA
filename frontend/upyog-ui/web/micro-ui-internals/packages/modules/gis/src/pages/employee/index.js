@@ -10,9 +10,9 @@ const EmployeeApp = ({ path }) => {
   return (
     <AppContainer>
       <Routes>
-        <Route path={`${path}/servicetype`} element={<PrivateRoute><ServiceTypes /></PrivateRoute>} />
-        <Route path={`${path}/mapview`} element={<PrivateRoute><MapView /></PrivateRoute>} />
-        <Route path={`${path}/viewpolygon`} element={<PrivateRoute><ViewOnMapAsset /></PrivateRoute>} />
+        <Route path="/servicetype/*" element={<PrivateRoute><ServiceTypes /></PrivateRoute>} />
+        <Route path="/mapview/*" element={<PrivateRoute><MapView /></PrivateRoute>} />
+        <Route path="/viewpolygon/*" element={<PrivateRoute><ViewOnMapAsset /></PrivateRoute>} />
       </Routes>
     </AppContainer>
   );

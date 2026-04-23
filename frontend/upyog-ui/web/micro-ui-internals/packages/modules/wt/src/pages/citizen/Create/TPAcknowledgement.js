@@ -62,14 +62,17 @@ const TPAcknowledgement = ({ data, onSuccess }) => {
   const { tenants } = storeData || {};
  
   useEffect(() => {
+    if (!data || mutation.isSuccess || mutation.isPending) {
+      return;
+    }
     try {
       data.tenantId = tenantId;
-      // if()
       let formdata = treePruningPayload(data);
       mutation.mutate(formdata, {onSuccess});
     } catch (err) {
+      console.error("Error in TPAcknowledgement submission:", err);
     }
-  }, []);
+  }, [data, tenantId]);
 
   /*custom hook to prevent going back in Acknowledgement /success response page
   * if you click Back then it will redirect you to Home page 
@@ -98,7 +101,7 @@ const TPAcknowledgement = ({ data, onSuccess }) => {
     <Loader />
   ) : (
     <Card>
-      <BannerPicker t={t} data={mutation.data} isSuccess={mutation.isSuccess} isLoading={mutation.isIdle || mutation.isLoading} />
+      <BannerPicker t={t} data={mutation.data} isSuccess={mutation.isSuccess} isLoading={mutation.isPending} />
       <StatusTable>
         {mutation.isSuccess && (
           <Row

@@ -100,11 +100,14 @@ const FormStep = ({
       }
   });
 
+  const { key, ...configWithoutKey } = config;
+  
   return (
     <form onSubmit={handleSubmit(goNext)}>
       <InputCard
+        key={key}
         {...{ isDisable: isDisable, isMultipleAllow: isMultipleAllow , isMandatory:isMandatory}}
-        {...config}
+        {...configWithoutKey}
         cardStyle={cardStyle}
         submit
         {...{ onSkip: onSkip, onAdd: onAdd }}

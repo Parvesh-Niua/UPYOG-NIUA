@@ -40,7 +40,6 @@ export const VendorBreadCrumb = ({ location }) => {
 };
 
 const EmployeeApp = ({ path, url, userType }) => {
-  console.log("tttttttttttt",path)
   const { t } = useTranslation();
   const location = useLocation();
   const mobileView = innerWidth <= 640;
@@ -58,7 +57,6 @@ const EmployeeApp = ({ path, url, userType }) => {
   };
 
 
-  console.log("index page in employee")
   //const Create = Digit?.ComponentRegistryService?.getComponent("VENDOREMPCreate");
   const AddVendor = Digit.ComponentRegistryService.getComponent("AddVendor");
   const SearchVendor = Digit.ComponentRegistryService.getComponent("SearchVendor");
