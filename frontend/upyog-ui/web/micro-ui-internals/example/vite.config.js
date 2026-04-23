@@ -1,7 +1,166 @@
-// vite.config.js for micro-ui-internals/example
-// Used after "yarn build" has already built all workspace packages into dist/
-// Run via: yarn start (which does run-s build start:dev)
-// Never run yarn start:dev directly — dist/ must exist first
+/**
+ * ========================= VITE CONFIG EXPLANATION =========================
+ *
+ * This configuration is designed for a monorepo setup where multiple internal
+ * packages (modules, libraries, react-components) are built first using:
+ *
+ *      yarn build
+ *
+ * and then served using:
+ *
+ *      yarn start
+ *
+ * IMPORTANT:
+ * - Never run `yarn start:dev` directly because it expects compiled `dist/` files.
+ * - This setup ensures proper aliasing of internal workspace packages and avoids
+ *   dependency duplication issues (like multiple React instances).
+ *
+ * ---------------------------------------------------------------------------
+ * 1. IMPORTS & SETUP
+ * ---------------------------------------------------------------------------
+ * - defineConfig: Helps with better typing and IntelliSense.
+ * - loadEnv: Loads environment variables based on mode.
+ * - react plugin: Enables React Fast Refresh + JSX support.
+ * - path/fs: Used for resolving file paths and reading package.json files.
+ * - fileURLToPath: Required because Vite config runs in ES module mode.
+ *
+ * __dirname is manually recreated because ES modules don't provide it by default.
+ *
+ * ---------------------------------------------------------------------------
+ * 2. ENVIRONMENT VARIABLES
+ * ---------------------------------------------------------------------------
+ * - Loads all env variables using loadEnv().
+ * - Supports REACT_APP_* variables (kept for compatibility with CRA-style apps).
+ *
+ * proxyTarget:
+ *   - API base URL (default: NIUA staging server).
+ *
+ * assetsTarget:
+ *   - Used specifically for asset endpoints (can differ from API).
+ *
+ * ---------------------------------------------------------------------------
+ * 3. API PROXY CONFIGURATION
+ * ---------------------------------------------------------------------------
+ * - apiPaths array contains all backend service routes.
+ * - Each path is proxied to the backend server to avoid CORS issues.
+ *
+ * Example:
+ *   /user → https://niuatt.niua.in/user
+ *
+ * - `/pb-egov-assets` is separately proxied to assetsTarget.
+ *
+ * ---------------------------------------------------------------------------
+ * 4. MONOREPO PACKAGE ALIASING (CRITICAL PART)
+ * ---------------------------------------------------------------------------
+ * packagesRoot → points to ../packages directory.
+ *
+ * getAliases():
+ *   - Dynamically scans all workspace packages.
+ *   - Reads each package.json.
+ *   - Maps package name → entry file (main or src/index.js).
+ *
+ * Why this matters:
+ * - Allows importing internal packages like:
+ *      import Something from "@upyog/digit-ui-react-components";
+ * - Prevents Vite from resolving them from node_modules.
+ * - Ensures local development uses latest source/build.
+ *
+ * It scans:
+ *   - packages/modules/* (multiple packages)
+ *   - packages/libraries (single package)
+ *   - packages/react-components (single package)
+ *
+ * ---------------------------------------------------------------------------
+ * 5. BASE CONFIGURATION
+ * ---------------------------------------------------------------------------
+ * base:
+ *   - Production: "/upyog-ui/" (important for deployment path)
+ *   - Dev: "/" (local server root)
+ *
+ * define:
+ *   - Injects process.env variables so existing code doesn't break.
+ *
+ * ---------------------------------------------------------------------------
+ * 6. MODULE RESOLUTION
+ * ---------------------------------------------------------------------------
+ * resolve.alias:
+ *   - Uses dynamically generated aliases for workspace packages.
+ *
+ * dedupe:
+ *   - Ensures only ONE instance of React & React DOM is used.
+ *   - Prevents errors like:
+ *       "Invalid hook call"
+ *
+ * ---------------------------------------------------------------------------
+ * 7. ESBUILD CONFIGURATION
+ * ---------------------------------------------------------------------------
+ * - Treats ALL `.js` files as JSX.
+ *
+ * Why:
+ *   - Some workspace packages use JSX inside `.js` files.
+ *   - Prevents syntax errors during build.
+ *
+ * ---------------------------------------------------------------------------
+ * 8. DEV SERVER CONFIGURATION
+ * ---------------------------------------------------------------------------
+ * port: 3000
+ *
+ * proxy:
+ *   - Applies API proxy rules defined earlier.
+ *
+ * fs.allow:
+ *   - Allows Vite to access files outside current directory (monorepo support).
+ *
+ * watch:
+ *   - Enables file watching across workspace packages.
+ *   - Uses polling (important for Linux/WSL/Docker environments).
+ *
+ * hmr:
+ *   - Enables Hot Module Replacement.
+ *
+ * ---------------------------------------------------------------------------
+ * 9. BUILD CONFIGURATION
+ * ---------------------------------------------------------------------------
+ * outDir:
+ *   - Output directory is "build" (instead of default "dist").
+ *
+ * sourcemap:
+ *   - Disabled for production optimization.
+ *
+ * rollupOptions.manualChunks:
+ *   - Separates vendor libraries into a separate chunk.
+ *
+ * Benefit:
+ *   - Better caching
+ *   - Faster load times
+ *
+ * ---------------------------------------------------------------------------
+ * 10. DEPENDENCY OPTIMIZATION (VERY IMPORTANT)
+ * ---------------------------------------------------------------------------
+ * optimizeDeps.include:
+ *   - Forces Vite to pre-bundle core dependencies.
+ *
+ * optimizeDeps.exclude:
+ *   - EXCLUDES all workspace packages (moduleAliases).
+ *
+ * WHY THIS IS CRITICAL:
+ *   - Prevents Vite from pre-bundling internal packages.
+ *   - Avoids stale builds and duplication issues.
+ *   - Ensures live changes in monorepo are reflected immediately.
+ *
+ * ---------------------------------------------------------------------------
+ * SUMMARY
+ * ---------------------------------------------------------------------------
+ * This config:
+ * ✔ Supports monorepo architecture
+ * ✔ Dynamically resolves internal packages
+ * ✔ Prevents duplicate React issues
+ * ✔ Enables smooth HMR across packages
+ * ✔ Uses proxy to handle backend APIs
+ * ✔ Maintains CRA compatibility via process.env
+ *
+ * ---------------------------------------------------------------------------
+ */
 
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
