@@ -101,7 +101,6 @@ const ReceiptsDesktopInbox = ({ tableConfig, filterComponent, ...props }) => {
             },
           };
         }}
-        onPageSizeChange={props.onPageSizeChange}
         currentPage={props.currentPage}
         onNextPage={props.onNextPage}
         onPrevPage={props.onPrevPage}

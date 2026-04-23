@@ -25,14 +25,13 @@ const EmployeeApp = () => {
       <AppContainer>
         <BackButton style={{ marginTop: "15px" }}>Back</BackButton>
         <Routes>
-          <Route path={`${path}/complaint/create`} element={<PrivateRoute><PGRAICreate /></PrivateRoute>} />
+          <Route path= "complaint/create/*" element={<PrivateRoute><PGRAICreate /></PrivateRoute>} />
           <Route
-            path={`${path}/inbox`}
+            path= "inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
                   useNewInboxAPI={true}
-                  parentRoute={path}
                   businessService="pgrai"
                   filterComponent="PGRAI_INBOX_FILTER"
                   initialStates={inboxInitialState}
@@ -41,7 +40,7 @@ const EmployeeApp = () => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/complaint-details/:id`} element={<PrivateRoute><ComplaintDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path= "complaint-details/:id" element={<PrivateRoute><ComplaintDetails /></PrivateRoute>} />
         </Routes>
       </AppContainer>
     </span>

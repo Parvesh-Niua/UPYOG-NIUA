@@ -224,7 +224,6 @@ const EditForm = ({ tenantId, applicationData, channelMenu, vehicleMenu, sanitat
           village: village?.code
             ? {
                 code: village?.code ? village?.code : "",
-                code: village?.code ? village?.code : "",
               }
             : newVillage,
           newGramPanchayat: newGp,
@@ -473,7 +472,6 @@ const EditForm = ({ tenantId, applicationData, channelMenu, vehicleMenu, sanitat
           },
           "type": "component",
           "key": "pitDetail",
-          "isMandatory":true,
           "nextStep": "select-payment-preference",
           "label": "ES_NEW_APPLICATION_PIT_DIMENSION"
         },

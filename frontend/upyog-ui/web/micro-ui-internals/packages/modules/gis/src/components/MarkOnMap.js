@@ -5,7 +5,7 @@ import { EditControl } from "react-leaflet-draw";
 import * as turf from "@turf/turf";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet-draw/dist/leaflet.draw.css";
+import "leaflet-draw/dist/leaflet.draw.css"; 
 
 /**
  * @author - Shivank - NUDM
