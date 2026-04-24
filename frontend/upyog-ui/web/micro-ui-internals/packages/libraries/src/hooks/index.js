@@ -67,6 +67,7 @@ import useSearchAll from "./fsm/useSearchAll";
 import useVehicleSearch from "./fsm/useVehicleSearch";
 import useVehicleUpdate from "./fsm/useVehicleUpdate";
 import useVehicleTripCreate from "./fsm/useVehicleTripCreate";
+import { useChallanGenerationRecieptSearch } from "./challanGeneration/challanGeneration";
 import useFSMInbox from "./fsm/useInbox";
 import useApplicationUpdate from "./fsm/useApplicationUpdate";
 import useWorkflowData from "./fsm/useWorkflowData";
@@ -324,6 +325,16 @@ import useADSDocumentSearch from "./ads/useADSDocumentSearch";
 import useADSDemandEstimation from "./ads/useADSDemandEstimation";
 import useCMSearch from "./cm/useCMSearch";
 
+import useChallanGenerationMDMS from "./challanGeneration/useChallanGenerationMDMS";
+import useChallanGenerationSearch from "./challanGeneration/useChallanGenerationSearch";
+import useChallanGenerationSearchBill from "./challanGeneration/useChallanGenerationSearchBill";
+import useChallanGenerationTenants from "./challanGeneration/useTenants";
+import useChallanGenerationCount from "./challanGeneration/useChallanGenerationCount";
+import useChallanGenerationCategory from "./challanGeneration/useChallanGenerationCategory";
+import useChallanGenerationCategoryTypes from "./challanGeneration/useChallanGenerationCategoryTypes";
+import useChallanGenerationTaxHeads from "./challanGeneration/useChallanGenerationTaxHeads";
+import useChallanGenerationFormConfig from "./challanGeneration/useChallanGenerationFormConfig";
+import useChallanInbox from "./challanGeneration/useInbox";
 
 import useTankerCreateAPI from "./wt/useTankerCreateAPI";
 import useTankerSearchAPI from "./wt/useTankerSearchAPI";
@@ -348,10 +359,19 @@ import useEnabledMDMS from "./useEnabledMDMS";
 import useSelectedMDMS from "./useSelectedMDMS";
 import useRouteSubscription from "./useRouteSubscription";
 import { useCustomBackNavigation } from "./UseCustomBackNavigationProps";
-import useCustomNavigate from "./useCustomNavigate";
+import useESTCreateAPI from "./estate/useESTCreateAPI";
+import useESTAssetSearch from "./estate/useESTAssetSearch";
+import useESTApplicationSearch from "./estate/useESTApplicationSearch";
+import useTenantsEST from "./estate/useTenants";
+import useESTAllotAsset from "./estate/useESTAllotAsset";
+import useESTAssetsAllotment from "./estate/useESTAssetsAllotment";
+import useESTBillSearch from "./estate/useESTBillSearch";
+import { useNDCSearchApplication, useNDCSearchApplicationEmployee } from "./ndc/useNDCSearchApplication";
+import useNDCDocumentSearch from "./ndc/useNDCDocumentSearch";
+import useNDCInbox from "./ndc/useInbox";
+
 import useModuleBasePath from "./useModuleBasePath";
-
-
+import useCustomNavigate from "./useCustomNavigate";
 const pgr = {
   useComplaintDetails,
   useComplaintsList,
@@ -370,7 +390,7 @@ const pgr = {
   useTradeLicenseBillingslab,
   useMDMS: usePGRMDMS,
 };
-const pgrAi={
+const pgrAi = {
   useCreate,
   useSearchPGRAI,
   useFilterEmployee,
@@ -404,6 +424,7 @@ const fsm = {
   useVehicleDetails,
   useVehicleCreate,
   useVendorCreate,
+  useVehicleCreate,
   useUpdateVehicle,
   useDriverSearch,
   useDriverCreate,
@@ -429,7 +450,7 @@ const ptr = {
   useMyPetPayments,
   useTenants: useTenantsPTR,
   usePetColors
- 
+
 };
 
 const pt = {
@@ -562,12 +583,12 @@ const survey = {
   useSubmitResponse: useSurveySubmitResponse,
   useShowResults: useSurveyShowResults,
   useSurveyInbox,
-  useServeyCreateDef:useServeyCreateDef,
-  useCfdefinitionsearch:useCfdefinitionsearch,
-  useSubmitSurveyResponse:useSubmitSurveyResponse,
-  useSelectedSurveySearch:useSelectedSurveySearch,
-  useCfdefinitionsearchresult:useCfdefinitionsearchresult,
-  useUpdateSurvey:useUpdateSurvey,
+  useServeyCreateDef: useServeyCreateDef,
+  useCfdefinitionsearch: useCfdefinitionsearch,
+  useSubmitSurveyResponse: useSubmitSurveyResponse,
+  useSelectedSurveySearch: useSelectedSurveySearch,
+  useCfdefinitionsearchresult: useCfdefinitionsearchresult,
+  useUpdateSurvey: useUpdateSurvey,
 };
 
 const noc = {
@@ -575,6 +596,20 @@ const noc = {
   useNOCApplicationActions,
   useInbox: useNOCInbox,
   useNOCSearchApplication,
+};
+
+const challangeneration = {
+  useChallanGenerationRecieptSearch,
+  useChallanGenerationMDMS,
+  useChallanGenerationSearch,
+  useChallanGenerationSearchBill,
+  useChallanGenerationTenants,
+  useChallanGenerationCount,
+  useChallanGenerationCategory,
+  useChallanGenerationCategoryTypes,
+  useChallanGenerationTaxHeads,
+  useChallanGenerationFormConfig,
+  useInbox: useChallanInbox,
 };
 
 const ws = {
@@ -649,35 +684,35 @@ const ew = {
   useEWApplicationAction,
 };
 
-const chb={
+const chb = {
   useChbCreateAPI,
   useChbDocumentsMDMS,
   useChbDocumentSearch,
   useChbApplicationDetail,
   useChbSearch,
-  useTenants:useTenantsCHB,
+  useTenants: useTenantsCHB,
   useChbApplicationAction,
   useServiceSearchCHB,
   useChbSlotSearch,
   useDemandEstimation
 }
 // for using tenant for city and document and search 
-const ads={
-  useTenants:useTenantsADS,
+const ads = {
+  useTenants: useTenantsADS,
   useADSDocumentsMDMS,
   useADSDocumentSearch,
   useADSCreateAPI,
   useADSSlotSearch,
   useADSSearch,
   useADSDemandEstimation,
-  useADSApplicationDetail  
+  useADSApplicationDetail
 }
 
 const cm = {
   useCMSearch
 }
 
-const wt={
+const wt = {
   useTankerCreateAPI,
   useTankerSearchAPI,
   useWTApplicationAction,
@@ -693,11 +728,28 @@ const wt={
 };
 
 const vendor = {
-  useTenants:useTenantsVENDOR,
+  useTenants: useTenantsVENDOR,
   useEmpvendorCreate,
   useEmpvendorSearch,
   useVendorAdditionaldetailsAPI,
   useEmpvendorCommonSearch,
+};
+
+const estate = {
+  useESTCreateAPI,
+  useESTAssetSearch,
+  useESTApplicationSearch,
+  useESTAllotAsset,
+  useESTAssetsAllotment,
+  useESTBillSearch,
+  useTenants: useTenantsEST
+};
+const ndc = {
+  useInbox: useNDCInbox,
+  useSearchApplication: useNDCSearchApplication,
+  useSearchEmployeeApplication: useNDCSearchApplicationEmployee,
+  useNDCDocumentSearch,
+  useNDCDoc
 };
 
 const Hooks = {
@@ -774,14 +826,17 @@ const Hooks = {
   cm,
   wt,
   vendor,
+  estate,
   useEnabledMDMS,
   useSelectedMDMS,
   useRouteSubscription,
   useCustomBackNavigation,
-  useCustomNavigate,
-  useModuleBasePath,
+  challangeneration,
   pgrAi,
-  useInbox
+  useInbox,
+  ndc,
+  useCustomNavigate,
+  useModuleBasePath
 };
 
 export default Hooks;
