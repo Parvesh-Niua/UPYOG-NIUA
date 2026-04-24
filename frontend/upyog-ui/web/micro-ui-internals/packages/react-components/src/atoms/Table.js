@@ -89,8 +89,20 @@ const Table = ({
   useEffect(() => setGlobalFilter(onSearch), [onSearch, setGlobalFilter]);
 
   const tref = useRef();
-  // Extract `key` from React Table props and pass it explicitly; don’t spread objects containing `key`.
-  return (
+/*
+  React Table prop getter functions (like getHeaderGroupProps, getRowProps, getCellProps)
+  return objects that include a special `key` property.
+
+  In React, `key` is reserved for internal reconciliation and should NOT be passed
+  via object spreading (e.g., {...props}), as it can cause warnings and unexpected behavior.
+
+  To handle this correctly, we extract `key` from the props object and pass it explicitly
+  as `key={key}`, while spreading the remaining props separately.
+
+  This ensures proper rendering and avoids React warnings, especially in dynamic tables
+  with sorting, pagination, and filtering.
+*/ 
+ return (
     <React.Fragment>
     <div ref={tref} style={tref.current && tref.current.offsetWidth < tref.current.scrollWidth ? {...inboxStyles}: {}}>
     <span className={customTableWrapperClassName}>

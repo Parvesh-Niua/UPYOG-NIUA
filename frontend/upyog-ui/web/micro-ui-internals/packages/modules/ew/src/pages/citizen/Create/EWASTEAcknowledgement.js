@@ -1,4 +1,4 @@
-import { Banner, Card, CardText, LinkButton, LinkLabel, Loader, Row, StatusTable, SubmitBar } from "@upyog/digit-ui-react-components";
+import { Banner, Card, CardText, LinkButton, LinkLabel, Loader, Row, StatusTable, SubmitBar, Toast } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -52,10 +52,13 @@ const EWASTEAcknowledgement = ({ data, onSuccess }) => {
     }
   }, [onSuccess]);
 
+  const [errorToast, setErrorToast] = useState(null);
+
   const handleError = useCallback((error) => {
     console.error('EW Create API Error:', error);
     setHasSubmitted(true);
-  }, []);
+    setErrorToast(error?.response?.data?.Errors?.[0]?.message || t("CS_EWASTE_APPLICATION_FAILED"));
+  }, [t]);
 
   useEffect(() => {
     if (!hasSubmitted && data) {
@@ -104,6 +107,7 @@ const EWASTEAcknowledgement = ({ data, onSuccess }) => {
         )}
       </StatusTable>
       {isSuccess && <SubmitBar label={t("EWASTE_DOWNLOAD_ACK_FORM")} onSubmit={handleDownloadPdf} />}
+      {errorToast && <Toast error label={errorToast} onClose={() => setErrorToast(null)} />}
       <Link to={`/upyog-ui/citizen`}>
         <LinkButton label={t("CORE_COMMON_GO_TO_HOME")} />
       </Link>

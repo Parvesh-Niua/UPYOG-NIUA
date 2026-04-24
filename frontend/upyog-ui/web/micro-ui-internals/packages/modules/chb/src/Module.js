@@ -23,8 +23,8 @@ import { TableConfig } from "./config/inbox-table-config";
 import ApplicationDetails from "./pages/employee/ApplicationDetails";
 import Response from "./pages/Response";
 import SelectOtp from "../../core/src/pages/citizen/Login/SelectOtp";
-import CitizenFeedback from "@upyog/digit-ui-module-core/src/components/CitizenFeedback";
-import AcknowledgementCF from "@upyog/digit-ui-module-core/src/components/AcknowledgementCF";
+import CitizenFeedback from "../../core/src/components/CitizenFeedback";
+import AcknowledgementCF from "../../core/src/components/AcknowledgementCF";
 import CHBRequiredDoc from "./pageComponents/CHBRequiredDoc";
 import CHBMapView from "./components/CHBMapView";
 
@@ -99,17 +99,17 @@ export const CHBModule = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("CHB_TENANTS", tenants);
 
-  useEffect(() => {
-    if (userType !== "employee") return;
+  // useEffect(() => {
+  //   if (userType !== "employee") return;
 
-    (async () => {
-      await Digit.LocalizationService.getLocale({
-        modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-        locale: Digit.StoreData.getCurrentLanguage(),
-        tenantId: Digit.ULBService.getCurrentTenantId(),
-      });
-    })();
-  }, []);
+  //   (async () => {
+  //     await Digit.LocalizationService.getLocale({
+  //       modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+  //       locale: Digit.StoreData.getCurrentLanguage(),
+  //       tenantId: Digit.ULBService.getCurrentTenantId(),
+  //     });
+  //   })();
+  // }, []);
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;

@@ -36,15 +36,15 @@ const componentsToRegister = {
     const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
     addComponentsToRegistry();
     Digit.SessionStorage.set("WT_TENANTS", tenants);
-    useEffect(() => {
-      if (userType === "employee") {
-        Digit.LocalizationService.getLocale({
-          modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-          locale: Digit.StoreData.getCurrentLanguage(),
-          tenantId: Digit.ULBService.getCurrentTenantId(),
-        });
-      }
-    }, [userType]);
+    // useEffect(() => {
+    //   if (userType === "employee") {
+    //     Digit.LocalizationService.getLocale({
+    //       modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+    //       locale: Digit.StoreData.getCurrentLanguage(),
+    //       tenantId: Digit.ULBService.getCurrentTenantId(),
+    //     });
+    //   }
+    // }, [userType]);
   
     if (userType === "employee") {
       return <EmployeeApp path={path} url={url} userType={userType} />;
