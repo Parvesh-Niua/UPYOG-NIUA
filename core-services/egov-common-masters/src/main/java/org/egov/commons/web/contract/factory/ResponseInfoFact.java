@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import lombok.EqualsAndHashCode;
 
+import static org.springframework.util.ObjectUtils.isEmpty;
+
 @Component
 @EqualsAndHashCode
 public class ResponseInfoFact {
@@ -19,7 +21,7 @@ public class ResponseInfoFact {
 		if (requestInfo != null) {
 			apiId = requestInfo.getApiId();
 			ver = requestInfo.getVer();
-			ts = requestInfo.getTs();
+			ts = isEmpty(requestInfo.getTs()) ? null : requestInfo.getTs();
 			msgId = requestInfo.getMsgId();
 		}
 		String responseStatus = success ? "successful" : "failed";

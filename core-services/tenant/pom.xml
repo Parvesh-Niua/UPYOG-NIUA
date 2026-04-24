@@ -67,9 +67,12 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- Our old tests were written using JUnit 4.
+    Spring Boot 3 supports only JUnit 5.
+    The junit-vintage-engine acts as a bridge to run JUnit 4 tests on the JUnit 5 platform.    -->
     <dependency>
       <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
+      <artifactId>junit-vintage-engine</artifactId> 
       <scope>test</scope>
     </dependency>
     <dependency>

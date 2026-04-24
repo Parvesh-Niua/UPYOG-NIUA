@@ -50,7 +50,7 @@ public class ResponseInfoFactory {
 	public ResponseInfo createResponseInfoFromRequestInfo(RequestInfo requestInfo, Boolean success) {
 		String apiId = null;
 		String ver = null;
-		Long ts = null;
+		Long ts = null;   // 2.9.0-SNAPSHOT  use Long keyword
 		String resMsgId = "uief87324"; // FIXME : Hard-coded
 		String msgId = null;
 		if (requestInfo != null) {
