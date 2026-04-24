@@ -64,17 +64,15 @@ export const EWModule = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("EW_TENANTS", tenants);
 
-  useEffect(
-    () =>
-      userType === "employee"
-        ? Digit.LocalizationService.getLocale({
-            modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-            locale: Digit.StoreData.getCurrentLanguage(),
-            tenantId: Digit.ULBService.getCurrentTenantId(),
-          })
-        : undefined,
-    []
-  );
+  // useEffect(() => {
+  //   if (userType === "employee") {
+  //     Digit.LocalizationService.getLocale({
+  //       modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+  //       locale: Digit.StoreData.getCurrentLanguage(),
+  //       tenantId: Digit.ULBService.getCurrentTenantId(),
+  //     });
+  //   }
+  // }, [userType]);
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;

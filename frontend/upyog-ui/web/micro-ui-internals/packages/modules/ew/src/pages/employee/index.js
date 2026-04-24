@@ -65,7 +65,7 @@ const EmployeeApp = ({ path, url, userType }) => {
         </div>
         <Routes>
           <Route
-            path={`${path}/inbox`}
+            path="inbox"
             element={
               <PrivateRoute>
                 <Inbox
@@ -79,11 +79,11 @@ const EmployeeApp = ({ path, url, userType }) => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/search`} element={<PrivateRoute><SearchApp path={`${path}/search`} /></PrivateRoute>} />
+          <Route path="application-details/:id" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path="my-applications/applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path="search" element={<PrivateRoute><SearchApp path={`${path}/search`} /></PrivateRoute>} />
           <Route
-            path={`${path}/searchold`}
+            path="searchold"
             element={
               <PrivateRoute>
                 <Inbox
@@ -97,7 +97,7 @@ const EmployeeApp = ({ path, url, userType }) => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/my-applications`} element={<PrivateRoute><SearchApp path={`${path}/my-applications`} /></PrivateRoute>} />
+          <Route path="my-applications" element={<PrivateRoute><SearchApp path={`${path}/my-applications`} /></PrivateRoute>} />
         </Routes>
       </div>
     </React.Fragment>

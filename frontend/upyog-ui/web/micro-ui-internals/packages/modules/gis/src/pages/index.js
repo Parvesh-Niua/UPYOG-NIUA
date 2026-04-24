@@ -16,8 +16,8 @@ const App = () => {
     <span className={"chb-citizen"} style={{ width: "100%" }}>
       <AppContainer>
         <Routes>
-          <Route path={`${path}/map`} element={<PrivateRoute><ServiceType /></PrivateRoute>} />
-          <Route path={`${path}/mapview`} element={<PrivateRoute><MapView /></PrivateRoute>} />
+          <Route path="/map/*" element={<PrivateRoute><ServiceType /></PrivateRoute>} />
+          <Route path="/mapview/*" element={<PrivateRoute><MapView /></PrivateRoute>} />
         </Routes>
       </AppContainer>
     </span>

@@ -19,9 +19,9 @@ const App = () => {
       <AppContainer>
         {!shouldHideBackButton(hideBackButtonConfig) ? <BackButton>Back</BackButton> : ""}
         <Routes>
-          <Route path={`${path}/raiseRequest`} element={<PrivateRoute><EWCreate /></PrivateRoute>} />
-          <Route path={`${path}/application/:requestId/:tenantId`} element={<PrivateRoute><EWASTEApplicationDetails /></PrivateRoute>} />
-          <Route path={`${path}/myApplication`} element={<PrivateRoute><EWASTEMyApplications /></PrivateRoute>} />
+          <Route path="raiseRequest/*" element={<PrivateRoute><EWCreate /></PrivateRoute>} />
+          <Route path="application/:requestId/:tenantId/*" element={<PrivateRoute><EWASTEApplicationDetails /></PrivateRoute>} />
+          <Route path="myApplication/*" element={<PrivateRoute><EWASTEMyApplications /></PrivateRoute>} />
         </Routes>
       </AppContainer>
     </span>
