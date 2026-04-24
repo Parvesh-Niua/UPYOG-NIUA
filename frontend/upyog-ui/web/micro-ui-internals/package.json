@@ -32,7 +32,10 @@
     "packages/modules/reports",
     "packages/modules/chb",
     "packages/modules/assetv2",
-    "packages/modules/gis"
+    "packages/modules/gis",
+    "packages/modules/est",
+    "packages/modules/challanGeneration",
+    "packages/modules/ndc"
   ],
   "license": "MIT",
   "private": true,

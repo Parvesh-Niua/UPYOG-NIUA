@@ -32,7 +32,10 @@
     "micro-ui-internals/packages/modules/mcollect",
     "micro-ui-internals/packages/modules/chb",
     "micro-ui-internals/packages/modules/assetv2",
-    "micro-ui-internals/packages/modules/gis"
+    "micro-ui-internals/packages/modules/gis",
+    "micro-ui-internals/packages/modules/challanGeneration",
+    "micro-ui-internals/packages/modules/ndc",
+    "micro-ui-internals/packages/modules/est"
   ],
   "engines": {
     "node": ">=22"
@@ -64,6 +67,9 @@
     "@upyog/upyog-ui-module-ptr": "3.10.0",
     "@upyog/upyog-ui-module-vendor": "3.10.0",
     "@upyog/upyog-ui-module-wt": "3.10.0",
+    "@upyog/digit-ui-module-challangeneration": "1.0.0",
+    "@nudmcdgnpm/upyog-ui-module-est":"1.0.0",
+    "@nudmcdgnpm/upyog-ui-module-ndc":"1.0.0",
     "qrcode": "^1.5.4",
     "react": "19.2.0",
     "react-dom": "19.2.0",
