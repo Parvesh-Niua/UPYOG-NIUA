@@ -64,15 +64,16 @@ export const EWModule = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("EW_TENANTS", tenants);
 
-  // useEffect(() => {
-  //   if (userType === "employee") {
-  //     Digit.LocalizationService.getLocale({
-  //       modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-  //       locale: Digit.StoreData.getCurrentLanguage(),
-  //       tenantId: Digit.ULBService.getCurrentTenantId(),
-  //     });
-  //   }
-  // }, [userType]);
+// Fetch localization data if the user is an employee if the user type is employee, fetch localization data for the current tenant and language
+  useEffect(() => {
+    if (userType === "employee") {
+      Digit.LocalizationService.getLocale({
+        modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+        locale: Digit.StoreData.getCurrentLanguage(),
+        tenantId: Digit.ULBService.getCurrentTenantId(),
+      });
+    }
+  }, [userType]);
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;
