@@ -69,15 +69,17 @@ const componentsToRegister = {
     const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
     addComponentsToRegistry();
     Digit.SessionStorage.set("WT_TENANTS", tenants);
-    // useEffect(() => {
-    //   if (userType === "employee") {
-    //     Digit.LocalizationService.getLocale({
-    //       modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-    //       locale: Digit.StoreData.getCurrentLanguage(),
-    //       tenantId: Digit.ULBService.getCurrentTenantId(),
-    //     });
-    //   }
-    // }, [userType]);
+
+// Fetch localization data if the user is an employee if the user type is employee, fetch localization data for the current tenant and saved in db
+    useEffect(() => {
+      if (userType === "employee") {
+        Digit.LocalizationService.getLocale({
+          modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+          locale: Digit.StoreData.getCurrentLanguage(),
+          tenantId: Digit.ULBService.getCurrentTenantId(),
+        });
+      }
+    }, [userType]);
   
     if (userType === "employee") {
       return <EmployeeApp path={path} url={url} userType={userType} />;

@@ -102,19 +102,20 @@ export const ASSETV2Module = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("ASSET_TENANTS", tenants);
 
-//   useEffect(() => {
-//   if (userType === "employee") {
-//     const loadLocale = async () => {
-//       await Digit.LocalizationService.getLocale({
-//         modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
-//         locale: Digit.StoreData.getCurrentLanguage(),
-//         tenantId: Digit.ULBService.getCurrentTenantId(),
-//       });
-//     };
+// Fetch localization data if the user is an employee if the user type is employee, fetch localization data for the current tenant and language
+  useEffect(() => {
+  if (userType === "employee") {
+    const loadLocale = async () => {
+      await Digit.LocalizationService.getLocale({
+        modules: [`rainmaker-${Digit.ULBService.getCurrentTenantId()}`],
+        locale: Digit.StoreData.getCurrentLanguage(),
+        tenantId: Digit.ULBService.getCurrentTenantId(),
+      });
+    };
 
-//     loadLocale();
-//   }
-// }, []);
+    loadLocale();
+  }
+}, []);
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;
