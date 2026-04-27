@@ -1,7 +1,7 @@
 import {AppContainer, BackButton, PrivateRoute,BreadCrumb } from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, Routes, Route } from "react-router-dom";
+import { Link, Switch, useLocation } from "react-router-dom";
 import { CHBLinks } from "../../Module";
 import Inbox from "./Inbox";
 // import PaymentDetails from "./PaymentDetails";
@@ -34,6 +34,7 @@ const EmployeeApp = ({ path, url, userType }) => {
  
 
   const ApplicationDetails = Digit?.ComponentRegistryService?.getComponent("ApplicationDetails");
+  const EnhancedReport = Digit?.ComponentRegistryService?.getComponent("EnhancedReport");
 
   const CHBCreate = Digit?.ComponentRegistryService?.getComponent("CHBCreate");
   const isRes = window.location.href.includes("chb/response");
@@ -63,11 +64,14 @@ const EmployeeApp = ({ path, url, userType }) => {
                   />
                 </PrivateRoute>
               }
+              //need to check routes
             />
             <Route path= "bookHall/*" element={<PrivateRoute><CHBCreate /></PrivateRoute>} />
             <Route path= "application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
             <Route path= "applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails /></PrivateRoute>} />
             <Route path= "my-applications/*" element={<PrivateRoute><SearchApp /></PrivateRoute>} />
+            <Route path="CHBDailyRegisterReport" component={(props) => <EnhancedReport {...props} parentRoute={path} moduleName="rainmaker-CHB" reportName="CHBDailyRegisterReport" />} />
+            <Route path="CHBRefundReport" component={(props) => <EnhancedReport {...props} parentRoute={path} moduleName="rainmaker-CHB" reportName="CHBRefundReport" />} />
           </Routes>
         </div>
       </React.Fragment>
