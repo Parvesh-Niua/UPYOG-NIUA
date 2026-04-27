@@ -13,7 +13,7 @@ import {
 } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams, useMatch } from "react-router-dom";
 import { stringReplaceAll, convertEpochToDate } from "./utils";
 import ActionModal from "./components/Modal";
 import { downloadAndPrintChallan, downloadAndPrintReciept } from "./utils";
@@ -35,7 +35,7 @@ const EmployeeChallan = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   const navigate = Digit.Hooks.useCustomNavigate();
-  const { url } = useRouteMatch();
+  const { url } = useMatch();
   const [isDisplayDownloadMenu, setIsDisplayDownloadMenu] = useState(false);
   const [showToast, setShowToast] = useState(null);
 

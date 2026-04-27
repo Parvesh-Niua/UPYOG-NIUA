@@ -369,6 +369,7 @@ import useESTBillSearch from "./estate/useESTBillSearch";
 import { useNDCSearchApplication, useNDCSearchApplicationEmployee } from "./ndc/useNDCSearchApplication";
 import useNDCDocumentSearch from "./ndc/useNDCDocumentSearch";
 import useNDCInbox from "./ndc/useInbox";
+import useNDCDoc from "./ndc/useNDCDoc";
 
 import useModuleBasePath from "./useModuleBasePath";
 import useCustomNavigate from "./useCustomNavigate";

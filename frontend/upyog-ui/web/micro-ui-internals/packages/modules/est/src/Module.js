@@ -1,7 +1,6 @@
 import { CitizenHomeCard, PropertyHouse } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouteMatch } from "react-router-dom";
 import CitizenApp from "./pages/citizen";
 import ESTCard from "./components/ESTCard";
 import EmployeeApp from "./pages/employee";
@@ -48,7 +47,7 @@ const addComponentsToRegistry = () => {
 };
 
 export const ESTModule = ({ stateCode, userType, tenants }) => {
-  const { path, url } = useRouteMatch();
+  const { path, url } = Digit.Hooks.useModuleBasePath();
   const moduleCode = "EST";
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({

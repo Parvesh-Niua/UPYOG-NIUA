@@ -1,7 +1,7 @@
 import React ,{Children, Fragment}from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Redirect, Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useMatch } from "react-router-dom";
 import { Config } from "../../../config/Create/AssignAssetConfig";
 /**
  * ESTAssignAssetCreate
@@ -16,7 +16,7 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
   // React Query client for cache invalidation
   const queryClient = useQueryClient();
     // Base route match
-  const match = useRouteMatch();
+  const match = useMatch(`${parentRoute}/*`);
    // Translation function
   const { t } = useTranslation();
   const { pathname } = useLocation();
@@ -82,14 +82,14 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
     
     // Redirect to check page if flow ends
     if (nextStep === null) {
-      return redirectWithHistory(`${match.path}/check`);
+      return redirectWithHistory(`${match.pattern.path}/check`);
     }
         // Build next page URL
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.path}/${nextStep}`;
+      nextPage = `${match.pattern.path}/${nextStep}`;
     }
      else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.path}/${nextStep}/${index}` : `${match.path}/${nextStep}`;
+      nextPage = isMultiple && nextStep !== "map" ? `${match.pattern.path}/${nextStep}/${index}` : `${match.pattern.path}/${nextStep}`;
     }
 
     redirectWithHistory(nextPage);
@@ -109,7 +109,7 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
    * Triggered after final check page submission
    */
   const estcreate = async () => {
-    navigate(`${match.path}/acknowledgement`);
+    navigate(`${match.pattern.path}/acknowledgement`);
   };
 
     /**
@@ -174,31 +174,21 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
    * Dynamically renders each step using configuration
    */
   return (
-    <Switch>
+    <Routes>
       {config.map((routeObj, index) => {
         const { component, texts, inputs, key } = routeObj;
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         const user = Digit.UserService.getUser().info.type;
         return (
-          <Route path={`${match.path}/${routeObj.route}`} key={index}>
-           <Component  config={{ texts, inputs, key }}  onSelect={handleSelect}  onSkip={handleSkip}  t={t}  formData={params} onAdd={handleMultiple}  userType={user}   />
-          </Route>
+          <Route path={routeObj.route} key={index} element={
+           <Component config={{ texts, inputs, key }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} userType={user} />
+          } />
         );
       })}
-
-    
-       
-     
-      <Route path={`${match.path}/check`}>
-        <ESTAssignAssetsCheckPage onSubmit={estcreate} value={params} />
-      </Route>
-      <Route path={`${match.path}/acknowledgement`}>
-        <ESTAllotmentAcknowledgement data={params} onSuccess={onSuccess}/>
-      </Route>
-      <Route>
-        <Redirect to={`${match.path}/${config.indexRoute}`} />  
-      </Route>
-    </Switch>     
+      <Route path="check" element={<ESTAssignAssetsCheckPage onSubmit={estcreate} value={params} />} />
+      <Route path="acknowledgement" element={<ESTAllotmentAcknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="*" element={<Navigate to={config.indexRoute} replace />} />
+    </Routes>
   );
 };
 

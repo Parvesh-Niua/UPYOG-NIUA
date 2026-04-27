@@ -1,7 +1,7 @@
 import { AppContainer, BackButton, PrivateRoute, BreadCrumb } from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link, Switch, useLocation } from "react-router-dom";
+import {  useLocation,Routes,Route } from "react-router-dom";
 import SearchApp from "./SearchApp";
 
 
@@ -51,7 +51,7 @@ const EmployeeApp = ({ path, url, userType }) => {
             <Route path="bookad/*" element={<PrivateRoute><ADSCreate /></PrivateRoute>} />
             <Route path="my-applications/*" element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
             <Route path="applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-            <Route path={`${path}/AdvApplicationReport`} element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-ads" reportName="AdvApplicationReport" /></PrivateRoute>} />
+            <Route path="AdvApplicationReport/*" element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-ads" reportName="AdvApplicationReport" /></PrivateRoute>} />
 
 
 
