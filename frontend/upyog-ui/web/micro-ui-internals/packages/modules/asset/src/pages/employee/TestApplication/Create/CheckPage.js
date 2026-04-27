@@ -118,7 +118,7 @@ const CheckPage = ({ onSubmit, value = {} }) => {
 
             <Row
               label={t("AST_SUB_CATEGORY")}
-              text={`${t(checkForNA(asset?.assetsubtype?.code))}`}
+              text={`${checkForNA(asset?.assetsubtype?.value || asset?.assetsubtype?.code)}`}
               actionButton={<ActionButton jumpTo={`/upyog-ui/employee/asset/assetservice/new-assets/asset-deatils`} />}
             />
             <Row
@@ -148,12 +148,6 @@ const CheckPage = ({ onSubmit, value = {} }) => {
               text={`${t(checkForNA(asset?.Department?.value))}`}
               actionButton={<ActionButton jumpTo={`/upyog-ui/employee/asset/assetservice/new-assets/asset-deatils`} />}
             />
-
-<Row
-            label={t("AST_TYPE")}
-            text={`${t(checkForNA(asset?.assetsOfType?.value))}`}
-            actionButton={<ActionButton jumpTo={`/upyog-ui/employee/asset/assetservice/new-assets/asset-deatils`} />}
-          />
 
           <Row
             label={t("AST_USAGE")}
@@ -227,7 +221,7 @@ const CheckPage = ({ onSubmit, value = {} }) => {
               {formJson.map((row, index) => (
                 <Row key= {index}
                   label={t(row.code)}
-                  text={`${extractValue(row.name)}`}
+                  text={`${t(extractValue(row.name))}`}
                   actionButton={<ActionButton jumpTo={`/upyog-ui/employee/asset/assetservice/new-assets/assets`} />}
                 />
                 

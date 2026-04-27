@@ -161,10 +161,15 @@ const NewAssetClassification = ({ t, config, onSelect, userType, formData }) => 
   Asset_Type &&
     Asset_Type.map((asset_type_mdms) => {
       if (asset_type_mdms.assetClassification == assetclassification?.code) {
+        const minorcodeAndAssetType = (asset_type_mdms.minorCode && asset_type_mdms.minorCode !== "undefined")
+          ? `${asset_type_mdms.minorCode} - ${asset_type_mdms.name}` 
+          : asset_type_mdms.name;
         asset_type.push({
           i18nKey: `${asset_type_mdms.name}`,
           code: `${asset_type_mdms.code}`,
-          value: `${asset_type_mdms.name}`,
+          value: minorcodeAndAssetType,
+          minorCode: asset_type_mdms.minorCode,
+          name: `${asset_type_mdms.name}`
         });
       }
     });
@@ -172,10 +177,15 @@ const NewAssetClassification = ({ t, config, onSelect, userType, formData }) => 
   Asset_Sub_Type &&
     Asset_Sub_Type.map((asset_sub_type_mdms) => {
       if (asset_sub_type_mdms.assetParentCategory == assettype?.code) {
+        const glcodeAndAssetsubType = (asset_sub_type_mdms.glcode && asset_sub_type_mdms.glcode !== "undefined")
+          ? `${asset_sub_type_mdms.glcode} - ${asset_sub_type_mdms.name}` 
+          : asset_sub_type_mdms.name;
         asset_sub_type.push({
           i18nKey: `${asset_sub_type_mdms.name}`,
           code: `${asset_sub_type_mdms.code}`,
-          value: `${asset_sub_type_mdms.name}`,
+          value: glcodeAndAssetsubType,
+          glcode: asset_sub_type_mdms.glcode,
+          name: `${asset_sub_type_mdms.name}`
         });
       }
     });
@@ -300,8 +310,8 @@ const NewAssetClassification = ({ t, config, onSelect, userType, formData }) => 
 
     // This is use for Asset Assigned / Not Assigned menu
     let assetAssignableMenu = [
-      {i18nKey: 'YES', code: 'YES', value: 'YES'},
-      {i18nKey: 'NO', code: 'NO', value: 'NO'},
+      {i18nKey: 'YES', code: 'true', value: 'YES'},
+      {i18nKey: 'NO', code: 'false', value: 'NO'},
     ];
   
     
@@ -440,7 +450,7 @@ const NewAssetClassification = ({ t, config, onSelect, userType, formData }) => 
                 selected={assettype}
                 select={setassettype}
                 option={asset_type}
-                optionKey="i18nKey"
+                optionKey="value"
                 placeholder={"Select"}
                 t={t}
               />
@@ -458,7 +468,7 @@ const NewAssetClassification = ({ t, config, onSelect, userType, formData }) => 
                 selected={assetsubtype}
                 select={setassetsubtype}
                 option={asset_sub_type}
-                optionKey="i18nKey"
+                optionKey="value"
                 placeholder={"Select"}
                 t={t}
               />
@@ -665,7 +675,7 @@ const NewAssetClassification = ({ t, config, onSelect, userType, formData }) => 
                 selected={assetAssignable}
                 select={setAssetAssignable}
                 option={assetAssignableMenu}
-                optionKey="i18nKey"
+                optionKey="code"
                 placeholder={"Select"}
                 t={t}
               />

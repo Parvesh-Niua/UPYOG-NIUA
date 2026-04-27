@@ -10,7 +10,7 @@ import {
   PTLinks,
   PTComponents,
 } from "@upyog/digit-ui-module-pt";
-// import { MCollectModule, MCollectLinks, initMCollectComponents } from "@upyog/digit-ui-module-mcollect";
+import { MCollectModule, MCollectLinks, initMCollectComponents } from "@upyog/digit-ui-module-mcollect";
 import { initDSSComponents } from "@upyog/digit-ui-module-dss";
 import {
   PaymentModule,
@@ -28,6 +28,11 @@ import {
   TLLinks,
   initTLComponents,
 } from "@upyog/digit-ui-module-tl";
+import {
+  ChallanGenerationModule,
+  initChallanGenerationComponents,
+  ChallanReducers,
+} from "@upyog/digit-ui-module-challangeneration";
 import { initReceiptsComponents, ReceiptsModule } from "@upyog/digit-ui-module-receipts";
 import { initOBPSComponents } from "@upyog/digit-ui-module-obps";
 import { initNOCComponents } from "@upyog/digit-ui-module-noc";
@@ -57,6 +62,9 @@ import { VENDORComponents, VENDORLinks, VENDORModule } from "@upyog/upyog-ui-mod
 import { PGRAIComponents, PGRAILinks, PGRAIModule } from "@upyog/upyog-ui-module-pgrai";
 import { ASSETV2Components, ASSETV2Links, ASSETV2Module } from "@nudmcdgnpm/upyog-ui-module-asset-v2";
 import { GISComponents, GISLinks, GISModule } from "@nudmcdgnpm/upyog-ui-module-gis";
+import { ESTComponents, ESTLinks, ESTModule } from "@nudmcdgnpm/upyog-ui-module-est";
+import { initNDCComponents, NDCReducers } from "@nudmcdgnpm/upyog-ui-module-ndc";
+
 // import "leaflet/dist/leaflet.css";
 // import "leaflet-draw/dist/leaflet.draw.css";
 
@@ -71,7 +79,7 @@ const enabledModules = [
   "QuickPayLinks",
   "DSS",
   "NDSS",
-  // "MCollect",
+  "MCollect",
   "HRMS",
   "TL",
   "Receipts",
@@ -94,11 +102,14 @@ const enabledModules = [
   "CHB",
   "WT",
   "VENDOR",
+  "ChallanGeneration",
   "MT",
   "PGRAI",
   "TP",
   "ASSETV2",
-  "GIS"
+   "EST",
+  "GIS",
+  "NDC"
 ];
 window.Digit.ComponentRegistryService.setupRegistry({
   ...paymentConfigs,
@@ -107,8 +118,9 @@ window.Digit.ComponentRegistryService.setupRegistry({
   PaymentModule,
   PaymentLinks,
   ...PTComponents,
-  // MCollectLinks,
-  // MCollectModule,
+  MCollectLinks,
+  MCollectModule,
+  ChallanGenerationModule,
   HRMSModule,
   TLModule,
   TLLinks,
@@ -142,13 +154,17 @@ window.Digit.ComponentRegistryService.setupRegistry({
   ASSETV2Module,
    GISLinks,
     GISModule,
-    ...GISComponents
+    ...GISComponents,
+    ESTModule,
+    ESTLinks,
+    ...ESTComponents,
 });
 
 initPGRComponents();
 initFSMComponents();
 initDSSComponents();
-// initMCollectComponents();
+initMCollectComponents();
+initChallanGenerationComponents();
 initHRMSComponents();
 initTLComponents();
 initReceiptsComponents();
@@ -158,11 +174,14 @@ initEngagementComponents();
 initWSComponents();
 initCommonPTComponents();
 initBillsComponents();
+initNDCComponents();
 // initReportsComponents();
 // initCustomisationComponents();
 
 const moduleReducers = (initData) => ({
   pgr: PGRReducers(initData),
+  ndc: NDCReducers(initData),
+  challan: ChallanReducers(initData),
 });
 
 function App() {

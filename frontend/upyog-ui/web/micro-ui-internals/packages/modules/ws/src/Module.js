@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Loader, CitizenHomeCard, WSICon } from "@upyog/digit-ui-react-components";
 import CitizenApp from "./pages/citizen";
 import EmployeeApp from "./pages/employee";
+import { ReportSearchApplication, EnhancedReport } from "@nudmcdgnpm/digit-ui-module-reports";
 
-
-//Page Components
+// PageComponents
 import WSServiceName from "./pageComponents/WSServiceName";
 import WSWaterConnectionDetails from "./pageComponents/WSWaterConnectionDetails";
 import WSDocsRequired from "./pageComponents/WSDocsRequired";
@@ -220,6 +220,8 @@ const componentsToRegister = {
   WSDisconnectionCheckPage,
   WSRestorationCheckPage,
   WSReSubmitDisconnectionCheckPage,
+  EnhancedReport,
+  ReportSearchApplication,
 
   //Employee Components
   WSApplicationBillAmendment: ApplicationBillAmendment,

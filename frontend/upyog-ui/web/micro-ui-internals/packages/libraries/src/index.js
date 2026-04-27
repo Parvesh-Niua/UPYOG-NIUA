@@ -66,6 +66,9 @@ import { TPService } from "./services/elements/TP";
 
 import { PGRAIService } from "./services/elements/PGRAI";
 import { PGRAIUpdate } from "./services/elements/PGRAIUpdate";
+import { ESTService } from "./services/elements/EST";
+import { NDCService } from "./services/elements/NDC";
+import { ChallanGenerationService } from "./services/elements/ChallanGeneration";
 
    
 
@@ -143,6 +146,9 @@ const initLibraries = () => {
   setupLibraries("TPService", TPService);
   setupLibraries("PGRAIService", PGRAIService);
   setupLibraries("PGRAIUpdate", PGRAIUpdate);
+  setupLibraries("ESTService", ESTService);
+  setupLibraries("NDCService", NDCService);
+  setupLibraries("ChallanGenerationService", ChallanGenerationService);
 
   return new Promise((resolve) => {
     initI18n(resolve);

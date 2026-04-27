@@ -149,6 +149,7 @@ export const newConfig = [
         type: "component",
         route: "check-slum",
         isMandatory: true,
+        component: "CheckSlum",
         texts: {
           header: "ES_NEW_APPLICATION_SLUM_CHECK",
           submitBarLabel: "CS_COMMON_NEXT",

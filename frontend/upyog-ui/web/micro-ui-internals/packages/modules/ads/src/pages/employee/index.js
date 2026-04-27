@@ -1,8 +1,9 @@
 import { AppContainer, BackButton, PrivateRoute, BreadCrumb } from "@upyog/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, Routes, Route } from "react-router-dom";
+import { Link, Switch, useLocation } from "react-router-dom";
 import SearchApp from "./SearchApp";
+
 
 /* EmployeeApp component serves as the main application container for employee-related routes.
  * It utilizes the AppContainer, PrivateRoute, and other components for structured navigation.
@@ -21,6 +22,7 @@ const EmployeeApp = ({ path, url, userType }) => {
   const ADSCreate = Digit?.ComponentRegistryService?.getComponent("ADSCreate");
   const ApplicationDetails = Digit?.ComponentRegistryService?.getComponent("ApplicationDetails");
   const isRes = window.location.href.includes("ads/response");
+  const EnhancedReport = Digit?.ComponentRegistryService?.getComponent("EnhancedReport");
   const isNewRegistration =
     window.location.href.includes("searchad") ||
     window.location.href.includes("modify-application") ||
@@ -47,8 +49,10 @@ const EmployeeApp = ({ path, url, userType }) => {
             <Route path={`${path}/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} /> */}
 
             <Route path="bookad/*" element={<PrivateRoute><ADSCreate /></PrivateRoute>} />
-            <Route path="my-applications" element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
+            <Route path="my-applications/*" element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
             <Route path="applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+            <Route path={`${path}/AdvApplicationReport`} element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-ads" reportName="AdvApplicationReport" /></PrivateRoute>} />
+
 
 
           </Routes>

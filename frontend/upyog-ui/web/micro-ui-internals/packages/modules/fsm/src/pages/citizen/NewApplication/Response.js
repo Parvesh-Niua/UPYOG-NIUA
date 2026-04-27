@@ -132,6 +132,7 @@ const Response = ({ data, onSuccess }) => {
             additionalDetails: {
               totalAmount: amount,
               tripAmount: typeof amountPerTrip === "number" ? JSON.stringify(amountPerTrip) : amountPerTrip,
+              propertyID : propertyID?.propertyID,
               distancefromroad : data?.roadWidth?.distancefromroad,
               roadWidth: data?.roadWidth?.roadWidth,
               propertyID : data?.cptId?.id
