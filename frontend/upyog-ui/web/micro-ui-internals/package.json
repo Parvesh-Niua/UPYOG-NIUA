@@ -28,7 +28,7 @@
     "packages/modules/bills",
     "packages/modules/dss",
     "packages/modules/noc",
-    "packages/modules/mcollect",
+    "packages/modules/mCollect",
     "packages/modules/reports",
     "packages/modules/chb",
     "packages/modules/assetv2",
