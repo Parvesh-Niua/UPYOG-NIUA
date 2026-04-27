@@ -1,13 +1,19 @@
-import { DetailsCard, Loader, Table, Modal,SearchField,SubmitBar,SearchForm } from "@upyog/digit-ui-react-components";
+import { DetailsCard, Loader, Table, Modal, SearchField, SubmitBar, SearchForm, Card, CardText, } from "@upyog/digit-ui-react-components";
 import React, { memo, useEffect, useMemo, useState } from "react";
-import { Link,  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropertyInvalidMobileNumber from "../../pages/citizen/MyProperties/PropertyInvalidMobileNumber";
 import { useQuery } from "@tanstack/react-query";
 const GetCell = (value) => <span className="cell-text">{value}</span>;
 
-const SearchPTID = ({ tenantId, t, payload, showToast, setShowToast,ptSearchConfig }) => {
+const SearchPTID = ({ tenantId, t, payload, showToast, setShowToast, ptSearchConfig }) => {
   const navigate = Digit.Hooks.useCustomNavigate();
-  
+  const [jobStatus, setJobStatus] = useState({
+    running: false,
+    done: 0,
+    total: 0,
+    message: ""
+  });
+
   const [searchQuery, setSearchQuery] = useState({
     /* ...defaultValues,   to enable pagination */
     ...payload,
@@ -16,12 +22,12 @@ const SearchPTID = ({ tenantId, t, payload, showToast, setShowToast,ptSearchConf
   const [showUpdateNo, setShowUpdateNo] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [ownerInvalidMobileNumberIndex, setOwnerInvalidMobileNumberIndex] = useState(0);
-const [showDownloads, setShowDownloads] = useState(false);
-const [groupBillrecords, setGroupBillrecords] = useState([]);
-console.log("payload", payload);
-let filters={ ...payload,isDefaulterNoticeSearch:true }
-const args = tenantId ? { tenantId, filters } : { filters };
-// const { isLoading, error, data, isSuccess } = useQuery(["propertySearchList", tenantId,filters ], () => Digit.PTService.search(args));   // v4 useQuery Syntax
+  const [showDownloads, setShowDownloads] = useState(false);
+  const [groupBillrecords, setGroupBillrecords] = useState([]);
+  console.log("payload", payload);
+  let filters={ ...payload,isDefaulterNoticeSearch:true }
+  const args = tenantId ? { tenantId, filters } : { filters };
+  // const { isLoading, error, data, isSuccess } = useQuery(["propertySearchList", tenantId,filters ], () => Digit.PTService.search(args));   // v4 useQuery Syntax
 
 //v5 useQuery syntax
   const { isLoading, error, data, isSuccess } = useQuery({
@@ -48,7 +54,7 @@ const args = tenantId ? { tenantId, filters } : { filters };
     owners = owners && owners.filter(owner => owner.status == "ACTIVE");
     owners && owners.map((owner, index) => {
       let number = owner.mobileNumber;
-      
+
       if (
           (
             (number == updateNumberConfig?.invalidNumber)
@@ -100,6 +106,13 @@ const args = tenantId ? { tenantId, filters } : { filters };
       index: ind,
     });
   }
+  const chunkArray = (arr, size) => {
+    const res = [];
+    for (let i = 0; i < arr.length; i += size) {
+      res.push(arr.slice(i, i + size));
+    }
+    return res;
+  };
 
   const columns = useMemo(
     () => [
@@ -181,7 +194,7 @@ const args = tenantId ? { tenantId, filters } : { filters };
     ],
     []
   );
-   const pdfDownloadLink = (documents = {}, fileStoreId = "", format = "") => {
+  const pdfDownloadLink = (documents = {}, fileStoreId = "", format = "") => {
     /* Need to enhance this util to return required format*/
   
     let downloadLink = documents[fileStoreId] || "";
@@ -195,22 +208,54 @@ const args = tenantId ? { tenantId, filters } : { filters };
       });
     return fileURL;
   };
-const downloadNotice = async (document) => {
-    console.log("document",document)
-    let fileStoreIds= [document.filestoreid]
+  const downloadNotice = async (document) => {
+    console.log("document", document)
+    let fileStoreIds = [document.filestoreid]
     const res = await Digit.UploadServices.Filefetch([document?.filestoreid], tenantId);
-    console.log("ressss",res)
-   let documentLink = pdfDownloadLink(res.data, document?.filestoreid);
-   window.open(documentLink, "_blank");
+    console.log("ressss", res)
+    let documentLink = pdfDownloadLink(res.data, document?.filestoreid);
+    window.open(documentLink, "_blank");
   };
-  const onSubmit= async ()=>{
-  let key
-  let properties
-    let response = await Digit.PTService.generateDefaulterNotice(tenantId,properties =Object.values(data?.Properties || {}));
-    setShowToast({
-        label: `${t("GRP_JOB_INITIATED_STATUS")} ${response?.jobId}`
-    })  
-}
+  const onSubmit = async () => {
+    const records = Object.values(data?.Properties || {});
+    if (!records.length) return;
+
+    const batches = chunkArray(records, 10);
+
+    setJobStatus({
+      running: true,
+      done: 0,
+      total: batches.length,
+      message: "Processing defaulter notices. Please don’t refresh."
+    });
+
+    await new Promise(r => setTimeout(r, 100));   // 👈 allow first repaint
+
+    for (let i = 0; i < batches.length; i++) {
+      try {
+        await Digit.PTService.generateDefaulterNotice(tenantId, batches[i]);
+
+        setJobStatus(prev => ({
+          ...prev,
+          done: i + 1
+        }));
+
+        await new Promise(r => setTimeout(r, 50)); // 👈 allow UI repaint each batch
+
+      } catch (e) {
+        console.error("Batch failed", i, e);
+      }
+    }
+
+    setJobStatus({
+      running: false,
+      done: batches.length,
+      total: batches.length,
+      message: "All notice generation jobs completed successfully."
+    });
+  };
+
+
   let isMobile = window.Digit.Utils.browser.isMobile();
 
   if (isLoading) {
@@ -252,61 +297,78 @@ const onViewDownload =async () =>{
         <DetailsCard data={getData(tableData)} t={t} />
       ) : (
         <div>
+          {jobStatus.running && (
+            <Card style={{ background: "#fff4e5", margin: "0px 0px 20px 0px !impportant" }}>
+              <CardText>
+                {jobStatus.message}
+                <br />
+                {`Processed ${jobStatus.done} of ${jobStatus.total} batches`}
+              </CardText>
+            </Card>
+          )}
 
-       
-        <Table
-          t={t}
-          data={tableData}
-          totalRecords={data?.Properties?.length}
-          columns={columns}
-          getCellProps={(cellInfo) => {
-            return {
-              style: {
-                padding: "20px 18px",
-                fontSize: "16px",
-              },
-            };
-          }}
-          manualPagination={false}
-          disableSort={true}
-        />
-         {/* <SearchForm onSubmit={onSubmit} className={"pt-property-search"} handleSubmit={onSubmit}> */}
-         <div style={{display:"flex", flexDirection:"row-reverse"}}>   
-         <div style={{width:"inherit",marginLeft:"10px"}}>
-         <SearchField className="pt-search-action-submit" >
-          <SubmitBar
-            label={t("CS_COMMON_GENERATE_NOTICE")}
-            onSubmit={onSubmit}
+          {!jobStatus.running && jobStatus.done === jobStatus.total && jobStatus.total > 0 && (
+            <Card style={{ background: "#00703c", margin: "0px 0px 20px 0px !impportant" }}>
+              <CardText style={{fontWeight :"700",color:"white"}}>
+                All notice generation jobs completed successfully.
+              </CardText>
+            </Card>
+          )}
+
+
+          <Table
+            t={t}
+            data={tableData}
+            totalRecords={data?.Properties?.length}
+            columns={columns}
+            getCellProps={(cellInfo) => {
+              return {
+                style: {
+                  padding: "20px 18px",
+                  fontSize: "16px",
+                },
+              };
+            }}
+            manualPagination={false}
+            disableSort={true}
           />
-        </SearchField>
-         </div>
-    <div style={{width:"inherit",marginLeft:"10px"}}>
-        <SearchField className="pt-search-action-submit">
-          {/* <SubmitBar label={t("ES_COMMON_SEARCH")} submit /> */}
-          <SubmitBar
-            label={t("CS_COMMON_DOWNLOADS")}
-            onSubmit={onViewDownload}
-          />
-        </SearchField></div></div>
-      
-        {showDownloads &&(
-        <Table
-          t={t}
-          data={tableData2}
-          totalRecords={groupBillrecords?.length}
-          columns={columns2}
-          getCellProps={(cellInfo) => {
-            return {
-              style: {
-                padding: "20px 18px",
-                fontSize: "16px",
-              },
-            };
-          }}
-          manualPagination={false}
-          disableSort={true}
-        />)}
-         </div>
+          {/* <SearchForm onSubmit={onSubmit} className={"pt-property-search"} handleSubmit={onSubmit}> */}
+          <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+            <div style={{ width: "inherit", marginLeft: "10px" }}>
+              <SearchField className="pt-search-action-submit" >
+                <SubmitBar
+                  label={t("CS_COMMON_GENERATE_NOTICE")}
+                  onSubmit={onSubmit}
+                />
+              </SearchField>
+            </div>
+            <div style={{ width: "inherit", marginLeft: "10px" }}>
+              <SearchField className="pt-search-action-submit">
+                {/* <SubmitBar label={t("ES_COMMON_SEARCH")} submit /> */}
+                <SubmitBar
+                  label={t("CS_COMMON_DOWNLOADS")}
+                  onSubmit={onViewDownload}
+                />
+              </SearchField></div></div>
+
+          {showDownloads && (
+            <Table
+              t={t}
+              data={tableData2}
+              totalRecords={groupBillrecords?.length}
+              columns={columns2}
+              getCellProps={(cellInfo) => {
+                return {
+                  style: {
+                    padding: "20px 18px",
+                    fontSize: "16px",
+                  },
+                };
+              }}
+              manualPagination={false}
+              disableSort={true}
+            />)}
+        </div>
       )}
 
     </React.Fragment>

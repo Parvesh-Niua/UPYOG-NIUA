@@ -158,6 +158,7 @@ const EmployeeApp = ({ path, url, userType }) => {
   const DocsRequired = Digit?.ComponentRegistryService?.getComponent("PTDocsRequired");
   const isRes = window.location.href.includes("pt/response");
   const isLocation = window.location.href.includes("pt") || window.location.href.includes("application");
+  const EnhancedReport = Digit?.ComponentRegistryService?.getComponent("EnhancedReport");
   const isNewRegistration = window.location.href.includes("new-application") || window.location.href.includes("modify-application") || window.location.href.includes("pt/application-details");
   return (
     <React.Fragment>
@@ -215,6 +216,12 @@ const EmployeeApp = ({ path, url, userType }) => {
           />
           <Route path={`${path}/application-search`} element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
           <Route path={`${path}/ulb-assesment`} element={<PrivateRoute><UlbAssesment parentRoute={path} /></PrivateRoute>} />
+          <Route path={`${path}/PTReceiptRegister`} element={<PrivateRoute><EnhancedReport {...props} parentRoute={path} moduleName="pt-reports" reportName="PTReceiptRegister" /></PrivateRoute>} />
+          <Route path={`${path}/PTCollectionReport`} element={<PrivateRoute><EnhancedReport {...props} parentRoute={path} moduleName="pt-reports" reportName="PTCollectionReport" /></PrivateRoute>} />
+          <Route path={`${path}/DefaulterReport`} element={<PrivateRoute><EnhancedReport {...props} parentRoute={path} moduleName="pt-reports" reportName="DefaulterReport" /></PrivateRoute>} />
+          <Route path={`${path}/PTGrievances`} element={<PrivateRoute><EnhancedReport {...props} parentRoute={path} moduleName="pt-reports" reportName="PTGrievances" /></PrivateRoute>} />
+          <Route path={`${path}/PTCoverageReport`} element={<PrivateRoute><EnhancedReport {...props} parentRoute={path} moduleName="pt-reports" reportName="PTCoverageReport" /></PrivateRoute>} />
+          <Route path={`${path}/PTTop20TaxPayers`} element={<PrivateRoute><EnhancedReport {...props} parentRoute={path} moduleName="pt-reports" reportName="PTTop20TaxPayers" /></PrivateRoute>} />
         </Routes>
       </div>
     </React.Fragment>

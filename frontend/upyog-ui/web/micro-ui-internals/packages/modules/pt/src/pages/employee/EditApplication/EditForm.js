@@ -1,7 +1,7 @@
 import { FormComposer, Loader } from "@upyog/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation,  } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { newConfig } from "../../../config/Create/config";
 
 const EditForm = ({ applicationData }) => {
@@ -37,6 +37,16 @@ let propertyStructureDetails= {"usageCategory":"","structureType":applicationDat
   sessionStorage.setItem("PropertyInitials",JSON.stringify(defaultValues?.originalData));
 
   const onFormValueChange = (setValue, formData, formState) => {
+    unitValues.length = 0;
+    if (formData?.units && Array.isArray(formData.units)) {
+        formData.units.forEach((unit) => {
+          unitValues.push({
+            RentedMonths: unit?.RentedMonths || null,
+            NonRentedMonthsUsage: unit?.NonRentedMonthsUsage || null,
+            floorNo: unit?.floorNo?.code || null,
+          });
+        });
+      }
     if(Object.keys(formState.errors).length==1 && formState.errors.documents)
     setSubmitValve(true);
     else 
@@ -61,7 +71,7 @@ let propertyStructureDetails= {"usageCategory":"","structureType":applicationDat
       landArea: Number(data?.landarea),
       superBuiltUpArea: Number(data?.landarea),
       additionalDetails:{...data.originalData.additionalDetails, electricity:data.electricity,uid:data.uid,ageOfProperty:data?.propertyStructureDetails?.ageOfProperty,
-        structureType:data?.propertyStructureDetails?.structureType},
+        structureType:data?.propertyStructureDetails?.structureType,  unit: unitValues },
       //electricity:data?.electricity,
       source: "MUNICIPAL_RECORDS", // required
       channel: "CFC_COUNTER", // required
