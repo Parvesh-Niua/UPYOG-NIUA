@@ -1,0 +1,24 @@
+{
+  "name": "@nudmcdgnpm/upyog-ui-module-ndc",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "src/index.js",
+  "source": "src/Module.js",
+
+
+  
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19",
+    "@tanstack/react-query": "^5.0.0",
+    "react-router-dom": "^6.23.0"
+  },
+  "dependencies": {
+    "@upyog/digit-ui-react-components": "3.10.0",
+    "react-hook-form": "6.15.8",
+    "react-redux": "7.2.8",
+    "redux": "4.1.2",
+    "redux-thunk": "2.4.1",
+    "react-i18next": "11.16.2"
+  }
+}

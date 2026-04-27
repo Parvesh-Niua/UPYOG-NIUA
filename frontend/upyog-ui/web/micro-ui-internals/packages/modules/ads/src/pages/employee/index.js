@@ -49,7 +49,7 @@ const EmployeeApp = ({ path, url, userType }) => {
             <Route path={`${path}/applicationsearch/application-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} /> */}
 
             <Route path="bookad/*" element={<PrivateRoute><ADSCreate /></PrivateRoute>} />
-            <Route path="my-applications" element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
+            <Route path="my-applications/*" element={<PrivateRoute><SearchApp parentRoute={path} /></PrivateRoute>} />
             <Route path="applicationsearch/application-details/:id" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
             <Route path={`${path}/AdvApplicationReport`} element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-ads" reportName="AdvApplicationReport" /></PrivateRoute>} />
 
