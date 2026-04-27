@@ -16,6 +16,7 @@ const editAssetDetails = () => ({
   Assetdescription: "",
   Department: "",
   sourceOfFinance: "",
+  assetclassification: "",
   key: Date.now(),
 });
 

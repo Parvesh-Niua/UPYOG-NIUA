@@ -1,6 +1,7 @@
 import { Header, CitizenHomeCard, PTIcon } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useRouteMatch } from "react-router-dom";
 import EmployeeApp from "./pages/employee";
 import ASSETCard from "./components/ASSETCard";
 import InboxFilter from "./components/inbox/NewInboxFilter";
@@ -38,6 +39,7 @@ import EditGeneralDetails from "./pageComponents/EditGeneralDetails";
 import EditAssetDetails from "./pageComponents/EditAssetDetails";
 import EditResponse from "./pages/employee/EditResponse";
 import EditAssetMaintenance from "./pages/employee/EditAssetMaintenance";
+import { ReportSearchApplication, EnhancedReport } from "@nudmcdgnpm/digit-ui-module-reports";
 
 
 
@@ -74,8 +76,9 @@ const componentsToRegister = {
   editAsset:EditAsset,
   EditGeneralDetails,
   EditAssetDetails,
-  editResponse:EditResponse
-  
+  editResponse:EditResponse,
+  EnhancedReport,
+  ReportSearchApplication  
   
 };
 
