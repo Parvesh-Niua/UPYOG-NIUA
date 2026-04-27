@@ -16,7 +16,7 @@ RUN ls -lah
 RUN cd web/ \
     && node envs.js \
     && node -e 'console.log(v8.getHeapStatistics().heap_size_limit/(1024*1024))' \
-    && yarn install \
+    && yarn install --production=true \
     && yarn build 
     
 
