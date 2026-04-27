@@ -63,7 +63,7 @@ const UserProfile = ({ stateCode, userType, cityDetails }) => {
   const [dob, setDob] = useState(dateOfBirth);
   const [email, setEmail] = useState(userInfo?.emailId ? userInfo.emailId : "");
   const [gender, setGender] = useState(userDetails?.gender);
-  const [city, setCity] = useState(userInfo?.permanentCity ? userInfo.permanentCity : cityDetails.name);
+  const [city, setCity] = useState(userInfo?.permanentCity ? userInfo.permanentCity : cityDetails?.name);
   const [mobileNumber, setMobileNo] = useState(userInfo?.mobileNumber ? userInfo.mobileNumber : "");
   const [altMobileNumber, setAltMobileNo] = useState(userInfo?.altContactNumber ? userInfo.altContactNumber : "");
   const [profilePic, setProfilePic] = useState(userDetails?.photo ? userDetails?.photo : "");

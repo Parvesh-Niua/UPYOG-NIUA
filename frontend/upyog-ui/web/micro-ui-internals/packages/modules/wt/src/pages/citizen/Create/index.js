@@ -8,7 +8,6 @@ import { Timeline } from "@upyog/digit-ui-react-components";
 
 const WTCreate = () => {
   const queryClient = useQueryClient();
-  const match = useMatch();
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const navigate = Digit.Hooks.useCustomNavigate();
@@ -91,7 +90,7 @@ const WTCreate = () => {
         }
     } 
     if (nextStep === null) {
-      return redirectWithHistory(`$check`);
+      return redirectWithHistory(`check`);
     }
     if (!isNaN(nextStep.split("/").pop())) {
       nextPage = `${nextStep}`;
@@ -172,11 +171,11 @@ const WTCreate = () => {
             />
           );
         })}
-        <Route path={`check`} element={<CheckPage onSubmit={wt_create} value={params} />} />
-        <Route path={`wt-acknowledgement`} element={<WTAcknowledgement data={params} onSuccess={onSuccess} />} />
-        <Route path={`mt-acknowledgement`} element={<MTAcknowledgement data={params} onSuccess={onSuccess} />} />
-        <Route path={`tp-acknowledgement`} element={<TPAcknowledgement data={params} onSuccess={onSuccess} />} />
-        <Route path="*" element={<Navigate to={`${config.indexRoute}`} />} />
+        <Route path="check/*" element={<CheckPage onSubmit={wt_create} value={params} />} />
+        <Route path="wt-acknowledgement/*" element={<WTAcknowledgement data={params} onSuccess={onSuccess} />} />
+        <Route path="mt-acknowledgement/*" element={<MTAcknowledgement data={params} onSuccess={onSuccess} />} />
+        <Route path="tp-acknowledgement/*" element={<TPAcknowledgement data={params} onSuccess={onSuccess} />} />
+        <Route path="/*" element={<Navigate to={`${config.indexRoute}`} />} />
       </Routes>
     </React.Fragment>
   );

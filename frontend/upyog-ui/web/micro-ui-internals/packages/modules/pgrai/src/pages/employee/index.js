@@ -36,6 +36,7 @@ const EmployeeApp = () => {
                   filterComponent="PGRAI_INBOX_FILTER"
                   initialStates={inboxInitialState}
                   isInbox={true}
+                  parentRoute={path}
                 />
               </PrivateRoute>
             }

@@ -35,7 +35,7 @@ const App = () => {
         <BackButton>Back</BackButton>
         <Routes>
           <Route
-            path={`${path}/inbox`}
+            path="inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
@@ -51,7 +51,7 @@ const App = () => {
             }
           />
           <Route
-            path={`${path}/mt/inbox`}
+            path="mt/inbox/*"
             element={
               <PrivateRoute>
                 <Inbox
@@ -66,15 +66,15 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route path={`${path}/request-service`} element={<PrivateRoute><WTCreate /></PrivateRoute>} />
-          <Route path={`${path}/status`} element={<PrivateRoute><WTMyApplications /></PrivateRoute>} />
-          <Route path={`${path}/booking/waterTanker/:acknowledgementIds/:tenantId`} element={<PrivateRoute><WTApplicationDetails /></PrivateRoute>} />
-          <Route path={`${path}/booking/mobileToilet/:acknowledgementIds/:tenantId`} element={<PrivateRoute><MTApplicationDetails /></PrivateRoute>} />
-          <Route path={`${path}/booking/treePruning/:acknowledgementIds/:tenantId`} element={<PrivateRoute><TPApplicationDetails /></PrivateRoute>} />
-          <Route path={`${path}/booking-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
-          <Route path={`${path}/bookingsearch/booking-details/:id`} element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path="request-service/*" element={<PrivateRoute><WTCreate /></PrivateRoute>} />
+          <Route path="status/*" element={<PrivateRoute><WTMyApplications /></PrivateRoute>} />
+          <Route path="booking/waterTanker/:acknowledgementIds/:tenantId/*" element={<PrivateRoute><WTApplicationDetails /></PrivateRoute>} />
+          <Route path="booking/mobileToilet/:acknowledgementIds/:tenantId/*" element={<PrivateRoute><MTApplicationDetails /></PrivateRoute>} />
+          <Route path="booking/treePruning/:acknowledgementIds/:tenantId/*" element={<PrivateRoute><TPApplicationDetails /></PrivateRoute>} />
+          <Route path="booking-details/:id/*" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
+          <Route path="bookingsearch/booking-details/:id/*" element={<PrivateRoute><ApplicationDetails parentRoute={path} /></PrivateRoute>} />
           <Route
-            path={`${path}/wt-Vendor`}
+            path="wt-Vendor/*"
             element={
               Digit.UserService.hasAccess(["WT_VENDOR"]) ? (
                 <PrivateRoute>
@@ -92,7 +92,7 @@ const App = () => {
             }
           />
           <Route
-            path={`${path}/mt-Vendor`}
+            path="mt-Vendor/*"
             element={
               Digit.UserService.hasAccess(["MT_VENDOR"]) ? (
                 <PrivateRoute>
@@ -109,8 +109,8 @@ const App = () => {
               )
             }
           />
-          <Route path={`${path}/my-bookings`} element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"WT"} /></PrivateRoute>} />
-          <Route path={`${path}/mt/my-bookings`} element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"MT"} /></PrivateRoute>} />
+          <Route path="my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"WT"} /></PrivateRoute>} />
+          <Route path="mt/my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"MT"} /></PrivateRoute>} />
         </Routes>
       </AppContainer>
     </span>

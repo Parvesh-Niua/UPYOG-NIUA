@@ -87,6 +87,7 @@ const EmployeeApp = ({ path, url, userType }) => {
                     filterComponent="AST_INBOX_FILTER"
                     initialStates={inboxInitialState}
                     isInbox={true}
+                    parentRoute={path}
                   />
                 </PrivateRoute>
               }

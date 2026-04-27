@@ -57,7 +57,7 @@ export const ADSModule = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("ADS_TENANTS", tenants);
 
-  // Fetch localization data if the user is an employee
+  // Fetch localization data if the user is an employee if the user type is employee, fetch localization data for the current tenant and language
   useEffect(() => {
     if (userType === "employee") {
       Digit.LocalizationService.getLocale({

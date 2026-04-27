@@ -82,6 +82,7 @@ const EmployeeApp = ({ path, url, userType }) => {
                 <PrivateRoute>
                   <Inbox
                     useNewInboxAPI={true}
+                    parentRoute={path}
                     businessService="asset-create"
                     filterComponent="AST_INBOX_FILTER"
                     initialStates={inboxInitialState}

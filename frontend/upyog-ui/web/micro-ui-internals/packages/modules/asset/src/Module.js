@@ -100,6 +100,7 @@ export const ASSETModule = ({ stateCode, userType, tenants }) => {
 
   Digit.SessionStorage.set("ASSET_TENANTS", tenants);
 
+// Fetch localization data if the user is an employee if the user type is employee, fetch localization data for the current tenant and language
   useEffect(() => {
   if (userType === "employee") {
     const loadLocale = async () => {
