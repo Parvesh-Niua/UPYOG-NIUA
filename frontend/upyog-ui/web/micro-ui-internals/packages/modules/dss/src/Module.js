@@ -52,7 +52,7 @@ const DssBreadCrumb = ({ location }) => {
   return <BreadCrumb crumbs={crumbs?.filter(ele=>ele.show)} />;
 };
 
-const DssModuleRoutes = ({ path, stateCode }) => {
+const Routes = ({ path, stateCode }) => {
   const location = useLocation();
   const isMobile = window.Digit.Utils.browser.isMobile();
 
@@ -75,6 +75,7 @@ Property Tax Assessment and Payment</div>
 Miscellaneous Collections</div>
         <div  style={{width:"90%",margin:"5%",backgroundColor:"white",fontWeight:"700",textAlign:"center",height:"50px",lineHeight:"3",cursor:"pointer"}}className="dashBoard" onClick = {(e)=>handClick(e,"national-fssm")}>
 Desludging Service</div>
+<div  style={{width:"90%",margin:"5%",backgroundColor:"white",fontWeight:"700",textAlign:"center",height:"50px",lineHeight:"3",cursor:"pointer"}}className="dashBoard" onClick = {(e)=>handClick(e,"national-sv")}>Street Vending</div>
       
       </div>
       <div className="chart-wrapper" style={isMobile ? {marginTop:"unset"} : {width:"100%"}}>
@@ -106,7 +107,7 @@ const DSSModule = ({ stateCode, userType, tenants }) => {
   Digit.SessionStorage.set("DSS_TENANTS", tenants);
 
   if (userType !== "citizen") {
-    return <DssModuleRoutes path={path} stateCode={stateCode} />;
+    return <Routes path={path} stateCode={stateCode} />;
   }
 };
 
