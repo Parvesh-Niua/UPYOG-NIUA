@@ -40,7 +40,7 @@ import ViewBreakup from "./ViewBreakup";
 import ArrearSummary from "../../../common/src/payments/citizen/bills/routes/bill-details/arrear-summary";
 // import ViewAssetOnMap from "./ViewAssetOnMap";
 // import MarkPropertyMap from "../../../asset/src/pageComponents/MarkPropertyMap";
-// import { MarkOnMap, ViewOnMap } from "@nudmcdgnpm/upyog-ui-module-gis";
+import { MarkOnMap, ViewOnMap } from "@nudmcdgnpm/upyog-ui-module-gis";
 
 // Helper function to convert "lat,lng" string to {lat:..., lng:...} object
 const coordinateFormatter = (locationString) => {
@@ -416,56 +416,56 @@ function ApplicationDetailsContent({
               {detail?.title &&
                 !detail?.title.includes("NOC") &&
                 detail?.values?.map((value, index) => {
-                  // if (value?.isViewOnMap) {
-                  //   return (
-                  //     <Row
-                  //       key={t(value.title)}
-                  //       label={t(value.title)}
-                  //       text={
-                  //         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  //           {/* Show the original value */}
-                  //           <span>{getTextValue(value)}</span>
-                  //           {applicationDetailsofAsset?.applicationData?.applicationData?.additionalDetails?.geometry ? (
-                  //             <button
-                  //               style={{
-                  //                 backgroundColor: "#a82227",
-                  //                 color: "white",
-                  //                 border: "none",
-                  //                 borderRadius: "4px",
-                  //                 padding: "4px 10px",
-                  //                 cursor: "pointer",
-                  //                 fontSize: "0.85rem",
-                  //               }}
-                  //               onClick={() =>
-                  //                 handleOpenMap(applicationDetailsofAsset?.applicationData?.applicationData?.additionalDetails?.geometry)
-                  //               }
-                  //             >
-                  //               {t("View on Map")}
-                  //             </button>
-                  //           ) : (
-                  //             <button
-                  //               style={{
-                  //                 backgroundColor: "#a82227",
-                  //                 color: "white",
-                  //                 border: "none",
-                  //                 borderRadius: "4px",
-                  //                 padding: "4px 10px",
-                  //                 cursor: "pointer",
-                  //                 fontSize: "0.85rem",
-                  //               }}
-                  //               onClick={() => setShowMap(true)}
-                  //             >
-                  //               {t("Mark on Map")}
-                  //             </button>
-                  //           )}
-                  //         </div>
-                  //       }
-                  //       last={index === detail?.values?.length - 1}
-                  //       className="border-none"
-                  //       rowContainerStyle={getRowStyles()}
-                  //     />
-                  //   );
-                  // }
+                  if (value?.isViewOnMap) {
+                    return (
+                      <Row
+                        key={t(value.title)}
+                        label={t(value.title)}
+                        text={
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            {/* Show the original value */}
+                            <span>{getTextValue(value)}</span>
+                            {applicationDetailsofAsset?.applicationData?.applicationData?.additionalDetails?.geometry ? (
+                              <button
+                                style={{
+                                  backgroundColor: "#a82227",
+                                  color: "white",
+                                  border: "none",
+                                  borderRadius: "4px",
+                                  padding: "4px 10px",
+                                  cursor: "pointer",
+                                  fontSize: "0.85rem",
+                                }}
+                                onClick={() =>
+                                  handleOpenMap(applicationDetailsofAsset?.applicationData?.applicationData?.additionalDetails?.geometry)
+                                }
+                              >
+                                {t("View on Map")}
+                              </button>
+                            ) : (
+                              <button
+                                style={{
+                                  backgroundColor: "#a82227",
+                                  color: "white",
+                                  border: "none",
+                                  borderRadius: "4px",
+                                  padding: "4px 10px",
+                                  cursor: "pointer",
+                                  fontSize: "0.85rem",
+                                }}
+                                onClick={() => setShowMap(true)}
+                              >
+                                {t("Mark on Map")}
+                              </button>
+                            )}
+                          </div>
+                        }
+                        last={index === detail?.values?.length - 1}
+                        className="border-none"
+                        rowContainerStyle={getRowStyles()}
+                      />
+                    );
+                  }
                   if (value.map === true && value.value !== "N/A") {
                     return (
                       <Row
@@ -685,14 +685,14 @@ function ApplicationDetailsContent({
             </Fragment>
           )}
 
-          {/* {showMapModal && (
+          {showMapModal && (
             <ViewOnMap
               closeModal={handleCloseMap}
               location={selectedLocation} // pass lat/lng or ID
               assetDetails={applicationDetailsofAsset?.applicationData?.applicationData}
             />
-          )} */}
-          {/* {showMap && (
+          )}
+          {showMap && (
             <MarkOnMap
               onGeometrySave={(geoJson) => {
                 setGeometry(geoJson);
@@ -703,7 +703,7 @@ function ApplicationDetailsContent({
               closeModal={() => setShowMap(false)}
               location={coordinateFormatter(applicationDetailsofAsset?.applicationData?.applicationData?.location)}
             />
-          )} */}
+          )}
         </React.Fragment>
       )}
     </Card>
