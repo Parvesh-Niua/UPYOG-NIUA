@@ -3,14 +3,16 @@
   "description": "Estate Managemnent Module",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "src/index.js",
-  "source": "src/Module.js",
+  "main": "src/Module.js",
+    "source": "src/Module.js",
+
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19",
     "@tanstack/react-query": "^5.0.0",
     "react-router-dom": "^6.23.0"
   },
+
   "dependencies": {
     "@upyog/digit-ui-libraries": "3.10.0",
     "@upyog/digit-ui-react-components": "3.10.0",
