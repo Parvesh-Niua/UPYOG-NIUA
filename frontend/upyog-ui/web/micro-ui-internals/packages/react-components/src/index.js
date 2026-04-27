@@ -28,7 +28,7 @@ import DatePicker from "./atoms/DatePicker";
 import DateRange from "./molecules/DateRange";
 import DateWrap from "./atoms/DateWrap";
 import DisplayPhotos from "./atoms/DisplayPhotos";
-// import DisplayPhotosnew from "./atoms/DisplayPhotosnew";
+import DisplayPhotosnew from "./atoms/DisplayPhotosnew";
 import Dropdown from "./atoms/Dropdown";
 import EllipsisMenu from "./atoms/EllipsisMenu";
 import EmployeeAppContainer from "./atoms/EmployeeAppContainer";
@@ -176,7 +176,8 @@ import {
   InfoIcon,
   LoginIcon,
   PTRIcon,
-  CHBIcon
+  CHBIcon,
+  SuccessSvg
 } from "./atoms/svgindex";
 import Table from "./atoms/Table";
 import TelePhone from "./atoms/TelePhone";
@@ -272,7 +273,7 @@ export {
   LastRow,
   MediaRow,
   DisplayPhotos,
-  // DisplayPhotosnew,
+  DisplayPhotosnew,
   ConnectingCheckPoints,
   CheckPoint,
   Rating,
@@ -471,6 +472,8 @@ export {
   CHBIcon,
   AddressDetails,
   ApplicantDetails,
-  Timeline
+  Timeline,
+  SuccessSvg
+
   
 };

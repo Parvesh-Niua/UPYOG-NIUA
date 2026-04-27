@@ -1,7 +1,5 @@
 import { CitizenHomeCard, Loader, PTIcon } from "@upyog/digit-ui-react-components";
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { useRouteMatch } from "react-router-dom";
 import InboxFilter from "./components/inbox/NewInboxFilter";
 import ChallanGenerationCard from "./components/ChallanGenerationCard";
 import EmployeeChallan from "./EmployeeChallan";
@@ -31,7 +29,7 @@ export const ChallanGenerationModule = ({ stateCode, userType, tenants }) => {
   if (isLoading) {
     return <Loader />;
   }
-  const { path, url } = useRouteMatch();
+  const { path, url } = Digit.Hooks.useModuleBasePath();
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;

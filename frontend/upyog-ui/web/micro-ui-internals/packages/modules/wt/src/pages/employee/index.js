@@ -58,6 +58,7 @@ const EmployeeApp = ({ path,userType }) => {
   };
 
   const ApplicationDetails = Digit?.ComponentRegistryService?.getComponent("ApplicationDetails");
+  const EnhancedReport = Digit?.ComponentRegistryService?.getComponent("EnhancedReport");
 
   // const Response = Digit?.ComponentRegistryService?.getComponent("CHBResponse");
   const WTCreate = Digit?.ComponentRegistryService?.getComponent("WTCreate");
@@ -131,6 +132,9 @@ const EmployeeApp = ({ path,userType }) => {
           <Route path="my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"WT"} /></PrivateRoute>} />
           <Route path="mt/my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"MT"} /></PrivateRoute>} />
           <Route path="tp/my-bookings/*" element={<PrivateRoute><SearchApp parentRoute={path} moduleCode={"TP"} /></PrivateRoute>} />
+          <Route path="waterTankerRequestReport" element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-wt" reportName="waterTankerRequestReport" /></PrivateRoute>} />
+          <Route path="MobileToiletRequestRegister" element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-mt" reportName="MobileToiletRequestRegister" /></PrivateRoute>} />
+          <Route path="treePruningRequestRegister" element={<PrivateRoute><EnhancedReport parentRoute={path} moduleName="rainmaker-tp" reportName="treePruningRequestRegister" /></PrivateRoute>} />
         </Routes>
       </div>
     </AppContainer>

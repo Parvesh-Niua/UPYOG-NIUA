@@ -2,7 +2,7 @@ import { BreadCrumb, PrivateRoute } from "@upyog/digit-ui-react-components";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import SearchApplication from "./SearchApplication";
-import { useLocation, Routes } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Response from "./Response";
 
 const NOCBreadCrumbs = ({ location }) => {
@@ -52,11 +52,11 @@ const EmployeeApp = ({ path }) => {
         <NOCBreadCrumbs location={location} />
       </div> : null} 
       <Routes>
-        <Route path={`${path}/inbox/application-overview/:id`} element={<PrivateRoute><ApplicationOverview /></PrivateRoute>} />
-        <Route path={`${path}/search/application-overview/:id`} element={<PrivateRoute><ApplicationOverview /></PrivateRoute>} />
-<Route path={`${path}/inbox`} element={<PrivateRoute><Inbox  parentRoute={path} /></PrivateRoute>} />
-<Route path={`${path}/search`} element={<PrivateRoute><SearchApplication  parentRoute={path} /></PrivateRoute>} />
-        <Route path={`${path}/response`} element={<PrivateRoute><Response /></PrivateRoute>} />
+        <Route path="inbox/application-overview/:id" element={<PrivateRoute><ApplicationOverview /></PrivateRoute>} />
+        <Route path="search/application-overview/:id" element={<PrivateRoute><ApplicationOverview /></PrivateRoute>} />
+        <Route path="inbox" element={<PrivateRoute><Inbox parentRoute={path} /></PrivateRoute>} />
+        <Route path="search" element={<PrivateRoute><SearchApplication parentRoute={path} /></PrivateRoute>} />
+        <Route path="response" element={<PrivateRoute><Response /></PrivateRoute>} />
       </Routes>
     </Fragment>
   );

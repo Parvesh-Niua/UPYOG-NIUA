@@ -2,6 +2,7 @@ import React from "react";
 import EmployeeApp from "./pages";
 import ReportsCard from "./components/ReportsCard";
 import ReportSearchApplication from "./components/ReportSearchApplication";
+import EnhancedReport from "./components/EnhancedReport";
 
 export const ReportsModule = ({ stateCode, userType }) => {
     const moduleCode = "REPORTS";
@@ -16,7 +17,8 @@ export const ReportsModule = ({ stateCode, userType }) => {
 const componentsToRegister = {
     ReportsModule,
     ReportsCard,
-    ReportSearchApplication
+    ReportSearchApplication,
+    EnhancedReport
 };
 
 export const initReportsComponents = () => {
@@ -24,3 +26,6 @@ export const initReportsComponents = () => {
         Digit.ComponentRegistryService.setComponent(key, value);
     });
 };
+
+
+export { EnhancedReport, ReportSearchApplication };

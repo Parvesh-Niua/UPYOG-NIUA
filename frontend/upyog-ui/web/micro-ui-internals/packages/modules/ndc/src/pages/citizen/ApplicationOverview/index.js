@@ -1,21 +1,10 @@
 import {
-  CardSectionHeader,
-  Header,
-  MultiUploadWrapper,
-  PDFSvg,
   Row,
   StatusTable,
-  LabelFieldPair,
-  CardLabel,
   Card,
   CardSubHeader,
   ActionBar,
   SubmitBar,
-  Menu,
-  LinkButton,
-  TLTimeLine,
-  DisplayPhotos,
-  StarRated,
   MultiLink
 } from "@upyog/digit-ui-react-components";
 import React, { Fragment, useEffect, useState, useRef } from "react";
