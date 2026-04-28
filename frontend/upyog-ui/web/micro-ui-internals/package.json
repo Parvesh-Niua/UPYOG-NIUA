@@ -28,7 +28,7 @@
     "packages/modules/bills",
     "packages/modules/dss",
     "packages/modules/noc",
-    "packages/modules/mcollect",
+    "packages/modules/mCollect",
     "packages/modules/reports",
     "packages/modules/chb",
     "packages/modules/assetv2",
@@ -106,7 +106,6 @@
     "deploy:jenkins": "./scripts/jenkins.sh"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-unicode-property-regex": "^7.18.6",
     "husky": "^9.1.5",
     "lint-staged": "^15.3.0",
     "npm-run-all2": "^7.0.0",

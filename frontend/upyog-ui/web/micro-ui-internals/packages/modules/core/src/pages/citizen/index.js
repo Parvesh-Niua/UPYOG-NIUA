@@ -85,7 +85,7 @@ const Home = (props) => {
   const classname = Digit.Hooks.useRouteSubscription(pathname);
   const { t } = useTranslation();
 
-  // 🔁 replacing useRouteMatch
+  // replacing useRouteMatch
   const path = "/upyog-ui/citizen";
 
   const navigate = Digit.Hooks.useCustomNavigate();

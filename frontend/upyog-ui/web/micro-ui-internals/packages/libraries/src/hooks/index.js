@@ -423,7 +423,6 @@ const fsm = {
   usePaymentHistory,
   useVendorUpdate,
   useVehicleDetails,
-  useVehicleCreate,
   useVendorCreate,
   useVehicleCreate,
   useUpdateVehicle,

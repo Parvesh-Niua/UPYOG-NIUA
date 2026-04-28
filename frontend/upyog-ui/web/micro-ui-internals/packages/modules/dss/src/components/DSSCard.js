@@ -37,7 +37,6 @@ const NDSSCard = () => {
     .filter((ele) => ele["nActive"] === true)
     .map((obj) => ({
       label: t(obj?.label),
-      link: `/upyog-ui/employee/dss/dashboard/${obj?.key}`,
       link: obj?.others?`/upyog-ui/employee/dss/${obj?.key}`:`/upyog-ui/employee/dss/dashboard/${obj?.key}`,
     }));
 

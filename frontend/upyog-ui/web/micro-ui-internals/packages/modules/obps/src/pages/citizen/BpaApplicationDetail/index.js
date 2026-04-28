@@ -470,7 +470,7 @@ const BpaApplicationDetail = () => {
                         onClick={() => downloadDiagram(scrutiny?.value)}
                         label={<PDFSvg />}>
                       </LinkButton>
-                      <p style={{ marginTop: "8px", marginBottom: "20px", fontWeight: "bold", fontSize: "16px", lineHeight: "19px", color: "#505A5F", fontWeight: "400" }}>{t(scrutiny?.text)}</p>
+                      <p style={{ marginTop: "8px", marginBottom: "20px", fontSize: "16px", lineHeight: "19px", color: "#505A5F", fontWeight: "400" }}>{t(scrutiny?.text)}</p>
                     </Fragment>
                   )) : null}
 

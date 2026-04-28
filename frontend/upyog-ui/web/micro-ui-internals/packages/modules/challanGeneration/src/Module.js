@@ -30,6 +30,7 @@ export const ChallanGenerationModule = ({ stateCode, userType, tenants }) => {
     return <Loader />;
   }
   const { path, url } = Digit.Hooks.useModuleBasePath();
+  const { path, url } = Digit.Hooks.useModuleBasePath();
 
   if (userType === "employee") {
     return <EmployeeApp path={path} url={url} userType={userType} />;
