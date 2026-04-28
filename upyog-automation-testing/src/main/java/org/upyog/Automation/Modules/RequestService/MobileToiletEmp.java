@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
@@ -18,19 +20,21 @@ import java.util.List;
 @Component
 public class MobileToiletEmp {
 
+    private static final Logger logger = LoggerFactory.getLogger(MobileToiletEmp.class);
+
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void MobileToiletInbox() {
-        MobileToiletInboxEmp(ConfigReader.get("employee.base.url"),
+    public void mobileToiletInbox() {
+        mobileToiletInboxEmp(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("mt.login.username"),
                 ConfigReader.get("mt.login.password"),
                 ConfigReader.get("mobileToilet.application.number"));
     }
 
-    public void MobileToiletInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("Mobile Toilet Application Employee Workflow");
+    public void mobileToiletInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("Mobile Toilet Application Employee Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -79,11 +83,11 @@ public class MobileToiletEmp {
 
 
 
-            System.out.println("Mobile Toilet Application Employee Workflow completed successfully!");
+            logger.info("Mobile Toilet Application Employee Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in Mobile Toilet Application Employee Workflow: " + e.getMessage());
+            logger.info("Exception in Mobile Toilet Application Employee Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -100,12 +104,12 @@ public class MobileToiletEmp {
             actions, String baseUrl, String username, String password) throws InterruptedException {
         driver.get(baseUrl);
         driver.manage().window().maximize();
-        System.out.println("Open the Employee Login Portal");
+        logger.info("Open the Employee Login Portal");
 
         // Enter credentials from configuration
         fillInput(wait, "username", username);
         fillInput(wait, "password", password);
-        System.out.println("Filled username and password");
+        logger.info("Filled username and password");
 
         // Select city dropdown
         selectCityDropdown(driver, wait, actions);
@@ -121,7 +125,7 @@ public class MobileToiletEmp {
     private void navigateToSearchApplication(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Navigating to Search Mobile Toilet Application");
+        logger.info("Navigating to Search Mobile Toilet Application");
 
         Thread.sleep(2000);
 
@@ -135,7 +139,7 @@ public class MobileToiletEmp {
 
         js.executeScript("arguments[0].click();", link);  // JS click (important)
 
-        System.out.println("Clicked Search Application via href");
+        logger.info("Clicked Search Application via href");
     }
 
 
@@ -148,7 +152,7 @@ public class MobileToiletEmp {
                                    JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Booking in Application Search");
+        logger.info("Searching Booking in Application Search");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//header[contains(text(),'Search Bookings')]")
@@ -156,7 +160,7 @@ public class MobileToiletEmp {
         Thread.sleep(1000);
 
         String mobileId = applicationNumber.trim();
-        System.out.println("Using Booking No.: " + mobileId);
+        logger.info("Using Booking No.: " + mobileId);
 
         WebElement mobileInput = null;
 
@@ -164,7 +168,7 @@ public class MobileToiletEmp {
             mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.name("bookingNo")
             ));
-            System.out.println("Found using name locator");
+            logger.info("Found using name locator");
 
         } catch (Exception e1) {
 
@@ -172,14 +176,14 @@ public class MobileToiletEmp {
                 mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Booking No.']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
                 ));
-                System.out.println("Found using index fallback locator");
+                logger.info("Found using index fallback locator");
             }
         }
 
@@ -189,7 +193,7 @@ public class MobileToiletEmp {
         mobileInput.clear();
         mobileInput.sendKeys(mobileId);
 
-        System.out.println("Booking No entered");
+        logger.info("Booking No entered");
 
         //SEARCH BUTTON
 
@@ -203,7 +207,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + mobileId + "')]");
 
@@ -220,7 +224,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked: " + mobileId);
+        logger.info("Application clicked: " + mobileId);
     }
 
     // =====================================================================
@@ -230,7 +234,7 @@ public class MobileToiletEmp {
     private void takeActionAndApprove(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify");
+        logger.info("Starting Take Action → Verify");
 
 
         // TAKE ACTION
@@ -261,7 +265,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -271,7 +275,7 @@ public class MobileToiletEmp {
     private void handleApprovePopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Approve Popup");
+        logger.info("Handling Approve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -294,7 +298,7 @@ public class MobileToiletEmp {
         commentBox.clear();
         commentBox.sendKeys("Approved");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -312,7 +316,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Final Approve clicked");
+        logger.info("Final Approve clicked");
     }
 
     // =====================================================================
@@ -322,7 +326,7 @@ public class MobileToiletEmp {
     private void takeActionAndPay (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Pay");
+        logger.info("Starting Take Action → Pay");
 
 
         // TAKE ACTION
@@ -354,7 +358,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", payBtn);
         }
 
-        System.out.println("Forward clicked");
+        logger.info("Forward clicked");
     }
 
 
@@ -365,7 +369,7 @@ public class MobileToiletEmp {
     private void fillPaymentAndCollect(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Filling Payment Details");
+        logger.info("Filling Payment Details");
 
 
         // PAYER MOBILE
@@ -380,7 +384,7 @@ public class MobileToiletEmp {
         mobileInput.clear();
         mobileInput.sendKeys("9999999999");
 
-        System.out.println("Payer Mobile entered");
+        logger.info("Payer Mobile entered");
 
 
 
@@ -396,7 +400,7 @@ public class MobileToiletEmp {
         receiptInput.clear();
         receiptInput.sendKeys("GEN123456");
 
-        System.out.println("Receipt Number entered");
+        logger.info("Receipt Number entered");
 
 
 
@@ -418,7 +422,7 @@ public class MobileToiletEmp {
                 dateInput
         );
 
-        System.out.println("Date entered: " + currentDate);
+        logger.info("Date entered: " + currentDate);
 
 
 
@@ -437,7 +441,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", collectBtn);
         }
 
-        System.out.println("Collect Payment clicked");
+        logger.info("Collect Payment clicked");
     }
 
     // =====================================================================
@@ -447,7 +451,7 @@ public class MobileToiletEmp {
     private void takeActionGoToHome (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Go To Home Page");
+        logger.info("Starting Take Action → Go To Home Page");
 
 
         // TAKE ACTION
@@ -455,7 +459,7 @@ public class MobileToiletEmp {
         clickGoBackToHomeButton(driver, wait);
         Thread.sleep(500);
 
-        System.out.println("Go To Home clicked");
+        logger.info("Go To Home clicked");
 
     }
 
@@ -466,7 +470,7 @@ public class MobileToiletEmp {
 
     private void navigateToSearchApplicationAgain (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Navigating to Search Mobile Toilet Application");
+        logger.info("Navigating to Search Mobile Toilet Application");
 
         Thread.sleep(2000);
 
@@ -479,7 +483,7 @@ public class MobileToiletEmp {
         Thread.sleep(500);
 
         js.executeScript("arguments[0].click();", link);  //  JS click
-        System.out.println("Clicked Search Application via href");
+        logger.info("Clicked Search Application via href");
     }
 
     // =====================================================================
@@ -491,7 +495,7 @@ public class MobileToiletEmp {
                                     JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Booking in Application Search");
+        logger.info("Searching Booking in Application Search");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//header[contains(text(),'Search Bookings')]")
@@ -499,7 +503,7 @@ public class MobileToiletEmp {
         Thread.sleep(1000);
 
         String mobileId = applicationNumber.trim();
-        System.out.println("Using Booking No.: " + mobileId);
+        logger.info("Using Booking No.: " + mobileId);
 
         WebElement mobileInput = null;
 
@@ -507,7 +511,7 @@ public class MobileToiletEmp {
             mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.name("bookingNo")
             ));
-            System.out.println("Found using name locator");
+            logger.info("Found using name locator");
 
         } catch (Exception e1) {
 
@@ -515,14 +519,14 @@ public class MobileToiletEmp {
                 mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Booking No.']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 mobileInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
                 ));
-                System.out.println("Found using index fallback locator");
+                logger.info("Found using index fallback locator");
             }
         }
 
@@ -532,7 +536,7 @@ public class MobileToiletEmp {
         mobileInput.clear();
         mobileInput.sendKeys(mobileId);
 
-        System.out.println("Booking No entered");
+        logger.info("Booking No entered");
 
         //SEARCH BUTTON
 
@@ -546,7 +550,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + mobileId + "')]");
 
@@ -563,7 +567,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked: " + mobileId);
+        logger.info("Application clicked: " + mobileId);
     }
 
     // =====================================================================
@@ -573,7 +577,7 @@ public class MobileToiletEmp {
     private void takeActionAssignVendor (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify");
+        logger.info("Starting Take Action → Verify");
 
 
         // TAKE ACTION
@@ -604,7 +608,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", assignBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -614,7 +618,7 @@ public class MobileToiletEmp {
     private void handleAssignPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Approve Popup");
+        logger.info("Handling Approve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -630,7 +634,7 @@ public class MobileToiletEmp {
 
         selectDropdownByIndex(driver, wait, js,0,0);
         Thread.sleep(1000);
-        System.out.println("sdgag");
+        logger.info("sdgag");
 
         // =========================
         // STEP 4: ENTER COMMENT
@@ -646,7 +650,7 @@ public class MobileToiletEmp {
         commentBox.clear();
         commentBox.sendKeys("Assigned");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 5: CLICK ASSIGN VENDOR BUTTON
@@ -664,7 +668,7 @@ public class MobileToiletEmp {
             js.executeScript("arguments[0].click();", assignBtn);
         }
 
-        System.out.println("Final Approve clicked");
+        logger.info("Final Approve clicked");
     }
 
 
@@ -711,7 +715,7 @@ public class MobileToiletEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
         Thread.sleep(300);
         takeActionButton.click();
-        System.out.println("Clicked TAKE ACTION button");
+        logger.info("Clicked TAKE ACTION button");
     }
 
     /**
@@ -723,7 +727,7 @@ public class MobileToiletEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToHomeButton);
         Thread.sleep(300);
         goBackToHomeButton.click();
-        System.out.println("Clicked GO Back To Home button");
+        logger.info("Clicked GO Back To Home button");
     }
 
 
@@ -739,33 +743,33 @@ public class MobileToiletEmp {
                 String text = option.getText().trim().toUpperCase();
                 if (text.equals("VERIFY")) {
                     option.click();
-                    System.out.println("Clicked VERIFY");
+                    logger.info("Clicked VERIFY");
                     handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("FORWARD")) {
                     option.click();
-                    System.out.println("Clicked FORWARD");
+                    logger.info("Clicked FORWARD");
                     handlePopupAndSubmit(driver, wait, "Automated forward comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("APPROVE")) {
                     option.click();
-                    System.out.println("Clicked APPROVE");
+                    logger.info("Clicked APPROVE");
                     handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("PAY")) {
                     option.click();
-                    System.out.println("Clicked PAY");
+                    logger.info("Clicked PAY");
                     break;
                 } else if (text.equals("REJECT")) {
-                    System.out.println("Application Rejected");
+                    logger.info("Application Rejected");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+            logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
         }
     }
 
@@ -782,7 +786,7 @@ public class MobileToiletEmp {
         // Upload document
         WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
         fileInput.sendKeys(filePath);
-        System.out.println("Document uploaded");
+        logger.info("Document uploaded");
 
         // Click Verify or Approve button
         List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -791,10 +795,10 @@ public class MobileToiletEmp {
         WebElement actionButton = null;
         if (!verifyButtons.isEmpty()) {
             actionButton = verifyButtons.get(0);
-            System.out.println("Clicking Verify button");
+            logger.info("Clicking Verify button");
         } else if (!approveButtons.isEmpty()) {
             actionButton = approveButtons.get(0);
-            System.out.println("Clicking Approve button");
+            logger.info("Clicking Approve button");
         } else {
             throw new RuntimeException("Neither Verify nor Approve button found!");
         }
@@ -875,9 +879,9 @@ public class MobileToiletEmp {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }}}

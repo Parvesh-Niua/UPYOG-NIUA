@@ -1,28 +1,25 @@
 package org.upyog.Automation.Common;
 
-import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Modules.Adv.AdvBookingCreate;
-import org.upyog.Automation.Modules.CHB.chbCreate;
-import org.upyog.Automation.Modules.CnD.CnDRequest;
+import org.upyog.Automation.Modules.CHB.ChbCreate;
+import org.upyog.Automation.Modules.CnD.CndRequest;
 import org.upyog.Automation.Modules.DesludgingService.DesludgingCreate;
 import org.upyog.Automation.Modules.EWaste.EWasteCreate;
-import org.upyog.Automation.Modules.OBPAS.OBPASCreate;
-import org.upyog.Automation.Modules.OBPAS.OBPASOcCreate;
+import org.upyog.Automation.Modules.OBPAS.ObpasCreate;
+import org.upyog.Automation.Modules.OBPAS.ObpasOcCreate;
 import org.upyog.Automation.Modules.Pet.PetCreateApplication;
 import org.upyog.Automation.Modules.PublicGrievanceRedressal.PgrCreate;
 import org.upyog.Automation.Modules.PropertyTax.PropertyTaxCreate;
-import org.upyog.Automation.Modules.StreetVending.CreateApplication;
+import org.upyog.Automation.Modules.StreetVending.SvCreateApplication;
 import org.upyog.Automation.Modules.TradeLicense.TradeLicenseCreate;
 import org.upyog.Automation.Modules.RequestService.TreePruningCitizen;
 import org.upyog.Automation.Modules.RequestService.WaterTankerCitizen;
 import org.upyog.Automation.Modules.RequestService.MobileToiletCitizen;
 import org.upyog.Automation.Modules.WaterAndSewerage.WAndSCreate;
-import org.upyog.Automation.Modules.DesludgingService.DesludgingCreate;
-import org.upyog.Automation.config.WebDriverFactory;
 
 
 /**
@@ -36,7 +33,7 @@ public class CommonCitizenTest {
     private static final Logger logger = LoggerFactory.getLogger(CommonCitizenTest.class);
 
     @Autowired
-    private CreateApplication createApplication;
+    private SvCreateApplication svCreateApplication;
     
     @Autowired
     private TradeLicenseCreate tradeLicenseCreate;
@@ -63,19 +60,19 @@ public class CommonCitizenTest {
     private PgrCreate pgrCreate;
     
     @Autowired
-    private OBPASCreate obpasCreate;
+    private ObpasCreate obpasCreate;
     
     @Autowired
     private EWasteCreate eWasteCreate;
     
     @Autowired
-    private chbCreate chbCreate;
+    private ChbCreate chbCreate;
 
     @Autowired
-    private CnDRequest cndRequest;
+    private CndRequest cndRequest;
 
     @Autowired
-    private OBPASOcCreate obpasOcCreate;
+    private ObpasOcCreate obpasOcCreate;
 
     @Autowired
     private DesludgingCreate desludgingCreate;
@@ -90,51 +87,51 @@ public class CommonCitizenTest {
             switch (moduleName.toUpperCase()) {
 
                 case "STREET_VENDING":
-                    createApplication.svCreateApplication(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    svCreateApplication.svCreateReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "TRADE_LICENSE":
-                    tradeLicenseCreate.TradeLicenceCitizenReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    tradeLicenseCreate.tradeLicenceCitizenReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "PET_REGISTRATION":
-                    petCreateApplication.PetApptest(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    petCreateApplication.petApptest(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "ADVERTISEMENT":
-                    advBookingCreate.AdvBookingReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    advBookingCreate.advBookingReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "TREE_PRUNING":
-                    treePruningCitizen.TreePruningCreate(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    treePruningCitizen.treePruningCreate(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "WATER_TANKER":
-                    waterTankerCitizen.WaterTankerCreate(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    waterTankerCitizen.waterTankerCreate(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "MOBILE_TOILET":
-                    mobileToiletCitizen.MobileToiletCreate(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    mobileToiletCitizen.mobileToiletCreate(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "PROPERTY_TAX":
-                    propertyTaxCreate.NewPropertyReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    propertyTaxCreate.newPropertyReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "PUBLIC_GRIEVANCE_REDRESSAL":
-                    pgrCreate.PgrReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    pgrCreate.pgrReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "ONLINE_BUILDING_PLAN_APPROVAL_SYSTEM":
-                    obpasCreate.OBPASReg(baseUrl, moduleName, mobileNumber, otp, cityName, permitNumber);
+                    obpasCreate.obpasReg(baseUrl, moduleName, mobileNumber, otp, cityName, permitNumber);
                     break;
 
                 case "ONLINE_BUILDING_PLAN_APPROVAL_SYSTEM_OC":
-                    obpasOcCreate.OBPASOCReg(baseUrl, moduleName, mobileNumber, otp, cityName, permitNumber);
+                    obpasOcCreate.obpasOCReg(baseUrl, moduleName, mobileNumber, otp, cityName, permitNumber);
                     break;
 
                 case "EWASTE_MANAGEMENT_SYSTEM":
-                    eWasteCreate.EWasteReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    eWasteCreate.eWasteReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "COMMUNITY_HALL_BOOKING":
@@ -142,7 +139,7 @@ public class CommonCitizenTest {
                     break;
 
                 case "CONSTRUCTION_AND_DEMOLITION":
-                    cndRequest.CndReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    cndRequest.cndReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 case "DESLUDGING_SERVICE":
@@ -150,7 +147,7 @@ public class CommonCitizenTest {
                     break;
 
                 case "WATER_AND_SEWERAGE":
-                    wAndSCreate.WandSReg(baseUrl, moduleName, mobileNumber, otp, cityName);
+                    wAndSCreate.wandSReg(baseUrl, moduleName, mobileNumber, otp, cityName);
                     break;
 
                 default:

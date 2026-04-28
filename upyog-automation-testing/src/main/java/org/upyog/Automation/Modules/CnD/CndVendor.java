@@ -9,18 +9,22 @@ import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
 import org.upyog.Automation.Utils.DriverFactory;
 import org.upyog.Automation.config.WebDriverFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Component
 public class CndVendor {
+    
+    private static final Logger logger= LoggerFactory.getLogger(CndVendor.class);
 
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void CndVReg() {
-        CndVReg(ConfigReader.get("citizen.base.url"),
+    public void cndVReg() {
+        cndVReg(ConfigReader.get("citizen.base.url"),
                 "CnD",
                 ConfigReader.get("cnd.mobile.number"),
                 ConfigReader.get("test.otp"),
@@ -28,8 +32,8 @@ public class CndVendor {
                 ConfigReader.get("cnd.application.number"));
     }
 
-    public void CndVReg(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName, String applicationNumber) {
-        System.out.println("CnD Application");
+    public void cndVReg(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName, String applicationNumber) {
+        logger.info("CnD Application");
 
         WebDriver driver = webDriverFactory.createDriver();
         WebDriverWait wait = DriverFactory.createWebDriverWait(driver);
@@ -62,7 +66,7 @@ public class CndVendor {
             handleAssignVehiclePopup(driver, wait, js);
 
         } catch (Exception e) {
-            System.out.println("Exception in Mobile Toilet: " + e.getMessage());
+            logger.info("Exception in Mobile Toilet: " + e.getMessage());
         } finally {
             if (driver != null) {
                 driver.quit();
@@ -78,7 +82,7 @@ public class CndVendor {
             throws InterruptedException {
 
         driver.get(baseUrl);
-        System.out.println("Open the Citizen Login Portal");
+        logger.info("Open the Citizen Login Portal");
 
         // Mobile number
         fillInput(wait, "mobileNumber", mobileNumber);
@@ -122,14 +126,14 @@ public class CndVendor {
     private void navigateToCndVendor(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Navigating to Construction and Demolition");
+        logger.info("Navigating to Construction and Demolition");
 
         // Sidebar CnD link
         js.executeScript("arguments[0].click();", wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//a[@href='/cnd-ui/citizen/cnd-home']"))));
 
         Thread.sleep(2000);
-        System.out.println("Reached CnD home page");
+        logger.info("Reached CnD home page");
 
         // "C&D Waste Pickup Request" link
         WebElement cndRequest = wait.until(ExpectedConditions.elementToBeClickable(
@@ -138,7 +142,7 @@ public class CndVendor {
 
         cndRequest.click();
 
-        System.out.println("Clicked C&D Waste Pickup Request");
+        logger.info("Clicked C&D Waste Pickup Request");
     }
 
     // =====================================================================
@@ -148,7 +152,7 @@ public class CndVendor {
     private void navigateToSearchApplication(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Navigating to Search CnD Application");
+        logger.info("Navigating to Search CnD Application");
 
         // Wait for page load
         Thread.sleep(2000);
@@ -161,7 +165,7 @@ public class CndVendor {
         js.executeScript("arguments[0].scrollIntoView({block:'center'});", inboxLink);
         js.executeScript("arguments[0].click();", inboxLink);
 
-        System.out.println("Clicked Inbox link");
+        logger.info("Clicked Inbox link");
     }
 
     // =====================================================================
@@ -172,13 +176,13 @@ public class CndVendor {
                                         JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching CnD Application in Inbox");
+        logger.info("Searching CnD Application in Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
 
         String cndId = applicationNumber.trim();
-        System.out.println("Using CND ID: " + cndId);
+        logger.info("Using CND ID: " + cndId);
 
         WebElement cndInput = null;
 
@@ -186,7 +190,7 @@ public class CndVendor {
             cndInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
             ));
-            System.out.println("Found using index fallback locator");
+            logger.info("Found using index fallback locator");
 
 
         } catch (Exception e1) {
@@ -195,14 +199,14 @@ public class CndVendor {
                 cndInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Application Number ']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 cndInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.name("applicationNumber")
                 ));
-                System.out.println("Found using name locator");
+                logger.info("Found using name locator");
             }
         }
 
@@ -212,7 +216,7 @@ public class CndVendor {
         cndInput.clear();
         cndInput.sendKeys(cndId);
 
-        System.out.println("CnD Application Number entered");
+        logger.info("CnD Application Number entered");
 
         //SEARCH BUTTON
 
@@ -226,7 +230,7 @@ public class CndVendor {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + cndId + "')]");
 
@@ -243,7 +247,7 @@ public class CndVendor {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked: " + cndId);
+        logger.info("Application clicked: " + cndId);
     }
 
     // =====================================================================
@@ -253,7 +257,7 @@ public class CndVendor {
     private void takeActionAndAssign(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Assign");
+        logger.info("Starting Take Action → Assign");
 
 
         // TAKE ACTION
@@ -284,7 +288,7 @@ public class CndVendor {
             js.executeScript("arguments[0].click();", assignBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -294,7 +298,7 @@ public class CndVendor {
     private void handleAssignCancelPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Cancel First");
+        logger.info("Cancel First");
         Thread.sleep(2000);
 
         WebElement cancelBtn = wait.until(ExpectedConditions.elementToBeClickable(
@@ -310,7 +314,7 @@ public class CndVendor {
             js.executeScript("arguments[0].click();", cancelBtn);
         }
 
-        System.out.println("Cancel clicked");
+        logger.info("Cancel clicked");
         Thread.sleep(2000);
     }
 
@@ -321,7 +325,7 @@ public class CndVendor {
     private void takeActionAndAssign1(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Assign");
+        logger.info("Starting Take Action → Assign");
 
 
         // TAKE ACTION
@@ -352,7 +356,7 @@ public class CndVendor {
             js.executeScript("arguments[0].click();", assignBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -362,7 +366,7 @@ public class CndVendor {
     private void handleAssignVehiclePopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Assign Vehicle Popup");
+        logger.info("Handling Assign Vehicle Popup");
         Thread.sleep(1000);
 
 
@@ -379,7 +383,7 @@ public class CndVendor {
 
         selectDropdownByIndex(driver, wait, js, 0,0 );
         Thread.sleep(2000);
-        System.out.println("PN 45 HU 8485");
+        logger.info("PN 45 HU 8485");
         WebElement input = driver.findElement(By.xpath("//input[@type='text']"));
 
         js.executeScript(
@@ -404,7 +408,7 @@ public class CndVendor {
         commentBox.clear();
         commentBox.sendKeys("Assigned");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
         Thread.sleep(1000);
 
 
@@ -423,7 +427,8 @@ public class CndVendor {
             js.executeScript("arguments[0].click();", assignBtn);
         }
 
-        System.out.println("Final Submit clicked");
+        logger.info("Final Submit clicked");
+        Thread.sleep(5000);
     }
 
 
@@ -490,7 +495,7 @@ private void selectDropdownOption(WebDriver driver, WebDriverWait wait, Javascri
                     By.cssSelector("div.select svg.cp")));
 
     if (dropdownIndex >= dropdownSvgs.size()) {
-        System.out.println("Dropdown index " + dropdownIndex + " not found. Total: " + dropdownSvgs.size());
+        logger.info("Dropdown index " + dropdownIndex + " not found. Total: " + dropdownSvgs.size());
         return;
     }
 
@@ -541,7 +546,7 @@ private void clickTakeActionButton (WebDriver driver, WebDriverWait wait) throws
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
     Thread.sleep(300);
     takeActionButton.click();
-    System.out.println("Clicked TAKE ACTION button");
+    logger.info("Clicked TAKE ACTION button");
 }
 
 private void selectDropdownByIndex(WebDriver driver, WebDriverWait wait, JavascriptExecutor js,

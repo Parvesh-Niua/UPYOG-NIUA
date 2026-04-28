@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.upyog.Automation.Modules.CnD.CndVendor;
 import org.upyog.Automation.Modules.RequestService.MobileToiletVendor;
 import org.upyog.Automation.Modules.RequestService.WaterTankerVendor;
-import org.upyog.Automation.config.WebDriverFactory;
 
 @Component
 public class CommonVendorTest {
@@ -30,15 +29,15 @@ public class CommonVendorTest {
             switch (moduleName.toUpperCase()) {
 
                 case "WATER_TANKER_VENDOR":
-                    waterTankerVendor.WaterTankerVCreate(baseUrl, moduleName, mobileNumber, otp, cityName, applicationNumber);
+                    waterTankerVendor.waterTankerVCreate(baseUrl, moduleName, mobileNumber, otp, cityName, applicationNumber);
                     break;
 
                 case "MOBILE_TOILET_VENDOR":
-                    mobileToiletVendor.MobileToiletVCreate(baseUrl, moduleName, mobileNumber, otp, cityName, applicationNumber);
+                    mobileToiletVendor.mobileToiletVCreate(baseUrl, moduleName, mobileNumber, otp, cityName, applicationNumber);
                     break;
 
                 case "CONSTRUCTION_AND_DEMOLITION":
-                    cndVendor.CndVReg(baseUrl, moduleName, mobileNumber, otp, cityName, applicationNumber);
+                    cndVendor.cndVReg(baseUrl, moduleName, mobileNumber, otp, cityName, applicationNumber);
                     break;
 
                 default:

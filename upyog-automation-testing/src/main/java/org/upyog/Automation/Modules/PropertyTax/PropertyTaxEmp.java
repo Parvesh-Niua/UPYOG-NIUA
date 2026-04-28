@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
@@ -18,19 +20,21 @@ import java.util.List;
 @Component
 public class PropertyTaxEmp {
 
+    private static final Logger logger = LoggerFactory.getLogger(PropertyTaxEmp.class);
+
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void PropertyInbox() {
-        PropertyInboxEmp(ConfigReader.get("employee.base.url"),
+    public void propertyInbox() {
+        propertyInboxEmp(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("property.login.username"),
                 ConfigReader.get("property.login.password"),
                 ConfigReader.get("propertyTax.application.number"));
     }
 
-    public void PropertyInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("Property Tax Application Employee Workflow");
+    public void propertyInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("Property Tax Application Employee Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -79,11 +83,11 @@ public class PropertyTaxEmp {
             fillPaymentAndCollect(driver, wait, js);
 
 
-            System.out.println("Property Tax Application Employee Workflow completed successfully!");
+            logger.info("Property Tax Application Employee Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in Property Tax Application Employee Workflow: " + e.getMessage());
+            logger.info("Exception in Property Tax Application Employee Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -99,12 +103,12 @@ public class PropertyTaxEmp {
 private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, Actions actions, String baseUrl, String username, String password) throws InterruptedException {
     driver.get(baseUrl);
     driver.manage().window().maximize();
-    System.out.println("Open the Employee Login Portal");
+    logger.info("Open the Employee Login Portal");
 
     // Enter credentials from configuration
     fillInput(wait, "username", username);
     fillInput(wait, "password", password);
-    System.out.println("Filled username and password");
+    logger.info("Filled username and password");
 
     // Select city dropdown
     selectCityDropdown(driver, wait, actions);
@@ -120,7 +124,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
 
     private void navigateToSearchApplication(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Navigating to Search Property Application");
+        logger.info("Navigating to Search Property Application");
 
         // Wait for page to load after login
         Thread.sleep(2000);
@@ -133,7 +137,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
                         "//*[normalize-space()='Inbox']")));
         js.executeScript("arguments[0].scrollIntoView(true);", inboxLink);
         inboxLink.click();
-        System.out.println("Clicked Inbox link");
+        logger.info("Clicked Inbox link");
     }
 
 
@@ -146,13 +150,13 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
                                     JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Property in Inbox");
+        logger.info("Searching Property in Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
 
         String propertyId = applicationNumber.trim();
-        System.out.println("Using Property ID: " + propertyId);
+        logger.info("Using Property ID: " + propertyId);
 
         WebElement propertyInput = null;
 
@@ -160,7 +164,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             propertyInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[2]")
             ));
-            System.out.println("Found using index fallback locator");
+            logger.info("Found using index fallback locator");
 
 
         } catch (Exception e1) {
@@ -169,14 +173,14 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
                 propertyInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Property ID']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 propertyInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.name("propertyId")
                 ));
-                System.out.println("Found using name locator");
+                logger.info("Found using name locator");
             }
         }
 
@@ -186,7 +190,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         propertyInput.clear();
         propertyInput.sendKeys(propertyId);
 
-        System.out.println("Property ID entered");
+        logger.info("Property ID entered");
 
         //SEARCH BUTTON
 
@@ -200,7 +204,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + propertyId + "')]");
 
@@ -217,7 +221,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked: " + propertyId);
+        logger.info("Application clicked: " + propertyId);
     }
 
     // =====================================================================
@@ -227,7 +231,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void takeActionAndVerify(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify");
+        logger.info("Starting Take Action → Verify");
 
 
         // TAKE ACTION
@@ -258,7 +262,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", verifyBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -268,7 +272,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void handleVerifyPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Verify Popup");
+        logger.info("Handling Verify Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -291,7 +295,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         commentBox.clear();
         commentBox.sendKeys("verified");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -309,7 +313,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", verifyBtn);
         }
 
-        System.out.println("Final Verify clicked");
+        logger.info("Final Verify clicked");
     }
 
     // =====================================================================
@@ -319,7 +323,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void takeActionAndForward(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Forward");
+        logger.info("Starting Take Action → Forward");
 
 
         // TAKE ACTION
@@ -351,7 +355,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", forwardBtn);
         }
 
-        System.out.println("Forward clicked");
+        logger.info("Forward clicked");
     }
 
     // =====================================================================
@@ -361,7 +365,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void handleForwardPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Forward Popup");
+        logger.info("Handling Forward Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -384,7 +388,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         commentBox.clear();
         commentBox.sendKeys("Forwarded");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK FORWARD BUTTON
@@ -402,7 +406,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", forwardBtn);
         }
 
-        System.out.println("Final Forward clicked");
+        logger.info("Final Forward clicked");
     }
 
     // =====================================================================
@@ -412,7 +416,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void takeActionAndApprove(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Approve");
+        logger.info("Starting Take Action → Approve");
 
 
         // TAKE ACTION
@@ -444,7 +448,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Approve clicked");
+        logger.info("Approve clicked");
     }
 
     // =====================================================================
@@ -454,7 +458,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void handleApprovePopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Approve Popup");
+        logger.info("Handling Approve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -477,7 +481,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         commentBox.clear();
         commentBox.sendKeys("Approved");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK APPROVE BUTTON
@@ -495,7 +499,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Final Forward clicked");
+        logger.info("Final Forward clicked");
         Thread.sleep(2000);
     }
 
@@ -519,7 +523,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", viewDetailsButton);
         }
 
-        System.out.println("Clicked VIEW DETAILS button");
+        logger.info("Clicked VIEW DETAILS button");
     }
 
     // =====================================================================
@@ -529,7 +533,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void takeActionAndAssessProperty(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Assess Property");
+        logger.info("Starting Take Action → Assess Property");
 
 
         // TAKE ACTION
@@ -561,10 +565,10 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", assessPropertyBtn);
         }
 
-        System.out.println("Assess Property clicked");
+        logger.info("Assess Property clicked");
 
 
-        System.out.println("Selecting Financial Year");
+        logger.info("Selecting Financial Year");
 
         // WAIT FOR POPUP
         wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -592,7 +596,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
 
         js.executeScript("arguments[0].click();", assessBtn);
 
-        System.out.println("Assess Property clicked");
+        logger.info("Assess Property clicked");
     }
 
     // =====================================================================
@@ -601,7 +605,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
 
     private void handleAssessPropertyButton(WebDriver driver, WebDriverWait wait)
         throws InterruptedException{
-        System.out.println("Clicking Assess Property");
+        logger.info("Clicking Assess Property");
 
         clickAssessPropertyButton(driver, wait);
         Thread.sleep(2000);
@@ -614,7 +618,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
     private void fillPaymentAndCollect(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Filling Payment Details");
+        logger.info("Filling Payment Details");
 
 
         // PAYER MOBILE
@@ -629,7 +633,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         mobileInput.clear();
         mobileInput.sendKeys("9999999999");
 
-        System.out.println("Payer Mobile entered");
+        logger.info("Payer Mobile entered");
 
 
 
@@ -645,7 +649,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         receiptInput.clear();
         receiptInput.sendKeys("GEN123456");
 
-        System.out.println("Receipt Number entered");
+        logger.info("Receipt Number entered");
 
 
 
@@ -667,7 +671,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
                 dateInput
         );
 
-        System.out.println("Date entered: " + currentDate);
+        logger.info("Date entered: " + currentDate);
 
 
 
@@ -686,7 +690,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
             js.executeScript("arguments[0].click();", collectBtn);
         }
 
-        System.out.println("Collect Payment clicked");
+        logger.info("Collect Payment clicked");
     }
 
     // =====================================================================
@@ -731,7 +735,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
         Thread.sleep(300);
         takeActionButton.click();
-        System.out.println("Clicked TAKE ACTION button");
+        logger.info("Clicked TAKE ACTION button");
     }
 
     /**
@@ -744,7 +748,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", assessPropertyButton);
         Thread.sleep(300);
         assessPropertyButton.click();
-        System.out.println("Clicked ASSESS PROPERTY button");
+        logger.info("Clicked ASSESS PROPERTY button");
     }
 
 
@@ -760,33 +764,33 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
                 String text = option.getText().trim().toUpperCase();
                 if (text.equals("VERIFY")) {
                     option.click();
-                    System.out.println("Clicked VERIFY");
+                    logger.info("Clicked VERIFY");
                     handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("FORWARD")) {
                     option.click();
-                    System.out.println("Clicked FORWARD");
+                    logger.info("Clicked FORWARD");
                     handlePopupAndSubmit(driver, wait, "Automated forward comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("APPROVE")) {
                     option.click();
-                    System.out.println("Clicked APPROVE");
+                    logger.info("Clicked APPROVE");
                     handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("PAY")) {
                     option.click();
-                    System.out.println("Clicked PAY");
+                    logger.info("Clicked PAY");
                     break;
                 } else if (text.equals("REJECT")) {
-                    System.out.println("Application Rejected");
+                    logger.info("Application Rejected");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+            logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
         }
     }
 
@@ -802,7 +806,7 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         // Upload document
         WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
         fileInput.sendKeys(filePath);
-        System.out.println("Document uploaded");
+        logger.info("Document uploaded");
 
         // Click Verify or Approve button
         List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -811,10 +815,10 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
         WebElement actionButton = null;
         if (!verifyButtons.isEmpty()) {
             actionButton = verifyButtons.get(0);
-            System.out.println("Clicking Verify button");
+            logger.info("Clicking Verify button");
         } else if (!approveButtons.isEmpty()) {
             actionButton = approveButtons.get(0);
-            System.out.println("Clicking Approve button");
+            logger.info("Clicking Approve button");
         } else {
             throw new RuntimeException("Neither Verify nor Approve button found!");
         }
@@ -850,10 +854,10 @@ private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, Javascri
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }
     }

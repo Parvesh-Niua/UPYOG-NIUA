@@ -4,6 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
@@ -17,19 +19,21 @@ import java.util.List;
 
 public class WaterEmp {
 
+    private static final Logger logger = LoggerFactory.getLogger(WaterEmp.class);
+
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void WaterInbox() {
-        WaterInboxEmp(ConfigReader.get("employee.base.url"),
+    public void waterInbox() {
+        waterInboxEmp(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("wns.login.username"),
                 ConfigReader.get("wns.login.password"),
                 ConfigReader.get("water.application.number"));
     }
 
-    public void WaterInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("Water Connection Application Employee Workflow");
+    public void waterInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("Water Connection Application Employee Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -95,11 +99,11 @@ public class WaterEmp {
             // STEP 18: Activate Connection Page
             handleActivateConnectionEmployee(driver, wait, js);
 
-            System.out.println("Water Application Employee Workflow completed successfully!");
+            logger.info("Water Application Employee Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in Water Application Employee Workflow: " + e.getMessage());
+            logger.info("Exception in Water Application Employee Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -116,12 +120,12 @@ public class WaterEmp {
             actions, String baseUrl, String username, String password) throws InterruptedException {
         driver.get(baseUrl);
         driver.manage().window().maximize();
-        System.out.println("Open the Employee Login Portal");
+        logger.info("Open the Employee Login Portal");
 
         // Enter credentials from configuration
         fillInput(wait, "username", username);
         fillInput(wait, "password", password);
-        System.out.println("Filled username and password");
+        logger.info("Filled username and password");
 
         // Select city dropdown
         selectCityDropdown(driver, wait, actions);
@@ -136,7 +140,7 @@ public class WaterEmp {
 
     private void navigateToSearchApplication (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Navigating to Search Water Tanker Application");
+        logger.info("Navigating to Search Water Tanker Application");
 
         // Wait for page to load after login
         Thread.sleep(2000);
@@ -149,7 +153,7 @@ public class WaterEmp {
                         "//*[normalize-space()='Inbox']")));
         js.executeScript("arguments[0].scrollIntoView(true);", inboxLink);
         inboxLink.click();
-        System.out.println("Clicked Inbox link");
+        logger.info("Clicked Inbox link");
     }
 
 
@@ -162,13 +166,13 @@ public class WaterEmp {
                                        JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Application No. in Inbox");
+        logger.info("Searching Application No. in Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
 
         String waterId = applicationNumber.trim();
-        System.out.println("Using Application No.: " + waterId);
+        logger.info("Using Application No.: " + waterId);
 
         WebElement waterInput = null;
 
@@ -176,7 +180,7 @@ public class WaterEmp {
             waterInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.name("applicationNumber")
             ));
-            System.out.println("Found using name locator");
+            logger.info("Found using name locator");
 
         } catch (Exception e1) {
 
@@ -184,14 +188,14 @@ public class WaterEmp {
                 waterInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//label[normalize-space()='Application No.']/following::input[1]")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 waterInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
                 ));
-                System.out.println("Found using index fallback locator");
+                logger.info("Found using index fallback locator");
             }
         }
         Thread.sleep(2000);
@@ -202,7 +206,7 @@ public class WaterEmp {
         waterInput.clear();
         waterInput.sendKeys(waterId);
 
-        System.out.println("Booking No entered");
+        logger.info("Booking No entered");
 
         //SEARCH BUTTON
 
@@ -216,7 +220,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         // WAIT FOR TABLE
 
@@ -242,7 +246,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked");
+        logger.info("Application clicked");
     }
 
     // =====================================================================
@@ -252,7 +256,7 @@ public class WaterEmp {
     private void takeActionAndVerifyAndForward(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify and Forward");
+        logger.info("Starting Take Action → Verify and Forward");
 
 
         // TAKE ACTION
@@ -283,7 +287,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", vAndfBtn);
         }
 
-        System.out.println("Verify and forward clicked");
+        logger.info("Verify and forward clicked");
     }
 
     // =====================================================================
@@ -293,7 +297,7 @@ public class WaterEmp {
     private void handleVerifyAndForwardPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Approve Popup");
+        logger.info("Handling Approve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -316,7 +320,7 @@ public class WaterEmp {
         commentBox.clear();
         commentBox.sendKeys("Verified and Okay to forward");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -335,7 +339,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", vAndfBtn);
         }
 
-        System.out.println("Final Verify and Forward clicked");
+        logger.info("Final Verify and Forward clicked");
     }
 
     // =====================================================================
@@ -345,7 +349,7 @@ public class WaterEmp {
     private void takeActionAndEdit(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Edit");
+        logger.info("Starting Take Action → Edit");
 
 
         // TAKE ACTION
@@ -376,7 +380,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", editBtn);
         }
 
-        System.out.println("Verify and forward clicked");
+        logger.info("Verify and forward clicked");
     }
 
     // =====================================================================
@@ -386,7 +390,7 @@ public class WaterEmp {
     private void handleEditPageEmployee(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Edit Page");
+        logger.info("Handling Edit Page");
 
         // SCROLL START (IMPORTANT)
         js.executeScript("window.scrollTo(0,0)");
@@ -472,7 +476,7 @@ public class WaterEmp {
 
         js.executeScript("arguments[0].click();", submitBtn);
 
-        System.out.println("Edit Page Completed");
+        logger.info("Edit Page Completed");
     }
 
     // =====================================================================
@@ -482,7 +486,7 @@ public class WaterEmp {
     private void takeActionAndVerifyAndForward1(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify and Forward");
+        logger.info("Starting Take Action → Verify and Forward");
 
 
         // TAKE ACTION
@@ -513,7 +517,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", vAndfBtn);
         }
 
-        System.out.println("Verify and forward clicked");
+        logger.info("Verify and forward clicked");
     }
 
     // =====================================================================
@@ -523,7 +527,7 @@ public class WaterEmp {
     private void handleVerifyAndForward1Popup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Approve Popup");
+        logger.info("Handling Approve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -546,7 +550,7 @@ public class WaterEmp {
         commentBox.clear();
         commentBox.sendKeys("Verified and Okay to forward");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -565,7 +569,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", vAndfBtn);
         }
 
-        System.out.println("Final Verify and Forward clicked");
+        logger.info("Final Verify and Forward clicked");
     }
 
     // =====================================================================
@@ -575,7 +579,7 @@ public class WaterEmp {
     private void takeActionAndApproveConnection(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Approve Connection");
+        logger.info("Starting Take Action → Approve Connection");
 
 
         // TAKE ACTION
@@ -606,7 +610,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Verify and forward clicked");
+        logger.info("Verify and forward clicked");
     }
 
     // =====================================================================
@@ -616,7 +620,7 @@ public class WaterEmp {
     private void handleApproveConnectionPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Approve Popup");
+        logger.info("Handling Approve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -639,7 +643,7 @@ public class WaterEmp {
         commentBox.clear();
         commentBox.sendKeys("Approved");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -658,7 +662,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Final Approved clicked");
+        logger.info("Final Approved clicked");
     }
 
     // =====================================================================
@@ -668,7 +672,7 @@ public class WaterEmp {
     private void takeActionCollect(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Approve Connection");
+        logger.info("Starting Take Action → Approve Connection");
 
 
         // TAKE ACTION
@@ -699,7 +703,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", collectBtn);
         }
 
-        System.out.println("Verify and forward clicked");
+        logger.info("Verify and forward clicked");
     }
 
     // =====================================================================
@@ -709,7 +713,7 @@ public class WaterEmp {
     private void fillPaymentAndCollect(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Filling Payment Details");
+        logger.info("Filling Payment Details");
 
 
         // PAYER MOBILE
@@ -724,7 +728,7 @@ public class WaterEmp {
         mobileInput.clear();
         mobileInput.sendKeys("9999999999");
 
-        System.out.println("Payer Mobile entered");
+        logger.info("Payer Mobile entered");
 
 
 
@@ -740,7 +744,7 @@ public class WaterEmp {
         receiptInput.clear();
         receiptInput.sendKeys("GEN123456");
 
-        System.out.println("Receipt Number entered");
+        logger.info("Receipt Number entered");
 
 
 
@@ -762,7 +766,7 @@ public class WaterEmp {
                 dateInput
         );
 
-        System.out.println("Date entered: " + currentDate);
+        logger.info("Date entered: " + currentDate);
 
         // CLICK COLLECT PAYMENT
 
@@ -779,7 +783,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", collectBtn);
         }
 
-        System.out.println("Collect Payment clicked");
+        logger.info("Collect Payment clicked");
     }
 
     // =====================================================================
@@ -789,7 +793,7 @@ public class WaterEmp {
     private void takeActionGoToHome (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Go To Home Page");
+        logger.info("Starting Take Action → Go To Home Page");
 
 
         // TAKE ACTION
@@ -797,7 +801,7 @@ public class WaterEmp {
         clickGoBackToHomeButton(driver, wait);
         Thread.sleep(500);
 
-        System.out.println("Go To Home clicked");
+        logger.info("Go To Home clicked");
 
     }
 
@@ -807,7 +811,7 @@ public class WaterEmp {
 
     private void navigateToSearchApplicationAgain(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Navigating to Search Water Tanker Application");
+        logger.info("Navigating to Search Water Tanker Application");
 
         // Wait for page to load after login
         Thread.sleep(2000);
@@ -820,7 +824,7 @@ public class WaterEmp {
                         "//*[normalize-space()='Inbox']")));
         js.executeScript("arguments[0].scrollIntoView(true);", inboxLink);
         inboxLink.click();
-        System.out.println("Clicked Inbox link");
+        logger.info("Clicked Inbox link");
     }
 
     // =====================================================================
@@ -831,13 +835,13 @@ public class WaterEmp {
                                        JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Application No. in Inbox");
+        logger.info("Searching Application No. in Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
 
         String waterId = applicationNumber.trim();
-        System.out.println("Using Application No.: " + waterId);
+        logger.info("Using Application No.: " + waterId);
 
         WebElement waterInput = null;
 
@@ -845,7 +849,7 @@ public class WaterEmp {
             waterInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.name("applicationNumber")
             ));
-            System.out.println("Found using name locator");
+            logger.info("Found using name locator");
 
         } catch (Exception e1) {
 
@@ -853,14 +857,14 @@ public class WaterEmp {
                 waterInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//label[normalize-space()='Application No.']/following::input[1]")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 waterInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
                 ));
-                System.out.println("Found using index fallback locator");
+                logger.info("Found using index fallback locator");
             }
         }
         Thread.sleep(2000);
@@ -871,7 +875,7 @@ public class WaterEmp {
         waterInput.clear();
         waterInput.sendKeys(waterId);
 
-        System.out.println("Booking No entered");
+        logger.info("Booking No entered");
 
         //SEARCH BUTTON
 
@@ -885,7 +889,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         // WAIT FOR TABLE
 
@@ -911,7 +915,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked");
+        logger.info("Application clicked");
     }
 
     // =====================================================================
@@ -921,7 +925,7 @@ public class WaterEmp {
     private void takeActionAndActivateConnection(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Activate Connection");
+        logger.info("Starting Take Action → Activate Connection");
 
 
         // TAKE ACTION
@@ -952,7 +956,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].click();", activateConnectionBtn);
         }
 
-        System.out.println("Activate Connection clicked");
+        logger.info("Activate Connection clicked");
     }
 
     // =====================================================================
@@ -962,7 +966,7 @@ public class WaterEmp {
     private void handleActivateConnectionEmployee(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Activate Connection Page");
+        logger.info("Handling Activate Connection Page");
 
         // SCROLL START (IMPORTANT)
         js.executeScript("window.scrollTo(0,0)");
@@ -1020,7 +1024,7 @@ public class WaterEmp {
         connectionInput.sendKeys(Keys.DELETE);
         connectionInput.sendKeys(date);
 
-        System.out.println("Dates entered: " + date);
+        logger.info("Dates entered: " + date);
 
 
         // =========================
@@ -1036,7 +1040,7 @@ public class WaterEmp {
 
         js.executeScript("arguments[0].click();", submitBtn);
 
-        System.out.println("Activate Collection Page Completed");
+        logger.info("Activate Collection Page Completed");
     }
 
 
@@ -1158,7 +1162,7 @@ public class WaterEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
         Thread.sleep(300);
         takeActionButton.click();
-        System.out.println("Clicked TAKE ACTION button");
+        logger.info("Clicked TAKE ACTION button");
     }
 
     /**
@@ -1170,7 +1174,7 @@ public class WaterEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToHomeButton);
         Thread.sleep(300);
         goBackToHomeButton.click();
-        System.out.println("Clicked GO Back To Home button");
+        logger.info("Clicked GO Back To Home button");
     }
 
     private void fillInputSecondH2(WebDriver driver, WebDriverWait wait, JavascriptExecutor js,
@@ -1202,33 +1206,33 @@ public class WaterEmp {
                 String text = option.getText().trim().toUpperCase();
                 if (text.equals("VERIFY")) {
                     option.click();
-                    System.out.println("Clicked VERIFY");
+                    logger.info("Clicked VERIFY");
                     handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("FORWARD")) {
                     option.click();
-                    System.out.println("Clicked FORWARD");
+                    logger.info("Clicked FORWARD");
                     handlePopupAndSubmit(driver, wait, "Automated forward comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("APPROVE")) {
                     option.click();
-                    System.out.println("Clicked APPROVE");
+                    logger.info("Clicked APPROVE");
                     handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("PAY")) {
                     option.click();
-                    System.out.println("Clicked PAY");
+                    logger.info("Clicked PAY");
                     break;
                 } else if (text.equals("REJECT")) {
-                    System.out.println("Application Rejected");
+                    logger.info("Application Rejected");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+            logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
         }
     }
 
@@ -1245,7 +1249,7 @@ public class WaterEmp {
         // Upload document
         WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
         fileInput.sendKeys(filePath);
-        System.out.println("Document uploaded");
+        logger.info("Document uploaded");
 
         // Click Verify or Approve button
         List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -1254,10 +1258,10 @@ public class WaterEmp {
         WebElement actionButton = null;
         if (!verifyButtons.isEmpty()) {
             actionButton = verifyButtons.get(0);
-            System.out.println("Clicking Verify button");
+            logger.info("Clicking Verify button");
         } else if (!approveButtons.isEmpty()) {
             actionButton = approveButtons.get(0);
-            System.out.println("Clicking Approve button");
+            logger.info("Clicking Approve button");
         } else {
             throw new RuntimeException("Neither Verify nor Approve button found!");
         }
@@ -1335,10 +1339,10 @@ public class WaterEmp {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }}
 
@@ -1348,7 +1352,7 @@ public class WaterEmp {
         List<WebElement> fileInputs = driver.findElements(By.cssSelector("input[type='file']"));
 
         if (index >= fileInputs.size()) {
-            System.out.println("ERROR: File input index " + index + " not found");
+            logger.info("ERROR: File input index " + index + " not found");
             return;
         }
 
@@ -1361,7 +1365,7 @@ public class WaterEmp {
         Thread.sleep(300);
 
         fileInput.sendKeys(filePath);
-        System.out.println("✓ Uploaded file at index " + index);
+        logger.info("✓ Uploaded file at index " + index);
 
         js.executeScript("arguments[0].dispatchEvent(new Event('change', { bubbles: true }));", fileInput);
         Thread.sleep(500);
@@ -1375,7 +1379,7 @@ public class WaterEmp {
             js.executeScript("arguments[0].scrollIntoView({block:'center'});", section);
             Thread.sleep(800);
         } catch (Exception e) {
-            System.out.println("Scroll failed for: " + labelText);
+            logger.info("Scroll failed for: " + labelText);
         }
     }
 

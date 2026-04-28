@@ -7,33 +7,35 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
 import org.upyog.Automation.Utils.DriverFactory;
 import org.upyog.Automation.config.WebDriverFactory;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
 @Component
 public class EWasteEmp {
 
+    private static final Logger logger = LoggerFactory.getLogger(EWasteEmp.class);
+
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void EWasteInbox() {
-        EWasteInboxEmp(ConfigReader.get("employee.base.url"),
+    public void eWasteInbox() {
+        eWasteInboxEmp(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("ewaste.login.username"),
                 ConfigReader.get("ewaste.login.password"),
                 ConfigReader.get("eWaste.application.number"));
     }
 
-    public void EWasteInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("Advertisement Application Employee Workflow");
+    public void eWasteInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("Advertisement Application Employee Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -71,11 +73,11 @@ public class EWasteEmp {
 
 
 
-            System.out.println("EWaste Management Tax Application Employee Workflow completed successfully!");
+            logger.info("EWaste Management Tax Application Employee Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in EWaste Management Application Employee Workflow: " + e.getMessage());
+            logger.info("Exception in EWaste Management Application Employee Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -91,12 +93,12 @@ public class EWasteEmp {
     private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, Actions actions, String baseUrl, String username, String password) throws InterruptedException {
         driver.get(baseUrl);
         driver.manage().window().maximize();
-        System.out.println("Open the Employee Login Portal");
+        logger.info("Open the Employee Login Portal");
 
         // Enter credentials from configuration
         fillInput(wait, "username", username);
         fillInput(wait, "password", password);
-        System.out.println("Filled username and password");
+        logger.info("Filled username and password");
 
         // Select city dropdown
         selectCityDropdown(driver, wait, actions);
@@ -109,7 +111,7 @@ public class EWasteEmp {
     private void navigateToInbox(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Navigating to E-Waste Inbox");
+        logger.info("Navigating to E-Waste Inbox");
 
         Thread.sleep(2000);
 
@@ -130,7 +132,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", inboxLink);
         }
 
-        System.out.println("Clicked E-Waste Inbox");
+        logger.info("Clicked E-Waste Inbox");
     }
 
     // =====================================================================
@@ -142,13 +144,13 @@ public class EWasteEmp {
                                    JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Request in E-Waste Inbox");
+        logger.info("Searching Request in E-Waste Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
 
         String requestId = applicationNumber.trim();
-        System.out.println("Using Request ID: " + requestId);
+        logger.info("Using Request ID: " + requestId);
 
         WebElement requestInput= null;
 
@@ -156,7 +158,7 @@ public class EWasteEmp {
             requestInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
             ));
-            System.out.println("Found using index fallback locator");
+            logger.info("Found using index fallback locator");
 
 
         } catch (Exception e1) {
@@ -165,14 +167,14 @@ public class EWasteEmp {
                 requestInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Request ID']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 requestInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.name("requestId")
                 ));
-                System.out.println("Found using name locator");
+                logger.info("Found using name locator");
             }
         }
 
@@ -182,7 +184,7 @@ public class EWasteEmp {
         requestInput.clear();
         requestInput.sendKeys(requestId);
 
-        System.out.println("Property ID entered");
+        logger.info("Property ID entered");
 
         // SEARCH BUTTON
         WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(
@@ -191,7 +193,7 @@ public class EWasteEmp {
 
         js.executeScript("arguments[0].click();", searchBtn);
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         // CLICK RESULT
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + requestId + "')]");
@@ -205,7 +207,7 @@ public class EWasteEmp {
 
         js.executeScript("arguments[0].click();", applicationLink);
 
-        System.out.println("Application clicked: " +requestId);
+        logger.info("Application clicked: " +requestId);
     }
 
     // =====================================================================
@@ -215,7 +217,7 @@ public class EWasteEmp {
     private void takeActionAndVerify(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify");
+        logger.info("Starting Take Action → Verify");
 
 
         // TAKE ACTION
@@ -246,7 +248,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", verifyBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -256,7 +258,7 @@ public class EWasteEmp {
     private void handleVerifyPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Verify Popup");
+        logger.info("Handling Verify Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -279,7 +281,7 @@ public class EWasteEmp {
         commentBox.clear();
         commentBox.sendKeys("Product verified");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -297,7 +299,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", verifyBtn);
         }
 
-        System.out.println("Final Verify clicked");
+        logger.info("Final Verify clicked");
     }
 
     // =====================================================================
@@ -307,7 +309,7 @@ public class EWasteEmp {
     private void takeActionPickup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Forward");
+        logger.info("Starting Take Action → Forward");
 
 
         // TAKE ACTION
@@ -337,7 +339,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", pickupBtn);
         }
 
-        System.out.println("Send Pickup Alert clicked");
+        logger.info("Send Pickup Alert clicked");
     }
 
     // =====================================================================
@@ -347,7 +349,7 @@ public class EWasteEmp {
     private void handlePickupPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Forward Popup");
+        logger.info("Handling Forward Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -377,7 +379,7 @@ public class EWasteEmp {
                 dateInput
         );
 
-        System.out.println("Date entered: " + currentDate);
+        logger.info("Date entered: " + currentDate);
 
         // =========================
         // STEP 3: ENTER COMMENT
@@ -392,7 +394,7 @@ public class EWasteEmp {
         commentBox.clear();
         commentBox.sendKeys("Pickup Alert");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 4: CLICK SEND PICKUP ALERT BUTTON
@@ -410,7 +412,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", pickupBtn);
         }
 
-        System.out.println("Final Forward clicked");
+        logger.info("Final Forward clicked");
     }
 
     // =====================================================================
@@ -420,7 +422,7 @@ public class EWasteEmp {
     private void takeActionComplete(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Approve");
+        logger.info("Starting Take Action → Approve");
 
 
         // TAKE ACTION
@@ -452,7 +454,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", completeReqBtn);
         }
 
-        System.out.println("Complete Request clicked");
+        logger.info("Complete Request clicked");
     }
 
     // =====================================================================
@@ -462,7 +464,7 @@ public class EWasteEmp {
     private void handleCompleteReqPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Complete Request Popup");
+        logger.info("Handling Complete Request Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -484,7 +486,7 @@ public class EWasteEmp {
         transactionIdBox.clear();
         transactionIdBox.sendKeys("9876ABCD54321");
 
-        System.out.println("Transaction ID entered");
+        logger.info("Transaction ID entered");
 
         // =================================
         // STEP 3: ENTER FINAL AMOUNT
@@ -498,7 +500,7 @@ public class EWasteEmp {
         finalAmountBox.clear();
         finalAmountBox.sendKeys("20000");
 
-        System.out.println("Final Amount entered");
+        logger.info("Final Amount entered");
 
         // =========================
         // STEP 4: ENTER COMMENT
@@ -513,7 +515,7 @@ public class EWasteEmp {
         commentBox.clear();
         commentBox.sendKeys("Completed");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 5: CLICK FORWARD BUTTON
@@ -531,7 +533,7 @@ public class EWasteEmp {
             js.executeScript("arguments[0].click();", completeBtn);
         }
 
-        System.out.println("Final Forward clicked");
+        logger.info("Final Forward clicked");
         Thread.sleep(2000);
     }
 
@@ -578,7 +580,7 @@ public class EWasteEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
         Thread.sleep(300);
         takeActionButton.click();
-        System.out.println("Clicked TAKE ACTION button");
+        logger.info("Clicked TAKE ACTION button");
     }
 
     /**
@@ -591,7 +593,7 @@ public class EWasteEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", assessPropertyButton);
         Thread.sleep(300);
         assessPropertyButton.click();
-        System.out.println("Clicked ASSESS PROPERTY button");
+        logger.info("Clicked ASSESS PROPERTY button");
     }
 
 
@@ -607,33 +609,33 @@ public class EWasteEmp {
                 String text = option.getText().trim().toUpperCase();
                 if (text.equals("VERIFY")) {
                     option.click();
-                    System.out.println("Clicked VERIFY");
+                    logger.info("Clicked VERIFY");
                     handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("FORWARD")) {
                     option.click();
-                    System.out.println("Clicked FORWARD");
+                    logger.info("Clicked FORWARD");
                     handlePopupAndSubmit(driver, wait, "Automated forward comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("APPROVE")) {
                     option.click();
-                    System.out.println("Clicked APPROVE");
+                    logger.info("Clicked APPROVE");
                     handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("PAY")) {
                     option.click();
-                    System.out.println("Clicked PAY");
+                    logger.info("Clicked PAY");
                     break;
                 } else if (text.equals("REJECT")) {
-                    System.out.println("Application Rejected");
+                    logger.info("Application Rejected");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+            logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
         }
     }
 
@@ -649,7 +651,7 @@ public class EWasteEmp {
         // Upload document
         WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
         fileInput.sendKeys(filePath);
-        System.out.println("Document uploaded");
+        logger.info("Document uploaded");
 
         // Click Verify or Approve button
         List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -658,10 +660,10 @@ public class EWasteEmp {
         WebElement actionButton = null;
         if (!verifyButtons.isEmpty()) {
             actionButton = verifyButtons.get(0);
-            System.out.println("Clicking Verify button");
+            logger.info("Clicking Verify button");
         } else if (!approveButtons.isEmpty()) {
             actionButton = approveButtons.get(0);
-            System.out.println("Clicking Approve button");
+            logger.info("Clicking Approve button");
         } else {
             throw new RuntimeException("Neither Verify nor Approve button found!");
         }
@@ -697,10 +699,10 @@ public class EWasteEmp {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }
     }

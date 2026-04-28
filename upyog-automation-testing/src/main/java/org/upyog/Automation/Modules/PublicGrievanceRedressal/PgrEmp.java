@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
@@ -18,19 +20,21 @@ import java.util.List;
 @Component
 public class PgrEmp {
 
+    private static final Logger logger = LoggerFactory.getLogger(PgrEmp.class);
+
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void PgrInbox() {
-        PgrInboxEmp(ConfigReader.get("employee.base.url"),
+    public void pgrInbox() {
+        pgrInboxEmp(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("pgr.login.username"),
                 ConfigReader.get("pgr.login.password"),
                 ConfigReader.get("pgr.application.number"));
     }
 
-    public void PgrInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("PGR Application Employee Workflow");
+    public void pgrInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("PGR Application Employee Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -62,11 +66,11 @@ public class PgrEmp {
 
 
 
-            System.out.println("PGR Application Employee Workflow completed successfully!");
+            logger.info("PGR Application Employee Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in PGR Application Employee Workflow: " + e.getMessage());
+            logger.info("Exception in PGR Application Employee Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -83,12 +87,12 @@ public class PgrEmp {
             actions, String baseUrl, String username, String password) throws InterruptedException {
         driver.get(baseUrl);
         driver.manage().window().maximize();
-        System.out.println("Open the Employee Login Portal");
+        logger.info("Open the Employee Login Portal");
 
         // Enter credentials from configuration
         fillInput(wait, "username", username);
         fillInput(wait, "password", password);
-        System.out.println("Filled username and password");
+        logger.info("Filled username and password");
 
         // Select city dropdown
         selectCityDropdown(driver, wait, actions);
@@ -104,7 +108,7 @@ public class PgrEmp {
 
     private void navigateToSearchApplication (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Navigating to Search Water Tanker Application");
+        logger.info("Navigating to Search Water Tanker Application");
 
         // Wait for page to load after login
         Thread.sleep(2000);
@@ -117,7 +121,7 @@ public class PgrEmp {
                         "//*[normalize-space()='Inbox']")));
         js.executeScript("arguments[0].scrollIntoView(true);", inboxLink);
         inboxLink.click();
-        System.out.println("Clicked Inbox link");
+        logger.info("Clicked Inbox link");
     }
 
 
@@ -130,7 +134,7 @@ public class PgrEmp {
                                    JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Application No. in Inbox");
+        logger.info("Searching Application No. in Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
@@ -139,7 +143,7 @@ public class PgrEmp {
         Thread.sleep(3000);
 
         String pgrId = applicationNumber.trim();
-        System.out.println("Using Application No.: " + pgrId);
+        logger.info("Using Application No.: " + pgrId);
 
         WebElement pgrInput = null;
 
@@ -147,7 +151,7 @@ public class PgrEmp {
             pgrInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
             ));
-            System.out.println("Found using index fallback locator");
+            logger.info("Found using index fallback locator");
 
 
         } catch (Exception e1) {
@@ -156,14 +160,14 @@ public class PgrEmp {
                 pgrInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Grievance ID']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 pgrInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.name("serviceRequestId")
                 ));
-                System.out.println("Found using name locator");
+                logger.info("Found using name locator");
             }
         }
 
@@ -173,7 +177,7 @@ public class PgrEmp {
         pgrInput.clear();
         pgrInput.sendKeys(pgrId);
 
-        System.out.println("Grievance ID entered");
+        logger.info("Grievance ID entered");
 
         //SEARCH BUTTON
 
@@ -187,7 +191,7 @@ public class PgrEmp {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + pgrId + "')]");
 
@@ -204,7 +208,7 @@ public class PgrEmp {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked: " + pgrId);
+        logger.info("Application clicked: " + pgrId);
     }
 
     // =====================================================================
@@ -214,7 +218,7 @@ public class PgrEmp {
     private void takeActionAndAssignGrievance(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Assign Grievance");
+        logger.info("Starting Take Action → Assign Grievance");
 
 
         // TAKE ACTION
@@ -245,7 +249,7 @@ public class PgrEmp {
             js.executeScript("arguments[0].click();", assignGrievanceBtn);
         }
 
-        System.out.println("Assign Grievance clicked");
+        logger.info("Assign Grievance clicked");
     }
 
     // =====================================================================
@@ -255,7 +259,7 @@ public class PgrEmp {
     private void handleAssignGrievancePopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Assign Popup");
+        logger.info("Handling Assign Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -279,7 +283,7 @@ public class PgrEmp {
         commentBox.sendKeys("Assigned");
         Thread.sleep(1000);
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -297,7 +301,7 @@ public class PgrEmp {
             js.executeScript("arguments[0].click();", approveBtn);
         }
 
-        System.out.println("Final Assign clicked");
+        logger.info("Final Assign clicked");
         Thread.sleep(3000);
     }
 
@@ -308,7 +312,7 @@ public class PgrEmp {
     private void takeActionAndResolve(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Resolve");
+        logger.info("Starting Take Action → Resolve");
 
 
         // TAKE ACTION
@@ -339,7 +343,7 @@ public class PgrEmp {
             js.executeScript("arguments[0].click();", resolveBtn);
         }
 
-        System.out.println("Resolve clicked");
+        logger.info("Resolve clicked");
     }
 
     // =====================================================================
@@ -349,7 +353,7 @@ public class PgrEmp {
     private void handleResolvePopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Resolve Popup");
+        logger.info("Handling Resolve Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -372,7 +376,7 @@ public class PgrEmp {
         commentBox.clear();
         commentBox.sendKeys("Resolved");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -390,7 +394,7 @@ public class PgrEmp {
             js.executeScript("arguments[0].click();", resolveBtn);
         }
 
-        System.out.println("Final Resolve clicked");
+        logger.info("Final Resolve clicked");
     }
 
     // =====================================================================
@@ -436,7 +440,7 @@ public class PgrEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
         Thread.sleep(300);
         takeActionButton.click();
-        System.out.println("Clicked TAKE ACTION button");
+        logger.info("Clicked TAKE ACTION button");
     }
 
     /**
@@ -448,7 +452,7 @@ public class PgrEmp {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToHomeButton);
         Thread.sleep(300);
         goBackToHomeButton.click();
-        System.out.println("Clicked GO Back To Home button");
+        logger.info("Clicked GO Back To Home button");
     }
 
 
@@ -464,33 +468,33 @@ public class PgrEmp {
                 String text = option.getText().trim().toUpperCase();
                 if (text.equals("VERIFY")) {
                     option.click();
-                    System.out.println("Clicked VERIFY");
+                    logger.info("Clicked VERIFY");
                     handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("FORWARD")) {
                     option.click();
-                    System.out.println("Clicked FORWARD");
+                    logger.info("Clicked FORWARD");
                     handlePopupAndSubmit(driver, wait, "Automated forward comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("APPROVE")) {
                     option.click();
-                    System.out.println("Clicked APPROVE");
+                    logger.info("Clicked APPROVE");
                     handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("PAY")) {
                     option.click();
-                    System.out.println("Clicked PAY");
+                    logger.info("Clicked PAY");
                     break;
                 } else if (text.equals("REJECT")) {
-                    System.out.println("Application Rejected");
+                    logger.info("Application Rejected");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+            logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
         }
     }
 
@@ -507,7 +511,7 @@ public class PgrEmp {
         // Upload document
         WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
         fileInput.sendKeys(filePath);
-        System.out.println("Document uploaded");
+        logger.info("Document uploaded");
 
         // Click Verify or Approve button
         List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -516,10 +520,10 @@ public class PgrEmp {
         WebElement actionButton = null;
         if (!verifyButtons.isEmpty()) {
             actionButton = verifyButtons.get(0);
-            System.out.println("Clicking Verify button");
+            logger.info("Clicking Verify button");
         } else if (!approveButtons.isEmpty()) {
             actionButton = approveButtons.get(0);
-            System.out.println("Clicking Approve button");
+            logger.info("Clicking Approve button");
         } else {
             throw new RuntimeException("Neither Verify nor Approve button found!");
         }
@@ -600,10 +604,10 @@ public class PgrEmp {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }}
 }

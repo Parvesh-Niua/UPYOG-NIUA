@@ -10,27 +10,31 @@ import org.upyog.Automation.Utils.ConfigReader;
 import org.upyog.Automation.config.WebDriverFactory;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 @Component
-
-
 public class EWasteCreate {
+
+    private static final Logger logger = LoggerFactory.getLogger(EWasteCreate.class);
 
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
 
-    public void EWasteReg() {
-        EWasteReg(ConfigReader.get("citizen.base.url"),
+    public void eWasteReg() {
+        eWasteReg(ConfigReader.get("citizen.base.url"),
                 "E-Waste",
                 ConfigReader.get("citizen.mobile.number"),
                 ConfigReader.get("test.otp"),
                 ConfigReader.get("test.city.name"));
     }
 
-    public void EWasteReg(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName) {
-        System.out.println("EWaste Management Booking");
+    public void eWasteReg(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName) {
+        logger.info("EWaste Management Booking");
 
         WebDriver driver = webDriverFactory.createDriver();
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(30));
@@ -66,7 +70,7 @@ public class EWasteCreate {
             submitApplication(driver, wait, js);
 
         } catch (Exception e) {
-            System.out.println("Exception in EWaste Management Booking: " + e.getMessage());
+            logger.info("Exception in EWaste Management Booking: " + e.getMessage());
             e.printStackTrace();
         } finally {
             if (driver != null) {
@@ -83,7 +87,7 @@ public class EWasteCreate {
             throws InterruptedException {
 
         driver.get(baseUrl);
-        System.out.println("Open the Citizen Login Portal");
+        logger.info("Open the Citizen Login Portal");
 
         // Mobile number
         fillInput(wait, "mobileNumber", mobileNumber);
@@ -126,14 +130,14 @@ public class EWasteCreate {
     private void navigateToEWaste(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Navigating to E-WASTE Booking");
+        logger.info("Navigating to E-WASTE Booking");
 
         // Sidebar E-Waste link
         js.executeScript("arguments[0].click();", wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//a[@href='/upyog-ui/citizen/ew-home']"))));
 
         Thread.sleep(2000);
-        System.out.println("Reached EWaste home page");
+        logger.info("Reached EWaste home page");
 
         // "Create E-Waste Request" link
         WebElement newConstruction = wait.until(
@@ -147,7 +151,7 @@ public class EWasteCreate {
 
         js.executeScript("arguments[0].click();", newConstruction);
 
-        System.out.println("Clicked Create Ewaste Request");
+        logger.info("Clicked Create Ewaste Request");
         Thread.sleep(2000);
 
     }
@@ -159,16 +163,16 @@ public class EWasteCreate {
     private void searchProduct(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
         throws InterruptedException{
 
-        System.out.println("Search Product Page");
+        logger.info("Search Product Page");
 
         // Product 1
 
         try {
             selectDropdownByIndex(driver, wait, js, 0, 1);
             Thread.sleep(1000);
-            System.out.println("Searched Product");
+            logger.info("Searched Product");
         } catch (Exception e) {
-            System.out.println("Search Product not found: " + e.getMessage());
+            logger.info("Search Product not found: " + e.getMessage());
         }
 
         Thread.sleep(1000);
@@ -198,7 +202,7 @@ public class EWasteCreate {
         );
 
         js.executeScript("arguments[0].click();", addProduct);
-        System.out.println("Clicked Add Product");
+        logger.info("Clicked Add Product");
 
         Thread.sleep(1500);
 
@@ -215,11 +219,11 @@ public class EWasteCreate {
 
     private void uploadImage(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
         throws InterruptedException {
-        System.out.println( "Selecting the image");
+        logger.info( "Selecting the image");
 
         uploadFile(driver, wait, js, 0, ConfigReader.get("document.EwasteImage.proof"));
         Thread.sleep(3000);
-        System.out.println("Finished Uploading Image step");
+        logger.info("Finished Uploading Image step");
 
         clickNextButton(driver, wait, js);
 
@@ -232,7 +236,7 @@ public class EWasteCreate {
     private void fillApplicantDetails(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Filling Applicant Details");
+        logger.info("Filling Applicant Details");
 
         fillInput(wait, "applicantName", "Arpit Rao");
         fillInput(wait, "emailId", "arpit@gmail.com");
@@ -248,7 +252,7 @@ public class EWasteCreate {
     private void addressPincode(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
         throws InterruptedException{
 
-        System.out.println("Entering the Address Pincode");
+        logger.info("Entering the Address Pincode");
         Thread.sleep(500);
         fillInput(wait, "pincode", "143001");
         Thread.sleep(1000);
@@ -262,7 +266,7 @@ public class EWasteCreate {
 
     private void selectCity(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Selecting City and Locality");
+        logger.info("Selecting City and Locality");
         Thread.sleep(1000);
 
         selectRadioButtonByLabel(driver, "Delhi");
@@ -283,7 +287,7 @@ public class EWasteCreate {
     private void addressDetails(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Entering the Address Details");
+        logger.info("Entering the Address Details");
         Thread.sleep(500);
 
         fillInput(wait, "street", "Raj Nagar");
@@ -315,47 +319,33 @@ public class EWasteCreate {
     private void submitApplication(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Submitting Ewaste Application - Summary Page");
+        logger.info("Submitting Ewaste Application - Summary Page");
 
-        // ===== CHECKBOX =====
-        WebElement checkbox = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//input[@type='checkbox']")
-        ));
-
-        if (!checkbox.isSelected()) {
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", checkbox);
-            js.executeScript("arguments[0].click();", checkbox);
-            System.out.println("Checked declaration checkbox");
+        List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
+        if (!checkboxes.isEmpty()) {
+            WebElement lastCheckbox = checkboxes.get(checkboxes.size() - 1);
+            try {
+                if (!lastCheckbox.isSelected()) {
+                    js.executeScript("arguments[0].scrollIntoView(true);", lastCheckbox);
+                    Thread.sleep(300);
+                    js.executeScript("arguments[0].click();", lastCheckbox);
+                    logger.info("Checked declaration checkbox");
+                }
+            } catch (Exception ex) {
+                logger.info("Could not click declaration checkbox: " + ex.getMessage());
+            }
         }
 
-        // ===== SUBMIT BUTTON =====
-        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[.//header[contains(text(),'Submit')]]")
-        ));
-
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", submitButton);
-        js.executeScript("arguments[0].click();", submitButton);
-
-        System.out.println("Submit clicked");
-
-        // ===== MOST IMPORTANT PART =====
-        System.out.println("Waiting for next page after submit...");
-
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.urlContains("acknowledgement"),
-                ExpectedConditions.urlContains("success"),
-                ExpectedConditions.urlContains("payment"),
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//*[contains(text(),'Application Submitted') or contains(text(),'Acknowledgement')]")
-                )
-        ));
-
-        System.out.println("Post-submit page loaded successfully");
-
-        Thread.sleep(2000); // optional stabilization
+        WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//button[@class='submit-bar ' and @type='button'][.//header[text()='Submit']]")));
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        Thread.sleep(300);
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
+        Thread.sleep(200);
+        submitButton.click();
+        logger.info("EWaste application: Submit clicked");
+        Thread.sleep(5000);
     }
-
-
 
     // =====================================================================
     // UTILITY METHODS
@@ -374,12 +364,12 @@ public class EWasteCreate {
             if (input.isDisplayed() && input.isEnabled()) {
                 input.clear();
                 input.sendKeys(value);
-                System.out.println("Filled optional field: " + fieldName);
+                logger.info("Filled optional field: " + fieldName);
             } else {
-                System.out.println("Optional field " + fieldName + " not interactable, skipping");
+                logger.info("Optional field " + fieldName + " not interactable, skipping");
             }
         } catch (Exception e) {
-            System.out.println("Optional field " + fieldName + " not found, skipping");
+            logger.info("Optional field " + fieldName + " not found, skipping");
         }
     }
 
@@ -408,7 +398,7 @@ public class EWasteCreate {
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", nextButton);
         Thread.sleep(200);
         nextButton.click();
-        System.out.println("Clicked Next");
+        logger.info("Clicked Next");
     }
 
     private void selectCity(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, String cityName)
@@ -460,10 +450,10 @@ public class EWasteCreate {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }
     }
@@ -480,7 +470,7 @@ public class EWasteCreate {
         );
 
         if (dropdownIndex < 0 || dropdownIndex >= dropdownSvgs.size()) {
-            System.out.println("Dropdown index " + dropdownIndex + " not found. Total: " + dropdownSvgs.size());
+            logger.info("Dropdown index " + dropdownIndex + " not found. Total: " + dropdownSvgs.size());
             return;
         }
 
@@ -494,7 +484,7 @@ public class EWasteCreate {
         try {
             svg.click();
         } catch (ElementClickInterceptedException e) {
-            System.out.println("Normal click intercepted on dropdown svg, using JS dispatch. Reason: " + e.getMessage());
+            logger.info("Normal click intercepted on dropdown svg, using JS dispatch. Reason: " + e.getMessage());
 
             // 2nd try: dispatch a click event manually (no arguments[0].click())
             js.executeScript(
@@ -531,7 +521,7 @@ public class EWasteCreate {
                 );
             }
         } else {
-            System.out.println("No options found in dropdown for index " + dropdownIndex);
+            logger.info("No options found in dropdown for index " + dropdownIndex);
         }
     }
 
@@ -546,7 +536,7 @@ public class EWasteCreate {
                                              int optionIndex) throws InterruptedException {
 
         if (dropdownIndex >= dropdownSvgs.size()) {
-            System.out.println("Dropdown index " + dropdownIndex + " out of range");
+            logger.info("Dropdown index " + dropdownIndex + " out of range");
             return;
         }
 
@@ -572,15 +562,15 @@ public class EWasteCreate {
             throws InterruptedException {
 
         if (index >= fileInputs.size()) {
-            System.out.println("⚠ No file input at index " + index + " for " + filePath);
+            logger.info("⚠ No file input at index " + index + " for " + filePath);
             return;
         }
 
         java.io.File f = new java.io.File(filePath);
-        System.out.println("Attempting upload from: " + f.getAbsolutePath() + "  exists? " + f.exists());
+        logger.info("Attempting upload from: " + f.getAbsolutePath() + "  exists? " + f.exists());
 
         if (!f.exists()) {
-            System.out.println("⚠ File does NOT exist on disk. Skipping this input.");
+            logger.info("⚠ File does NOT exist on disk. Skipping this input.");
             return;
         }
 
@@ -592,7 +582,7 @@ public class EWasteCreate {
         Thread.sleep(300);
 
         input.sendKeys(f.getAbsolutePath());
-        System.out.println(" Uploaded document into input index " + index);
+        logger.info(" Uploaded document into input index " + index);
     }
 
 
@@ -606,7 +596,7 @@ public class EWasteCreate {
         );
 
         if (index >= fileInputs.size()) {
-            System.out.println("File input index " + index + " not found for path: " + filePath);
+            logger.info("File input index " + index + " not found for path: " + filePath);
             return;
         }
 
@@ -618,7 +608,7 @@ public class EWasteCreate {
         Thread.sleep(300);
 
         fileInput.sendKeys(filePath);
-        System.out.println("Uploaded file at index " + index + ": " + filePath);
+        logger.info("Uploaded file at index " + index + ": " + filePath);
         Thread.sleep(500);
     }
 

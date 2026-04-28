@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
@@ -18,19 +20,21 @@ import java.util.List;
 @Component
 public class TreePruningVerifier {
 
+    private static final Logger logger = LoggerFactory.getLogger(TreePruningVerifier.class);
+
     @Autowired
     private WebDriverFactory webDriverFactory;
 
     //@PostConstruct
-    public void TreePruningInbox1() {
-        TreePruningInboxVerifier(ConfigReader.get("employee.base.url"),
+    public void treePruningInbox1() {
+        treePruningInboxVerifier(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("app.login.username"),
                 ConfigReader.get("app.login.password"),
                 ConfigReader.get("treePruning.application.number"));
     }
 
-    public void TreePruningInboxVerifier(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("Tree Pruning Application Verifier Workflow");
+    public void treePruningInboxVerifier(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("Tree Pruning Application Verifier Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -60,11 +64,11 @@ public class TreePruningVerifier {
             // STEP 7: Pop Up Execute
             handleExecutePopup(driver, wait, js);
 
-            System.out.println("Tree Pruning Application Verifier Workflow completed successfully!");
+            logger.info("Tree Pruning Application Verifier Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in Tree Pruning Application Verifier Workflow: " + e.getMessage());
+            logger.info("Exception in Tree Pruning Application Verifier Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -81,12 +85,12 @@ public class TreePruningVerifier {
             actions, String baseUrl, String username, String password) throws InterruptedException {
         driver.get(baseUrl);
         driver.manage().window().maximize();
-        System.out.println("Open the Employee Login Portal");
+        logger.info("Open the Employee Login Portal");
 
         // Enter credentials from configuration
         fillInput(wait, "username", username);
         fillInput(wait, "password", password);
-        System.out.println("Filled username and password");
+        logger.info("Filled username and password");
 
         // Select city dropdown
         selectCityDropdown(driver, wait, actions);
@@ -102,7 +106,7 @@ public class TreePruningVerifier {
 
     private void navigateToSearchApplication (WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Navigating to Search Tree Pruning Application");
+        logger.info("Navigating to Search Tree Pruning Application");
 
         // Wait for page to load after login
         Thread.sleep(2000);
@@ -115,7 +119,7 @@ public class TreePruningVerifier {
                         "//*[normalize-space()='Inbox']")));
         js.executeScript("arguments[0].scrollIntoView(true);", inboxLink);
         inboxLink.click();
-        System.out.println("Clicked Inbox link");
+        logger.info("Clicked Inbox link");
     }
 
     // =====================================================================
@@ -127,13 +131,13 @@ public class TreePruningVerifier {
                                    JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Booking in Inbox");
+        logger.info("Searching Booking in Inbox");
 
         wait.until(ExpectedConditions.urlContains("inbox"));
         Thread.sleep(2000);
 
         String tree1Id = applicationNumber.trim();
-        System.out.println("Using Booking No.: " + tree1Id);
+        logger.info("Using Booking No.: " + tree1Id);
 
         WebElement tree1Input = null;
 
@@ -141,7 +145,7 @@ public class TreePruningVerifier {
             tree1Input = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//div[contains(@class,'search-complaint-container')]//input[@type='text'])[1]")
             ));
-            System.out.println("Found using index fallback locator");
+            logger.info("Found using index fallback locator");
 
 
         } catch (Exception e1) {
@@ -150,14 +154,14 @@ public class TreePruningVerifier {
                 tree1Input = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//h4[text()='Booking No.']/parent::span//input")
                 ));
-                System.out.println("Found using label-based locator");
+                logger.info("Found using label-based locator");
 
             } catch (Exception e2) {
 
                 tree1Input = wait.until(ExpectedConditions.visibilityOfElementLocated(
                         By.name("bookingNo")
                 ));
-                System.out.println("Found using name locator");
+                logger.info("Found using name locator");
             }
         }
 
@@ -167,7 +171,7 @@ public class TreePruningVerifier {
         tree1Input.clear();
         tree1Input.sendKeys(tree1Id);
 
-        System.out.println("Booking No entered");
+        logger.info("Booking No entered");
 
         //SEARCH BUTTON
 
@@ -181,7 +185,7 @@ public class TreePruningVerifier {
             js.executeScript("arguments[0].click();", searchBtn);
         }
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
 
         By applicationLinkLocator = By.xpath("//a[contains(text(),'" + tree1Id + "')]");
 
@@ -198,7 +202,7 @@ public class TreePruningVerifier {
             js.executeScript("arguments[0].click();", applicationLink);
         }
 
-        System.out.println("Application clicked: " + tree1Id);
+        logger.info("Application clicked: " + tree1Id);
     }
 
     // =====================================================================
@@ -208,7 +212,7 @@ public class TreePruningVerifier {
     private void takeActionAndVerify(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Verify");
+        logger.info("Starting Take Action → Verify");
 
 
         // TAKE ACTION
@@ -239,7 +243,7 @@ public class TreePruningVerifier {
             js.executeScript("arguments[0].click();", verifyBtn);
         }
 
-        System.out.println("Verify clicked");
+        logger.info("Verify clicked");
     }
 
     // =====================================================================
@@ -249,7 +253,7 @@ public class TreePruningVerifier {
     private void handleVerifyPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Verify Popup");
+        logger.info("Handling Verify Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -272,7 +276,7 @@ public class TreePruningVerifier {
         commentBox.clear();
         commentBox.sendKeys("Verified");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK VERIFY BUTTON
@@ -290,7 +294,7 @@ public class TreePruningVerifier {
             js.executeScript("arguments[0].click();", verifyBtn);
         }
 
-        System.out.println("Final Verify clicked");
+        logger.info("Final Verify clicked");
     }
 
     // =====================================================================
@@ -300,7 +304,7 @@ public class TreePruningVerifier {
     private void takeActionAndExecute(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Starting Take Action → Execute");
+        logger.info("Starting Take Action → Execute");
 
 
         // TAKE ACTION
@@ -331,7 +335,7 @@ public class TreePruningVerifier {
             js.executeScript("arguments[0].click();", executeBtn);
         }
 
-        System.out.println("Execute clicked");
+        logger.info("Execute clicked");
     }
 
     // =====================================================================
@@ -341,7 +345,7 @@ public class TreePruningVerifier {
     private void handleExecutePopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Verify Popup");
+        logger.info("Handling Verify Popup");
 
         // =========================
         // STEP 1: WAIT FOR POPUP
@@ -364,7 +368,7 @@ public class TreePruningVerifier {
         commentBox.clear();
         commentBox.sendKeys("Executed");
 
-        System.out.println("Comment entered");
+        logger.info("Comment entered");
 
         // =========================
         // STEP 3: CLICK EXECUTE BUTTON
@@ -382,7 +386,7 @@ public class TreePruningVerifier {
             js.executeScript("arguments[0].click();",executeBtn);
         }
 
-        System.out.println("Final Execute clicked");
+        logger.info("Final Execute clicked");
     }
 
     // =====================================================================
@@ -428,7 +432,7 @@ public class TreePruningVerifier {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
         Thread.sleep(300);
         takeActionButton.click();
-        System.out.println("Clicked TAKE ACTION button");
+        logger.info("Clicked TAKE ACTION button");
     }
 
     /**
@@ -440,7 +444,7 @@ public class TreePruningVerifier {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToHomeButton);
         Thread.sleep(300);
         goBackToHomeButton.click();
-        System.out.println("Clicked GO Back To Home button");
+        logger.info("Clicked GO Back To Home button");
     }
 
 
@@ -456,33 +460,33 @@ public class TreePruningVerifier {
                 String text = option.getText().trim().toUpperCase();
                 if (text.equals("VERIFY")) {
                     option.click();
-                    System.out.println("Clicked VERIFY");
+                    logger.info("Clicked VERIFY");
                     handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("FORWARD")) {
                     option.click();
-                    System.out.println("Clicked FORWARD");
+                    logger.info("Clicked FORWARD");
                     handlePopupAndSubmit(driver, wait, "Automated forward comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("APPROVE")) {
                     option.click();
-                    System.out.println("Clicked APPROVE");
+                    logger.info("Clicked APPROVE");
                     handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                             ConfigReader.get("document.identity.proof"));
                     break;
                 } else if (text.equals("PAY")) {
                     option.click();
-                    System.out.println("Clicked PAY");
+                    logger.info("Clicked PAY");
                     break;
                 } else if (text.equals("REJECT")) {
-                    System.out.println("Application Rejected");
+                    logger.info("Application Rejected");
                     break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+            logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
         }
     }
 
@@ -499,7 +503,7 @@ public class TreePruningVerifier {
         // Upload document
         WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
         fileInput.sendKeys(filePath);
-        System.out.println("Document uploaded");
+        logger.info("Document uploaded");
 
         // Click Verify or Approve button
         List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -508,10 +512,10 @@ public class TreePruningVerifier {
         WebElement actionButton = null;
         if (!verifyButtons.isEmpty()) {
             actionButton = verifyButtons.get(0);
-            System.out.println("Clicking Verify button");
+            logger.info("Clicking Verify button");
         } else if (!approveButtons.isEmpty()) {
             actionButton = approveButtons.get(0);
-            System.out.println("Clicking Approve button");
+            logger.info("Clicking Approve button");
         } else {
             throw new RuntimeException("Neither Verify nor Approve button found!");
         }
@@ -592,10 +596,10 @@ public class TreePruningVerifier {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }}
 }

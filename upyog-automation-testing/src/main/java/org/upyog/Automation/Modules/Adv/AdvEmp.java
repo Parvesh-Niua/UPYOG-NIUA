@@ -13,24 +13,28 @@ import org.springframework.stereotype.Component;
 import org.upyog.Automation.Utils.ConfigReader;
 import org.upyog.Automation.Utils.DriverFactory;
 import org.upyog.Automation.config.WebDriverFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class AdvEmp {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdvEmp.class);
 
     @Autowired
     private WebDriverFactory webDriverFactory;
 
 
     //@PostConstruct
-    public void AdvInbox() {
-        AdvInboxEmp(ConfigReader.get("employee.base.url"),
+    public void advInbox() {
+        advInboxEmp(ConfigReader.get("employee.base.url"),
                 ConfigReader.get("adv.login.username"),
                 ConfigReader.get("adv.login.password"),
                 ConfigReader.get("adv.application.number"));
     }
 
-    public void AdvInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
-        System.out.println("Advertisement Application Employee Workflow");
+    public void advInboxEmp(String baseUrl, String username, String password, String applicationNumber) {
+        logger.info("Advertisement Application Employee Workflow");
 
         // Initialize WebDriver using DriverFactory
         WebDriver driver = webDriverFactory.createDriver();
@@ -56,11 +60,11 @@ public class AdvEmp {
 
 
 
-            System.out.println("Advertisement Application Employee Workflow completed successfully!");
+            logger.info("Advertisement Application Employee Workflow completed successfully!");
             Thread.sleep(50000); // Keep browser open for observation
 
         } catch (Exception e) {
-            System.out.println("Exception in Advertisement Application Employee Workflow: " + e.getMessage());
+            logger.info("Exception in Advertisement Application Employee Workflow: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -68,15 +72,19 @@ public class AdvEmp {
             }}
     }
 
+    // =====================================================================
+    // STEP 1: EMPLOYEE LOGIN
+    // =====================================================================
+
         private void performEmployeeLogin(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, Actions actions, String baseUrl, String username, String password) throws InterruptedException {
             driver.get(baseUrl);
             driver.manage().window().maximize();
-            System.out.println("Open the Employee Login Portal");
+            logger.info("Open the Employee Login Portal");
 
             // Enter credentials from configuration
             fillInput(wait, "username", username);
             fillInput(wait, "password", password);
-            System.out.println("Filled username and password");
+            logger.info("Filled username and password");
 
             // Select city dropdown
             selectCityDropdown(driver, wait, actions);
@@ -85,12 +93,13 @@ public class AdvEmp {
             clickButton(wait, js, "//button[contains(@class, 'submit-bar') and .//header[text()='Continue']]");
         }
 
-        /**
-         * Navigates to Advertisement Search Bookings
-         */
+    // =====================================================================
+    // STEP 2: NAVIGATES TO ADVERTISEMENT SEARCH BOOKINGS
+    // =====================================================================
+
         private void navigateToSearchBookings(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
                 throws InterruptedException {
-            System.out.println("Navigating to Search Bookings");
+            logger.info("Navigating to Search Bookings");
 
             // Wait for page to load after login
             Thread.sleep(2000);
@@ -103,18 +112,19 @@ public class AdvEmp {
                             "//*[normalize-space()='Search Bookings']")));
             js.executeScript("arguments[0].scrollIntoView(true);", searchBookingLink);
             searchBookingLink.click();
-            System.out.println("Clicked Search Bookings link");
+            logger.info("Clicked Search Bookings link");
         }
 
-    /**
-     * Navigates to Advertisement Search Application Through Booking Number
-     */
+    // =====================================================================
+    // STEP 3: NAVIGATES TO ADVERTISEMENT SEARCH APPLICATION
+    // =====================================================================
+
 
     private void searchByApplicationNumber(WebDriver driver, WebDriverWait wait,
                                            JavascriptExecutor js, String applicationNumber)
             throws InterruptedException {
 
-        System.out.println("Searching Application");
+        logger.info("Searching Application");
 
         Thread.sleep(1000);
 
@@ -127,11 +137,11 @@ public class AdvEmp {
                 && !applicationNumber.contains("@")) {
 
             bookingNumber = applicationNumber.trim();
-            System.out.println("Using Application Number from UI: " + bookingNumber);
+            logger.info("Using Application Number from UI: " + bookingNumber);
 
         } else {
 
-            System.out.println("No valid input → fetching from table");
+            logger.info("No valid input → fetching from table");
 
             WebElement firstBooking = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//table//tbody//tr[1]//td[1])")
@@ -139,7 +149,7 @@ public class AdvEmp {
 
             bookingNumber = firstBooking.getText().trim();
 
-            System.out.println("Captured Booking Number: " + bookingNumber);
+            logger.info("Captured Booking Number: " + bookingNumber);
         }
 
         // =========================
@@ -158,7 +168,7 @@ public class AdvEmp {
         bookingInput.clear();
         bookingInput.sendKeys(bookingNumber);
 
-        System.out.println("Booking number entered");
+        logger.info("Booking number entered");
 
         // =========================
         // STEP 3: CLICK SEARCH
@@ -174,13 +184,17 @@ public class AdvEmp {
 
         js.executeScript("arguments[0].click();", searchBtn);
 
-        System.out.println("Search button clicked");
+        logger.info("Search button clicked");
     }
+
+    // =====================================================================
+    // STEP 4:TAKE ACTION
+    // =====================================================================
 
     private void clickTakeAction(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Clicking TAKE ACTION");
+        logger.info("Clicking TAKE ACTION");
 
         // =========================
         // STEP 1: CLICK TAKE ACTION
@@ -194,7 +208,7 @@ public class AdvEmp {
 
         js.executeScript("arguments[0].click();", takeActionBtn);
 
-        System.out.println("TAKE ACTION clicked");
+        logger.info("TAKE ACTION clicked");
 
         // =========================
         // STEP 2: WAIT & CLICK CANCEL
@@ -212,13 +226,17 @@ public class AdvEmp {
             js.executeScript("arguments[0].click();", cancelOption);
         }
 
-        System.out.println("Cancel Advertisement Booking clicked");
+        logger.info("Cancel Advertisement Booking clicked");
     }
+
+    // =====================================================================
+    // STEP 5: HANDLE CANCEL POPUP
+    // =====================================================================
 
     private void handleCancelPopup(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Handling Cancel Popup");
+        logger.info("Handling Cancel Popup");
 
         List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
         if (!checkboxes.isEmpty()) {
@@ -228,10 +246,10 @@ public class AdvEmp {
                     js.executeScript("arguments[0].scrollIntoView(true);", lastCheckbox);
                     Thread.sleep(300);
                     js.executeScript("arguments[0].click();", lastCheckbox);
-                    System.out.println("Checked declaration checkbox");
+                    logger.info("Checked declaration checkbox");
                 }
             } catch (Exception ex) {
-                System.out.println("Could not click declaration checkbox: " + ex.getMessage());
+                logger.info("Could not click declaration checkbox: " + ex.getMessage());
             }
 
 
@@ -249,13 +267,13 @@ public class AdvEmp {
                 js.executeScript("arguments[0].click();", cancelBtn);
             }
 
-            System.out.println("Final Cancel clicked");
+            logger.info("Final Cancel clicked");
 
             // backend process ke liye wait
             Thread.sleep(2000);
             driver.navigate().refresh();
 
-            System.out.println("Page refreshed after cancel");
+            logger.info("Page refreshed after cancel");
         }
     }
 
@@ -301,7 +319,7 @@ public class AdvEmp {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", takeActionButton);
             Thread.sleep(300);
             takeActionButton.click();
-            System.out.println("Clicked TAKE ACTION button");
+            logger.info("Clicked TAKE ACTION button");
         }
 
         /**
@@ -316,27 +334,27 @@ public class AdvEmp {
                     String text = option.getText().trim().toUpperCase();
                     if (text.equals("VERIFY")) {
                         option.click();
-                        System.out.println("Clicked VERIFY");
+                        logger.info("Clicked VERIFY");
                         handlePopupAndSubmit(driver, wait, "Automated verification comment.",
                                 ConfigReader.get("document.identity.proof"));
                         break;
                     } else if (text.equals("APPROVE")) {
                         option.click();
-                        System.out.println("Clicked APPROVE");
+                        logger.info("Clicked APPROVE");
                         handlePopupAndSubmit(driver, wait, "Automated approval comment.",
                                 ConfigReader.get("document.identity.proof"));
                         break;
                     } else if (text.equals("PAY")) {
                         option.click();
-                        System.out.println("Clicked PAY");
+                        logger.info("Clicked PAY");
                         break;
                     } else if (text.equals("REJECT")) {
-                        System.out.println("Application Rejected");
+                        logger.info("Application Rejected");
                         break;
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Take Action Menu not found or no valid option present: " + e.getMessage());
+                logger.info("Take Action Menu not found or no valid option present: " + e.getMessage());
             }
         }
 
@@ -352,7 +370,7 @@ public class AdvEmp {
             // Upload document
             WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("workflow-doc")));
             fileInput.sendKeys(filePath);
-            System.out.println("Document uploaded");
+            logger.info("Document uploaded");
 
             // Click Verify or Approve button
             List<WebElement> verifyButtons = driver.findElements(By.xpath("//button[contains(@class, 'selector-button-primary') and .//h2[normalize-space()='Verify']]"));
@@ -361,10 +379,10 @@ public class AdvEmp {
             WebElement actionButton = null;
             if (!verifyButtons.isEmpty()) {
                 actionButton = verifyButtons.get(0);
-                System.out.println("Clicking Verify button");
+                logger.info("Clicking Verify button");
             } else if (!approveButtons.isEmpty()) {
                 actionButton = approveButtons.get(0);
-                System.out.println("Clicking Approve button");
+                logger.info("Clicking Approve button");
             } else {
                 throw new RuntimeException("Neither Verify nor Approve button found!");
             }

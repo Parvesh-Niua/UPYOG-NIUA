@@ -15,9 +15,13 @@ import org.upyog.Automation.config.WebDriverFactory;
 
 import java.io.File;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
-public class DesludgingCreate{
+public class DesludgingCreate {
+
+    private static final Logger logger= LoggerFactory.getLogger(DesludgingCreate.class);
 
     @Autowired
     private WebDriverFactory webDriverFactory;
@@ -32,7 +36,7 @@ public class DesludgingCreate{
     }
 
     public void desludgingReg(String baseUrl, String moduleName, String mobileNumber, String otp, String cityName) {
-        System.out.println("Community Hall Booking by Citizen");
+        logger.info("Community Hall Booking by Citizen");
 
         WebDriver driver = webDriverFactory.createDriver();
         WebDriverWait wait = DriverFactory.createWebDriverWait(driver);
@@ -99,7 +103,7 @@ public class DesludgingCreate{
 
 
         } catch (Exception e) {
-            System.out.println("Exception in Desludging Service: " + e.getMessage());
+            logger.info("Exception in Desludging Service: " + e.getMessage());
             e.printStackTrace();
         }finally {
             if (driver != null) {
@@ -117,7 +121,7 @@ public class DesludgingCreate{
             throws InterruptedException {
 
         driver.get(baseUrl);
-        System.out.println("Open the Citizen Login Portal");
+        logger.info("Open the Citizen Login Portal");
 
         // Mobile number
         fillInput(wait, "mobileNumber", mobileNumber);
@@ -162,20 +166,20 @@ public class DesludgingCreate{
     private void navigateToCommunityHallBooking(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Navigating to Community Hall Booking");
+        logger.info("Navigating to Community Hall Booking");
 
         // Sidebar Desludging Service link
         js.executeScript("arguments[0].click();", wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//a[@href='/upyog-ui/citizen/fsm-home']"))));
 
         Thread.sleep(2000);
-        System.out.println("Reached Desludging Service home page");
+        logger.info("Reached Desludging Service home page");
 
         // "Apply for Emptying of Septic Tank / Pit" link
         js.executeScript("arguments[0].click();", wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//a[@href='/upyog-ui/citizen/fsm/new-application']"))));
 
-        System.out.println("Clicked Apply for Emptying of Septic Tank / Pit link");
+        logger.info("Clicked Apply for Emptying of Septic Tank / Pit link");
     }
 
     // =====================================================================
@@ -185,7 +189,7 @@ public class DesludgingCreate{
     private void serviceRequest(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Selecting the service");
+        logger.info("Selecting the service");
         Thread.sleep(500);
 
         selectDropdownByIndex(driver, wait, js,0,1);
@@ -206,14 +210,14 @@ public class DesludgingCreate{
 
     private void searchProperty(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
-        System.out.println("Search Property by Mobile Number");
+        logger.info("Search Property by Mobile Number");
 
         try {
             selectDropdownByIndex(driver, wait, js, 0, 0);
             Thread.sleep(1000);
-            System.out.println("Selected city");
+            logger.info("Selected city");
         } catch (Exception e) {
-            System.out.println("City dropdown not found: " + e.getMessage());
+            logger.info("City dropdown not found: " + e.getMessage());
         }
 
         Thread.sleep(1000);
@@ -248,7 +252,7 @@ public class DesludgingCreate{
 
         searchBtn.click();Thread.sleep(1000);
 
-        System.out.println("Clicked Search button");
+        logger.info("Clicked Search button");
     }
 
     // =====================================================================
@@ -259,7 +263,7 @@ public class DesludgingCreate{
     private void selectSearchedProperty(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Selecting Searched Property");
+        logger.info("Selecting Searched Property");
         WebElement selectBtn = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.xpath("(//button[normalize-space()='Select'])[1]")
@@ -271,7 +275,7 @@ public class DesludgingCreate{
 
         js.executeScript("arguments[0].click();", selectBtn);
 
-        System.out.println("Clicked Select button");
+        logger.info("Clicked Select button");
     }
 
     // =====================================================================
@@ -281,7 +285,7 @@ public class DesludgingCreate{
     private void chooseType(WebDriver driver,WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Select Type of Property ");
+        logger.info("Select Type of Property ");
         Thread.sleep(500);
 
         selectRadioButtonByLabel(driver, "Residential");
@@ -289,7 +293,7 @@ public class DesludgingCreate{
 
         clickNextButton(driver, wait, js);
         Thread.sleep(500);
-        System.out.println("Type of Property Selected");
+        logger.info("Type of Property Selected");
     }
 
     // =====================================================================
@@ -299,7 +303,7 @@ public class DesludgingCreate{
     private void chooseSubType(WebDriver driver,WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Select Sub Type of Property ");
+        logger.info("Select Sub Type of Property ");
         Thread.sleep(500);
 
         selectRadioButtonByLabel(driver, "Independent house");
@@ -307,7 +311,7 @@ public class DesludgingCreate{
 
         clickNextButton(driver, wait, js);
         Thread.sleep(500);
-        System.out.println("Type of Sub Property Selected");
+        logger.info("Type of Sub Property Selected");
     }
 
     // =====================================================================
@@ -317,7 +321,7 @@ public class DesludgingCreate{
     private void clickPinPropertyLocation(WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Clicking Skip and Continue");
+        logger.info("Clicking Skip and Continue");
 
         WebElement skipLink = wait.until(
                 ExpectedConditions.elementToBeClickable(
@@ -331,7 +335,7 @@ public class DesludgingCreate{
         js.executeScript("arguments[0].click();", skipLink);
 
         Thread.sleep(1000);
-        System.out.println("Skip and Continue clicked successfully");
+        logger.info("Skip and Continue clicked successfully");
     }
 
     // =====================================================================
@@ -341,7 +345,7 @@ public class DesludgingCreate{
     private void fillPincodeDetail(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Filling Pincode");
+        logger.info("Filling Pincode");
         Thread.sleep(1000);
 
         // Try multiple selectors for pincode input
@@ -357,7 +361,7 @@ public class DesludgingCreate{
                 pincodeInput = wait.until(ExpectedConditions.elementToBeClickable(selector));
                 break;
             } catch (Exception e) {
-                System.out.println("Pincode selector failed: " + selector);
+                logger.info("Pincode selector failed: " + selector);
             }
         }
 
@@ -368,7 +372,7 @@ public class DesludgingCreate{
             pincodeInput.sendKeys("143001");
 
         } else {
-            System.out.println("Pincode input not found");
+            logger.info("Pincode input not found");
         }
 
         clickNextButton(driver, wait, js);
@@ -381,7 +385,7 @@ public class DesludgingCreate{
 
     private void fillPropertyAddressDetail(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
-        System.out.println("Selecting City and Locality");
+        logger.info("Selecting City and Locality");
         Thread.sleep(1000);
 
         selectRadioButtonByLabel(driver, "Within Ulb Limits");
@@ -403,7 +407,7 @@ public class DesludgingCreate{
     private void fillPropertyAddressDetail2(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Provide Property Details");
+        logger.info("Provide Property Details");
 
         selectDropdownByIndex(driver, wait, js,0,0);
         Thread.sleep(500);
@@ -419,7 +423,7 @@ public class DesludgingCreate{
     private void slumArea(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Selecting Slum Area or Not");
+        logger.info("Selecting Slum Area or Not");
         Thread.sleep(500);
 
         selectRadioButtonByLabel(driver, "NO");
@@ -428,7 +432,7 @@ public class DesludgingCreate{
         clickNextButton(driver, wait, js);
         Thread.sleep(1000);
 
-        System.out.println("Selected Slum Or Not");
+        logger.info("Selected Slum Or Not");
 
     }
 
@@ -439,7 +443,7 @@ public class DesludgingCreate{
     private void providePropertyDetails(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Filling Street name and House No.");
+        logger.info("Filling Street name and House No.");
         Thread.sleep(500);
 
         List<WebElement> inputs = wait.until(
@@ -468,7 +472,7 @@ public class DesludgingCreate{
     private void fillLandMarkDetail(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Filling Landmark");
+        logger.info("Filling Landmark");
 
         // textarea (NOT input)
         WebElement landmarkTextarea = wait.until(
@@ -492,7 +496,7 @@ public class DesludgingCreate{
 
         clickNextButton(driver, wait, js);
 
-        System.out.println("Landmark submitted successfully");
+        logger.info("Landmark submitted successfully");
     }
 
     // =====================================================================
@@ -502,7 +506,7 @@ public class DesludgingCreate{
     private void choosePitType(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Choose Septic Tank Type");
+        logger.info("Choose Septic Tank Type");
         Thread.sleep(500);
 
         selectRadioButtonByLabel(driver, "Conventional septic tank");
@@ -511,7 +515,7 @@ public class DesludgingCreate{
         clickNextButton(driver, wait, js);
         Thread.sleep(500);
 
-        System.out.println("Selected the Septic Tank Type");
+        logger.info("Selected the Septic Tank Type");
 
     }
 
@@ -522,7 +526,7 @@ public class DesludgingCreate{
     private void roadWidth(WebDriver driver,WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException{
 
-        System.out.println("Filling Road Details");
+        logger.info("Filling Road Details");
         Thread.sleep(500);
 
         List<WebElement> inputs = wait.until(
@@ -551,10 +555,10 @@ public class DesludgingCreate{
     private void uploadComplaintPhoto(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Uploading complaint photo");
+        logger.info("Uploading complaint photo");
 
         String photoPath = ConfigReader.get("document.pitPhoto.proof");
-        System.out.println("PHOTO PATH: " + photoPath);
+        logger.info("PHOTO PATH: " + photoPath);
 
         File f = new File(photoPath);
         if (!f.exists()) {
@@ -577,7 +581,7 @@ public class DesludgingCreate{
 
         // Upload
         fileInput.sendKeys(f.getAbsolutePath());
-        System.out.println("Complaint photo uploaded");
+        logger.info("Complaint photo uploaded");
 
         Thread.sleep(2000);
 
@@ -591,7 +595,7 @@ public class DesludgingCreate{
     private void paymentDetails(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Payment Details Page");
+        logger.info("Payment Details Page");
         Thread.sleep(1000);
 
         // Just ensure field visible (optional)
@@ -599,7 +603,7 @@ public class DesludgingCreate{
                 By.cssSelector("input[type='number']")
         ));
 
-        System.out.println("Amount auto-filled: " + amountInput.getAttribute("value"));
+        logger.info("Amount auto-filled: " + amountInput.getAttribute("value"));
 
         // ================================
         // CLICK NEXT
@@ -621,7 +625,7 @@ public class DesludgingCreate{
                 nextBtn
         );
 
-        System.out.println("Clicked Next on Payment Page");
+        logger.info("Clicked Next on Payment Page");
 
         Thread.sleep(1500);
     }
@@ -640,7 +644,8 @@ public class DesludgingCreate{
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", submitButton);
         Thread.sleep(200);
         submitButton.click();
-        System.out.println("Property tax application: Submit clicked");
+        logger.info("Property tax application: Submit clicked");
+        Thread.sleep(5000);
     }
 
  /*
@@ -662,12 +667,12 @@ public class DesludgingCreate{
             if (input.isDisplayed() && input.isEnabled()) {
                 input.clear();
                 input.sendKeys(value);
-                System.out.println("Filled optional field: " + fieldName);
+                logger.info("Filled optional field: " + fieldName);
             } else {
-                System.out.println("Optional field " + fieldName + " not interactable, skipping");
+                logger.info("Optional field " + fieldName + " not interactable, skipping");
             }
         } catch (Exception e) {
-            System.out.println("Optional field " + fieldName + " not found, skipping");
+            logger.info("Optional field " + fieldName + " not found, skipping");
         }
     }
 
@@ -706,7 +711,7 @@ public class DesludgingCreate{
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", nextButton);
         Thread.sleep(200);
         nextButton.click();
-        System.out.println("Clicked Next");
+        logger.info("Clicked Next");
     }
 
     private void selectCity(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, String cityName)
@@ -743,7 +748,7 @@ public class DesludgingCreate{
                 WebElement el = localWait.until(org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable(locator));
                 try {
                     el.click();
-                    System.out.println("Clicked element " + locator + " (attempt " + attempt + ")");
+                    logger.info("Clicked element " + locator + " (attempt " + attempt + ")");
                     return true;
                 } catch (Exception clickEx) {
                     // fallback to JS click
@@ -751,14 +756,14 @@ public class DesludgingCreate{
                         js.executeScript("arguments[0].scrollIntoView({block:'center'});", el);
                         Thread.sleep(150);
                         js.executeScript("arguments[0].click();", el);
-                        System.out.println("JS-clicked element " + locator + " (attempt " + attempt + ")");
+                        logger.info("JS-clicked element " + locator + " (attempt " + attempt + ")");
                         return true;
                     } catch (Exception jsEx) {
-                        System.out.println("Click failed attempt " + attempt + " for " + locator + " : " + jsEx.getMessage());
+                        logger.info("Click failed attempt " + attempt + " for " + locator + " : " + jsEx.getMessage());
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Element not clickable yet (" + locator + ") attempt " + attempt + " : " + e.getMessage());
+                logger.info("Element not clickable yet (" + locator + ") attempt " + attempt + " : " + e.getMessage());
             }
             Thread.sleep(retryDelayMs);
         }
@@ -811,10 +816,10 @@ public class DesludgingCreate{
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", radio);
                 Thread.sleep(200);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", radio);
-                System.out.println("Selected radio button: " + labelText);
+                logger.info("Selected radio button: " + labelText);
             }
         } catch (Exception e) {
-            System.out.println("Error selecting radio button '" + labelText + "': " + e.getMessage());
+            logger.info("Error selecting radio button '" + labelText + "': " + e.getMessage());
             throw new RuntimeException("Failed to select radio button: " + labelText, e);
         }
     }
@@ -831,7 +836,7 @@ public class DesludgingCreate{
         );
 
         if (dropdownIndex < 0 || dropdownIndex >= dropdownSvgs.size()) {
-            System.out.println("Dropdown index " + dropdownIndex + " not found. Total: " + dropdownSvgs.size());
+            logger.info("Dropdown index " + dropdownIndex + " not found. Total: " + dropdownSvgs.size());
             return;
         }
 
@@ -897,7 +902,7 @@ public class DesludgingCreate{
         );
 
         if (index >= fileInputs.size()) {
-            System.out.println("File input index " + index + " not found for path: " + filePath);
+            logger.info("File input index " + index + " not found for path: " + filePath);
             return;
         }
 
@@ -909,7 +914,7 @@ public class DesludgingCreate{
         Thread.sleep(300);
 
         fileInput.sendKeys(filePath);
-        System.out.println("Uploaded file at index " + index + ": " + filePath);
+        logger.info("Uploaded file at index " + index + ": " + filePath);
         Thread.sleep(500);
     }
 
@@ -935,7 +940,7 @@ public class DesludgingCreate{
         }
 
         Thread.sleep(400);
-        System.out.println("Selected radio: " + labelText);
+        logger.info("Selected radio: " + labelText);
     }
 
     private void fillInputStable(JavascriptExecutor js, WebElement input, String value)
@@ -969,14 +974,14 @@ public class DesludgingCreate{
         WebElement clickable = radio.findElement(By.xpath(".."));
         js.executeScript("arguments[0].click();", clickable);
 
-        System.out.println("Selected radio index: " + index);
+        logger.info("Selected radio index: " + index);
         Thread.sleep(500);
     }
 
     private void selectDateRange(WebDriver driver, WebDriverWait wait, JavascriptExecutor js)
             throws InterruptedException {
 
-        System.out.println("Selecting Date Range via Calendar Icon");
+        logger.info("Selecting Date Range via Calendar Icon");
 
         // CLICK CALENDAR ICON
         WebElement calendarIcon = wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -992,7 +997,7 @@ public class DesludgingCreate{
                 calendarIcon
         );
 
-        System.out.println("Calendar icon clicked");
+        logger.info("Calendar icon clicked");
 
         Thread.sleep(2000); // wait for calendar UI
 
@@ -1001,6 +1006,6 @@ public class DesludgingCreate{
         ));
         js.executeScript("arguments[0].click();", threeDays);
 
-        System.out.println("Three Days selected");
+        logger.info("Three Days selected");
     }
 }

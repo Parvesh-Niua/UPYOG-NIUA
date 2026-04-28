@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.upyog.Automation.Modules.Adv.AdvEmp;
 import org.upyog.Automation.Modules.Asset.AssetEmp;
-import org.upyog.Automation.Modules.CnD.CnDEmp;
+import org.upyog.Automation.Modules.CHB.ChbEmp;
+import org.upyog.Automation.Modules.CnD.CndEmp;
 import org.upyog.Automation.Modules.EWaste.EWasteEmp;
-import org.upyog.Automation.Modules.OBPAS.OBPASEmp;
-import org.upyog.Automation.Modules.OBPAS.OBPASOcEmp;
+import org.upyog.Automation.Modules.OBPAS.ObpasEmp;
+import org.upyog.Automation.Modules.OBPAS.ObpasOcEmp;
 import org.upyog.Automation.Modules.Pet.PetApplicationEmp;
 import org.upyog.Automation.Modules.PropertyTax.PropertyTaxEmp;
 import org.upyog.Automation.Modules.PublicGrievanceRedressal.PgrEmp;
 import org.upyog.Automation.Modules.RequestService.MobileToiletEmp;
 import org.upyog.Automation.Modules.RequestService.TreePruningEmp;
 import org.upyog.Automation.Modules.RequestService.TreePruningVerifier;
-import org.upyog.Automation.Modules.RequestService.WaterTankerEmployee;
 import org.upyog.Automation.Modules.StreetVending.SvEmp;
 import org.upyog.Automation.Modules.TradeLicense.TradeLicenseEmp;
-import org.upyog.Automation.Modules.CHB.chbEmp;
 import org.upyog.Automation.Modules.WaterAndSewerage.SewerageEmp;
 import org.upyog.Automation.Modules.WaterAndSewerage.WaterEmp;
+import org.upyog.Automation.Modules.RequestService.WaterTankerEmployee;
 
 /**
  * Common entry point for all employee module tests
@@ -54,10 +54,10 @@ public class CommonEmployeeTest {
     private EWasteEmp eWasteEmp;
 
     @Autowired
-    private OBPASEmp oBPASEmp;
+    private ObpasEmp obpasEmp;
 
     @Autowired
-    private OBPASOcEmp oBPASOcEmp;
+    private ObpasOcEmp obpasOcEmp;
 
     @Autowired
     private WaterTankerEmployee waterTankerEmployee;
@@ -72,10 +72,10 @@ public class CommonEmployeeTest {
     private MobileToiletEmp mobileToiletEmp;
 
     @Autowired
-    private chbEmp chbEmp;
+    private ChbEmp chbEmp;
 
     @Autowired
-    private CnDEmp cnDEmp;
+    private CndEmp cndEmp;
 
     @Autowired
     private PgrEmp pgrEmp;
@@ -96,7 +96,7 @@ public class CommonEmployeeTest {
 
 
                 case "STREET_VENDING":
-                    svEmp.InboxEmpSv(baseUrl, username, password, applicationNumber);
+                    svEmp.inboxEmpSv(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "PET_REGISTRATION":
@@ -112,39 +112,39 @@ public class CommonEmployeeTest {
                     break;
 
                 case "ADVERTISEMENT":
-                    advEmp.AdvInboxEmp(baseUrl, username, password, applicationNumber);
+                    advEmp.advInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "PROPERTY_TAX":
-                    propertyTaxEmp.PropertyInboxEmp(baseUrl, username, password, applicationNumber);
+                    propertyTaxEmp.propertyInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "EWASTE_MANAGEMENT_SYSTEM":
-                    eWasteEmp.EWasteInboxEmp(baseUrl, username, password, applicationNumber);
+                    eWasteEmp.eWasteInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "ONLINE_BUILDING_PLAN_APPROVAL_SYSTEM":
-                    oBPASEmp.OBPASInboxEmp(baseUrl, username, password, applicationNumber);
+                    obpasEmp.obpasInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "ONLINE_BUILDING_PLAN_APPROVAL_SYSTEM_OC":
-                    oBPASOcEmp.OBPASOcInboxEmp(baseUrl, username, password, applicationNumber);
+                    obpasOcEmp.obpasOcInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "WATER_TANKER":
-                    waterTankerEmployee.WaterTankerInboxEmp(baseUrl, username, password, applicationNumber);
+                    waterTankerEmployee.waterTankerInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "TREE_PRUNING":
-                    treePruningEmp.TreePruningInboxEmp(baseUrl, username, password, applicationNumber);
+                    treePruningEmp.treePruningInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "TREE_PRUNING_VERIFIER":
-                    treePruningVerifier.TreePruningInboxVerifier(baseUrl, username, password, applicationNumber);
+                    treePruningVerifier.treePruningInboxVerifier(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "MOBILE_TOILET":
-                    mobileToiletEmp.MobileToiletInboxEmp(baseUrl, username, password, applicationNumber);
+                    mobileToiletEmp.mobileToiletInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "COMMUNITY_HALL_BOOKING":
@@ -152,18 +152,18 @@ public class CommonEmployeeTest {
                     break;
 
                 case "CONSTRUCTION_AND_DEMOLITION":
-                    cnDEmp.CnDInboxEmp(baseUrl, username, password, applicationNumber);
+                    cndEmp.cndInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "PUBLIC_GRIEVANCE_REDRESSAL":
-                    pgrEmp.PgrInboxEmp(baseUrl, username, password, applicationNumber);
+                    pgrEmp.pgrInboxEmp(baseUrl, username, password, applicationNumber);
                     break;
 
                 case "WATER_AND_SEWERAGE":
                     if (applicationNumber.startsWith("SW")) {
-                        sewerageEmp.SewerageInboxEmp(baseUrl, username, password, applicationNumber);
+                        sewerageEmp.sewerageInboxEmp(baseUrl, username, password, applicationNumber);
                     } else {
-                        waterEmp.WaterInboxEmp(baseUrl, username, password, applicationNumber);
+                        waterEmp.waterInboxEmp(baseUrl, username, password, applicationNumber);
                     }
                     break;
 
