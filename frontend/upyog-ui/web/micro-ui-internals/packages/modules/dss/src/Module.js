@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-// import { useRouteMatch } from "react-router";
 import { BackButton, Loader, PrivateRoute, BreadCrumb } from "@upyog/digit-ui-react-components";
 import DashBoard from "./pages";
 import NewDashBoard from "./pages/NewDashboard";

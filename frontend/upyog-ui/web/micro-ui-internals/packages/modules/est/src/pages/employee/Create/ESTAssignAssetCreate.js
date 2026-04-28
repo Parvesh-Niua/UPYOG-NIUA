@@ -1,8 +1,9 @@
-import React ,{Children, Fragment}from "react";
+import React, { Children, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
-import { Navigate, Route, Routes, useLocation, useMatch } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Config } from "../../../config/Create/AssignAssetConfig";
+
 /**
  * ESTAssignAssetCreate
  * ---------------------------------------------------------
@@ -15,9 +16,7 @@ import { Config } from "../../../config/Create/AssignAssetConfig";
 const ESTAssignAssetCreate = ({ parentRoute }) => {
   // React Query client for cache invalidation
   const queryClient = useQueryClient();
-    // Base route match
-  const match = useMatch(`${parentRoute}/*`);
-   // Translation function
+  const match = Digit.Hooks.useModuleBasePath();
   const { t } = useTranslation();
   const { pathname } = useLocation();
   
@@ -44,7 +43,7 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
    * - Multiple-entry steps (owners, units, etc.)
    */
 
-  const goNext = (skipStep, index, isAddMultiple, key) => {  
+  const goNext = (skipStep, index, isAddMultiple, key) => {
     let currentPath = pathname.split("/").pop(),
       lastchar = currentPath.charAt(currentPath.length - 1),
       isMultiple = false,
@@ -73,23 +72,22 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
       // Decide navigation method
     let redirectWithHistory = navigate;
     if (skipStep) {
-      redirectWithHistory = navigate;
+      redirectWithHistory = (to, state) => navigate(to, state != null ? { replace: true, state } : { replace: true });
     }
     // Override next step for multiple add flow
     if (isAddMultiple) {
       nextStep = key;
     }
-    
+
     // Redirect to check page if flow ends
     if (nextStep === null) {
-      return redirectWithHistory(`${match.pattern.path}/check`);
+      return redirectWithHistory(`check`);
     }
         // Build next page URL
     if (!isNaN(nextStep.split("/").pop())) {
-      nextPage = `${match.pattern.path}/${nextStep}`;
-    }
-     else {
-      nextPage = isMultiple && nextStep !== "map" ? `${match.pattern.path}/${nextStep}/${index}` : `${match.pattern.path}/${nextStep}`;
+      nextPage = `${nextStep}`;
+    } else {
+      nextPage = isMultiple && nextStep !== "map" ? `${nextStep}/${index}` : `${nextStep}`;
     }
 
     redirectWithHistory(nextPage);
@@ -101,15 +99,15 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
    */
   if(params && Object.keys(params).length>0 && window.location.href.includes("/info") && sessionStorage.getItem("docReqScreenByBack") !== "true")
     {
-      clearParams();
-      queryClient.invalidateQueries("EST_ASSIGN_ASSETS");
-    }
+    clearParams();
+    queryClient.invalidateQueries("EST_ASSIGN_ASSETS");
+  }
 
   /**
    * Triggered after final check page submission
    */
   const estcreate = async () => {
-    navigate(`${match.pattern.path}/acknowledgement`);
+    navigate(`acknowledgement`);
   };
 
     /**
@@ -131,7 +129,6 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
       let units = params.units || [];
       // if(index){units[index] = data;}else{
       units = data;
-
       setParams({ ...params, units });
     } else {
       setParams({ ...params, ...{ [key]: { ...params[key], ...data } } });
@@ -142,11 +139,9 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
   const handleSkip = () => {};
   const handleMultiple = () => {};
 
-
   const onSuccess = () => {
     clearParams();
     queryClient.invalidateQueries("EST_ASSIGN_ASSETS");
-
   };
 
     /**
@@ -154,19 +149,17 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
    * Filters out citizen-hidden screens
    */
   let commonFields = Config;
-
-
   commonFields.forEach((obj) => {
     config = config.concat(obj.body.filter((a) => !a.hideInCitizen));
   });
-  
+
     // Default route
   config.indexRoute = "info";
-  
+
   // Load dynamic components
   const ESTAssignAssetsCheckPage = Digit?.ComponentRegistryService?.getComponent("ESTAssignAssetsCheckPage");
   const ESTAllotmentAcknowledgement = Digit?.ComponentRegistryService?.getComponent("ESTAllotmentAcknowledgement");
-  
+
 
     /**
    * Route Rendering
@@ -180,14 +173,16 @@ const ESTAssignAssetCreate = ({ parentRoute }) => {
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         const user = Digit.UserService.getUser().info.type;
         return (
-          <Route path={routeObj.route} key={index} element={
-           <Component config={{ texts, inputs, key }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} userType={user} />
-          } />
+          <Route
+            path={`${routeObj.route}/*`}
+            key={index}
+            element={<Component config={{ texts, inputs, key }} onSelect={handleSelect} onSkip={handleSkip} t={t} formData={params} onAdd={handleMultiple} userType={user} />}
+          />
         );
       })}
-      <Route path="check" element={<ESTAssignAssetsCheckPage onSubmit={estcreate} value={params} />} />
-      <Route path="acknowledgement" element={<ESTAllotmentAcknowledgement data={params} onSuccess={onSuccess} />} />
-      <Route path="*" element={<Navigate to={config.indexRoute} replace />} />
+      <Route path="check/*" element={<ESTAssignAssetsCheckPage onSubmit={estcreate} value={params} />} />
+      <Route path="acknowledgement/*" element={<ESTAllotmentAcknowledgement data={params} onSuccess={onSuccess} />} />
+      <Route path="/*" element={<Navigate to={config.indexRoute} replace />} />
     </Routes>
   );
 };
