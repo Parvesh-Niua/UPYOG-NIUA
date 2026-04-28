@@ -242,6 +242,12 @@ const ChallanApplicationDetails = () => {
   }
 
   const payLater = async () => {
+    // Prevent API call if data not ready
+    if (!getChallanData || !getChallanData.challanNo) {
+      console.warn("Challan data not loaded yet");
+      return;
+    }
+
     setLoader(true);
 
     const payload = {
@@ -255,19 +261,20 @@ const ChallanApplicationDetails = () => {
 
     try {
       const response = await Digit.ChallanGenerationService.update(payload);
+
       setLoader(false);
 
-      // ✅ Show success first
       setLable("Challan set to pay later.");
       setError(false);
       setShowToast(true);
 
-      // ✅ Delay navigation so toast shows
       setTimeout(() => {
         navigate("/upyog-ui/employee/challangeneration/inbox");
         window.location.reload();
       }, 2000);
+
     } catch (error) {
+      console.error("PAY_LATER failed:", error);
       setLoader(false);
     }
   };
@@ -296,7 +303,7 @@ const ChallanApplicationDetails = () => {
             feeWaiver: modalData?.amount,
           },
         };
-        
+
         try {
           const response = await Digit.ChallanGenerationService.update(payload);
           setLoader(false);

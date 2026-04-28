@@ -193,7 +193,7 @@ export default defineConfig(({ mode }) => {
     "/chb-services", "/adv-services", "/employee-dashboard",
     "/verification-service", "/asset-services", "/vendor-management",
     "/tp-services", "/pgr-ai-services", "/gis-dx-service", "/individual",
-    "/bpa-calculator", "/request-service",
+    "/bpa-calculator", "/request-service", "/challan-generation", "/ndc-services", "/estate-management"
   ];
 
   const packagesRoot = path.resolve(__dirname, "../packages");
