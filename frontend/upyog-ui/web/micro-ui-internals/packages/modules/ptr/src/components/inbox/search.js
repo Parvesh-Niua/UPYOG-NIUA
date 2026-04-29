@@ -179,7 +179,7 @@ const SearchApplication = ({ onSearch, type, onClose, searchFields, searchParams
                   <SubmitBar
                     className="submit-bar-search"
                     label={t("ES_COMMON_SEARCH")}
-                    disabled={!!Object.keys(formState.errors).length || formValueEmpty()}
+                    disabled={!!Object.keys(formState.errors).length}
                     submit
                   />
                   {/* style={{ paddingTop: "16px", textAlign: "center" }} className="clear-search" */}
