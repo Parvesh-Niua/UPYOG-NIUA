@@ -1,7 +1,7 @@
 import { CloseSvg, FormComposer, Header } from "@egovernments/digit-ui-react-components";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CreateNewSurvey from "../../../components/Surveys/SurveyForms";
 
 export const answerTypeEnum = {
@@ -40,7 +40,7 @@ export const mapQuestions = (questions =[]) =>{
 
 const NewSurveys = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   
   const onSubmit = (data) => {
     const { collectCitizenInfo, title, description, tenantIds, fromDate, toDate, fromTime, toTime, questions } = data;
@@ -56,7 +56,7 @@ const NewSurveys = () => {
         questions:mappedQuestions
       },
     };
-    history.push(`/${window?.contextPath}/employee/engagement/surveys/create-response`, details)
+    navigate(`/${window?.contextPath}/employee/engagement/surveys/create-response`, details)
   };
 
   const tenantId = Digit.ULBService.getCurrentTenantId();

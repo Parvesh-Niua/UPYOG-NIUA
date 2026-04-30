@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouteMatch } from "react-router-dom";
 
 import { Card, Header, Loader } from "@egovernments/digit-ui-react-components";
 import { LOCALE } from "../../constants/Localization";
@@ -11,7 +10,6 @@ export const ComplaintsList = (props) => {
   const mobileNumber = User.mobileNumber || User?.info?.mobileNumber || User?.info?.userInfo?.mobileNumber;
   const tenantId = Digit.SessionStorage.get("CITIZEN.COMMON.HOME.CITY")?.code || Digit.ULBService.getCurrentTenantId();
   const { t } = useTranslation();
-  const { path, url } = useRouteMatch();
   let { isLoading, error, data, revalidate } = Digit.Hooks.pgr.useComplaintsListByMobile(tenantId, mobileNumber);
 
   useEffect(() => {
@@ -54,7 +52,7 @@ export const ComplaintsList = (props) => {
       </Card>
     );
   } else {
-    complaintsList = complaints.map(({ service }, index) => <Complaint key={index} data={service} path={path} />);
+    complaintsList = complaints.map(({ service }, index) => <Complaint key={index} data={service} />);
   }
 
   return (

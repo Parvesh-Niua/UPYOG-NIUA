@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CitizenSurveyForm from "../../../components/Surveys/CitizenSurveyForm";
 
 const transformSurveyResponseData = (data) => {
@@ -26,7 +26,7 @@ const FillSurvey = ({ location }) => {
   
   //sort survey questions based on qorder field, in surveyData.questions array, here and then render
   surveyData?.questions?.sort((a,b)=>a.qorder-b.qorder)
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const details = {
@@ -37,7 +37,7 @@ const FillSurvey = ({ location }) => {
         hasResponded:surveyData.hasResponded,
       },
     };
-    history.push(`/${window?.contextPath}/citizen/engagement/surveys/submit-response`, details);
+    navigate(`/${window?.contextPath}/citizen/engagement/surveys/submit-response`, details);
   };
 
   

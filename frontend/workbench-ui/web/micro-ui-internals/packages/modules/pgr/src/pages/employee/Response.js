@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Banner, CardText, SubmitBar } from "@egovernments/digit-ui-react-components";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PgrRoutes, getRoute } from "../../constants/Routes";
 import { useTranslation } from "react-i18next";
@@ -32,7 +32,6 @@ const BannerPicker = ({ response }) => {
 
 const Response = (props) => {
   const { t } = useTranslation();
-  const { match } = useRouteMatch();
   const appState = useSelector((state) => state)["pgr"];
   return (
     <Card>

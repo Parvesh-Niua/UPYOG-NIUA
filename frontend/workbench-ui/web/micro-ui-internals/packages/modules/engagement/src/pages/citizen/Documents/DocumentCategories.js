@@ -1,6 +1,6 @@
 import { AppContainer, Card, CardCaption, Header, Loader, PrevIcon } from "@egovernments/digit-ui-react-components";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Searchbar from "../../../components/Documents/Searchbar";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { renderDocsList } from "./DocumentList";
@@ -22,7 +22,7 @@ const Accordion = ({ t, title, count, onClick, children }) => {
 };
 
 const DocumentCategories = ({ t, parentRoute }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const tenantIds = Digit.ULBService.getCitizenCurrentTenant();
 
@@ -51,11 +51,11 @@ const DocumentCategories = ({ t, parentRoute }) => {
   );
 
   if (!Digit.UserService?.getUser()?.access_token) {
-    return <Redirect to={{ pathname: `/${window?.contextPath}/citizen/login`, state: { from: location.pathname + location.search } }} />;
+    return <Navigate to={{ pathname: `/${window?.contextPath}/citizen/login`, state: { from: location.pathname + location.search } }} />;
   }
 
   const showDocuments = (category, count) => {
-    history.push(`documents/list/${category}/${count}`);
+    navigate(`documents/list/${category}/${count}`);
   };
 
   const handleKeyPress = (event) => {

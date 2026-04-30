@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Route, useRouteMatch, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ActionBar, Menu, SubmitBar, BreadCrumb } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 // import { ComplaintDetails } from "./ComplaintDetails";
@@ -11,8 +11,11 @@ import { Employee } from "../../constants/Routes";
 const Complaint = () => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [popup, setPopup] = useState(false);
-  const match = useRouteMatch();
+  const location = useLocation();
   const { t } = useTranslation();
+
+  // CHANGE 3: Replace of match.url with location.pathname to make it dynamic and not break when the url changes
+  const matchUrl = location.pathname.split('/').slice(0, 4).join('/');
 
   const breadcrumConfig = {
     home: {
@@ -21,27 +24,26 @@ const Complaint = () => {
     },
     inbox: {
       content: t("CS_COMMON_INBOX"),
-      path: match.url + Employee.Inbox,
+      path: matchUrl + Employee.Inbox,
     },
     createComplaint: {
       content: t("CS_PGR_CREATE_COMPLAINT"),
-      path: match.url + Employee.CreateComplaint,
+      path: matchUrl + Employee.CreateComplaint,
     },
     complaintDetails: {
       content: t("CS_PGR_COMPLAINT_DETAILS"),
-      path: match.url + Employee.ComplaintDetails + ":id",
+      path: matchUrl + Employee.ComplaintDetails + ":id",
     },
     response: {
       content: t("CS_PGR_RESPONSE"),
-      path: match.url + Employee.Response,
+      path: matchUrl + Employee.Response,
     },
   };
+
   function popupCall(option) {
     setDisplayMenu(false);
     setPopup(true);
   }
-
-  let location = useLocation().pathname;
 
   const CreateComplaint = Digit?.ComponentRegistryService?.getComponent('PGRCreateComplaintEmp');
   const ComplaintDetails = Digit?.ComponentRegistryService?.getComponent('PGRComplaintDetails');
@@ -51,37 +53,33 @@ const Complaint = () => {
   return (
     <React.Fragment>
       <div className="ground-container">
-        {!location.includes(Employee.Response) && (
-          <Switch>
+        {!location.pathname.includes(Employee.Response) && ( //CHANGE 4
+          <Routes> {/* CHANGE 5: Switch → Routes */}
             <Route
-              path={match.url + Employee.CreateComplaint}
-              component={() => <BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.createComplaint]}></BreadCrumb>}
+              path={matchUrl + Employee.CreateComplaint}
+              element={<BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.createComplaint]}></BreadCrumb>} // CHANGE 6
             />
             <Route
-              path={match.url + Employee.ComplaintDetails + ":id"}
-              component={() => <BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.inbox, breadcrumConfig.complaintDetails]}></BreadCrumb>}
+              path={matchUrl + Employee.ComplaintDetails + ":id"}
+              element={<BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.inbox, breadcrumConfig.complaintDetails]}></BreadCrumb>}
             />
             <Route
-              path={match.url + Employee.Inbox}
-              component={() => <BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.inbox]}></BreadCrumb>}
+              path={matchUrl + Employee.Inbox}
+              element={<BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.inbox]}></BreadCrumb>}
             />
             <Route
-              path={match.url + Employee.Response}
-              component={<BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.response]}></BreadCrumb>}
+              path={matchUrl + Employee.Response}
+              element={<BreadCrumb crumbs={[breadcrumConfig.home, breadcrumConfig.response]}></BreadCrumb>}
             />
-          </Switch>
+          </Routes>
         )}
-        <Switch>
-          <Route path={match.url + Employee.CreateComplaint} component={() => <CreateComplaint parentUrl={match.url} />} />
-          <Route path={match.url + Employee.ComplaintDetails + ":id*"} component={() => <ComplaintDetails />} />
-          <Route path={match.url + Employee.Inbox} component={Inbox} />
-          <Route path={match.url + Employee.Response} component={Response} />
-        </Switch>
+        <Routes> {/*CHANGE 5: Switch → Routes */}
+          <Route path={matchUrl + Employee.CreateComplaint} element={<CreateComplaint parentUrl={matchUrl} />} /> {/* CHANGE 6 */}
+          <Route path={matchUrl + Employee.ComplaintDetails + ":id*"} element={<ComplaintDetails />} />
+          <Route path={matchUrl + Employee.Inbox} element={<Inbox />} />
+          <Route path={matchUrl + Employee.Response} element={<Response />} />
+        </Routes>
       </div>
-      {/* <ActionBar>
-        {displayMenu ? <Menu options={["Assign Complaint", "Reject Complaint"]} onSelect={popupCall} /> : null}
-        <SubmitBar label="Take Action" onSubmit={() => setDisplayMenu(!displayMenu)} />
-      </ActionBar> */}
     </React.Fragment>
   );
 };

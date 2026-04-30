@@ -287,7 +287,7 @@ export const UICustomizations = {
     },
     MobileDetailsOnClick: (row, tenantId) => {
       let link;
-      Object.keys(row).map((key) => {
+      Object.keys(row).forEach((key) => {
         if (key === "ATM_MUSTER_ROLL_ID")
           link = `/${window.contextPath}/employee/attendencemgmt/view-attendance?tenantId=${tenantId}&musterRollNumber=${row[key]}`;
       });
@@ -405,7 +405,7 @@ export const UICustomizations = {
     },
     MobileDetailsOnClick: (row, tenantId) => {
       let link;
-      Object.keys(row).map((key) => {
+      Object.keys(row).forEach((key) => {
         if (key === "MASTERS_WAGESEEKER_ID")
           link = `/${window.contextPath}/employee/masters/view-wageseeker?tenantId=${tenantId}&wageseekerId=${row[key]}`;
       });

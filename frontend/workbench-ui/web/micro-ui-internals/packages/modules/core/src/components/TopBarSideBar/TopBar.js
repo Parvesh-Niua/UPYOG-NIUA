@@ -1,6 +1,6 @@
 import { Dropdown, Hamburger, TopBar as TopBarComponent } from "@egovernments/digit-ui-react-components";
 import React from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ChangeCity from "../ChangeCity";
 import ChangeLanguage from "../ChangeLanguage";
 
@@ -26,22 +26,25 @@ const TopBar = ({
 }) => {
   const [profilePic, setProfilePic] = React.useState(null);
 
-  React.useEffect(async () => {
-    const tenant = Digit.ULBService.getCurrentTenantId();
-    const uuid = userDetails?.info?.uuid;
-    if (uuid) {
-      const usersResponse = await Digit.UserService.userSearch(tenant, { uuid: [uuid] }, {});
-      if (usersResponse && usersResponse.user && usersResponse.user.length) {
-        const userDetails = usersResponse.user[0];
-        const thumbs = userDetails?.photo?.split(",");
-        setProfilePic(thumbs?.at(0));
+  React.useEffect(() => {
+    async function fetchProfilePic() {
+      const tenant = Digit.ULBService.getCurrentTenantId();
+      const uuid = userDetails?.info?.uuid;
+      if (uuid) {
+        const usersResponse = await Digit.UserService.userSearch(tenant, { uuid: [uuid] }, {});
+        if (usersResponse && usersResponse.user && usersResponse.user.length) {
+          const userDetails = usersResponse.user[0];
+          const thumbs = userDetails?.photo?.split(",");
+          setProfilePic(thumbs?.at(0));
+        }
       }
     }
+    fetchProfilePic();
   }, [profilePic !== null, userDetails?.info?.uuid]);
 
   const CitizenHomePageTenantId = Digit.ULBService.getCitizenCurrentTenant(true);
 
-  let history = useHistory();
+  let navigate = useNavigate();
   const { pathname } = useLocation();
 
   const conditionsToDisableNotificationCountTrigger = () => {
@@ -69,7 +72,7 @@ const TopBar = ({
   };
 
   function onNotificationIconClick() {
-    history.push(`/${window?.contextPath}/citizen/engagement/notifications`);
+    navigate(`/${window?.contextPath}/citizen/engagement/notifications`);
   }
 
   const urlsToDisableNotificationIcon = (pathname) =>

@@ -1,7 +1,7 @@
 import { FormComposer, Toast ,Loader, Header} from "@egovernments/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { newConfig } from "../components/config/config";
 import _ from "lodash";
 
@@ -13,7 +13,7 @@ const CreateEmployee = () => {
   const [phonecheck, setPhonecheck] = useState(false);
   const [checkfield, setcheck] = useState(false)
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const isMobile = window.Digit.Utils.browser.isMobile();
 
  const { data: mdmsData,isLoading } = Digit.Hooks.useCommonMDMS(Digit.ULBService.getStateId(), "egov-hrms", ["CommonFieldsConfig"], {
@@ -132,7 +132,7 @@ const CreateEmployee = () => {
   };
 
   const navigateToAcknowledgement = (Employees) => {
-    history.replace(`/${window?.contextPath}/employee/hrms/response`, { Employees, key: "CREATE", action: "CREATE" });
+    navigate(`/${window?.contextPath}/employee/hrms/response`, { state: { Employees, key: "CREATE", action: "CREATE" } });
   }
 
   

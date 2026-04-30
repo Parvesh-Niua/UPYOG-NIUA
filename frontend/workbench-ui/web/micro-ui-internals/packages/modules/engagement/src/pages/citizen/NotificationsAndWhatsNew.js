@@ -1,13 +1,13 @@
 import { Card, CardCaption, Header, Loader, OnGroundEventCard, WhatsNewCard } from "@egovernments/digit-ui-react-components";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import BroadcastWhatsNewCard from "../../components/Messages/BroadcastWhatsNewCard";
 
 const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
   const { t } = useTranslation();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const tenantId = Digit.ULBService.getCitizenCurrentTenant();
   const {
@@ -32,7 +32,7 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
   const { data: EventsData, isLoading: EventsDataLoading } = Digit.Hooks.useEvents({ tenantId, variant });
 
   // if (!Digit.UserService?.getUser()?.access_token) {
-  //     return <Redirect to={{ pathname: `/${window?.contextPath}/citizen/login`, state: { from: location.pathname + location.search } }} />
+  //     return <Navigate to={{ pathname: `/${window?.contextPath}/citizen/login`, state: { from: location.pathname + location.search } }} />
   // }
 
   if (EventsDataLoading) return <Loader />;
@@ -55,12 +55,12 @@ const NotificationsAndWhatsNew = ({ variant, parentRoute }) => {
         return <Header>{t("CS_HEADER_WHATSNEW")}</Header>;
 
       default:
-        return <Redirect to={{ pathname: `/${window?.contextPath}/citizen`, state: { from: location.pathname + location.search } }} />;
+        return <Navigate to={{ pathname: `/${window?.contextPath}/citizen`, state: { from: location.pathname + location.search } }} />;
     }
   };
 
   function onEventCardClick(id) {
-    history.push(parentRoute + "/events/details/" + id);
+    navigate(parentRoute + "/events/details/" + id);
   }
 
   return (

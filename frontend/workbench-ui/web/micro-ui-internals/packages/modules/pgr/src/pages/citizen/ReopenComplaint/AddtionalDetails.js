@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 
 import { BackButton, Card, CardHeader, CardText, TextArea, SubmitBar } from "@egovernments/digit-ui-react-components";
 
@@ -10,26 +10,29 @@ import { LOCALIZATION_KEY } from "../../../constants/Localization";
 
 const AddtionalDetails = (props) => {
   // const [details, setDetails] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   let { id } = useParams();
   const dispatch = useDispatch();
   const appState = useSelector((state) => state)["common"];
   let { t } = useTranslation();
   
   const {complaintDetails} = props
+
   useEffect(() => {
     if (appState.complaints) {
       const { response } = appState.complaints;
       if (response && response.responseInfo.status === "successful") {
-        history.push(`${props.match.path}/response/:${id}`);
+        //  Use navigate with relative path or calculate parent path
+        navigate(`response/:${id}`); // or use absolute path if needed
       }
     }
-  }, [appState.complaints, props.history]);
+  }, [appState.complaints, navigate, id]); // Fixed dependencies
 
   const updateComplaint = useCallback(
     async (complaintDetails) => {
       await dispatch(updateComplaints(complaintDetails));
-      history.push(`${props.match.path}/response/${id}`);
+      // Use navigate instead of history.push
+      navigate(`response/${id}`); // or use absolute path if needed
     },
     [dispatch]
   );
@@ -61,13 +64,14 @@ const AddtionalDetails = (props) => {
       };
       updateComplaint({ service: complaintDetails.service, workflow: complaintDetails.workflow });
     }
+    // Changed Redirect to Navigate (though this logic seems wrong - see note below)
     return (
-      <Redirect
-        to={{
-          pathname: `${props.parentRoute}/response`,
-          state: { complaintDetails },
-        }}
+      <Navigate
+        to={`${props.parentRoute}/response`}
+        state={{ complaintDetails }}
+        replace
       />
+
     );
   }
 

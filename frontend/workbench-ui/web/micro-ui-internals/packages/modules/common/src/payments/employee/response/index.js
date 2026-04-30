@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Banner, Card, CardText, SubmitBar, ActionBar, DownloadPrefixIcon, Loader, Menu } from "@egovernments/digit-ui-react-components";
-import { useHistory, useParams, Link, LinkLabel } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
 
 export const SuccessfulPayment = (props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { addParams, clearParams } = props;
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -42,9 +42,9 @@ export const SuccessfulPayment = (props) => {
   useEffect(() => {
     switch (selectedAction) {
       case "GO_TO_HOME":
-        return history.push(`/${window?.contextPath}/employee`);
+        return navigate(`/${window?.contextPath}/employee`);
       case "ASSIGN_TO_DSO":
-        return history.push(`/${window?.contextPath}/employee/fsm/application-details/${consumerCode}`);
+        return navigate(`/${window?.contextPath}/employee/fsm/application-details/${consumerCode}`);
       default:
         return null;
     }

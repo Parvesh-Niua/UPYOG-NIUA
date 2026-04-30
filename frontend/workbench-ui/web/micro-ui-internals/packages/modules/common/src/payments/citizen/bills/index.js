@@ -1,6 +1,6 @@
 import { Loader } from "@egovernments/digit-ui-react-components";
 import React, { useEffect } from "react";
-import { useParams, useHistory, useRouteMatch, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Routes from "./routes";
 // import { myBillMap } from "./myBillsKeysMap";
 
@@ -14,14 +14,15 @@ export const MyBills = ({ stateCode }) => {
     language: Digit.StoreData.getCurrentLanguage(),
   });
 
-  const history = useHistory();
-  const { url } = useRouteMatch();
-  const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation(); // Already imported
+  const url = location.pathname; // Use location.pathname instead of useRouteMatch().url
+
 
   const { tenantId } = Digit.UserService.getUser()?.info || location?.state || { tenantId: _tenantId } || {};
 
   if (!tenantId && !location?.state?.fromSearchResults) {
-    history.replace(`/${window?.contextPath}/citizen/login`, { from: url });
+    navigate(`/${window?.contextPath}/citizen/login`, { state: { from: url } }); // Changed 'from' to state object
   }
 
   const { isLoading, data } = Digit.Hooks.useFetchCitizenBillsForBuissnessService(

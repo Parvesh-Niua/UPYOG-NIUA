@@ -1,5 +1,5 @@
 import React from "react"
-import { Switch } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { PrivateRoute } from "@egovernments/digit-ui-react-components"
 import Inbox from "./Inbox"
 import NewMessage from "./NewMessage"
@@ -9,15 +9,14 @@ import MessageDetails from "./MessageDetails"
 import DocumentDetails from "../../../components/Messages/DocumentDetails"
 
 const Messages = ({match:{path} = {}, tenants, parentRoute}) => {
-    return <Switch>
-        <PrivateRoute path={`${path}/create`} component={props => <NewMessage {...props} />} />
-        <PrivateRoute path={`${path}/inbox/create`} component={props => <NewMessage {...props} />} />
-        <PrivateRoute path={`${path}/inbox/details/:id`} component={props => <DocumentDetails {...props} />} />
-        <PrivateRoute path={`${path}/inbox/edit/:id`} component={props => <EditMessage {...props} />} />
-        <PrivateRoute path={`${path}/inbox`} component={props => <Inbox {...props} tenants={tenants} parentRoute={parentRoute} />} />
-        <PrivateRoute path={`${path}/response`} component={(props) => <Response {...props} />} />
-
-    </Switch>
+    return <Routes>
+        <Route path={`${path}/create`} element={<NewMessage />} />
+        <Route path={`${path}/inbox/create`} element={<NewMessage />} />
+        <Route path={`${path}/inbox/details/:id`} element={<DocumentDetails />} />
+        <Route path={`${path}/inbox/edit/:id`} element={<EditMessage />} />
+        <Route path={`${path}/inbox`} element={<Inbox tenants={tenants} parentRoute={parentRoute} />} />
+        <Route path={`${path}/response`} element={<Response />} />
+    </Routes>
 }
 
 export default Messages

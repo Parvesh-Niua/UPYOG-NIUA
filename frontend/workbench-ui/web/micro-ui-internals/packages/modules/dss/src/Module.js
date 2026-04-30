@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-// import { useRouteMatch } from "react-router";
 import { BackButton, Loader, PrivateRoute, BreadCrumb } from "@egovernments/digit-ui-react-components";
 import DashBoard from "./pages";
 import Home from "./pages/Home";
-import { Route, Switch, useRouteMatch, useLocation } from "react-router-dom";
+import { Route, Routes, useResolvedPath, useLocation } from "react-router-dom";
 import Overview from "./pages/Overview";
 import {checkCurrentScreen, DSSCard,NDSSCard} from "./components/DSSCard";
 import DrillDown from "./pages/DrillDown";
@@ -50,31 +49,30 @@ const DssBreadCrumb = ({ location }) => {
 
   return <BreadCrumb crumbs={crumbs?.filter(ele=>ele.show)} />;
 };
+// Renamed Routes → DSSRoutes (For conflict avoid with react-router-dom v6 Routes)
 
-const Routes = ({ path, stateCode }) => {
+const DSSRoutes = ({ path, stateCode }) => {
   const location = useLocation();
   const isMobile = window.Digit.Utils.browser.isMobile();
   return (
     <div className="chart-wrapper" style={isMobile ? {marginTop:"unset"} : {}}>
       <DssBreadCrumb location={location} />
-      <Switch>
-        <PrivateRoute path={`${path}/landing/:moduleCode`} component={() => <Home stateCode={stateCode} />} />
-        <PrivateRoute path={`${path}/dashboard/:moduleCode`} component={() => <DashBoard stateCode={stateCode} />} />
-        <PrivateRoute path={`${path}/drilldown`} component={() => <DrillDown  stateCode={stateCode}  />} />
-        <Route key={"national-faq"} path={`${path}/national-faqs`}>
-          <FAQsSection/>
-        </Route>
-        <Route key={"national-about"} path={`${path}/national-about`}>
-          <About/>
-        </Route>
-      </Switch>
+      //Switch → Routes
+      <Routes>                                         
+        // rivateRoute element prop + relative paths 
+        <Route path="landing/:moduleCode" element={<PrivateRoute element={<Home stateCode={stateCode} />} />} />
+        <Route path="dashboard/:moduleCode" element={<PrivateRoute element={<DashBoard stateCode={stateCode} />} />} />
+        <Route path="drilldown" element={<PrivateRoute element={<DrillDown stateCode={stateCode} />} />} />
+        // children → element prop 
+        <Route path="national-faqs" element={<FAQsSection />} />
+        <Route path="national-about" element={<About />} />
+      </Routes>
     </div>
   );
 };
 
 const DSSModule = ({ stateCode, userType, tenants }) => {
-  // const { path, url } = useRouteMatch();
-  const { path, url } = useRouteMatch();
+  const { pathname: path } = useResolvedPath(".");        //useRouteMatch → useResolvedPath
   const language = Digit.StoreData.getCurrentLanguage();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const moduleCode = ["DSS","common-masters",tenantId];
@@ -91,7 +89,7 @@ const DSSModule = ({ stateCode, userType, tenants }) => {
   Digit.SessionStorage.set("DSS_TENANTS", tenants);
 
   if (userType !== "citizen") {
-    return <Routes path={path} stateCode={stateCode} />;
+    return <DSSRoutes stateCode={stateCode} />;      // path prop removed from DSSRoutes as useResolvedPath is used inside it to get the path
   }
 };
 

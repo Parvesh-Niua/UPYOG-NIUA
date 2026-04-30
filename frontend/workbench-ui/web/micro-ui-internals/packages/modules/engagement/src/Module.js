@@ -1,7 +1,7 @@
 import { Loader, BreadCrumb } from "@egovernments/digit-ui-react-components";
 import React, {Fragment} from "react";
 import { useTranslation } from "react-i18next";
-import { Switch, useLocation, useRouteMatch, Route } from "react-router-dom";
+import { Routes, useLocation, useResolvedPath, Route } from "react-router-dom";
 
 
 import EngagementCard from "./components/EngagementCard";
@@ -190,7 +190,7 @@ const EmployeeApp = ({ path, url, userType, tenants }) => {
     // <div className="ground-container">
     <>
       <EventsBreadCrumb location={location} />
-      <Switch>
+      <Routes>
        
         <Route path={`${path}/event/inbox`} exact>
           <Inbox tenants={tenants} parentRoute={path} />
@@ -219,8 +219,8 @@ const EmployeeApp = ({ path, url, userType, tenants }) => {
         <Route path={`${path}/messages`} component={(props) => <Messages {...props} tenants={tenants} parentRoute={path} />} />
         <Route path={`${path}/surveys`} component={(props)=><Surveys {...props} tenants={tenants} parentRoute={path} />} />
         {/* documents/update-response */}
-        {/* <Redirect to={`${path}/docs`} /> */}
-      </Switch>
+        {/* <Navigate to={`${path}/docs`} /> */}
+      </Routes>
       </>
     // </div>
   );
@@ -228,7 +228,9 @@ const EmployeeApp = ({ path, url, userType, tenants }) => {
 
 const EngagementModule = ({ stateCode, userType, tenants }) => {
   const moduleCode = "Engagement";
-  const { path, url } = useRouteMatch();
+  const resolved = useResolvedPath("");
+  const path = resolved.pathname;
+  const url = path;
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
 

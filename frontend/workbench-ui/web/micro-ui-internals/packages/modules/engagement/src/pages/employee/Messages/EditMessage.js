@@ -2,13 +2,13 @@ import { FormComposer, Header, Loader } from "@egovernments/digit-ui-react-compo
 import { format } from 'date-fns';
 import React, { Fragment, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { handleTodaysDate, isNestedArray, reduceDocsArray } from "../../../utils";
 import { config } from "../../../config/NewMessageConfig";
 
 const EditMessage = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id: MessageId } = useParams();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const { isLoading, data } = Digit.Hooks.events.useInbox(tenantId, {},
@@ -53,7 +53,7 @@ const EditMessage = () => {
         }
       ]
     }
-    history.push(`/${window?.contextPath}/employee/engagement/messages/response?update=true`, details)
+    navigate(`/${window?.contextPath}/employee/engagement/messages/response?update=true`, { state: { ...details } })
   }
 
   const defaultValues = useMemo(() => {

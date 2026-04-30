@@ -1,6 +1,5 @@
 import { Loader } from "@egovernments/digit-ui-react-components";
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
 import EmployeeApp from "./pages/employee";
 import { CustomisedHooks } from "./hooks";
 import { UICustomizations } from "./configs/UICustomizations";
@@ -11,7 +10,6 @@ import * as parsingUtils from "../src/utils/ParsingUtils"
 
 const WorkbenchModule = ({ stateCode, userType, tenants }) => {
   const moduleCode = ["workbench","mdms","schema"];
-  const { path, url } = useRouteMatch();
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({
     stateCode,
@@ -23,7 +21,7 @@ const WorkbenchModule = ({ stateCode, userType, tenants }) => {
     return <Loader />;
   }
 
-  return <EmployeeApp path={path} stateCode={stateCode} />;
+  return <EmployeeApp stateCode={stateCode} />;
 };
 
 const componentsToRegister = {

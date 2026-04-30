@@ -1,14 +1,17 @@
 import { Loader } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CitizenPayment from "./citizen";
 import { getKeyNotesConfig } from "./citizen/keynotesConfig";
 import EmployeePayment from "./employee";
 
 
 export const PaymentModule = ({ deltaConfig = {}, stateCode, cityCode, moduleCode = "Payment", userType }) => {
-  const { path, url } = useRouteMatch();
+  const location = useLocation(); // Changed from useRouteMatch
+  const path = location.pathname; // Get current path
+  const url = location.pathname;  // In v6, path and url are the same
+
   const store = { data: {} }; //Digit.Services.useStore({}, { deltaConfig, stateCode, cityCode, moduleCode, language });
 
   if (Object.keys(store).length === 0) {
@@ -31,3 +34,6 @@ export const PaymentLinks = ({ matchPath }) => {
 export const paymentConfigs = {
   getBillDetailsConfigWithBusinessService: getKeyNotesConfig,
 };
+
+
+

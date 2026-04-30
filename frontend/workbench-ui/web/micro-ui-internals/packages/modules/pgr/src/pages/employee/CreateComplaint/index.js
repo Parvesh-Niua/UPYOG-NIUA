@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Dropdown } from "@egovernments/digit-ui-react-components";
-import { useRouteMatch, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 
 import { FormComposer } from "../../../components/FormComposer";
@@ -39,8 +39,7 @@ export const CreateComplaint = ({ parentUrl }) => {
   const tenantId = window.Digit.SessionStorage.get("Employee.tenantId");
   const menu = Digit.Hooks.pgr.useComplaintTypes({ stateCode: tenantId });
   const dispatch = useDispatch();
-  const match = useRouteMatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const serviceDefinitions = Digit.GetServiceDefinitions;
   const client = useQueryClient();
 
@@ -124,7 +123,7 @@ export const CreateComplaint = ({ parentUrl }) => {
     const formData = { ...data, cityCode, city, district, region, localityCode, localityName, landmark, complaintType, mobileNumber, name };
     await dispatch(createComplaint(formData));
     await client.refetchQueries(["fetchInboxData"]);
-    history.push(parentUrl + "/response");
+    navigate(parentUrl + "/response");
   };
 
   const handlePincode = (event) => {

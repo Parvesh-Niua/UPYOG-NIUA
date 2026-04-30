@@ -3,11 +3,11 @@ import {
 } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const tenantId = Digit.ULBService.getCitizenCurrentTenant(true);
   const { data: { stateInfo, uiHomePage } = {}, isLoading } = Digit.Hooks.useStore.getInitData();
   let isMobile = window.Digit.Utils.browser.isMobile();
@@ -27,7 +27,7 @@ const Home = () => {
   });
 
   if (!tenantId) {
-    history.push(`/${window?.contextPath}/citizen/select-language`);
+    navigate(`/${window?.contextPath}/citizen/select-language`);
   }
 
   const appBannerWebObj = uiHomePage?.appBannerDesktop;

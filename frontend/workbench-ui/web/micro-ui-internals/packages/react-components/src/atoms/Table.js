@@ -28,7 +28,7 @@ const IndeterminateCheckbox = forwardRef(
   }
 )
 const getNoColumnBorder=(noColumnBorder)=>noColumnBorder?({
-  cellspacing:"0" ,cellpadding:"0"
+  cellSpacing:"0" ,cellPadding:"0"
 }):null;
 const Table = ({
   className = "table",

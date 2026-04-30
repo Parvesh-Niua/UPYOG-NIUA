@@ -7,7 +7,7 @@ import { Loader } from "@egovernments/digit-ui-react-components";
 
 import ActionModal from "./Modal";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ApplicationDetailsContent from "./components/ApplicationDetailsContent";
 import ApplicationDetailsToast from "./components/ApplicationDetailsToast";
 import ApplicationDetailsActionBar from "./components/ApplicationDetailsActionBar";
@@ -17,7 +17,7 @@ const ApplicationDetails = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const state = Digit.ULBService.getStateId();
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   let { id: applicationNumber } = useParams();
   const [displayMenu, setDisplayMenu] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
@@ -72,17 +72,17 @@ const ApplicationDetails = (props) => {
       } else if (action?.redirectionUrll) {
         //here do the loi edit upon rejection
         if (action?.redirectionUrll?.action === "EDIT_LOI_APPLICATION") {
-          history.push(`${action?.redirectionUrll?.pathname}`, { data: action?.redirectionUrll?.state });
+          navigate(`${action?.redirectionUrll?.pathname}`, { data: action?.redirectionUrll?.state });
         }
         if (action?.redirectionUrll?.action === "EDIT_ESTIMATE_APPLICATION") {
-          history.push(`${action?.redirectionUrll?.pathname}`,{ data: action?.redirectionUrll?.state });
+          navigate(`${action?.redirectionUrll?.pathname}`,{ data: action?.redirectionUrll?.state });
         }
         
       } else if (!action?.redirectionUrl) {
         if(action?.action === 'EDIT') setModify(true)
         else setShowModal(true);
       } else {
-        history.push({
+        navigate({
           pathname: action.redirectionUrl?.pathname,
           state: { ...action.redirectionUrl?.state },
         });
@@ -179,7 +179,7 @@ const ApplicationDetails = (props) => {
         },
         onSuccess: (data, variables) => {
           setIsEnableLoader(false);
-          //just history.push to the response component from here and show relevant details
+          //just navigate to the response component from here and show relevant details
           if(data?.letterOfIndents?.[0]){
             const updatedLOI = data?.letterOfIndents?.[0]
             const state = {
@@ -208,7 +208,7 @@ const ApplicationDetails = (props) => {
               responseData:data,
               requestData:variables
             }
-            history.push(`/${window.contextPath}/employee/works/response`, state)
+            navigate(`/${window.contextPath}/employee/works/response`, { state });
           }
           if(data?.estimates?.[0]){
             const updatedEstimate = data?.estimates?.[0]
@@ -238,23 +238,23 @@ const ApplicationDetails = (props) => {
               responseData:data,
               requestData:variables
             }
-            history.push(`/${window.contextPath}/employee/works/response`, state)
+            navigate(`/${window.contextPath}/employee/works/response`, { state })
           }
           if (isOBPS?.bpa) {
             data.selectedAction = selectedAction;
-            history.replace(`/${window?.contextPath}/employee/obps/response`, { data: data });
+            navigate(`/${window?.contextPath}/employee/obps/response`, { data: data });
           }
           if (isOBPS?.isStakeholder) {
             data.selectedAction = selectedAction;
-            history.push(`/${window?.contextPath}/employee/obps/stakeholder-response`, { data: data });
+            navigate(`/${window?.contextPath}/employee/obps/stakeholder-response`, { data: data });
           }
           if (isOBPS?.isNoc) {
-            history.push(`/${window?.contextPath}/employee/noc/response`, { data: data });
+            navigate(`/${window?.contextPath}/employee/noc/response`, { data: data });
           }
           if (data?.Amendments?.length > 0 ){
             //RAIN-6981 instead just show a toast here with appropriate message
           //show toast here and return 
-            //history.push("/${window?.contextPath}/employee/ws/response-bill-amend", { status: true, state: data?.Amendments?.[0] })
+            //navigate("/${window?.contextPath}/employee/ws/response-bill-amend", { status: true, state: data?.Amendments?.[0] })
             
             if(variables?.AmendmentUpdate?.workflow?.action.includes("SEND_BACK")){
               setShowToast({ key: "success", label: t("ES_MODIFYSWCONNECTION_SEND_BACK_UPDATE_SUCCESS")})
@@ -277,7 +277,7 @@ const ApplicationDetails = (props) => {
               info: t("ATM_REGISTER_ID_WEEK"),
               id: `${musterRoll.registerId} | ${format(new Date(musterRoll.startDate), "dd/MM/yyyy")} - ${format(new Date(musterRoll.endDate), "dd/MM/yyyy")}`,
             }
-            history.push(`/${window.contextPath}/employee/attendencemgmt/response`, state)
+            navigate(`/${window.contextPath}/employee/attendencemgmt/response`, { state })
           }
           setShowToast({ key: "success", action: selectedAction });
           clearDataDetails && setTimeout(clearDataDetails, 3000);

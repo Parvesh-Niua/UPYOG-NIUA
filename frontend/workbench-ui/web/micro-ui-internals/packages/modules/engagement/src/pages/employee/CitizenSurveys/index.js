@@ -1,5 +1,5 @@
 import React from "react"
-import { Switch } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { PrivateRoute } from "@egovernments/digit-ui-react-components"
 import Inbox from "./Inbox"
 import NewSurvey from "./NewSurvey"
@@ -10,19 +10,21 @@ import DeleteResponse from "./responses/delete"
 import SurveyDetails from "./SurveyDetails"
 import SurveyResults from "./SurveyResults"
 
-const Surveys = ({match:{path} = {}, tenants, parentRoute}) => {
-    return <Switch>
-        <PrivateRoute path={`${path}/inbox/create`} component={props => <NewSurvey {...props} />} />
-        <PrivateRoute path={`${path}/create`} component={props => <NewSurvey {...props} />} />
-        <PrivateRoute path={`${path}/inbox/details/:id`} component={props => <SurveyDetails {...props} />} />
-        {/* <PrivateRoute path={`${path}/inbox/edit/:id`} component={props => <EditSurvey {...props} />} /> */}
-        <PrivateRoute path={`${path}/inbox/results/:id`} component={(props) => <SurveyResults {...props} />} />
-        <PrivateRoute path={`${path}/inbox`} component={props => <Inbox {...props} tenants={tenants} parentRoute={parentRoute} />} />
-        <PrivateRoute path={`${path}/create-response`} component={(props) => <CreateResponse {...props} />} />
-        <PrivateRoute path={`${path}/update-response`} component={(props) => <UpdateResponse {...props} />} />
-        <PrivateRoute path={`${path}/delete-response`} component={(props) => <DeleteResponse {...props} />} />
+const Surveys = ({tenants, parentRoute}) => {
+    // match:{path} prop removed — In v6 routes not get props 
 
-    </Switch>
+    return <Routes>
+            {/* Route + element prop + relative paths */}
+            <Route path="inbox/create" element={<PrivateRoute element={<NewSurvey />} />} />
+            <Route path="create" element={<PrivateRoute element={<NewSurvey />} />} />
+            <Route path="inbox/details/:id" element={<PrivateRoute element={<SurveyDetails />} />} />
+            <Route path="inbox/results/:id" element={<PrivateRoute element={<SurveyResults />} />} />
+            <Route path="inbox" element={<PrivateRoute element={<Inbox tenants={tenants} parentRoute={parentRoute} />} />} />
+            <Route path="create-response" element={<PrivateRoute element={<CreateResponse />} />} />
+            <Route path="update-response" element={<PrivateRoute element={<UpdateResponse />} />} />
+            <Route path="delete-response" element={<PrivateRoute element={<DeleteResponse />} />} />
+        </Routes>
+
 }
 
 export default Surveys

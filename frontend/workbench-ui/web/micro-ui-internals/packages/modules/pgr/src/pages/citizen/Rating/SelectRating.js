@@ -1,15 +1,16 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RatingCard, CardLabelError } from "@egovernments/digit-ui-react-components";
-import { useParams, Redirect, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { updateComplaints } from "../../../redux/actions/index";
 
 const SelectRating = ({ parentRoute }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
+  
 
   let tenantId = Digit.SessionStorage.get("CITIZEN.COMMON.HOME.CITY")?.code || Digit.ULBService.getCurrentTenantId();
   const complaintDetails = Digit.Hooks.pgr.useComplaintDetails({ tenantId: tenantId, id: id }).complaintDetails;
@@ -26,7 +27,7 @@ const SelectRating = ({ parentRoute }) => {
         verificationDocuments: [],
       };
       updateComplaint({ service: complaintDetails.service, workflow: complaintDetails.workflow });
-      history.push(`${parentRoute}/response`);
+      navigate(`${parentRoute}/response`);
     }
     else{
       setError(true)

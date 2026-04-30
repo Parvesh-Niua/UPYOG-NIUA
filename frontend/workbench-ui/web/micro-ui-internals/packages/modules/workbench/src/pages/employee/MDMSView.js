@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 import MDMSAdd from './MDMSAddV2'
 import { Loader,Toast } from '@egovernments/digit-ui-react-components';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const MDMSView = ({...props}) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const [showToast, setShowToast] = useState(false);
   let { moduleName, masterName, tenantId,uniqueIdentifier } = Digit.Hooks.useQueryParams();
@@ -114,7 +114,7 @@ const MDMSView = ({...props}) => {
     const {action:actionSelected} = action 
     //action===EDIT go to edit screen 
     if(actionSelected==="EDIT") {
-      history.push(`/${window?.contextPath}/employee/workbench/mdms-edit?moduleName=${moduleName}&masterName=${masterName}&uniqueIdentifier=${uniqueIdentifier}`)
+      navigate(`/${window?.contextPath}/employee/workbench/mdms-edit?moduleName=${moduleName}&masterName=${masterName}&uniqueIdentifier=${uniqueIdentifier}`)
     }
     //action===DISABLE || ENABLE call update api and show toast respectively
     else{

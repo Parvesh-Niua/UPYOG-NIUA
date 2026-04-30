@@ -5,11 +5,9 @@ import FilterFormFieldsComponent from "./FilterFieldsComponent";
 import SearchFormFieldsComponents from "./SearchFieldsComponents";
 import useInboxTableConfig from "./useInboxTableConfig";
 import useInboxMobileCardsData from "./useInboxMobileDataCard";
-// import { useHistory } from "react-router-dom";
 const Inbox = ({ parentRoute }) => {
 
   const { t } = useTranslation()
-  // const history = useHistory()
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const ulbs = Digit.SessionStorage.get("ENGAGEMENT_TENANTS");
   const userInfo = Digit.UserService.getUser().info;

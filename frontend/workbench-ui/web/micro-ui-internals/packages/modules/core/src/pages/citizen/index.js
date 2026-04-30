@@ -1,7 +1,7 @@
 import { BackButton, CitizenHomeCard, CitizenInfoLabel } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
+import { Route, Routes, useNavigate, useResolvedPath } from "react-router-dom";
 import ErrorBoundary from "../../components/ErrorBoundaries";
 import ErrorComponent from "../../components/ErrorComponent";
 import { AppHome, processLinkData } from "../../components/Home";
@@ -69,8 +69,9 @@ const Home = ({
 
   const classname = Digit.Hooks.useRouteSubscription(pathname);
   const { t } = useTranslation();
-  const { path } = useRouteMatch();
-  const history = useHistory();
+  const { pathname: path } = useResolvedPath(".");  // useRouteMatch → useResolvedPath
+
+  const navigate = useNavigate();
   const handleClickOnWhatsApp = (obj) => {
     window.open(obj);
   };
@@ -79,10 +80,18 @@ const Home = ({
   const appRoutes = modules.map(({ code, tenants }, index) => {
     const Module = Digit.ComponentRegistryService.getComponent(`${code}Module`);
     return Module ? (
-      <Route key={index} path={`${path}/${code.toLowerCase()}`}>
-        <Module stateCode={stateCode} moduleCode={code} userType="citizen" tenants={getTenants(tenants, appTenants)} />
-      </Route>
-    ) : null;
+      <Route
+        key={index}
+        path={`${code.toLowerCase()}/*`}              // relative + /* for nested
+        element={
+          <Module
+            stateCode={stateCode}
+            moduleCode={code}
+            userType="citizen"
+            tenants={getTenants(tenants, appTenants)}
+          />
+        }
+      /> ) : null;
   });
 
   const ModuleLevelLinkHomePages = modules.map(({ code, bannerImage }, index) => {
@@ -158,8 +167,9 @@ const Home = ({
             <StaticCitizenSideBar linkData={linkData} islinkDataLoading={islinkDataLoading} />
           </div>
         )}
-
-        <Switch>
+        /*  ErrorBoundary out of Routes  — Routes only Route allowed */
+      <ErrorBoundary initData={initData}>
+        <Routes>
           <Route exact path={path}>
             <CitizenHome />
           </Route>
@@ -175,40 +185,36 @@ const Home = ({
             <ErrorComponent
               initData={initData}
               goToHome={() => {
-                history.push(`/${window?.contextPath}/${Digit?.UserService?.getType?.()}`);
+                navigate(`/${window?.contextPath}/${Digit?.UserService?.getType?.()}`);
               }}
             />
           </Route>
-          <Route path={`${path}/all-services`}>
-            <AppHome
-              userType="citizen"
-              modules={modules}
-              getCitizenMenu={linkData}
-              fetchedCitizen={isLinkDataFetched}
-              isLoading={islinkDataLoading}
+          <Route
+              path="all-services"
+              element={
+                <AppHome
+                  userType="citizen"
+                  modules={modules}
+                  getCitizenMenu={linkData}
+                  fetchedCitizen={isLinkDataFetched}
+                  isLoading={islinkDataLoading}
+                />
+              }
             />
-          </Route>
 
-          <Route path={`${path}/login`}>
-            <Login stateCode={stateCode} />
-          </Route>
+          <Route path="login" element={<Login stateCode={stateCode} />} />
+            <Route path="register" element={<Login stateCode={stateCode} isUserRegistered={false} />} />
+            <Route
+              path="user/profile"
+              element={<UserProfile stateCode={stateCode} userType={"citizen"} cityDetails={cityDetails} />}
+            />
+            <Route path="Audit" element={<Search />} />
 
-          <Route path={`${path}/register`}>
-            <Login stateCode={stateCode} isUserRegistered={false} />
-          </Route>
-
-          <Route path={`${path}/user/profile`}>
-            <UserProfile stateCode={stateCode} userType={"citizen"} cityDetails={cityDetails} />
-          </Route>
-
-          <Route path={`${path}/Audit`}>
-            <Search />
-          </Route>
-          <ErrorBoundary initData={initData}>
             {appRoutes}
             {ModuleLevelLinkHomePages}
-          </ErrorBoundary>
-        </Switch>
+        </Routes>
+        
+      </ErrorBoundary>
       </div>
       <div className="citizen-home-footer" style={window.location.href.includes("citizen/obps") ? { zIndex: "-1" } : {}}>
         {/* <img

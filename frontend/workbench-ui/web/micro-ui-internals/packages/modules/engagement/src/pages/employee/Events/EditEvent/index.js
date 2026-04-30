@@ -2,12 +2,12 @@ import { FormComposer, Header, Loader } from "@egovernments/digit-ui-react-compo
 import { format } from 'date-fns';
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { config } from "../../../../config/NewEventConfig";
 
 const EditEvents = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id: EventId } = useParams();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const { isLoading, data } = Digit.Hooks.events.useInbox(tenantId, {},
@@ -55,7 +55,7 @@ const EditEvents = () => {
         }
       ]
     }
-    history.push(`/${window?.contextPath}/employee/engagement/event/response?update=true`, details)
+    navigate(`/${window?.contextPath}/employee/engagement/event/response?update=true`, { state: { ...details } })
   }
 
   if (isLoading) {

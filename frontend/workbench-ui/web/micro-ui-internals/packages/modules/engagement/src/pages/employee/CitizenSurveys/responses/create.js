@@ -2,7 +2,7 @@ import { Banner, Card, Loader, CardText, ActionBar, SubmitBar,Menu } from "@egov
 import { useQueryClient } from "react-query";
 import React, { useEffect,useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const getMessage = (mutation) => {
   if (mutation.isSuccess) return mutation.data?.Surveys?.[0]?.uuid;
   return "";
@@ -26,7 +26,7 @@ const Acknowledgement = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const mutation = Digit.Hooks.survey.useCreate();
   const { state } = props.location;
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isActionClicked,setIsActionClicked] = useState(false) 
   useEffect(() => {
     const onSuccess = () => {
@@ -53,13 +53,13 @@ const Acknowledgement = (props) => {
     }))
   }
   // const actionClickHandler = (option) => {
-  //   if(option === "Go Back to home") history.push(`/${window?.contextPath}/employee`)
-  //   else if(option === "Create another survey") history.push(`/${window?.contextPath}/employee/engagement/surveys/create")
+  //   if(option === "Go Back to home") navigate(`/${window?.contextPath}/employee`)
+  //   else if(option === "Create another survey") navigate(`/${window?.contextPath}/employee/engagement/surveys/create")
   // }
 
    const actionClickHandler = (option) => {
-    if(option === t("GO_BACK_TO_HOME")) history.push(`/${window?.contextPath}/employee`)
-    else if(option === t("CREATE_ANOTHER_SURVEY")) history.push(`/${window?.contextPath}/employee/engagement/surveys/create`)
+    if(option === t("GO_BACK_TO_HOME")) navigate(`/${window?.contextPath}/employee`)
+    else if(option === t("CREATE_ANOTHER_SURVEY")) navigate(`/${window?.contextPath}/employee/engagement/surveys/create`)
   }
   return (
     <Card>

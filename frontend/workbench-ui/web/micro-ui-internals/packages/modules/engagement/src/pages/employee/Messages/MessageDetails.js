@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Header, Card, CardSectionHeader, PDFSvg, Loader, StatusTable, Menu, ActionBar, SubmitBar, Modal, CardText } from "@egovernments/digit-ui-react-components";
 import ApplicationDetailsTemplate from "../../../../../templates/ApplicationDetails";
@@ -52,7 +52,7 @@ const DocumentDetails = ({ t, data, documents, paymentDetails }) => {
 const MessageDetails = () => {
   const { id } = useParams();
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [displayMenu, setDisplayMenu] = useState(false);
   const tenantId = Digit.ULBService.getCurrentTenantId();
@@ -83,7 +83,7 @@ const MessageDetails = () => {
   function onActionSelect(action) {
     // setSelectedAction(action);
     if (action === "EDIT") {
-      history.push(`/${window?.contextPath}/employee/engagement/messages/inbox/edit/${id}`)
+      navigate(`/${window?.contextPath}/employee/engagement/messages/inbox/edit/${id}`)
     }
     if (action === "DELETE") {
       setShowModal(true);
@@ -101,7 +101,7 @@ const MessageDetails = () => {
         },
       ],
     };
-    history.push(`/${window?.contextPath}/employee/engagement/messages/response?delete=true`, details);
+    navigate(`/${window?.contextPath}/employee/engagement/messages/response?delete=true`, { state: { ...details } });
   };
 
   return (

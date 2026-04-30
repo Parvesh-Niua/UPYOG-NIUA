@@ -14,7 +14,7 @@ const EmployeeSideBar = () => {
 
   useEffect(() => {
     if (isLoading) {
-      return <Loader />;
+      return;
     }
     sidebarRef.current.style.cursor = "pointer";
     collapseNav();

@@ -7,15 +7,16 @@ import { PGR_CITIZEN_COMPLAINT_CONFIG, PGR_CITIZEN_CREATE_COMPLAINT } from "../.
 import Response from "./Response";
 
 import { config as defaultConfig } from "./defaultConfig";
-import { Redirect, Route, Switch, useHistory, useRouteMatch, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate, useResolvedPath, useLocation } from "react-router-dom";
 import { useQueryClient } from "react-query";
 
 export const CreateComplaint = () => {
   const ComponentProvider = Digit.Contexts.ComponentProvider;
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const match = useRouteMatch();
-  const history = useHistory();
+  const { pathname: path } = useResolvedPath(".");   // useRouteMatch → useResolvedPath
+
+  const navigate = useNavigate();
   const registry = useContext(ComponentProvider);
   const dispatch = useDispatch();
   const { data: storeData, isLoading } = Digit.Hooks.useStore.getInitData();
@@ -38,7 +39,7 @@ export const CreateComplaint = () => {
     if (nextStep === null) {
       wrapperSubmit();
     } else {
-      history.push(`${match.path}/${nextStep}`);
+      navigate(`${path}/${nextStep}`);
     }
   }, [params, nextStep]);
 
@@ -92,7 +93,7 @@ export const CreateComplaint = () => {
 
       await dispatch(createComplaint(data));
       await client.refetchQueries(["complaintsList"]);
-      history.push(`${match.path}/response`);
+      navigate(`${path}/response`);                  
     }
   };
 
@@ -108,22 +109,34 @@ export const CreateComplaint = () => {
   if (isLoading) return null;
 
   return (
-    <Switch>
+    <Routes>
       {Object.keys(config.routes).map((route, index) => {
         const { component, texts, inputs } = config.routes[route];
         const Component = typeof component === "string" ? Digit.ComponentRegistryService.getComponent(component) : component;
         return (
-          <Route path={`${match.path}/${route}`} key={index}>
-            <Component config={{ texts, inputs }} onSelect={handleSelect} onSkip={handleSkip} value={params} t={t} />
-          </Route>
+          <Route
+            path={route}                             // relative path
+            key={index}
+            element={                               // children → element prop
+              <Component
+                config={{ texts, inputs }}
+                onSelect={handleSelect}
+                onSkip={handleSkip}
+                value={params}
+                t={t}
+              />
+            }
+          />
         );
       })}
-      <Route path={`${match.path}/response`}>
-        <Response match={match} />
-      </Route>
-      <Route>
-        <Redirect to={`${match.path}/${config.indexRoute}`} />
-      </Route>
-    </Switch>
+      <Route
+        path="response"                              // relative path
+        element={<Response />}                       // match prop removed
+      />
+      <Route
+        path="*"                                     // catch-all
+        element={<Navigate to={`${path}/${config.indexRoute}`} replace />}  // Redirect → Navigate
+      />
+    </Routes>
   );
 };

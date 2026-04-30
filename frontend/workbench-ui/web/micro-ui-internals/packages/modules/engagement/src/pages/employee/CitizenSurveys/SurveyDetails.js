@@ -1,7 +1,7 @@
 import { Header, Modal, Loader } from "@egovernments/digit-ui-react-components";
 import React, { Fragment, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import EditSurveyForm from "../../../components/Surveys/EditSurveyForms";
 import { mapQuestions } from "./NewSurvey";
@@ -35,7 +35,7 @@ const SurveyDetails = ({ location, match }) => {
   let isMobile = window.Digit.Utils.browser.isMobile();
   const { id } = useParams();
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(true);
   const [isFormPartiallyEnabled, setFormPartiallyEnabled] = useState(false);
@@ -129,14 +129,14 @@ const SurveyDetails = ({ location, match }) => {
         //These are not required to update, only status was required that we were not sending..
       },
     };
-    history.push(`/${window?.contextPath}/employee/engagement/surveys/update-response`, details);
+    navigate(`/${window?.contextPath}/employee/engagement/surveys/update-response`, details);
   };
 
   const handleDelete = () => {
     const details = {
       SurveyEntity: { ...surveyData, collectCitizenInfo: surveyData.collectCitizenInfo.code },
     };
-    history.push(`/${window?.contextPath}/employee/engagement/surveys/delete-response`, details);
+    navigate(`/${window?.contextPath}/employee/engagement/surveys/delete-response`, details);
   };
 
   //if we don't send tenantId it violates the not null constraint in the backend...
@@ -153,7 +153,7 @@ const SurveyDetails = ({ location, match }) => {
         tenantId,
       },
     };
-    history.push(`/${window?.contextPath}/employee/engagement/surveys/update-response`, details);
+    navigate(`/${window?.contextPath}/employee/engagement/surveys/update-response`, details);
   };
 
   const handleMarkInactive = () => {
@@ -165,7 +165,7 @@ const SurveyDetails = ({ location, match }) => {
         collectCitizenInfo: surveyData.collectCitizenInfo.code,
          },
     };
-    history.push(`/${window?.contextPath}/employee/engagement/surveys/update-response`, details);
+    navigate(`/${window?.contextPath}/employee/engagement/surveys/update-response`, details);
   };
 
   const actionMenuOptions = useMemo(() => {

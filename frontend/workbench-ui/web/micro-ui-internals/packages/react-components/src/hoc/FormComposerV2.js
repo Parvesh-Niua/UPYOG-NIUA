@@ -716,9 +716,8 @@ export const FormComposer = (props) => {
               </React.Fragment>
             );
           return (
-            <Fragment>
+            <Fragment key={index}>
               <LabelFieldPair
-                key={index}
                 style={
                   props?.showWrapperContainers && !field.hideContainer
                     ? { ...wrapperStyles, ...field?.populators?.customStyle }
@@ -797,7 +796,7 @@ export const FormComposer = (props) => {
   },[props.horizontalNavConfig]);
   
   const renderFormFields = (props, section, index, array, sectionFormCategory) => (
-      <React.Fragment key={index}>
+      <>
           {!props.childrenAtTheBottom && props.children}
           {props.heading && <CardSubHeader className={props?.cardSubHeaderClassName ? props?.cardSubHeaderClassName : ""} style={{ ...props.headingStyle }}> {props.heading} </CardSubHeader>}
           {props.description && <CardLabelDesc className={"repos"}> {props.description} </CardLabelDesc>}
@@ -811,7 +810,7 @@ export const FormComposer = (props) => {
           <div className="primary-label-btn" style={{ margin: "20px auto 0 auto" }} onClick={onSecondayActionClick}>
             {props.secondaryActionLabel}
           </div>)}
-      </React.Fragment>  
+      </>  
   );
 
   return (
@@ -821,7 +820,7 @@ export const FormComposer = (props) => {
       {props?.showMultipleCardsWithoutNavs ? (
           props?.config?.map((section, index, array) => {
             return !section.navLink && (
-              <Card style={getCardStyles()} noCardStyle={props.noCardStyle} className={props.cardClassName}>
+              <Card key={index} style={getCardStyles()} noCardStyle={props.noCardStyle} className={props.cardClassName}>
                 {renderFormFields(props, section, index, array)}
               </Card>
             )
@@ -831,9 +830,9 @@ export const FormComposer = (props) => {
             {
               props?.config?.map((section, index, array) => {
                 return !section.navLink && (
-                    <>
+                    <React.Fragment key={index}>
                       {renderFormFields(props, section, index, array)}
-                    </>
+                    </React.Fragment>
                 )
               })
             }
@@ -845,7 +844,7 @@ export const FormComposer = (props) => {
            {props?.showMultipleCardsInNavs ? (
              props?.config?.map((section, index, array) => {
                return section.navLink ? (
-                 <Card style={section.navLink !== activeLink ? getCardStyles(false) : getCardStyles()} noCardStyle={props.noCardStyle}>
+                 <Card key={index} style={section.navLink !== activeLink ? getCardStyles(false) : getCardStyles()} noCardStyle={props.noCardStyle}>
                     {renderFormFields(props, section, index, array, section?.sectionFormCategory)}
                  </Card>
                ) : null
@@ -856,11 +855,11 @@ export const FormComposer = (props) => {
                    {
                      props?.config?.map((section, index, array) => {
                       return section.navLink ?  (
-                         <>
+                         <React.Fragment key={index}>
                             <div style={section.navLink !== activeLink ? {display : "none"} : {}}>
                               {renderFormFields(props, section, index, array, section?.sectionFormCategory)}
                             </div>
-                         </>
+                         </React.Fragment>
                        ) : null
                      })
                    }

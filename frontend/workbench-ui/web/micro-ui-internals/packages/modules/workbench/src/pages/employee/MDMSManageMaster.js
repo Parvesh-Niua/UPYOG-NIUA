@@ -1,7 +1,7 @@
 import { AddFilled, Button, Header, InboxSearchComposer, Loader, Dropdown, Card } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Config as Configg } from "../../configs/searchMDMSConfig";
 import _, { drop } from "lodash";
 
@@ -26,7 +26,7 @@ function sortByKey(arr, key) {
 const MDMSManageMaster = () => {
   let Config = _.clone(Configg)
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   
   let {masterName:modulee,moduleName:master,tenantId} = Digit.Hooks.useQueryParams()
   
@@ -109,7 +109,7 @@ const MDMSManageMaster = () => {
     //here set current schema based on module and master name
     if(masterName?.name && moduleName?.name){
     setCurrentSchema(availableSchemas.filter(schema => schema.code === `${masterName?.name}.${moduleName?.name}`)?.[0])
-    history.push(`/${window?.contextPath}/employee/workbench/mdms-search-v2?moduleName=${masterName.name}&masterName=${moduleName.name}`)
+    navigate(`/${window?.contextPath}/employee/workbench/mdms-search-v2?moduleName=${masterName.name}&masterName=${moduleName.name}`)
     }
   }, [moduleName])
   

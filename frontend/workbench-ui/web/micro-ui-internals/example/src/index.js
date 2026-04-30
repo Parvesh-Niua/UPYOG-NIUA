@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { initLibraries } from "@egovernments/digit-ui-libraries";
 // import { paymentConfigs, PaymentLinks, PaymentModule } from "@egovernments/digit-ui-module-common";
@@ -15,8 +15,6 @@ import { PGRReducers, initPGRComponents } from "@egovernments/digit-ui-module-pg
 
 import { pgrCustomizations } from "./pgr";
 import { UICustomizations } from "./UICustomizations";
-
-var Digit = window.Digit || {};
 
 const enabledModules = [ "DSS", 
   //"HRMS",
@@ -81,7 +79,9 @@ const initDigitUI = () => {
   const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";
   initTokens(stateCode);
 
-  ReactDOM.render(<DigitUI stateCode={stateCode} enabledModules={enabledModules}       defaultLanding="employee"  moduleReducers={moduleReducers} />, document.getElementById("root"));
+  createRoot(document.getElementById("root")).render(
+    <DigitUI stateCode={stateCode} enabledModules={enabledModules} defaultLanding="employee" moduleReducers={moduleReducers} />
+  );
 };
 
 initLibraries().then(() => {

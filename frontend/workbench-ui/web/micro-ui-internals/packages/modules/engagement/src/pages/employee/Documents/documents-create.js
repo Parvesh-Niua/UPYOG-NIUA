@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { FormComposer, Header } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
 import { documentsFormConfig } from "../../../config/doc-create";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Documents = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [canSubmit, setSubmitValve] = useState(false);
 
   const onFormValueChange = (setValue, formData, formState) => {
@@ -34,7 +34,7 @@ const Documents = () => {
       tenantIds: data.ULB.map((e) => e.code),
     };
 
-    history.push(`/${window?.contextPath}/employee/engagement/documents/response`, { DocumentEntity });
+    navigate(`/${window?.contextPath}/employee/engagement/documents/response`, { DocumentEntity });
   };
 
   return (

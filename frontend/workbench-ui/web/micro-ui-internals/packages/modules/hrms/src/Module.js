@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
+// useRouteMatch removed — not needed
 import HRMSCard from "./components/hrmscard";
 import InboxFilter from "./components/InboxFilter";
 import ActionModal from "./components/Modal";
@@ -28,12 +28,14 @@ export const HRMSModule = ({ stateCode, userType, tenants }) => {
   const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
 
   Digit.SessionStorage.set("HRMS_TENANTS", tenants);
-  const { path, url } = useRouteMatch();
+
+  // useRouteMatch removed — path/url EmployeeApp internally handle the routing and it is not needed here
   if (!Digit.Utils.hrmsAccess()) {
     return null;
   }
+
   if (userType === "employee") {
-    return <EmployeeApp path={path} url={url} />;
+    return <EmployeeApp  />;
   } else return null;
 };
 

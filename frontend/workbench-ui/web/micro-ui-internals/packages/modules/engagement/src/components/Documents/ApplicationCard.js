@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, DetailsCard, Loader, PopUp, SearchAction, FilterAction } from "@egovernments/digit-ui-react-components";
 import Filter from "./Filter";
 import Search from "./Search";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { areEqual } from "../../utils";
 
 const ApplicationCard = ({
@@ -18,7 +18,7 @@ const ApplicationCard = ({
   const [popup, setPopup] = useState(false);
   const [params, setParams] = useState(searchParams);
   const tenantId = Digit.ULBService.getCurrentTenantId();
-  const history = useHistory()
+  const navigate = useNavigate();
   useEffect(() => {
     if (type) setPopup(true);
   }, [type]);
@@ -35,7 +35,7 @@ const ApplicationCard = ({
   const redirectToDetailsPage = (data) => {
     const details = responseData?.find((item) => (areEqual(item.postedBy, data["Posted By"]) && areEqual(item.name, data["Document Name"])));
     if (details) {
-      history.push(`/${window?.contextPath}/employee/engagement/documents/inbox/details/${details?.name}`, { details })
+      navigate(`/${window?.contextPath}/employee/engagement/documents/inbox/details/${details?.name}`, { details })
     }
   }
 

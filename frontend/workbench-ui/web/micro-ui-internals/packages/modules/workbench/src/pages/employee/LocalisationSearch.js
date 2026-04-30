@@ -1,7 +1,7 @@
 import { AddFilled, Button, Header, InboxSearchComposer, Loader, Dropdown,Toast,WorkflowModal,ActionBar,SubmitBar } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import _, { drop } from "lodash";
 import { Config } from "../../configs/LocalisationSearchConfig";
 import getEditModalConfig from "../../configs/EditModalConfig";
@@ -10,7 +10,7 @@ import { useQueryClient } from "react-query";
 const LocalisationSearch = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient()
-  const history = useHistory();
+  const navigate = useNavigate();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [showToast, setShowToast] = useState(false);
   const [modalConfig, setModalConfig] = useState(null);
@@ -120,7 +120,7 @@ const LocalisationSearch = () => {
             variation="secondary"
             icon={<AddFilled style={{ height: "20px", width: "20px" }} />}
             onButtonClick={() => {
-              history.push(`/${window?.contextPath}/employee/${Config?.actionLink}`);
+              navigate(`/${window?.contextPath}/employee/${Config?.actionLink}`);
             }}
             type="button"
             className={'header-btn'}
@@ -130,7 +130,7 @@ const LocalisationSearch = () => {
         Config && Digit.Utils.didEmployeeHasRole(Config?.actionRole) &&
         <ActionBar >
           <SubmitBar disabled={false} onSubmit={() => {
-              history.push(`/${window?.contextPath}/employee/${Config?.actionLink}`);
+              navigate(`/${window?.contextPath}/employee/${Config?.actionLink}`);
             }} label={t("WBH_ADD_LOCALISATION")} />
         </ActionBar>
       }

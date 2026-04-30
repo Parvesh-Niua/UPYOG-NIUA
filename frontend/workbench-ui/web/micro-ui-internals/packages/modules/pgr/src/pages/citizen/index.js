@@ -2,18 +2,16 @@ import React from "react";
 import { ReopenComplaint } from "./ReopenComplaint/index";
 import SelectRating from "./Rating/SelectRating";
 import { PgrRoutes, getRoute } from "../../constants/Routes";
-import { useRouteMatch, Switch, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useResolvedPath } from "react-router-dom";
 import { AppContainer, BackButton, PrivateRoute } from "@egovernments/digit-ui-react-components";
 
-import { CreateComplaint } from "./Create";
-import { ComplaintsList } from "./ComplaintsList";
-import ComplaintDetailsPage from "./ComplaintDetails";
-import Response from "./Response";
+//  Remove Dublicate imports
 import { useTranslation } from "react-i18next";
 
 const App = () => {
   const { t } = useTranslation();
-  const { path, url, ...match } = useRouteMatch();
+  const { pathname: path } = useResolvedPath(".");  // useRouteMatch → useResolvedPath
+
   const location = useLocation();
 
   const CreateComplaint = Digit?.ComponentRegistryService?.getComponent("PGRCreateComplaintCitizen");
@@ -26,20 +24,44 @@ const App = () => {
     <React.Fragment>
       <div className="pgr-citizen-wrapper">
         {!location.pathname.includes("/response") && <BackButton>{t("CS_COMMON_BACK")}</BackButton>}
-        <Switch>
-          {/* <AppContainer> */}
-          <PrivateRoute path={`${path}/create-complaint`} component={CreateComplaint} />
-          <PrivateRoute path={`${path}/complaints`} exact component={ComplaintsList} />
-          <PrivateRoute path={`${path}/complaints/:id*`} component={ComplaintDetailsPage} />
-          <PrivateRoute
-            path={`${path}/reopen`}
-            component={() => <ReopenComplaint match={{ ...match, url, path: `${path}/reopen` }} parentRoute={path} />}
+        
+         <Routes>                                                    //  Switch → Routes 
+          <Route
+            path="create-complaint"                                 //  relative path
+            element={<PrivateRoute element={<CreateComplaint />} />}
           />
-          <PrivateRoute path={`${path}/rate/:id*`} component={() => <SelectRating parentRoute={path} />} />
-          <PrivateRoute path={`${path}/response`} component={() => <Response match={{ ...match, url, path }} />} />
+          <Route
+            path="complaints"                                       // exact not needed in v6
+            element={<PrivateRoute element={<ComplaintsList />} />}
+          />
+          <Route
+            path="complaints/:id/*"                                 // :id* → :id/*
+            element={<PrivateRoute element={<ComplaintDetailsPage />} />}
+          />
+          <Route
+            path="reopen"
+            element={
+              <PrivateRoute
+                element={
+                  // match/url props removed — use useLocation/useParams inside component
+                  <ReopenComplaint parentRoute={path} />
+                }
+              />
+            }
+          />
+          <Route
+            path="rate/:id/*"                                       // :id* → :id/*
+            element={<PrivateRoute element={<SelectRating parentRoute={path} />} />}
+          />
+          <Route
+            path="response"
+            element={
+              // match props removed
+              <PrivateRoute element={<Response />} />
+            }
+          />
 
-          {/* </AppContainer> */}
-        </Switch>
+        </Routes>
       </div>
     </React.Fragment>
   );

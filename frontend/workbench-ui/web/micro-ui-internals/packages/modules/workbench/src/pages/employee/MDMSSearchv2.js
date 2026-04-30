@@ -1,7 +1,7 @@
 import { AddFilled, Button, Header, InboxSearchComposer, Loader, Dropdown,SubmitBar, ActionBar } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Config as Configg } from "../../configs/searchMDMSConfig";
 import _, { drop } from "lodash";
 
@@ -21,7 +21,7 @@ const toDropdownObj = (master = "", mod = "") => {
 const MDMSSearchv2 = () => {
   let Config = _.clone(Configg)
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   
   let {masterName:modulee,moduleName:master,tenantId} = Digit.Hooks.useQueryParams()
   
@@ -160,12 +160,12 @@ const MDMSSearchv2 = () => {
     if(modulee&&master){
       actionLink= `workbench/mdms-add-v2?moduleName=${master}&masterName=${modulee}`
     }
-    history.push(`/${window?.contextPath}/employee/${actionLink}`);
+    navigate(`/${window?.contextPath}/employee/${actionLink}`);
   }
 
   const onClickRow = ({original:row}) => {
     const [moduleName,masterName] = row.schemaCode.split(".")
-    history.push(`/${window.contextPath}/employee/workbench/mdms-view?moduleName=${moduleName}&masterName=${masterName}&uniqueIdentifier=${row.uniqueIdentifier}`)
+    navigate(`/${window.contextPath}/employee/workbench/mdms-view?moduleName=${moduleName}&masterName=${masterName}&uniqueIdentifier=${row.uniqueIdentifier}`)
   }
 
   if (isLoading) return <Loader />;
@@ -216,7 +216,7 @@ const MDMSSearchv2 = () => {
               if(modulee&&master){
                 actionLink= `workbench/mdms-add-v2?moduleName=${master}&masterName=${modulee}`
               }
-              history.push(`/${window?.contextPath}/employee/${actionLink}`);
+              navigate(`/${window?.contextPath}/employee/${actionLink}`);
             }}
             type="button"
           />

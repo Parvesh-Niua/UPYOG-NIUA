@@ -2,9 +2,9 @@ import React,{useState} from 'react'
 import MDMSAdd from './MDMSAddV2'
 import { Loader,Toast } from '@egovernments/digit-ui-react-components';
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const MDMSEdit = ({...props}) => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const { t } = useTranslation()
 
@@ -61,7 +61,7 @@ const MDMSEdit = ({...props}) => {
   const gotoView = () => { 
     setTimeout(() => {
       setRenderLoader(true)
-      history.push(`/${window?.contextPath}/employee/workbench/mdms-view?moduleName=${moduleName}&masterName=${masterName}&uniqueIdentifier=${uniqueIdentifier}`)
+      navigate(`/${window?.contextPath}/employee/workbench/mdms-view?moduleName=${moduleName}&masterName=${masterName}&uniqueIdentifier=${uniqueIdentifier}`)
     }, 2000);
   }
 
