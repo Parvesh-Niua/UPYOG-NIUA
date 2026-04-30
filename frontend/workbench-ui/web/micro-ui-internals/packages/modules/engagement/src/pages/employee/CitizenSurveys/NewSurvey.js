@@ -1,7 +1,7 @@
 import { CloseSvg, FormComposer, Header } from "@egovernments/digit-ui-react-components";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import CreateNewSurvey from "../../../components/Surveys/SurveyForms";
 
 export const answerTypeEnum = {
@@ -12,7 +12,6 @@ export const answerTypeEnum = {
   Date: "DATE_ANSWER_TYPE",
   Time: "TIME_ANSWER_TYPE",
 };
-
 
 /**TODO NRJ-egov handle this by setting correct state inside the surveyFormMaker */
 export const mapQuestions = (questions =[]) =>{
@@ -40,7 +39,7 @@ export const mapQuestions = (questions =[]) =>{
 
 const NewSurveys = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   
   const onSubmit = (data) => {
     const { collectCitizenInfo, title, description, tenantIds, fromDate, toDate, fromTime, toTime, questions } = data;

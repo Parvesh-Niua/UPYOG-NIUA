@@ -3,11 +3,10 @@ import {
 } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.ULBService.getCitizenCurrentTenant(true);
   const { data: { stateInfo, uiHomePage } = {}, isLoading } = Digit.Hooks.useStore.getInitData();
   let isMobile = window.Digit.Utils.browser.isMobile();

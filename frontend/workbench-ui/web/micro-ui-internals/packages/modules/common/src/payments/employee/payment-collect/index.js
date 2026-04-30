@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RadioButtons, FormComposer, Dropdown, CardSectionHeader, Loader, Toast, Card, Header } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import { useCashPaymentDetails } from "./ManualReciept";
 import { useCardPaymentDetails } from "./card";
@@ -13,7 +13,7 @@ export const CollectPayment = (props) => {
   // const { formData, addParams } = props;
   const { workflow: ModuleWorkflow, IsDisconnectionFlow } = Digit.Hooks.useQueryParams();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const queryClient = useQueryClient();
 
   const { path: currentPath } = useRouteMatch();

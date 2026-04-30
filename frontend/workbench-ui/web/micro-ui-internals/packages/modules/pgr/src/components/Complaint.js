@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { Card, DateWrap, KeyNote } from "@egovernments/digit-ui-react-components";
 import { CardSubHeader } from "@egovernments/digit-ui-react-components";
 import { LOCALIZATION_KEY } from "../constants/Localization";
@@ -10,7 +10,7 @@ import { LOCALIZATION_KEY } from "../constants/Localization";
 const Complaint = ({ data, path }) => {
   let { serviceCode, serviceRequestId, applicationStatus } = data;
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { t } = useTranslation();
 
   const handleClick = () => {

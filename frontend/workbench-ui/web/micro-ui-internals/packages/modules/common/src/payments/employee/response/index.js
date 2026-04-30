@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Banner, Card, CardText, SubmitBar, ActionBar, DownloadPrefixIcon, Loader, Menu } from "@egovernments/digit-ui-react-components";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
 
 export const SuccessfulPayment = (props) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { addParams, clearParams } = props;
   const { t } = useTranslation();
   const queryClient = useQueryClient();

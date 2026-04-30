@@ -1,6 +1,6 @@
 import { AppContainer, Card, CardCaption, Header, Loader, PrevIcon } from "@egovernments/digit-ui-react-components";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Searchbar from "../../../components/Documents/Searchbar";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { renderDocsList } from "./DocumentList";
@@ -22,7 +22,7 @@ const Accordion = ({ t, title, count, onClick, children }) => {
 };
 
 const DocumentCategories = ({ t, parentRoute }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [searchValue, setSearchValue] = useState("");
   const tenantIds = Digit.ULBService.getCitizenCurrentTenant();
 

@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
 import { PageBasedInput, Loader, RadioButtons, CardHeader } from "@egovernments/digit-ui-react-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 const LanguageSelection = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();  /* useHistory to useNavigate */
+  const navigate = Digit.Hooks.useCustomNavigate();  /* useHistory to useNavigate */
 
   const { data: { languages, stateInfo } = {}, isLoading } = Digit.Hooks.useStore.getInitData();
   const selectedLanguage = Digit.StoreData.getCurrentLanguage();

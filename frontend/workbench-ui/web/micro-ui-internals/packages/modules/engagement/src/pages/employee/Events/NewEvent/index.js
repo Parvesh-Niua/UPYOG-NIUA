@@ -1,12 +1,12 @@
 import { FormComposer, Header } from "@egovernments/digit-ui-react-components";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { config } from "../../../../config/NewEventConfig";
 
 const NewEvents = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const onSubmit = (data) => {
     const { fromDate, toDate, fromTime, toTime, address, organizer, fees, geoLocation = {} } = data;

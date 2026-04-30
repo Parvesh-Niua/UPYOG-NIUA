@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Card, SubmitBar, BackButton, ImageUploadHandler, CardLabelError, LinkButton } from "@egovernments/digit-ui-react-components";
@@ -8,7 +8,7 @@ import { LOCALIZATION_KEY } from "../../../constants/Localization";
 
 const UploadPhoto = (props) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   let { id } = useParams();
   const [verificationDocuments, setVerificationDocuments] = useState(null);
   const [valid, setValid] = useState(true);

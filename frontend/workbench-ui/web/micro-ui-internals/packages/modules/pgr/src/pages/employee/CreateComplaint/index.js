@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Dropdown } from "@egovernments/digit-ui-react-components";
-import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 
 import { FormComposer } from "../../../components/FormComposer";
@@ -39,7 +38,7 @@ export const CreateComplaint = ({ parentUrl }) => {
   const tenantId = window.Digit.SessionStorage.get("Employee.tenantId");
   const menu = Digit.Hooks.pgr.useComplaintTypes({ stateCode: tenantId });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const serviceDefinitions = Digit.GetServiceDefinitions;
   const client = useQueryClient();
 

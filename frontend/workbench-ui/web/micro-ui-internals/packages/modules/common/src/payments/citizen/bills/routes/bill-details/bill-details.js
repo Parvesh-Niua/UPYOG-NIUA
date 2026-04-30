@@ -1,14 +1,14 @@
 import { Card, CardSubHeader, Header, KeyNote, Loader, RadioButtons, SubmitBar, TextInput } from "@egovernments/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ArrearSummary from "./arrear-summary";
 import BillSumary from "./bill-summary";
 import { stringReplaceAll } from "./utils";
 
 const BillDetails = ({ paymentRules, businessService }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { state, pathname, search } = useLocation();
   const userInfo = Digit.UserService.getUser();
   let { consumerCode } = useParams();

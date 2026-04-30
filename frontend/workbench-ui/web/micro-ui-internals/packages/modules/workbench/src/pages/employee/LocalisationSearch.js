@@ -1,7 +1,7 @@
 import { AddFilled, Button, Header, InboxSearchComposer, Loader, Dropdown,Toast,WorkflowModal,ActionBar,SubmitBar } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import _, { drop } from "lodash";
 import { Config } from "../../configs/LocalisationSearchConfig";
 import getEditModalConfig from "../../configs/EditModalConfig";
@@ -10,7 +10,7 @@ import { useQueryClient } from "react-query";
 const LocalisationSearch = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient()
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const [showToast, setShowToast] = useState(false);
   const [modalConfig, setModalConfig] = useState(null);
@@ -75,7 +75,6 @@ const LocalisationSearch = () => {
       setEditRow(null)
       closeToast();
     };
-
 
     mutation.mutate(
       {

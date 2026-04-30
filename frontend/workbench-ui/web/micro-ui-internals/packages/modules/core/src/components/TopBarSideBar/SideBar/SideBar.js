@@ -18,7 +18,7 @@ import {
 } from "@egovernments/digit-ui-react-components";
 import ReactTooltip from "react-tooltip";
 import { set } from "lodash";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const DIGIT_UI_CONTEXTS = [
@@ -86,7 +86,7 @@ const navigateToRespectiveURL = (navigate = {}, url = "") => {
 
 const Sidebar = ({ data }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();  /* useHistory to useNavigate */ 
+  const navigate = Digit.Hooks.useCustomNavigate();  /* useHistory to useNavigate */ 
   const [openItems, setOpenItems] = useState({});
   const [selectedParent, setSelectedParent] = useState(null);
   const [selectedChild, setSelectedChild] = useState(null);

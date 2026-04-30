@@ -1,7 +1,7 @@
 import { AddFilled, Button, Header, InboxSearchComposer, Loader, Dropdown,SubmitBar, ActionBar } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Config as Configg } from "../../configs/searchMDMSConfig";
 import _, { drop } from "lodash";
 
@@ -17,11 +17,10 @@ const toDropdownObj = (master = "", mod = "") => {
   // };
 };
 
-
 const MDMSSearchv2 = () => {
   let Config = _.clone(Configg)
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   
   let {masterName:modulee,moduleName:master,tenantId} = Digit.Hooks.useQueryParams()
   
@@ -77,7 +76,6 @@ const MDMSSearchv2 = () => {
       },
     },
   });
-
 
   useEffect(() => {
     setMasterOptions(dropdownData?.mastersAvailable)

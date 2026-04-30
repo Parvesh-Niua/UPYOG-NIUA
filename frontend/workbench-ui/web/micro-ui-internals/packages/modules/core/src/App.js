@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Navigate, Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import CitizenApp from "./pages/citizen";
 import EmployeeApp from "./pages/employee";
 
 export const DigitApp = ({ stateCode, modules, appTenants, logoUrl, initData ,defaultLanding="citizen"}) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { pathname } = useLocation();
   const innerWidth = window.innerWidth;
   const cityDetails = Digit.ULBService.getCurrentUlb();

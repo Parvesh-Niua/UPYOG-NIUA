@@ -1,7 +1,7 @@
 import { Header, Loader } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import SurveyListCard from "../../../components/Surveys/SurveyListCard";
 const isActive = (startDate, endDate) => {
   const currentDate = new Date().getTime();
@@ -13,7 +13,7 @@ const isActive = (startDate, endDate) => {
 
 const SurveyList = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const tenantIds = Digit.ULBService.getCitizenCurrentTenant();
 
   const { data, isLoading: isLoadingSurveys } = Digit.Hooks.survey.useSearch(

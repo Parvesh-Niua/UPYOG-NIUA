@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import CitizenSurveyForm from "../../../components/Surveys/CitizenSurveyForm";
 
 const transformSurveyResponseData = (data) => {
@@ -26,7 +26,7 @@ const FillSurvey = ({ location }) => {
   
   //sort survey questions based on qorder field, in surveyData.questions array, here and then render
   surveyData?.questions?.sort((a,b)=>a.qorder-b.qorder)
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const onSubmit = (data) => {
     const details = {

@@ -35,7 +35,7 @@ const DocumentDetails = () => {
   let isMobile = window.Digit.Utils.browser.isMobile();
   const { id } = useParams();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [showModal, setShowModal] = useState(false);
   const [displayMenu, setDisplayMenu] = useState(false);
   const tenantId = Digit.ULBService.getCurrentTenantId();

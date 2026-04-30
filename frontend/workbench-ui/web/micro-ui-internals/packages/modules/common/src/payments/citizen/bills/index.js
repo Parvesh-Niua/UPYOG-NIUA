@@ -1,6 +1,6 @@
 import { Loader } from "@egovernments/digit-ui-react-components";
 import React, { useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Routes from "./routes";
 // import { myBillMap } from "./myBillsKeysMap";
 
@@ -14,7 +14,7 @@ export const MyBills = ({ stateCode }) => {
     language: Digit.StoreData.getCurrentLanguage(),
   });
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();;
   const location = useLocation(); // Already imported
   const url = location.pathname; // Use location.pathname instead of useRouteMatch().url
 

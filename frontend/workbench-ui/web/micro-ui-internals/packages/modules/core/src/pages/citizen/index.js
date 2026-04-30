@@ -1,7 +1,7 @@
 import { BackButton, CitizenHomeCard, CitizenInfoLabel } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useNavigate, useResolvedPath } from "react-router-dom";
+import { Route, Routes, useResolvedPath } from "react-router-dom";
 import ErrorBoundary from "../../components/ErrorBoundaries";
 import ErrorComponent from "../../components/ErrorComponent";
 import { AppHome, processLinkData } from "../../components/Home";
@@ -71,7 +71,7 @@ const Home = ({
   const { t } = useTranslation();
   const { pathname: path } = useResolvedPath(".");  // useRouteMatch → useResolvedPath
 
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const handleClickOnWhatsApp = (obj) => {
     window.open(obj);
   };

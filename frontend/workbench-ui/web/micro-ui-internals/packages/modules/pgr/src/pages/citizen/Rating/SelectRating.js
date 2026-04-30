@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RatingCard, CardLabelError } from "@egovernments/digit-ui-react-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { updateComplaints } from "../../../redux/actions/index";
 
 const SelectRating = ({ parentRoute }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   

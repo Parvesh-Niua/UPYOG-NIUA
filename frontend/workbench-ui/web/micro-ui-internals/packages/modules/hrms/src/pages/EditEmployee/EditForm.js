@@ -1,13 +1,13 @@
 import { FormComposer, Toast,Loader } from "@egovernments/digit-ui-react-components";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { newConfig } from "../../components/config/config";
 import { convertEpochToDate } from "../../components/Utils";
 
 const EditForm = ({ tenantId, data }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [canSubmit, setSubmitValve] = useState(false);
   const [showToast, setShowToast] = useState(null);
   const [mobileNumber, setMobileNumber] = useState(null);
@@ -196,7 +196,6 @@ const EditForm = ({ tenantId, data }) => {
 
     /* use customiseUpdateFormData hook to make some chnages to the Employee object */
     Employees=Digit?.Customizations?.HRMS?.customiseUpdateFormData?Digit.Customizations.HRMS.customiseUpdateFormData(data,Employees):Employees;
-
 
     navigate(`/${window?.contextPath}/employee/hrms/response`, { state: { Employees, key: "UPDATE", action: "UPDATE" } });
   };

@@ -2,7 +2,7 @@ import { Banner, Card, Loader, CardText, ActionBar, SubmitBar,Menu } from "@egov
 import { useQueryClient } from "react-query";
 import React, { useEffect,useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 const getMessage = (mutation) => {
   if (mutation.isSuccess) return mutation.data?.Surveys?.[0]?.uuid;
   return "";
@@ -26,7 +26,7 @@ const Acknowledgement = (props) => {
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const mutation = Digit.Hooks.survey.useCreate();
   const { state } = props.location;
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const [isActionClicked,setIsActionClicked] = useState(false) 
   useEffect(() => {
     const onSuccess = () => {
@@ -43,7 +43,6 @@ const Acknowledgement = (props) => {
   if (mutation.isLoading && !mutation.isIdle) {
     return <Loader />;
   }
-
 
   const survey = mutation.data?.Surveys?.[0];
  

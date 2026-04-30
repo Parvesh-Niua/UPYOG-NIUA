@@ -1,7 +1,6 @@
 import { Loader } from "@egovernments/digit-ui-react-components";
 import React, { Fragment, useContext, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,LabelList } from "recharts";
 import FilterContext from "./FilterContext";
 import NoData from "./NoData";
@@ -45,7 +44,7 @@ const CustomHorizontalBarChart = ({
 }) => {
   const { id } = data;
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   const { value } = useContext(FilterContext);
   const tenantId = Digit.ULBService.getCurrentTenantId();
   const { isLoading, data: response } = Digit.Hooks.dss.useGetChart({

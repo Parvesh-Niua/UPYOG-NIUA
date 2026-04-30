@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   ArrowForward,
   ArrowVectorDown,
@@ -25,7 +25,7 @@ const SubMenu = ({ item }) => {
   const location = useLocation();
   const { pathname } = location;
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const showSubnav = () => setSubnav(!subnav);
   const IconsObject = {

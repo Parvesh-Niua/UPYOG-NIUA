@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import { ArrowRightInbox } from "./svgindex";
-import { useNavigate, useLocation, Link } from "react-router-dom";
-
+import { useLocation, Link } from "react-router-dom";
 
 const EmployeeModuleCard = ({ Icon, moduleName, kpis = [], links = [], isCitizen = false, className, styles, longModuleName=false }) => {
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   return (
     <div className={className ? className : "employeeCard customEmployeeCard card-home home-action-cards"} style={styles ? styles : {}}>

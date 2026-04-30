@@ -1,13 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Card, KeyNote, SubmitBar } from "@egovernments/digit-ui-react-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // import { getKeyNotesConfig } from "./keynotesConfig";
 
 const MyBill = ({ bill, currentPath, businessService, getKeyNotesConfig }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
 
   const onSubmit = () => {
     navigate(`${currentPath}/${bill.consumerCode}`, { state: { tenantId: bill?.tenantId } });

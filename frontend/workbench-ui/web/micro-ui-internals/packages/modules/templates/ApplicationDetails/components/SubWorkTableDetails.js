@@ -1,11 +1,10 @@
 import { EditIcon } from '@egovernments/digit-ui-react-components';
 import React from 'react'
 import { useTranslation } from "react-i18next";
-import { useNavigate } from 'react-router-dom';
 
 const SubWorkTableDetails = ({data}) => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
+    const navigate = Digit.Hooks.useCustomNavigate();
     const getStyles = (index) => {
         let obj = {}
         switch (index) {

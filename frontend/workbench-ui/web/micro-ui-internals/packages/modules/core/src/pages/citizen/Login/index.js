@@ -1,7 +1,7 @@
 import { AppContainer, BackButton, Toast } from "@egovernments/digit-ui-react-components";
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useNavigate, useLocation, useResolvedPath } from "react-router-dom";
+import { Route, Routes, useLocation, useResolvedPath } from "react-router-dom";
 import { loginSteps } from "./config";
 import SelectMobileNumber from "./SelectMobileNumber";
 import SelectName from "./SelectName";
@@ -34,7 +34,7 @@ const Login = ({ stateCode, isUserRegistered = true }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const { pathname: path } = useResolvedPath(".");   // useRouteMatch → useResolvedPath
-  const navigate = useNavigate();                    // useHistory → useNavigate
+  const navigate = Digit.Hooks.useCustomNavigate();                    // useHistory → useNavigate
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [isOtpValid, setIsOtpValid] = useState(true);

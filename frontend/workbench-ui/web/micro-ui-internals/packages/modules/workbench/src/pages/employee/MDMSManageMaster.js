@@ -1,11 +1,9 @@
 import { AddFilled, Button, Header, InboxSearchComposer, Loader, Dropdown, Card } from "@egovernments/digit-ui-react-components";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Config as Configg } from "../../configs/searchMDMSConfig";
 import _, { drop } from "lodash";
-
-
 
 function sortByKey(arr, key) {
   return arr.slice().sort((a, b) => {
@@ -22,11 +20,10 @@ function sortByKey(arr, key) {
   });
 }
 
-
 const MDMSManageMaster = () => {
   let Config = _.clone(Configg)
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = Digit.Hooks.useCustomNavigate();
   
   let {masterName:modulee,moduleName:master,tenantId} = Digit.Hooks.useQueryParams()
   
@@ -93,7 +90,6 @@ const MDMSManageMaster = () => {
       },
     },
   });
-
 
   useEffect(() => {
     setMasterOptions(dropdownData?.mastersAvailable)

@@ -1,6 +1,5 @@
 import { TextInput, Dropdown, RemoveableTag, LinkButton,SearchField,SubmitBar } from '@egovernments/digit-ui-react-components'
 import React,{useMemo} from 'react'
-import { useNavigate } from "react-router-dom";
 
 const SurveyDetailsView = ({surveyTitle,surveyDesc,t,surveyId}) => {
     const navigate = useNavigate()
