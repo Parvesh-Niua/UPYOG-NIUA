@@ -1,5 +1,7 @@
 /**
  * package-builder.mjs
+ * 
+ * @author Shivank - NIUA
  *
  * Centralized Vite library build script for all UPYOG UI workspace modules.
  *
