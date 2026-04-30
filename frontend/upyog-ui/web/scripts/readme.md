@@ -14,7 +14,7 @@ Before the Vite upgrade (React 17 → 19, Node 14 → 22, CRA/Webpack → Vite),
 3. Run `npm publish --access public`
 4. Manually remove the module from the root `workspaces[]`
 
-This was error-prone, slow, inconsistent across 30+ modules, and required every developer to understand the internal build tooling of each package.
+This was error-prone, slow, inconsistent across 25+ modules, and required every developer to understand the internal build tooling of each package.
  
 After the Vite upgrade, all individual module build scripts were removed because Vite resolves workspace packages directly from `src/` — no `dist/` is needed for local development or the main app build. This made local dev and the Docker build significantly faster (32 min → 4 min 28 sec), but broke the NPM publish flow entirely since NPM consumers need compiled `dist/` output.
  
