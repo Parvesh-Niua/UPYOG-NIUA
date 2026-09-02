@@ -34,7 +34,9 @@ public class ThemeConfigServiceImpl implements ThemeConfigService {
      * @return created theme configuration
      */
     @Override
-    public ThemeConfig create(ThemeConfig themeConfig) {
+    public ThemeConfig create(
+        ThemeConfig themeConfig,
+        RequestInfo requestInfo) {
 
         log.info(
                 "Creating theme configuration for tenantId: {} and themeType: {}",

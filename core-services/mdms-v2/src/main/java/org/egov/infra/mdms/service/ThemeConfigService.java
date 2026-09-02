@@ -21,7 +21,10 @@ public interface ThemeConfigService {
      * @param themeConfig theme configuration details
      * @return created theme configuration
      */
-    ThemeConfig create(ThemeConfig themeConfig);
+    ThemeConfig create(
+        ThemeConfig themeConfig,
+        RequestInfo requestInfo
+);
 
 
     /**

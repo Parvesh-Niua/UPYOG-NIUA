@@ -43,10 +43,13 @@ public class ThemeConfigController {
             method = RequestMethod.POST
     )
     public ResponseEntity<?> create(
-            @Valid @RequestBody ThemeConfig themeConfig) {
+        @Valid @RequestBody ThemeConfigWorkflowRequest request) {
 
-        ThemeConfig response =
-                themeConfigService.create(themeConfig);
+    ThemeConfig response =
+            themeConfigService.create(
+                    request.getThemeConfig(),
+                    request.getRequestInfo()
+            );
 
         return new ResponseEntity<>(
                 response,
