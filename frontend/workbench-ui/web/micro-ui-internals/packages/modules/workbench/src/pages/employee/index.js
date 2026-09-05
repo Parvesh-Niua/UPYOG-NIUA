@@ -11,6 +11,7 @@ import OnBoardingContent from "./OnBoardingContent";
 // Added onboarding login component
 import OnBoardingLogin from "./OnBoardingLogin";
 import OnBoardingRegister from "./OnBoardingRegister";
+import EmployeeThemeBuilder from "./EmployeeThemeBuilder";
 import MDMSSearch from "./MDMSSearch";
 import MDMSAdd from "./MDMSAdd";
 import MDMSAddV2 from "./MDMSAddV2";
@@ -91,6 +92,12 @@ const WorkbenchBreadCrumb = ({ location, defaultPath }) => {
       path: `/${window?.contextPath}/employee/workbench/onboarding-register-configuration`,
       content: t(`WBH_ONBOARDING_REGISTER_CONFIG`),
       show: pathVar.includes("onboarding-register-configuration")
+    },
+    {
+      // Employee Theme Builder
+      path: `/${window?.contextPath}/employee/workbench/theme-builder`,
+      content: t(`WBH_Employee_ThemeBuilder`),
+      show: pathVar.includes("theme-builder")
     }
 
   ];
@@ -124,7 +131,7 @@ const App = ({ path }) => {
     if (!currentUrl.includes("mdms-edit")) {
       clearSessionStorageWithPrefix('MDMS_edit');
     }
-  }, [window.location.href]);
+  }, [location]);
 
   useEffect(() => {
     if (!window.location.href.includes("mdms-add-v2") && sessionFormData && Object.keys(sessionFormData) != 0) {
@@ -203,6 +210,11 @@ const App = ({ path }) => {
           <Route
             path="onboarding-register-configuration"
             element={<PrivateRoute><OnBoardingRegister parentRoute={path} /></PrivateRoute>}
+          />
+
+          <Route
+            path="theme-builder"
+            element={<PrivateRoute><EmployeeThemeBuilder parentRoute={path} /></PrivateRoute>}
           />
 
 
